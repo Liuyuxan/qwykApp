@@ -1,0 +1,52 @@
+import App from './App.uvue'
+
+import { createSSRApp } from 'vue'
+export function createApp() {
+	const app = createSSRApp(App)
+	return {
+		app
+	}
+}
+export function main(app: IApp) {
+    definePageRoutes();
+    defineAppConfig();
+    
+    (createApp()['app'] as VueApp).mount(app);
+}
+
+import { AppConfig } from "io.dcloud.uniapp.appframe"
+export class UniAppConfig extends AppConfig {
+    override name: string = "轻养问康"
+    override appid: string = "__UNI__B7338A2"
+    override versionName: string = "1.0.0"
+    override versionCode: string = "1"
+    override uniCompileVersion: string = "4.12"
+    
+    constructor() {}
+}
+
+import GenPagesIndexIndexClass from './pages/index/index.uvue?type=page'
+import GenPagesLoginLoginClass from './pages/login/login.uvue?type=page'
+import GenPagesShowWindowShowWindowClass from './pages/showWindow/showWindow.uvue?type=page'
+import GenPagesCommunityCommunityClass from './pages/community/community.uvue?type=page'
+import GenPagesMessageMessageClass from './pages/message/message.uvue?type=page'
+import GenPagesMyPageMyPageClass from './pages/myPage/myPage.uvue?type=page'
+function definePageRoutes() {
+__uniRoutes.push({ path: "pages/index/index", component: GenPagesIndexIndexClass, meta: { isQuit: true } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/login/login", component: GenPagesLoginLoginClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/showWindow/showWindow", component: GenPagesShowWindowShowWindowClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/community/community", component: GenPagesCommunityCommunityClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/message/message", component: GenPagesMessageMessageClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/myPage/myPage", component: GenPagesMyPageMyPageClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
+}
+const __uniTabBar: Map<string, any | null> | null = utsMapOf([["color","#323232"],["selectedColor","#b19983"],["backgroundColor","#fff"],["borderStyle","#fff"],["iconWidth","28px"],["list",[utsMapOf([["pagePath","pages/showWindow/showWindow"],["iconPath","static/image/icons/未选择1.png"],["selectedIconPath","static/image/icons/选择1.png"]]),utsMapOf([["pagePath","pages/community/community"],["iconPath","static/image/icons/未选择2.png"],["selectedIconPath","static/image/icons/选择2.png"]]),utsMapOf([["pagePath","pages/index/index"],["iconPath","static/image/icons/未选择3.png"],["selectedIconPath","static/image/icons/选择3.png"]]),utsMapOf([["pagePath","pages/message/message"],["iconPath","static/image/icons/未选择4.png"],["selectedIconPath","static/image/icons/选择4.png"]]),utsMapOf([["pagePath","pages/myPage/myPage"],["iconPath","static/image/icons/未选择5.png"],["selectedIconPath","static/image/icons/选择5.png"]])]]])
+const __uniLaunchPage: Map<string, any | null> = utsMapOf([["url","pages/index/index"],["style",utsMapOf([["navigationBarTitleText",""]])]])
+@Suppress("UNCHECKED_CAST")
+function defineAppConfig(){
+  __uniConfig.entryPagePath = '/pages/index/index'
+  __uniConfig.globalStyle = utsMapOf([["navigationBarTextStyle","black"],["navigationBarTitleText","uni-app x"],["navigationBarBackgroundColor","#F8F8F8"],["backgroundColor","#F8F8F8"],["navigationStyle","custom"]])
+  __uniConfig.tabBar = __uniTabBar as Map<string, any> | null
+  __uniConfig.conditionUrl = ''
+  __uniConfig.uniIdRouter = utsMapOf()
+  __uniConfig.ready = true
+}

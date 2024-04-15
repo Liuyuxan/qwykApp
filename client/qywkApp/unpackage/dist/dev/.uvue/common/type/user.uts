@@ -1,0 +1,26 @@
+export type TUserDetail = {
+	name: string | null;
+	id: number;
+	username: string | null;
+	avatar: string | null;
+	password: boolean;
+	phone: string | null;
+	email: string | null;
+	status: number;
+	age: number;
+	sex: number;
+	qg: number;
+	job: string | null;
+	path: string | null;
+	birthday: string | null;
+	desc: string | null;
+	token: string | null;
+}
+
+export type TloginInfo = {
+	username: string
+	password: string
+}
+export type IToken = {
+	token: string
+}

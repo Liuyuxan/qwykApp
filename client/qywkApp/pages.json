@@ -1,0 +1,96 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path": "pages/login/login",
+		// 	"style": {
+		// 		"navigationBarTitleText": ""
+		// 	}
+		// },
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/showWindow/showWindow",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/community/community",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/myPage/myPage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app x",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#323232",
+		"selectedColor": "#b19983",
+		"backgroundColor": "#fff",
+		"borderStyle": "#fff",
+		"iconWidth": "28px",
+		"list": [{
+				"pagePath": "pages/showWindow/showWindow",
+				// "text": "展架",
+				"iconPath": "static/image/icons/未选择1.png",
+				"selectedIconPath": "static/image/icons/选择1.png"
+			},
+			{
+				"pagePath": "pages/community/community",
+				// "text": "集市",
+				"iconPath": "static/image/icons/未选择2.png",
+				"selectedIconPath": "static/image/icons/选择2.png"
+			},
+			{
+				"pagePath": "pages/index/index",
+				// "text": "",
+				"iconPath": "static/image/icons/未选择3.png",
+				"selectedIconPath": "static/image/icons/选择3.png"
+			},
+			{
+				"pagePath": "pages/message/message",
+				// "text": "养生",
+				"iconPath": "static/image/icons/未选择4.png",
+				"selectedIconPath": "static/image/icons/选择4.png"
+			},
+			{
+				"pagePath": "pages/myPage/myPage",
+				// "text": "我的",
+				"iconPath": "static/image/icons/未选择5.png",
+				"selectedIconPath": "static/image/icons/选择5.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

@@ -1,0 +1,11 @@
+// 请求结果
+export interface IResponse<T = any> {
+	msg: string
+	data: T | null
+	code: number
+}
+
+// 登录返回token
+export type UserInfo = {
+	token: string
+}

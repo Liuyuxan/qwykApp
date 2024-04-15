@@ -1,0 +1,23 @@
+
+	export default {
+		data() {
+			return {
+					
+			}
+		},
+		onLoad() {
+			const token = uni.getStorageSync('token')
+			console.log('token', token);
+		},
+		methods: {
+			
+		}
+	}
+
+
+function GenPagesIndexIndexRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("view", utsMapOf({ class: "content" }), " 首页 ")
+}
+const GenPagesIndexIndexStyles = []

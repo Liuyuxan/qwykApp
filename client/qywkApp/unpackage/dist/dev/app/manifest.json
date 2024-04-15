@@ -1,0 +1,29 @@
+{
+  "id": "__UNI__B7338A2",
+  "name": "轻养问康",
+  "description": "",
+  "version": {
+    "name": "1.0.0",
+    "code": 1
+  },
+  "uni-app-x": {},
+  "app": {
+    "distribute": {
+      "icons": {
+        "android": {
+          "hdpi": "unpackage/res/icons/72x72.png",
+          "xhdpi": "unpackage/res/icons/96x96.png",
+          "xxhdpi": "unpackage/res/icons/144x144.png",
+          "xxxhdpi": "unpackage/res/icons/192x192.png"
+        }
+      },
+      "splashScreens": {
+        "android": {
+          "xhdpi": "D:/项目代码/qywk-启动页/drawable-xhdpi/qidong.9.png",
+          "xxhdpi": "D:/项目代码/qywk-启动页/drawable-xxhdpi/qidong.9.png",
+          "xxxhdpi": "D:/项目代码/qywk-启动页/drawable-xxxhdpi/qidong.9.png"
+        }
+      }
+    }
+  }
+}

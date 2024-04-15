@@ -1,0 +1,64 @@
+spring:
+  # 数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/qywk?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    username: 
+    password:
+
+server:
+  port: 1109
+  address: 0.0.0.0
+  servlet:
+    # 项目请求路径前缀
+    context-path: /qywk
+    # 文件上传配置
+    multipart:
+      enabled: true
+      max-file-size: 10MB  # 单个文件大小限制
+      max-request-size: 100MB  # 请求总大小限制
+##mybatis日志
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    map-underscore-to-camel-case: false
+
+# 开启事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: ERROR
+
+wechat:
+  appid: "xxx"
+  secret: "xxx"
+
+chat-ai:
+  api: ""
+  auth: ""
+
+#白名单
+whitelist:
+  pathList:
+    - /login/**
+    - /inquiry
+    - /download/**
+
+#黑名单
+blacklist:
+  pathList:
+    - /usr/local/data/finance
+    - /home/user/personal_info
+    - /etc/passwd
+    - /bin/su
+    - /cgi-bin/vulnerable_script
+    - /uploads/virus.exe
+    - /var/www/html/malware
+    - /opt/malicious_toolkit
+    - /test_server
+    - /dev_environment
+    - /backup/system
+    - /data/backup
+    - /var/log/security
+    - /var/log/audit
+
+

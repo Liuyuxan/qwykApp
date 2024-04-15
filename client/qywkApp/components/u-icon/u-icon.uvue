@@ -1,0 +1,37 @@
+<template>
+	<text class="iconfont" :style="{color, 'fontSize': size}" >{{ code }}</text>
+</template>
+
+<script>
+	import fontPath from "@/static/iconfont.ttf"
+	export default {
+		name:"u-icon",
+		props: {
+			code: {
+				type: String,
+				required: true
+			},
+			color: {
+				type: String,
+				default: "#000",
+			},
+			size: {
+				type: String,
+				default: '50rpx'
+			}
+		},
+		mounted() {
+			uni.loadFontFace({
+				global: false,
+				source: fontPath,
+				family: 'iconfont'
+			})
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+.iconfont {
+	font-family: iconfont;
+}
+</style>

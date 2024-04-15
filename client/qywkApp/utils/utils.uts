@@ -1,0 +1,39 @@
+import { BASE_URL } from "@/config/index.uts"
+
+
+export default class Utils {
+	
+	// 拼接baseUrl
+	static getBaseURL(url:string) : string {
+		return BASE_URL + url
+	}
+	
+	// 从本地缓存中获取数据
+	static getStoreageSync(key: string) {
+		return uni.getStorageSync(key)
+	}
+	
+	static setStorageSync(key: string, data: any) {
+		return uni.setStorageSync(key, data)
+	}
+	
+	// 关闭所有页面,打开指定页面
+	static quickReLaunch(url: string, successFn?: () => any, failFn?: () => any) {
+		uni.reLaunch({
+			// 这里不认@符号开头的路径
+			url,
+			success: successFn,
+			fail: failFn
+		})
+	}
+	// 保留当前页面,打开指定页面  
+	static quickNavigateTo<T>(url: string, successFn?: () => any, failFn?: () => any) {
+		uni.navigateTo({
+			// 这里不认@符号开头的路径
+			url,
+			success: successFn,
+			fail: failFn
+		})
+	}
+	
+}

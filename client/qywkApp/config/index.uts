@@ -1,0 +1,2 @@
+export const BASE_URL = 'http://47.120.10.1:1109'
+export const TIME_OUT = 10000

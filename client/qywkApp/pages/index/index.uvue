@@ -1,0 +1,198 @@
+<template>
+	<view class="content">
+			
+			<image class="bg-img" src="/static/image/bg/宣纸纹理背景.png" mode="widthFix"></image>
+
+			<view class="top-bar flex justify-center">
+				<image class="plant-avatar" src="/static/image/bg/圆扇.png" mode="widthFix" style="width: 90rpx;"></image>
+				<view class="right ml-1">
+					<view class="title-top flex">
+						<text class="title">{{ plantTitle }}</text>
+						<text class="level ml-1">Lv{{ level }}</text>
+					</view>
+					<view class="bottom flex align-center mt-1">
+						<text class="today">今天</text>
+						<view class="jindutiao ml-1 mr-1"></view>
+						<text class="jindutiao-count">{{ schedule }}%</text>
+					</view>
+				</view>
+			</view>
+			
+			<image class="bg2-img" src="/static/image/bg/圆扇.png" mode="widthFix"></image>
+			<image class="desk" src="../../static/image/bg/桌子.png" mode="widthFix"></image>
+			<image class="plant" src="../../static/image/bg/植物.png" mode="widthFix"></image>
+			
+			<view class="user-bar flex ">
+				<view class="hexagon-container">
+					<image class="hexagon-img" src="../../static/image/bg/圆扇.png" mode="widthFix"></image>
+				</view>
+				<view class="right ml-2">
+					<view class="top-text">
+						<text class="username">{{ username }}</text>
+					</view>
+					<view class="bottom-content flex align-center mt-2">
+						<view class="flex align-center">
+							<image class="icon" src="../../static/image/icons/挑战icon.png" mode="widthFix"></image>
+							<text class="challenge-days text">挑战{{ challengeDays }}天</text>
+						</view>
+						
+						<view class="line"></view>
+						<view class="flex align-center">
+							<image class="icon" src="../../static/image/icons/植物状态icon.png" mode="widthFix"></image>
+							<text class="tree-height text">树高{{ treeHeight }}M</text>
+						</view>
+						
+					</view>
+				</view>
+			</view>
+			
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+					plantTitle: '人参',
+					level: 2,
+					schedule: 25,
+					username: '初心平原',
+					challengeDays: 2,
+					treeHeight: 5
+			}
+		},
+		onLoad() {
+			const token = uni.getStorageSync('token')
+			console.log('token', token);
+		},
+		methods: {
+			
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+
+	.content {
+		width: 100vw;
+		height: 100vh;
+		
+	}
+	.bg-img {
+		// width: 100vw;
+		// height: 120vh;
+		transform: scale(1.5);
+		position: fixed;
+		top: 0;
+		z-index: 2;
+		
+	}
+	.bg2-img {
+		width: 580rpx;
+		
+		position: fixed;
+		z-index: 99;
+		top: 18%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.desk {
+		width: 750rpx;
+		
+		// transform: scale(2);
+		position: fixed;
+		z-index: 3;
+		top: 3%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	
+	.plant {
+		position: fixed;
+		width: 560rpx;
+		z-index: 4;
+		top: 31%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	
+	.top-bar {
+		box-sizing: border-box;
+		width: 650rpx;
+		height: 130rpx;
+		background-color: #f2f2e9;
+		border-radius: 100px;
+		border: 1px solid #c2a587;
+		padding: 20rpx;
+		
+		position: fixed;
+		z-index: 999;
+		top: 5%;
+		left: 50%;
+		transform: translateX(-50%);
+		.right {
+			margin-left: 28rpx;
+			.title-top {
+				.level {
+					color: #965D30;
+					font-weight: 700;
+					font-size: 32rpx;
+				}
+			}
+			.bottom {
+				
+				.today {
+					color: #BF9350;
+					font-size: 28rpx;
+				}
+				.jindutiao {
+					width: 348rpx;
+					height: 20rpx;
+					border-radius: 50px;
+					background-color: #c5c5c2;
+				}
+				.jindutiao-count {
+					font-size: 28rpx;
+					color: #BF9350;
+				}
+			}
+		}
+	}
+	
+	.user-bar {
+		box-sizing: border-box;
+		padding: 20rpx;
+		position: fixed;
+		z-index: 999;
+		bottom: -1%;
+		left: 50%;
+		transform: translateX(-50%);
+		
+		width: 580rpx;
+		height: 148rpx;
+		background-color: #f9f8f6;
+		border-top-left-radius: 40rpx;
+		border-top-right-radius: 40rpx;
+		.hexagon-img {
+			width: 120rpx;
+		}
+		
+		.right {
+			.line {
+				width: 6rpx;
+				height: 26rpx;
+				background-color: #e5e5e5;
+				border-radius: 10px;
+				margin: 0 30rpx;
+			}
+			.icon {
+				width: 32rpx;
+				margin-right: 16rpx;
+			}
+			.text {
+				font-size: 24rpx;
+			}
+		}
+		
+	}
+</style>

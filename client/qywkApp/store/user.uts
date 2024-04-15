@@ -1,0 +1,47 @@
+// import type { TUserDetail } from "@/common/type/user.uts"
+// import { httpPost } from "@/utils/http.uts"
+// import type { TloginInfo } from "@/common/type/user.uts"
+// import utils from "@/utils/utils.uts"
+
+
+// // 状态管理
+// export const userState = reactive({
+// 	"name": "",
+// 	"id": 0,
+// 	"username": null,
+// 	"avatar": "",
+// 	"password": false,
+// 	"phone": "",
+// 	"email": null,
+// 	"status": 1,
+// 	"age": 0,
+// 	"sex": 0,
+// 	"qg": 0,
+// 	"job": null,
+// 	"path": null,
+// 	"birthday": null,
+// 	"desc": null,
+// 	"token": null
+// } as TUserDetail)
+
+// // 是否已登录
+// export const loginState = ref(false)
+
+// // 用户登录
+// export function login(loginInfo: TloginInfo){
+// 	httpPost('/qywk/login/normal', loginInfo)
+
+// 	// 修改登录状态为已登陆
+// 	loginState.value = true
+// }
+
+// // 获取当前用户token
+// export function getToken():string | null{
+// 	return uni.getStorageSync("token") as string | null
+// }
+
+// // 当前用户是否已登录
+// export function isLogin():boolean{
+// 	let token = getToken()
+// 	return token == '' || token == null ? false : true
+// }

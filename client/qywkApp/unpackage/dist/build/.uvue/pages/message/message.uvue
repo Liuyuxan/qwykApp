@@ -1,0 +1,16 @@
+
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
+
+
+function GenPagesMessageMessageRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("view", utsMapOf({ class: "message" }), " 消息 ")
+}
+const GenPagesMessageMessageStyles = []

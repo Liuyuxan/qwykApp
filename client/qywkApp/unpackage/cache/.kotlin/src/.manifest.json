@@ -1,0 +1,36 @@
+{
+  "version": "1",
+  "env": {
+    "compiler_version": "4.12.2024041009-alpha"
+  },
+  "files": {
+    "pages/showWindow/showWindow.kt": {
+      "class": "GenPagesShowWindowShowWindow",
+      "md5": "2e47048936f8017e3748a172c518ca8ce8e7f1aa"
+    },
+    "index.kt": {
+      "md5": "ad301fdc82454caf3b04d99b7986d4d18959351c",
+      "class": ""
+    },
+    "pages/myPage/myPage.kt": {
+      "class": "GenPagesMyPageMyPage",
+      "md5": "5522211c2f327776ba4b14d257f44df2a2a1b68c"
+    },
+    "pages/login/login.kt": {
+      "md5": "5449337afcbb1c5317d3fc310e672dd487b79dfe",
+      "class": "GenPagesLoginLogin"
+    },
+    "pages/community/community.kt": {
+      "class": "GenPagesCommunityCommunity",
+      "md5": "26121324ccf57a3a9caf9b26d28b1c75d2557d46"
+    },
+    "pages/index/index.kt": {
+      "md5": "ac7a1de1bca36f8fc9dbdc07e75aa9efc54f7618",
+      "class": "GenPagesIndexIndex"
+    },
+    "pages/message/message.kt": {
+      "class": "GenPagesMessageMessage",
+      "md5": "57988ffd4d9775001ffaaad0b77a2b52b09df207"
+    }
+  }
+}

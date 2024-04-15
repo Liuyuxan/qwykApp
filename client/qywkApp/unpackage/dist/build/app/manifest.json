@@ -1,0 +1,26 @@
+{
+  "id": "__UNI__B7338A2",
+  "name": "轻氧问康",
+  "description": "",
+  "version": {
+    "name": "1.0.0",
+    "code": 1
+  },
+  "uni-app-x": {},
+  "app": {
+    "distribute": {
+      "icons": {
+        "android": {
+          "hdpi": "unpackage/res/icons/72x72.png",
+          "xhdpi": "unpackage/res/icons/96x96.png",
+          "xxhdpi": "unpackage/res/icons/144x144.png",
+          "xxxhdpi": "unpackage/res/icons/192x192.png"
+        }
+      },
+      "modules": {
+        "uni-exit": {},
+        "uni-prompt": {}
+      }
+    }
+  }
+}
