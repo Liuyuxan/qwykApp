@@ -45,7 +45,7 @@ public class LoginServiceImpl implements LoginService {
         else wrapper.eq("username", ao.getUsername());
 
         UserDTO user = userMapper.selectOne(wrapper);
-        if(user == null || user.getEnable().equals(EnableConstants.NOT_ACTIVATION)){
+        if(user == null || user.getEnable().equals(EnableConstants.DELETE)){
             return ResultBody.error().message("手机号或用户名不存在").code(CodeStateEnum.LOGIN_USER_NOT_NULL.code);
         }
 
@@ -171,7 +171,7 @@ public class LoginServiceImpl implements LoginService {
         UserDTO user = userMapper.selectOne(wrapper);
 
         // 判断用户是否为注册使用
-        if(user == null || user.getEnable().equals(EnableConstants.NOT_ACTIVATION)){
+        if(user == null || user.getEnable().equals(EnableConstants.DELETE)){
             return ResultBody.error().code(CodeStateEnum.LOGIN_USER_NOT_NULL.code).
                     message(CodeStateEnum.LOGIN_USER_NOT_NULL.message);
         }
