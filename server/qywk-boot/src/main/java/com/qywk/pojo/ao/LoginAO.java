@@ -12,7 +12,7 @@ public class LoginAO {
     /**
      * 账号
      */
-    private String username;
+    private String userId;
 
     /**
      * 密码

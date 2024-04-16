@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+    </parent>
+
+    <groupId>com.qywk</groupId>
+    <artifactId>qywk-cloud</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <description>
+        轻养问康-工程项目包
+    </description>
+
+    <modules>
+        <!-- 用户中心 -->
+        <module>qywk-user-center</module>
+        <!-- 模块中心 -->
+        <module>qywk-modules</module>
+        <!-- 网关中心 -->
+        <module>qywk-gateway</module>
+        <!-- 公共工具 -->
+        <module>qywk-common</module>
+        <!-- 文件服务器 -->
+        <module>qywk-file</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <!--指尖移通代码版本-->
+        <qywk-version>1.0-SNAPSHOT</qywk-version>
+        <!--springcloud依赖管理-->
+        <springcloud.alibaba-version>2.1.0.RELEASE</springcloud.alibaba-version>
+        <spring.cloud-version>Hoxton.SR1</spring.cloud-version>
+        <!--三方工具包-->
+        <hutool-version>5.3.7</hutool-version>
+        <oracle.jdbc-version>11.2.0.1.0</oracle.jdbc-version>
+        <mybatis.plus-version>3.4.0</mybatis.plus-version>
+        <swagger-version>3.0.0</swagger-version>
+        <fastjson.version>2.0.14</fastjson.version>
+        <jjwt.version>0.9.1</jjwt.version>
+    </properties>
+
+    <!--依赖申明-->
+    <dependencyManagement>
+        <dependencies>
+
+            <!--springcloud alibaba的总依赖 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${springcloud.alibaba-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--springcloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- 糊涂工具包 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-version}</version>
+            </dependency>
+
+            <!--oracle 数据库连接依赖-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.oracle</groupId>-->
+            <!--                <artifactId>ojdbc6</artifactId>-->
+            <!--                <version>${oracle.jdbc-version}</version>-->
+            <!--            </dependency>-->
+
+            <!--mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus-version}</version>
+            </dependency>
+
+            <!--mybatis-plus 多数据源-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${mybatis.plus-version}</version>
+            </dependency>
+
+            <!-- swagger 3.0版本只需要引入一个，不再像2.x版本需要引入两个包 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qywk</groupId>
+                <artifactId>qywk-common-core</artifactId>
+                <version>${qywk-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qywk</groupId>
+                <artifactId>qywk-common-mybatis</artifactId>
+                <version>${qywk-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qywk</groupId>
+                <artifactId>qywk-common-redis</artifactId>
+                <version>${qywk-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--swagger3.0-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+        <!-- 辅助工具 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dozermapper</groupId>
+            <artifactId>dozer-core</artifactId>
+            <version>6.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

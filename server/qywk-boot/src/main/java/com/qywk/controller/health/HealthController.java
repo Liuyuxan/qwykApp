@@ -21,12 +21,12 @@ public class HealthController {
 
     /**
      * 提交文件结果
-     * @param username
+     * @param userId
      * @param form
      * @return
      */
     @PostMapping("submit")
-    public ResultBody submit(@RequestHeader(value = "username", defaultValue = "test") String username,
+    public ResultBody submit(@RequestHeader(value = "user_id", defaultValue = "test") String userId,
                              @RequestBody List<ProblemAO> form){
         return healthService.submit(form);
     }

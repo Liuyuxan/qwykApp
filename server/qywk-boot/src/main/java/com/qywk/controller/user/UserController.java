@@ -18,13 +18,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/getBaseInfo")
-    public ResultBody getBaseInfo(@RequestParam String username){
-        return userService.getBaseInfo(username);
+    public ResultBody getBaseInfo(@RequestParam(value = "user_id") String userId){
+        return userService.getBaseInfo(userId);
     }
 
     @GetMapping("/getDetailInfo")
-    public ResultBody getDetailInfo(@RequestHeader("username") String username){
-        return userService.getDetailInfo(username);
+    public ResultBody getDetailInfo(@RequestHeader("user_id") String userId){
+        return userService.getDetailInfo(userId);
     }
 
 

@@ -41,8 +41,8 @@ public class LoginServiceImpl implements LoginService {
         QueryWrapper<UserDTO> wrapper = new QueryWrapper<>();
 
         // 账号类型判断
-        if(ao.getUsername().length() == 11) wrapper.eq("phone_num", ao.getUsername());
-        else wrapper.eq("username", ao.getUsername());
+        if(ao.getUserId().length() == 11) wrapper.eq("phone_num", ao.getUserId());
+        else wrapper.eq("user_id", ao.getUserId());
 
         UserDTO user = userMapper.selectOne(wrapper);
         if(user == null || user.getEnable().equals(EnableConstants.DELETE)){
@@ -94,11 +94,11 @@ public class LoginServiceImpl implements LoginService {
         for(int i = 0; i < 4; i++){
             UserDTO user = new UserDTO();
             // 生成用户id
-            user.setUsername(generateUserAccount(i));
+            user.setUserId(generateUserAccount(i));
             BeanUtil.copyProperties(ao, user);
             user.setPassword(MD5Utils.getMD5String(user.getPassword()));
             if(userMapper.insert(user) >= 1){
-                return ResultBody.ok().message("创建成功").data("username", user.getUsername());
+                return ResultBody.ok().message("创建成功").data("username", user.getUserId());
             }
         }
 
@@ -166,8 +166,8 @@ public class LoginServiceImpl implements LoginService {
         }
 
         QueryWrapper<UserDTO> wrapper = new QueryWrapper<>();
-        if(ao.getUsername().length() == 11) wrapper.eq("phone_num", ao.getUsername());
-        else wrapper.eq("username", ao.getUsername());
+        if(ao.getUserId().length() == 11) wrapper.eq("phone_num", ao.getUserId());
+        else wrapper.eq("username", ao.getUserId());
         UserDTO user = userMapper.selectOne(wrapper);
 
         // 判断用户是否为注册使用

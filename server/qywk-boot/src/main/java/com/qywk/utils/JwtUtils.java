@@ -26,7 +26,7 @@ public class JwtUtils {
     public static String getToken(UserDTO user){
         Map<String, Object> claims = new HashMap<>();
         claims.put(FilterConstants.KEY, user.getId());
-        claims.put(FilterConstants.USERNAME, user.getUsername());
+        claims.put(FilterConstants.USERNAME, user.getUserId());
         return generateJwt(claims);
     }
 
