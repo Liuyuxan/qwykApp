@@ -20,7 +20,7 @@ export class UniAppConfig extends AppConfig {
     override appid: string = "__UNI__B7338A2"
     override versionName: string = "1.0.0"
     override versionCode: string = "1"
-    override uniCompileVersion: string = "4.12"
+    override uniCompileVersion: string = "3.99"
     
     constructor() {}
 }
@@ -39,7 +39,7 @@ __uniRoutes.push({ path: "pages/community/community", component: GenPagesCommuni
 __uniRoutes.push({ path: "pages/message/message", component: GenPagesMessageMessageClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/myPage/myPage", component: GenPagesMyPageMyPageClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
 }
-const __uniTabBar: Map<string, any | null> | null = utsMapOf([["color","#323232"],["selectedColor","#b19983"],["backgroundColor","#fff"],["borderStyle","#fff"],["iconWidth","28px"],["list",[utsMapOf([["pagePath","pages/showWindow/showWindow"],["iconPath","static/image/icons/未选择1.png"],["selectedIconPath","static/image/icons/选择1.png"]]),utsMapOf([["pagePath","pages/community/community"],["iconPath","static/image/icons/未选择2.png"],["selectedIconPath","static/image/icons/选择2.png"]]),utsMapOf([["pagePath","pages/index/index"],["iconPath","static/image/icons/未选择3.png"],["selectedIconPath","static/image/icons/选择3.png"]]),utsMapOf([["pagePath","pages/message/message"],["iconPath","static/image/icons/未选择4.png"],["selectedIconPath","static/image/icons/选择4.png"]]),utsMapOf([["pagePath","pages/myPage/myPage"],["iconPath","static/image/icons/未选择5.png"],["selectedIconPath","static/image/icons/选择5.png"]])]]])
+const __uniTabBar: Map<string, any | null> | null = utsMapOf([["color","#323232"],["selectedColor","#b19983"],["backgroundColor","#fff"],["borderStyle","#fff"],["iconWidth","28px"],["fontSize","12px"],["height","60px"],["list",[utsMapOf([["pagePath","pages/showWindow/showWindow"],["text","展架"],["iconPath","static/image/icons/未选择1.png"],["selectedIconPath","static/image/icons/选择1.png"]]),utsMapOf([["pagePath","pages/community/community"],["text","集市"],["iconPath","static/image/icons/未选择2.png"],["selectedIconPath","static/image/icons/选择2.png"]]),utsMapOf([["pagePath","pages/index/index"],["text","药材"],["iconPath","static/image/icons/未选择3.png"],["selectedIconPath","static/image/icons/选择3.png"]]),utsMapOf([["pagePath","pages/message/message"],["text","养生"],["iconPath","static/image/icons/未选择4.png"],["selectedIconPath","static/image/icons/选择4.png"]]),utsMapOf([["pagePath","pages/myPage/myPage"],["text","我的"],["iconPath","static/image/icons/未选择5.png"],["selectedIconPath","static/image/icons/选择5.png"]])]]])
 const __uniLaunchPage: Map<string, any | null> = utsMapOf([["url","pages/index/index"],["style",utsMapOf([["navigationBarTitleText",""]])]])
 @Suppress("UNCHECKED_CAST")
 function defineAppConfig(){

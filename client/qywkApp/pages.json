@@ -53,6 +53,7 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"navigationStyle": "custom"
+		
 	},
 	"tabBar": {
 		"color": "#323232",
@@ -60,33 +61,36 @@
 		"backgroundColor": "#fff",
 		"borderStyle": "#fff",
 		"iconWidth": "28px",
+		"fontSize": "12px",
+		"iconWidth": "28px",
+		"height": "60px",
 		"list": [{
 				"pagePath": "pages/showWindow/showWindow",
-				// "text": "展架",
+				"text": "展架",
 				"iconPath": "static/image/icons/未选择1.png",
 				"selectedIconPath": "static/image/icons/选择1.png"
 			},
 			{
 				"pagePath": "pages/community/community",
-				// "text": "集市",
+				"text": "集市",
 				"iconPath": "static/image/icons/未选择2.png",
 				"selectedIconPath": "static/image/icons/选择2.png"
 			},
 			{
 				"pagePath": "pages/index/index",
-				// "text": "",
+				"text": "药材",
 				"iconPath": "static/image/icons/未选择3.png",
 				"selectedIconPath": "static/image/icons/选择3.png"
 			},
 			{
 				"pagePath": "pages/message/message",
-				// "text": "养生",
+				"text": "养生",
 				"iconPath": "static/image/icons/未选择4.png",
 				"selectedIconPath": "static/image/icons/选择4.png"
 			},
 			{
 				"pagePath": "pages/myPage/myPage",
-				// "text": "我的",
+				"text": "我的",
 				"iconPath": "static/image/icons/未选择5.png",
 				"selectedIconPath": "static/image/icons/选择5.png"
 			}

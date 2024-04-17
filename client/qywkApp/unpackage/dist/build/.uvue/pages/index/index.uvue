@@ -2,7 +2,12 @@
 	export default {
 		data() {
 			return {
-					
+				plantTitle: '人参',
+				level: 2,
+				schedule: 25,
+				username: '初心平原',
+				challengeDays: 2,
+				treeHeight: 5
 			}
 		},
 		onLoad() {
@@ -10,7 +15,7 @@
 			console.log('token', token);
 		},
 		methods: {
-			
+
 		}
 	}
 
@@ -18,6 +23,106 @@
 function GenPagesIndexIndexRender(): any | null {
 const _ctx = this
 const _cache = this.$.renderCache
-  return createElementVNode("view", utsMapOf({ class: "content" }), " 首页 ")
+  return createElementVNode("view", utsMapOf({ class: "content" }), [
+    createElementVNode("scroll-view", utsMapOf({
+      direction: "vertical",
+      class: "scroll-Y"
+    }), [
+      createElementVNode("view", null, [
+        createElementVNode("image", utsMapOf({
+          class: "bg-img",
+          src: "/static/image/bg/宣纸纹理背景.png",
+          mode: "widthFix"
+        })),
+        createElementVNode("view", utsMapOf({ class: "top-bar flex justify-center" }), [
+          createElementVNode("image", utsMapOf({
+            class: "plant-avatar",
+            src: "/static/image/bg/圆扇.png",
+            mode: "widthFix",
+            style: normalizeStyle(utsMapOf({"width":"90rpx"}))
+          }), null, 4),
+          createElementVNode("view", utsMapOf({ class: "right ml-1" }), [
+            createElementVNode("view", utsMapOf({ class: "title-top flex" }), [
+              createElementVNode("text", utsMapOf({ class: "title" }), toDisplayString(_ctx.plantTitle), 1),
+              createElementVNode("text", utsMapOf({ class: "level ml-1" }), "Lv" + toDisplayString(_ctx.level), 1)
+            ]),
+            createElementVNode("view", utsMapOf({ class: "bottom flex align-center mt-1" }), [
+              createElementVNode("text", utsMapOf({ class: "today" }), "今天"),
+              createElementVNode("view", utsMapOf({ class: "jindutiao ml-1 mr-1" })),
+              createElementVNode("text", utsMapOf({ class: "jindutiao-count" }), toDisplayString(_ctx.schedule) + "%", 1)
+            ])
+          ])
+        ]),
+        createElementVNode("image", utsMapOf({
+          class: "bg2-img",
+          src: "/static/image/bg/圆扇.png",
+          mode: "widthFix"
+        })),
+        createElementVNode("image", utsMapOf({
+          class: "desk",
+          src: "/static/image/bg/桌子.png",
+          mode: "widthFix"
+        })),
+        createElementVNode("image", utsMapOf({
+          class: "plant",
+          src: "/static/image/bg/植物.png",
+          mode: "widthFix"
+        })),
+        createElementVNode("view", utsMapOf({ class: "user-bar flex" }), [
+          createElementVNode("view", utsMapOf({ class: "hexagon-container" }), [
+            createElementVNode("image", utsMapOf({
+              class: "hexagon-img",
+              src: "/static/image/bg/圆扇.png",
+              mode: "widthFix"
+            }))
+          ]),
+          createElementVNode("view", utsMapOf({ class: "right ml-2" }), [
+            createElementVNode("view", utsMapOf({ class: "top-text" }), [
+              createElementVNode("text", utsMapOf({ class: "username" }), toDisplayString(_ctx.username), 1)
+            ]),
+            createElementVNode("view", utsMapOf({ class: "flex align-center mt-2" }), [
+              createElementVNode("view", utsMapOf({ class: "flex align-center" }), [
+                createElementVNode("image", utsMapOf({
+                  class: "icon",
+                  src: "/static/image/icons/挑战icon.png",
+                  mode: "widthFix"
+                })),
+                createElementVNode("text", utsMapOf({ class: "challenge-days text" }), "挑战" + toDisplayString(_ctx.challengeDays) + "天", 1)
+              ]),
+              createElementVNode("view", utsMapOf({ class: "line" })),
+              createElementVNode("view", utsMapOf({ class: "flex align-center" }), [
+                createElementVNode("image", utsMapOf({
+                  class: "icon",
+                  src: "/static/image/icons/植物状态icon.png",
+                  mode: "widthFix"
+                })),
+                createElementVNode("text", utsMapOf({ class: "tree-height text" }), "树高" + toDisplayString(_ctx.treeHeight) + "M", 1)
+              ]),
+              createElementVNode("scroll-view", utsMapOf({ direction: "vertical" }), [
+                createElementVNode("view", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"width":"20px","height":"100px","background-color":"skyblue"}))
+                }), null, 4),
+                createElementVNode("view", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"width":"20px","height":"100px","background-color":"skyblue"}))
+                }), null, 4),
+                createElementVNode("view", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"width":"20px","height":"100px","background-color":"skyblue"}))
+                }), null, 4),
+                createElementVNode("view", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"width":"20px","height":"100px","background-color":"skyblue"}))
+                }), null, 4),
+                createElementVNode("view", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"width":"20px","height":"100px","background-color":"skyblue"}))
+                }), null, 4),
+                createElementVNode("view", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"width":"20px","height":"100px","background-color":"skyblue"}))
+                }), null, 4)
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-const GenPagesIndexIndexStyles = []
+const GenPagesIndexIndexStyles = [utsMapOf([["bg-img", padStyleMapOf(utsMapOf([["transform", "scale(1.5)"], ["position", "fixed"], ["top", 0], ["zIndex", 2]]))], ["bg2-img", padStyleMapOf(utsMapOf([["width", "580rpx"], ["zIndex", 99], ["top", "18%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["desk", padStyleMapOf(utsMapOf([["width", "750rpx"], ["zIndex", 3], ["top", "3%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["plant", padStyleMapOf(utsMapOf([["width", "560rpx"], ["zIndex", 4], ["top", "31%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["top-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "130rpx"], ["backgroundColor", "#f2f2e9"], ["borderRadius", 100], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#c2a587"], ["paddingTop", "20rpx"], ["paddingRight", "20rpx"], ["paddingBottom", "20rpx"], ["paddingLeft", "20rpx"], ["zIndex", 999], ["top", "5%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["right", utsMapOf([[".top-bar ", utsMapOf([["marginLeft", "28rpx"]])]])], ["level", utsMapOf([[".top-bar .right .title-top ", utsMapOf([["color", "#965D30"], ["fontWeight", "700"], ["fontSize", "32rpx"]])]])], ["today", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["color", "#BF9350"], ["fontSize", "28rpx"]])]])], ["jindutiao", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["width", "348rpx"], ["height", "20rpx"], ["borderRadius", 50], ["backgroundColor", "#c5c5c2"]])]])], ["jindutiao-count", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["fontSize", "28rpx"], ["color", "#BF9350"]])]])], ["user-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["paddingTop", "20rpx"], ["paddingRight", "20rpx"], ["paddingBottom", "20rpx"], ["paddingLeft", "20rpx"], ["zIndex", 999], ["bottom", "-1%"], ["left", "50%"], ["transform", "translateX(-50%)"], ["width", "580rpx"], ["height", "780rpx"], ["backgroundColor", "#f9f8f6"], ["borderRadius", "40rpx"]]))], ["hexagon-img", utsMapOf([[".user-bar ", utsMapOf([["width", "120rpx"]])]])], ["line", utsMapOf([[".user-bar .right ", utsMapOf([["width", "6rpx"], ["height", "26rpx"], ["backgroundColor", "#e5e5e5"], ["borderRadius", 10], ["marginTop", 0], ["marginRight", "30rpx"], ["marginBottom", 0], ["marginLeft", "30rpx"]])]])], ["icon", utsMapOf([[".user-bar .right ", utsMapOf([["width", "32rpx"], ["marginRight", "16rpx"]])]])], ["text", utsMapOf([[".user-bar .right ", utsMapOf([["fontSize", "24rpx"]])]])]])]

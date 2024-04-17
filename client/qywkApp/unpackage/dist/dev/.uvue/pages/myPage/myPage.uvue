@@ -1,4 +1,10 @@
 
+
+
+
+
+
+
 	export default {
 		data() {
 			return {
@@ -11,7 +17,7 @@
 	}
 
 
-function GenPagesMyPageMyPageRender(): any | null {
+function GenPagesMyPageMyPageRender(): VNode | null {
 const _ctx = this
 const _cache = this.$.renderCache
   return createElementVNode("view", utsMapOf({ class: "my-page" }), " 我的 ")

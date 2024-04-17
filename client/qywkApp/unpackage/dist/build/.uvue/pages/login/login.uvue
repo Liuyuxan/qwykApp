@@ -17,6 +17,8 @@
 		},
 		methods: {
 			clickLogin() {
+				if((this.loginInfo.username.length <= 0) || (this.loginInfo.password.length <= 0)) return 
+				
 				console.log(this.loginInfo);
 				// Http.post('/qywk/login/normal', this.loginInfo)
 				uni.request<IResponse<IToken>>({
@@ -29,21 +31,27 @@
 					dataType: 'json',
 					success: (res) => {
 						let r = res.data
-						console.log(r);
+						console.log('登录返回信息', r);
 						if(r!.code == 200) {
 							uni.setStorageSync('token', r!.data!.token)
 							uni.reLaunch({
 								url: '/pages/index/index',
 							})
 						} else {
+							
 							uni.showToast({
-								title: r!.message
+								title: "账号或密码错误",
+								icon: "none"
 							})
 						}
 						
 					},
 					fail: (err) => {
 						console.log(err);
+						uni.showToast({
+							title: "账号或密码错误",
+							icon: "none"
+						})
 					}
 				})
 

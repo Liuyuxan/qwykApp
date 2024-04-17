@@ -16,24 +16,25 @@ import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
 import io.dcloud.uniapp.appframe.AppConfig;
 import io.dcloud.uniapp.extapi.exit as uni_exit;
+import io.dcloud.uniapp.extapi.removeInterceptor as uni_removeInterceptor;
 import io.dcloud.uniapp.extapi.showToast as uni_showToast;
 var firstBackTime: Number = 0;
 open class GenApp : BaseApp {
     constructor(instance: ComponentInternalInstance) : super(instance) {
         onLaunch(fun(_: OnLaunchOptions) {
-            console.log("App Launch", " at App.uvue:5");
+            console.log("App Launch", " at App.uvue:29");
         }
         , instance);
         onAppShow(fun(_: OnShowOptions) {
-            console.log("App Show", " at App.uvue:8");
+            console.log("App Show", " at App.uvue:32");
         }
         , instance);
         onHide(fun() {
-            console.log("App Hide", " at App.uvue:11");
+            console.log("App Hide", " at App.uvue:35");
         }
         , instance);
         onLastPageBackPress(fun() {
-            console.log("App LastPageBackPress", " at App.uvue:15");
+            console.log("App LastPageBackPress", " at App.uvue:39");
             if (firstBackTime == 0) {
                 uni_showToast(ShowToastOptions(title = "再按一次退出应用", position = "bottom"));
                 firstBackTime = Date.now();
@@ -47,7 +48,8 @@ open class GenApp : BaseApp {
         }
         , instance);
         onExit(fun() {
-            console.log("App Exit", " at App.uvue:32");
+            uni_removeInterceptor("navigateTo", null);
+            console.log("App Exit", " at App.uvue:57");
         }
         , instance);
     }
@@ -79,6 +81,13 @@ val GenAppClass = CreateVueAppComponent(GenApp::class.java, fun(): VueComponentO
 }
 , fun(instance): GenApp {
     return GenApp(instance);
+}
+);
+val GenPagesIndexIndexClass = CreateVueComponent(GenPagesIndexIndex::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesIndexIndex.inheritAttrs, inject = GenPagesIndexIndex.inject, props = GenPagesIndexIndex.props, propsNeedCastKeys = GenPagesIndexIndex.propsNeedCastKeys, emits = GenPagesIndexIndex.emits, components = GenPagesIndexIndex.components, styles = GenPagesIndexIndex.styles);
+}
+, fun(instance): GenPagesIndexIndex {
+    return GenPagesIndexIndex(instance);
 }
 );
 open class TloginInfo (
@@ -153,11 +162,11 @@ val GenPagesLoginLoginClass = CreateVueComponent(GenPagesLoginLogin::class.java,
     return GenPagesLoginLogin(instance);
 }
 );
-val GenPagesIndexIndexClass = CreateVueComponent(GenPagesIndexIndex::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenPagesIndexIndex.inheritAttrs, inject = GenPagesIndexIndex.inject, props = GenPagesIndexIndex.props, propsNeedCastKeys = GenPagesIndexIndex.propsNeedCastKeys, emits = GenPagesIndexIndex.emits, components = GenPagesIndexIndex.components, styles = GenPagesIndexIndex.styles);
+val GenPagesShowWindowShowWindowClass = CreateVueComponent(GenPagesShowWindowShowWindow::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesShowWindowShowWindow.inheritAttrs, inject = GenPagesShowWindowShowWindow.inject, props = GenPagesShowWindowShowWindow.props, propsNeedCastKeys = GenPagesShowWindowShowWindow.propsNeedCastKeys, emits = GenPagesShowWindowShowWindow.emits, components = GenPagesShowWindowShowWindow.components, styles = GenPagesShowWindowShowWindow.styles);
 }
-, fun(instance): GenPagesIndexIndex {
-    return GenPagesIndexIndex(instance);
+, fun(instance): GenPagesShowWindowShowWindow {
+    return GenPagesShowWindowShowWindow(instance);
 }
 );
 val GenPagesCommunityCommunityClass = CreateVueComponent(GenPagesCommunityCommunity::class.java, fun(): VueComponentOptions {
@@ -197,26 +206,28 @@ open class UniAppConfig : AppConfig {
     override var appid: String = "__UNI__B7338A2";
     override var versionName: String = "1.0.0";
     override var versionCode: String = "1";
-    override var uniCompileVersion: String = "4.11";
+    override var uniCompileVersion: String = "4.12";
     constructor(){}
 }
 fun definePageRoutes() {
-    __uniRoutes.push(PageRoute(path = "pages/login/login", component = GenPagesLoginLoginClass, meta = PageMeta(isQuit = true), style = utsMapOf("navigationBarTitleText" to "")));
-    __uniRoutes.push(PageRoute(path = "pages/index/index", component = GenPagesIndexIndexClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "首页")));
+    __uniRoutes.push(PageRoute(path = "pages/index/index", component = GenPagesIndexIndexClass, meta = PageMeta(isQuit = true), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/login/login", component = GenPagesLoginLoginClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/showWindow/showWindow", component = GenPagesShowWindowShowWindowClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "", "enablePullDownRefresh" to false)));
     __uniRoutes.push(PageRoute(path = "pages/community/community", component = GenPagesCommunityCommunityClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "", "enablePullDownRefresh" to false)));
     __uniRoutes.push(PageRoute(path = "pages/message/message", component = GenPagesMessageMessageClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "", "enablePullDownRefresh" to false)));
     __uniRoutes.push(PageRoute(path = "pages/myPage/myPage", component = GenPagesMyPageMyPageClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "", "enablePullDownRefresh" to false)));
 }
-val __uniTabBar: Map<String, Any?>? = utsMapOf("color" to "#323232", "selectedColor" to "#69d4c8", "backgroundColor" to "#fff", "borderStyle" to "#fff", "list" to utsArrayOf(
-    utsMapOf("pagePath" to "pages/index/index", "text" to "植物"),
-    utsMapOf("pagePath" to "pages/community/community", "text" to "岛屿"),
-    utsMapOf("pagePath" to "pages/message/message", "text" to "消息"),
-    utsMapOf("pagePath" to "pages/myPage/myPage", "text" to "我的")
+val __uniTabBar: Map<String, Any?>? = utsMapOf("color" to "#323232", "selectedColor" to "#b19983", "backgroundColor" to "#fff", "borderStyle" to "#fff", "iconWidth" to "28px", "list" to utsArrayOf(
+    utsMapOf("pagePath" to "pages/showWindow/showWindow", "iconPath" to "static/image/icons/未选择1.png", "selectedIconPath" to "static/image/icons/选择1.png"),
+    utsMapOf("pagePath" to "pages/community/community", "iconPath" to "static/image/icons/未选择2.png", "selectedIconPath" to "static/image/icons/选择2.png"),
+    utsMapOf("pagePath" to "pages/index/index", "iconPath" to "static/image/icons/未选择3.png", "selectedIconPath" to "static/image/icons/选择3.png"),
+    utsMapOf("pagePath" to "pages/message/message", "iconPath" to "static/image/icons/未选择4.png", "selectedIconPath" to "static/image/icons/选择4.png"),
+    utsMapOf("pagePath" to "pages/myPage/myPage", "iconPath" to "static/image/icons/未选择5.png", "selectedIconPath" to "static/image/icons/选择5.png")
 ));
-val __uniLaunchPage: Map<String, Any?> = utsMapOf("url" to "pages/login/login", "style" to utsMapOf("navigationBarTitleText" to ""));
+val __uniLaunchPage: Map<String, Any?> = utsMapOf("url" to "pages/index/index", "style" to utsMapOf("navigationBarTitleText" to ""));
 @Suppress("UNCHECKED_CAST")
 fun defineAppConfig() {
-    __uniConfig.entryPagePath = "/pages/login/login";
+    __uniConfig.entryPagePath = "/pages/index/index";
     __uniConfig.globalStyle = utsMapOf("navigationBarTextStyle" to "black", "navigationBarTitleText" to "uni-app x", "navigationBarBackgroundColor" to "#F8F8F8", "backgroundColor" to "#F8F8F8", "navigationStyle" to "custom");
     __uniConfig.tabBar = __uniTabBar as Map<String, Any>?;
     __uniConfig.conditionUrl = "";

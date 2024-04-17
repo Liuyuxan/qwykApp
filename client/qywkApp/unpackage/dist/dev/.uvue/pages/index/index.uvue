@@ -1,18 +1,134 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	type signInDataType = {
+		icon: string
+		text: string
+	}
+	
 	export default {
 		data() {
 			return {
-					plantTitle: '人参',
-					level: 2,
-					schedule: 25,
-					username: '初心平原',
-					challengeDays: 2,
-					treeHeight: 5
+				plantTitle: '人参' as string,
+				level: 2 as number,
+				schedule: 25 as number,
+				username: '初心平原' as string,
+				challengeDays: 2 as number,
+				treeHeight: 5 as number,
+				currentPercenter: 20 as number, // 顶部当前进度
+				signInData: [
+					{
+						icon: '/static/image/icons/money/money-box.png',
+						text: '第七天：未知的惊喜'
+					},
+					{
+						icon: '/static/image/icons/money/money-chinese.png',
+						text: '第六天：中国结*2'
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第五天：铜钱*4'
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第四天：铜钱*3'
+					},
+					{
+						icon: '/static/image/icons/money/money-box.png',
+						text: '第三天：未知的惊喜'
+					},
+					{
+						icon: '/static/image/icons/money/money-chinese.png',
+						text: '第二天：中国结*1'
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第一天：铜钱*2'
+					}
+				] as signInDataType[]
 			}
 		},
 		onLoad() {
 			const token = uni.getStorageSync('token')
-			console.log('token', token, " at pages/index/index.uvue:66");
+			console.log('token', token);
 		},
 		methods: {
 			
@@ -20,82 +136,138 @@
 	}
 
 
-function GenPagesIndexIndexRender(): any | null {
+function GenPagesIndexIndexRender(): VNode | null {
 const _ctx = this
 const _cache = this.$.renderCache
-  return createElementVNode("view", utsMapOf({ class: "content" }), [
-    createElementVNode("image", utsMapOf({
-      class: "bg-img",
-      src: "/static/image/bg/宣纸纹理背景.png",
-      mode: "widthFix"
-    })),
-    createElementVNode("view", utsMapOf({ class: "top-bar flex justify-center" }), [
+const _component_progress = resolveComponent("progress")
+
+  return createElementVNode("scroll-view", utsMapOf({
+    direction: "vertical",
+    style: "flex:1",
+    "show-scrollbar": false
+  }), [
+    createElementVNode("view", utsMapOf({ class: "content" }), [
       createElementVNode("image", utsMapOf({
-        class: "plant-avatar",
-        src: "/static/image/bg/圆扇.png",
-        mode: "widthFix",
-        style: normalizeStyle(utsMapOf({"width":"90rpx"}))
-      }), null, 4 /* STYLE */),
-      createElementVNode("view", utsMapOf({ class: "right ml-1" }), [
-        createElementVNode("view", utsMapOf({ class: "title-top flex" }), [
-          createElementVNode("text", utsMapOf({ class: "title" }), toDisplayString(_ctx.plantTitle), 1 /* TEXT */),
-          createElementVNode("text", utsMapOf({ class: "level ml-1" }), "Lv" + toDisplayString(_ctx.level), 1 /* TEXT */)
-        ]),
-        createElementVNode("view", utsMapOf({ class: "bottom flex align-center mt-1" }), [
-          createElementVNode("text", utsMapOf({ class: "today" }), "今天"),
-          createElementVNode("view", utsMapOf({ class: "jindutiao ml-1 mr-1" })),
-          createElementVNode("text", utsMapOf({ class: "jindutiao-count" }), toDisplayString(_ctx.schedule) + "%", 1 /* TEXT */)
-        ])
-      ])
-    ]),
-    createElementVNode("image", utsMapOf({
-      class: "bg2-img",
-      src: "/static/image/bg/圆扇.png",
-      mode: "widthFix"
-    })),
-    createElementVNode("image", utsMapOf({
-      class: "desk",
-      src: "/static/image/bg/桌子.png",
-      mode: "widthFix"
-    })),
-    createElementVNode("image", utsMapOf({
-      class: "plant",
-      src: "/static/image/bg/植物.png",
-      mode: "widthFix"
-    })),
-    createElementVNode("view", utsMapOf({ class: "user-bar flex" }), [
-      createElementVNode("view", utsMapOf({ class: "hexagon-container" }), [
+        class: "bg-img",
+        src: "/static/image/bg/宣纸纹理背景.png",
+        mode: "scaleToFill"
+      })),
+      createElementVNode("view", utsMapOf({ class: "top-bar flex justify-center" }), [
         createElementVNode("image", utsMapOf({
-          class: "hexagon-img",
+          class: "plant-avatar",
           src: "/static/image/bg/圆扇.png",
-          mode: "widthFix"
-        }))
-      ]),
-      createElementVNode("view", utsMapOf({ class: "right ml-2" }), [
-        createElementVNode("view", utsMapOf({ class: "top-text" }), [
-          createElementVNode("text", utsMapOf({ class: "username" }), toDisplayString(_ctx.username), 1 /* TEXT */)
-        ]),
-        createElementVNode("view", utsMapOf({ class: "bottom-content flex align-center mt-2" }), [
-          createElementVNode("view", utsMapOf({ class: "flex align-center" }), [
-            createElementVNode("image", utsMapOf({
-              class: "icon",
-              src: "/static/image/icons/挑战icon.png",
-              mode: "widthFix"
-            })),
-            createElementVNode("text", utsMapOf({ class: "challenge-days text" }), "挑战" + toDisplayString(_ctx.challengeDays) + "天", 1 /* TEXT */)
+          mode: "heightFix",
+          style: "height: 140rpx;"
+        })),
+        createElementVNode("view", utsMapOf({ class: "right" }), [
+          createElementVNode("view", utsMapOf({ class: "title-top flex" }), [
+            createElementVNode("text", utsMapOf({ class: "title" }), toDisplayString(_ctx.plantTitle), 1 /* TEXT */),
+            createElementVNode("text", utsMapOf({ class: "level ml-1" }), "Lv" + toDisplayString(_ctx.level), 1 /* TEXT */)
           ]),
-          createElementVNode("view", utsMapOf({ class: "line" })),
-          createElementVNode("view", utsMapOf({ class: "flex align-center" }), [
-            createElementVNode("image", utsMapOf({
-              class: "icon",
-              src: "/static/image/icons/植物状态icon.png",
-              mode: "widthFix"
-            })),
-            createElementVNode("text", utsMapOf({ class: "tree-height text" }), "树高" + toDisplayString(_ctx.treeHeight) + "M", 1 /* TEXT */)
+          createElementVNode("view", utsMapOf({ class: "bottom flex align-center mt-1" }), [
+            createElementVNode("text", utsMapOf({ class: "today" }), "今天"),
+            createVNode(_component_progress, utsMapOf({
+              class: "jindutiao",
+              percent: _ctx.currentPercenter,
+              "stroke-width": 12,
+              "border-radius": 20,
+              activeColor: "#BF9350",
+              backgroundColor: "#c3c3c0"
+            }), null, 8 /* PROPS */, ["percent"]),
+            createElementVNode("text", utsMapOf({ class: "jindutiao-count" }), toDisplayString(_ctx.currentPercenter) + "%", 1 /* TEXT */)
           ])
         ])
+      ]),
+      createElementVNode("image", utsMapOf({
+        class: "bg2-img center",
+        src: "/static/image/bg/圆扇.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("image", utsMapOf({
+        class: "desk center",
+        src: "/static/image/bg/桌子.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("image", utsMapOf({
+        class: "plant center",
+        src: "/static/image/bg/植物.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("view", utsMapOf({ class: "user-bar" }), [
+        createElementVNode("view", utsMapOf({ class: "user-info flex" }), [
+          createElementVNode("view", utsMapOf({ class: "avatar" }), [
+            createElementVNode("image", utsMapOf({
+              class: "hexagon-img",
+              src: "/static/image/bg/圆扇.png",
+              mode: "widthFix"
+            }))
+          ]),
+          createElementVNode("view", utsMapOf({ class: "right ml-3" }), [
+            createElementVNode("view", utsMapOf({ class: "top-text" }), [
+              createElementVNode("text", utsMapOf({ class: "username" }), toDisplayString(_ctx.username), 1 /* TEXT */)
+            ]),
+            createElementVNode("view", utsMapOf({ class: "flex align-center mt-2" }), [
+              createElementVNode("view", utsMapOf({ class: "flex align-center" }), [
+                createElementVNode("image", utsMapOf({
+                  class: "icon",
+                  src: "/static/image/icons/挑战icon.png",
+                  mode: "widthFix"
+                })),
+                createElementVNode("text", utsMapOf({ class: "challenge-days text" }), "挑战" + toDisplayString(_ctx.challengeDays) + "天", 1 /* TEXT */)
+              ]),
+              createElementVNode("view", utsMapOf({ class: "line" })),
+              createElementVNode("view", utsMapOf({ class: "flex align-center" }), [
+                createElementVNode("image", utsMapOf({
+                  class: "icon",
+                  src: "/static/image/icons/植物状态icon.png",
+                  mode: "widthFix"
+                })),
+                createElementVNode("text", utsMapOf({ class: "tree-height text" }), "树高" + toDisplayString(_ctx.treeHeight) + "M", 1 /* TEXT */)
+              ])
+            ])
+          ])
+        ]),
+        createElementVNode("scroll-view", utsMapOf({
+          direction: "vertical",
+          class: "sign-in-scroll",
+          "show-scrollbar": false
+        }), [
+          createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.signInData, (item, index, _, _): VNode => {
+            return createElementVNode("view", utsMapOf({
+              class: "item flex",
+              key: index
+            }), [
+              createElementVNode("view", utsMapOf({ class: "money-icon" }), [
+                createElementVNode("image", utsMapOf({
+                  style: "width: 50px;height: 50px;",
+                  src: item.icon,
+                  mode: "widthFix"
+                }), null, 8 /* PROPS */, ["src"])
+              ]),
+              createElementVNode("view", utsMapOf({ class: "line-time" }), [
+                createElementVNode("view", utsMapOf({ class: "top" })),
+                createElementVNode("view", utsMapOf({ class: "current" }), [
+                  createElementVNode("text", utsMapOf({ class: "day" }), toDisplayString(index + 1), 1 /* TEXT */)
+                ]),
+                createElementVNode("view", utsMapOf({ class: "bottom" }))
+              ]),
+              createElementVNode("text", utsMapOf({ style: "font-size: 24rpx;color: #584717;font-weight: 700;" }), toDisplayString(item.text), 1 /* TEXT */)
+            ])
+          }), 128 /* KEYED_FRAGMENT */)
+        ])
+      ]),
+      createElementVNode("view", utsMapOf({ class: "garden center flex flex-column justify-around align-center" }), [
+        createElementVNode("view", utsMapOf({ class: "title" }), [
+          createElementVNode("view", utsMapOf({ class: "circular" })),
+          createElementVNode("text", utsMapOf({ class: "text" }), "花圃")
+        ]),
+        createElementVNode("image", utsMapOf({
+          class: "graden-bg",
+          src: "/static/image/bg/花圃背景.png",
+          mode: "widthFix"
+        }))
       ])
     ])
   ])
 }
-const GenPagesIndexIndexStyles = [utsMapOf([["bg-img", padStyleMapOf(utsMapOf([["transform", "scale(1.5)"], ["position", "fixed"], ["top", 0], ["zIndex", 2]]))], ["bg2-img", padStyleMapOf(utsMapOf([["width", "580rpx"], ["position", "fixed"], ["zIndex", 99], ["top", "18%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["desk", padStyleMapOf(utsMapOf([["width", "750rpx"], ["position", "fixed"], ["zIndex", 3], ["top", "3%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["plant", padStyleMapOf(utsMapOf([["position", "fixed"], ["width", "560rpx"], ["zIndex", 4], ["top", "31%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["top-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "130rpx"], ["backgroundColor", "#f2f2e9"], ["borderRadius", 100], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#c2a587"], ["paddingTop", "20rpx"], ["paddingRight", "20rpx"], ["paddingBottom", "20rpx"], ["paddingLeft", "20rpx"], ["position", "fixed"], ["zIndex", 999], ["top", "5%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["right", utsMapOf([[".top-bar ", utsMapOf([["marginLeft", "28rpx"]])]])], ["level", utsMapOf([[".top-bar .right .title-top ", utsMapOf([["color", "#965D30"], ["fontWeight", "700"], ["fontSize", "32rpx"]])]])], ["today", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["color", "#BF9350"], ["fontSize", "28rpx"]])]])], ["jindutiao", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["width", "348rpx"], ["height", "20rpx"], ["borderRadius", 50], ["backgroundColor", "#c5c5c2"]])]])], ["jindutiao-count", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["fontSize", "28rpx"], ["color", "#BF9350"]])]])], ["user-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["paddingTop", "20rpx"], ["paddingRight", "20rpx"], ["paddingBottom", "20rpx"], ["paddingLeft", "20rpx"], ["position", "fixed"], ["zIndex", 999], ["bottom", "-1%"], ["left", "50%"], ["transform", "translateX(-50%)"], ["width", "580rpx"], ["height", "148rpx"], ["backgroundColor", "#f9f8f6"], ["borderTopLeftRadius", "40rpx"], ["borderTopRightRadius", "40rpx"]]))], ["hexagon-img", utsMapOf([[".user-bar ", utsMapOf([["width", "120rpx"]])]])], ["line", utsMapOf([[".user-bar .right ", utsMapOf([["width", "6rpx"], ["height", "26rpx"], ["backgroundColor", "#e5e5e5"], ["borderRadius", 10], ["marginTop", 0], ["marginRight", "30rpx"], ["marginBottom", 0], ["marginLeft", "30rpx"]])]])], ["icon", utsMapOf([[".user-bar .right ", utsMapOf([["width", "32rpx"], ["marginRight", "16rpx"]])]])], ["text", utsMapOf([[".user-bar .right ", utsMapOf([["fontSize", "24rpx"]])]])]])]
+const GenPagesIndexIndexStyles = [utsMapOf([["content", padStyleMapOf(utsMapOf([["paddingBottom", "150rpx"]]))], ["bg-img", padStyleMapOf(utsMapOf([["transform", "scale(1.8)"], ["width", "750rpx"], ["height", "2000rpx"], ["position", "absolute"], ["zIndex", 0]]))], ["top-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "130rpx"], ["backgroundColor", "#f2f2e9"], ["borderRadius", 100], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#c2a587"], ["padding", "20rpx"], ["zIndex", 999], ["top", "3%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["right", utsMapOf([[".top-bar ", utsMapOf([["marginLeft", "28rpx"]])]])], ["level", utsMapOf([[".top-bar .right .title-top ", utsMapOf([["color", "#965D30"], ["fontWeight", "700"], ["fontSize", "32rpx"]])]])], ["today", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["color", "#BF9350"], ["fontSize", "28rpx"]])]])], ["jindutiao", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["margin", "0 14rpx"], ["width", "340rpx"]])]])], ["jindutiao-count", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["fontSize", "28rpx"], ["color", "#BF9350"]])]])], ["bg2-img", padStyleMapOf(utsMapOf([["width", "700rpx"], ["zIndex", 99], ["top", "4%"]]))], ["desk", padStyleMapOf(utsMapOf([["position", "absolute"], ["width", "750rpx"], ["zIndex", 3], ["top", "9%"]]))], ["plant", padStyleMapOf(utsMapOf([["position", "absolute"], ["width", "560rpx"], ["zIndex", 999], ["top", "22%"]]))], ["user-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["padding", "20rpx"], ["zIndex", 999], ["bottom", "-2%"], ["left", "50%"], ["transform", "translateX(-50%)"], ["width", "680rpx"], ["height", "780rpx"], ["backgroundColor", "#f9f8f6"], ["borderRadius", "46rpx"]]))], ["user-info", utsMapOf([[".user-bar ", utsMapOf([["height", "140rpx"]])]])], ["hexagon-img", utsMapOf([[".user-bar .user-info ", utsMapOf([["width", "120rpx"]])]])], ["line", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["width", "6rpx"], ["height", "26rpx"], ["backgroundColor", "#e5e5e5"], ["borderRadius", 10], ["margin", "0 40rpx"]])]])], ["icon", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["width", "32rpx"], ["marginRight", "16rpx"]])]])], ["text", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["fontSize", "24rpx"]])], [".garden .title ", utsMapOf([["backgroundColor", "#ffeec7"], ["color", "#7a4923"], ["borderRadius", 50], ["textAlign", "center"], ["lineHeight", "60rpx"]])]])], ["sign-in-scroll", utsMapOf([[".user-bar ", utsMapOf([["width", "100%"], ["height", "580rpx"], ["backgroundColor", "#cccccc"]])]])], ["item", utsMapOf([[".user-bar .sign-in-scroll ", utsMapOf([["marginBottom", "20rpx"], ["backgroundColor", "#965D30"], ["overflow", "visible"]])]])], ["money-icon", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["width", "128rpx"], ["height", "128rpx"], ["borderRadius", "20rpx"], ["backgroundColor", "#ededed"]])]])], ["line-time", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["overflow", "visible"], ["display", "flex"], ["justifyContent", "center"]])]])], ["top", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", 3], ["height", 80], ["backgroundColor", "#ededed"]])]])], ["current", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#ededed"]])]])], ["day", utsMapOf([[".user-bar .sign-in-scroll .item .line-time .current ", utsMapOf([["textAlign", "center"], ["lineHeight", "32rpx"]])]])], ["bottom", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", 3], ["height", 100], ["backgroundColor", "#ededed"]])]])], ["garden", padStyleMapOf(utsMapOf([["overflow", "visible"], ["width", "680rpx"], ["height", "400rpx"], ["backgroundColor", "#FFEEC7"], ["borderRadius", "46rpx"], ["top", "4%"], ["position", "relative"]]))], ["title", utsMapOf([[".garden ", utsMapOf([["position", "absolute"], ["top", "-7%"], ["zIndex", 99], ["width", "160rpx"], ["height", "60rpx"]])]])], ["circular", utsMapOf([[".garden .title ", utsMapOf([["position", "absolute"], ["width", "22rpx"], ["height", "22rpx"], ["backgroundColor", "#7a4923"], ["borderRadius", 50], ["top", "50%"], ["transform", "translateY(-50%)"], ["left", "8%"], ["zIndex", 99]])]])], ["graden-bg", utsMapOf([[".garden ", utsMapOf([["width", "700rpx"], ["position", "absolute"], ["left", "2%"], ["top", "-32%"]])]])]])]
