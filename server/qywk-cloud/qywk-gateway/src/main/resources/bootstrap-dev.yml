@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.0.6.21:8848
+        namespace: 4901d021-77fa-40ec-93dc-e1f1ac69bccd #上下两个命名空间统一,本地测试改成自己的命名空间
+        group: dev-qlh #可变
+      config:
+        server-addr: 10.0.6.21:8848
+        file-extension: yaml # 不变
+        namespace: 4901d021-77fa-40ec-93dc-e1f1ac69bccd #上下两个命名空间统一,本地测试改成自己的命名空间
+        group: dev-qlh #可变
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

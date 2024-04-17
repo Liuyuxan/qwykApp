@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: qywk-chatai
+  profiles:
+    active: dev
+server:
+  port: 20244

@@ -35,7 +35,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <!--指尖移通代码版本-->
+        <!--轻养问康代码版本-->
         <qywk-version>1.0-SNAPSHOT</qywk-version>
         <!--springcloud依赖管理-->
         <springcloud.alibaba-version>2.1.0.RELEASE</springcloud.alibaba-version>

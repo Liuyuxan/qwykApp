@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>qywk-modules-chat-ai</artifactId>
+    <artifactId>qywk-modules-community</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -60,7 +60,5 @@
             <artifactId>qywk-common-redis</artifactId>
         </dependency>
     </dependencies>
-
-
 
 </project>
