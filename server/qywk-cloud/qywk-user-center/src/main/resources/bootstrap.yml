@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: qywk-user
+  profiles:
+    active: dev
+server:
+  port: 20240

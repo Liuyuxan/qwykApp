@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="qywk-modules-chat-ai" />
+        <module name="qywk-common-redis" />
+        <module name="qywk-modules-health" />
+        <module name="qywk-file" />
+        <module name="qywk-modules-community" />
+        <module name="qywk-user-center" />
+        <module name="qywk-common-mybatis" />
+        <module name="qywk-gateway" />
+        <module name="qywk-common-core" />
+        <module name="script" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="community" target="8" />
+      <module name="qywk-background" target="8" />
+      <module name="qywk-cmmon-redis" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="community" options="-parameters" />
+      <module name="qywk-background" options="-parameters" />
+      <module name="qywk-cmmon-redis" options="-parameters" />
+      <module name="qywk-common" options="-parameters" />
+      <module name="qywk-common-core" options="-parameters" />
+      <module name="qywk-common-mybatis" options="-parameters" />
+      <module name="qywk-common-redis" options="-parameters" />
+      <module name="qywk-file" options="-parameters" />
+      <module name="qywk-gateway" options="-parameters" />
+      <module name="qywk-modules" options="-parameters" />
+      <module name="qywk-modules-chat-ai" options="-parameters" />
+      <module name="qywk-modules-community" options="-parameters" />
+      <module name="qywk-modules-health" options="-parameters" />
+      <module name="qywk-user-center" options="-parameters" />
+      <module name="script" options="-parameters" />
+    </option>
+  </component>
+</project>

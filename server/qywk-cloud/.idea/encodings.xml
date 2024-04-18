@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/qywk-common/qywk-common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-common/qywk-common-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-common/qywk-common-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-modules/qywk-modules-chat-ai/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-modules/qywk-modules-community/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/qywk-user-center/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/script/src/main/java" charset="UTF-8" />
+  </component>
+</project>

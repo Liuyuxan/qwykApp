@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.11.1:8848
+        namespace: aea957b5-a967-49a7-9fda-f133f2837954 #上下两个命名空间统一,本地测试改成自己的命名空间
+        group: dev #可变
+      config:
+        server-addr: 192.168.11.1:8848
+        file-extension: yaml # 不变
+        namespace: aea957b5-a967-49a7-9fda-f133f2837954 #上下两个命名空间统一,本地测试改成自己的命名空间
+        group: dev #可变
+  servlet:
+    multipart:
+      # 配置单个文件上传大小限制
+      max-file-size: 200MB
+      # 配置单个请求最大大小的限制（一次请求可以上传多个文件）
+      max-request-size: 1024MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

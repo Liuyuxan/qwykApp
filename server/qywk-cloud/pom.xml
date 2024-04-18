@@ -30,6 +30,8 @@
         <module>qywk-common</module>
         <!-- 文件服务器 -->
         <module>qywk-file</module>
+        <!-- yaml 配置脚本 -->
+        <module>script</module>
     </modules>
 
     <properties>

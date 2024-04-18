@@ -1,7 +1,7 @@
 spring:
   application:
-    name: qywk-chatai
+    name: qywk-gateway
   profiles:
     active: dev
 server:
-  port: 20244
+  port: 9000

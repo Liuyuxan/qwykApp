@@ -4,83 +4,109 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a006224f-c1db-4f3c-90d6-e0f1c2c7fd4c" name="默认变更列表" comment="init(qywk-cloud): 初始化cloud项目">
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/ZJYTFileUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/resources/bootstrap-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/resources/logback.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/java/com/qywk/chatai/QYWKChatAiApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/bootstrap-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-community/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/src/main/java/com/qywk/user/QYWKUserCenterApplication.java" afterDir="false" />
+    <list default="true" id="a006224f-c1db-4f3c-90d6-e0f1c2c7fd4c" name="默认变更列表" comment="fix(qywk-gateway): 修复网关服务器bug&#10;init(qywk-cloud): 初始化cloud项目,新定义各个模块框架">
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/src/main/java/com/qywk/file/QYWKFileApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/src/main/java/com/qywk/file/api/AliOSSApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/src/main/java/com/qywk/file/config/properties/AliOSSProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/src/main/resources/bootstrap-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-community/src/main/resources/bootstrap-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-community/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-community/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-health/src/main/resources/bootstrap-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-health/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-health/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/src/main/java/com/qywk/user/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/src/main/resources/bootstrap-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/src/main/resources/bootstrap.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/src/main/java/NacosConfigScript.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/target/classes/NacosConfigScript.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/qywk-cloud/script/target/script-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/qywk-boot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/QYWKApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/gateway/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/gateway/HeaderMapRequestWrapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/mybatis/MyMetaObjectHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/mybatis/MybatisPlusConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/properties/ChatAiProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/properties/WeChatProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/properties/WhiteListProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/redis/FastJson2JsonRedisSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/redis/RedisConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/config/redis/RequestLimitInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/constant/CodeStateEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/constant/EnableConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/constant/FilterConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/constant/RedisKeyEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/constant/SecurityConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/constant/TokenConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/entity/ResultBody.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/exception/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/redis/annotation/GlobalRequestLimit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/redis/annotation/UserRequestLimit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/redis/service/RedisService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/common/redis/utils/RedisLockUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/controller/chat/ChatAiController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/controller/health/HealthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/controller/health/PlantController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/controller/user/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/controller/user/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/controller/user/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/gateway/LoginCheckFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/mapper/ProblemMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/mapper/UserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/ForgetAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/LoginAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/PermissionAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/ProblemAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/RegisterAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/RoleAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/ao/UserAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/dto/PermissionDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/dto/PlantDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/dto/ProblemDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/dto/RoleDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/dto/UserDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/entity/ChatAiResp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/entity/HealthIndicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/entity/Indicator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/entity/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/entity/Payload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/entity/Photos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/vo/ArticleVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/vo/CommentVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/pojo/vo/ProblemVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/ChatAiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/HealthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/LoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/PlantService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/impl/AuthServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/impl/ChatAiServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/impl/HealthServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/impl/LoginServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/impl/PlantServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/utils/ChatAiUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/utils/JwtUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/java/com/qywk/utils/MD5Utils.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-boot/src/test/java/QYWKTestApplication.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/qywk-cloud/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/constant/CacheConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/constant/CacheConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/constant/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/constant/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/constant/EnableConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/constant/EnableConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/constant/FilterConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/constant/FilterConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/constant/SecurityConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/constant/SecurityConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/constant/TokenConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/constant/TokenConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/customenum/CodeStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/customenum/CodeStateEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/customenum/ModulesNameEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/customenum/ModulesNameEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/ChatAiResp.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/ChatAiResp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/HealthIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/HealthIndicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/Indicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/Indicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/Payload.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/Payload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/Photos.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/Photos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/ResultBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/ResultBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/WeChatMessageConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/WeChatMessageConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/entity/WeChatMessageUrlConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/WeChatMessageUrlConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/properties/ChatAiProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/java/com/qywk/chatai/properties/ChatAiProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/properties/WeChatProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/properties/WhiteListProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/ChatAiUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/CmdUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/CmdUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/DateTimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/DateTimeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/FileServerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/FileServerClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/JwtUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/MD5Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/Md5Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/MyBeanUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/MyBeanUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/PageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/PageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/SensitiveWordFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/SensitiveWordFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/ServletUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/ServletUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/StringUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/ThumbnailUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/ThumbnailUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/WeChatMessageUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/WeChatMessageUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/ZJYTFileUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/html/EscapeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/html/EscapeUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/sensitivewdfilter/BCConvert.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/sensitivewdfilter/BCConvert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/sensitivewdfilter/FilterSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/sensitivewdfilter/FilterSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/sensitivewdfilter/WordFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/sensitivewdfilter/WordFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/utils/sensitivewdfilter/WordNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/utils/sensitivewdfilter/WordNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-mybatis/src/main/java/com/qywk/common/mybatis/MyMetaObjectHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-mybatis/src/main/java/com/qywk/common/mybatis/MybatisPlusConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/annotation/GlobalRequestLimit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/annotation/UserRequestLimit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/configure/FastJson2JsonRedisSerializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/configure/RedisConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/configure/RequestLimitInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/customenum/RedisKeyEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/service/RedisService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/utils/RedisLockUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/ZJYTGateWayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/QYWKGateWayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/config/properties/IgnoreWhiteProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/config/properties/IgnoreWhiteProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/config/properties/XssProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/config/properties/XssProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/config/swagger/MySwaggerResourcesProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/config/swagger/MySwaggerResourcesProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/filter/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/filter/AuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/filter/BlackListUrlFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/filter/BlackListUrlFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/filter/CacheRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/filter/CacheRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/filter/MyLogGateWayFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/filter/XssFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/filter/XssFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/gateway/handler/GatewayExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/java/com/qywk/handler/GatewayExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-user-center/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-file/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/resources/bootstrap-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-gateway/src/main/resources/bootstrap-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/bootstrap-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/bootstrap-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/qywk-cloud/qywk-modules/qywk-modules-chat-ai/src/main/resources/bootstrap.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +152,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="项目" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -160,7 +187,8 @@
       <workItem from="1713257738356" duration="463000" />
       <workItem from="1713258221996" duration="1450000" />
       <workItem from="1713263944841" duration="6083000" />
-      <workItem from="1713370796815" duration="646000" />
+      <workItem from="1713370796815" duration="1648000" />
+      <workItem from="1713413938430" duration="706000" />
     </task>
     <task id="LOCAL-00001" summary="fix: common -&gt; EnableConstants &quot;修改激活状态&quot;">
       <created>1713170091958</created>
@@ -183,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713267658643</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix(qywk-gateway): 修复网关服务器bug&#10;init(qywk-cloud): 初始化cloud项目,新定义各个模块框架">
+      <created>1713371571767</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713371571767</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +241,7 @@
     <MESSAGE value="init(readme): 初始化，贡献文档和规范手册" />
     <MESSAGE value="init(qywk-clod): 初始化cloud项目" />
     <MESSAGE value="init(qywk-cloud): 初始化cloud项目" />
-    <option name="LAST_COMMIT_MESSAGE" value="init(qywk-cloud): 初始化cloud项目" />
+    <MESSAGE value="fix(qywk-gateway): 修复网关服务器bug&#10;init(qywk-cloud): 初始化cloud项目,新定义各个模块框架" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(qywk-gateway): 修复网关服务器bug&#10;init(qywk-cloud): 初始化cloud项目,新定义各个模块框架" />
   </component>
 </project>

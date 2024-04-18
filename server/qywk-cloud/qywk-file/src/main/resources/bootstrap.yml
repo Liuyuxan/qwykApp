@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: qywk-file
+  profiles:
+    active: dev
+server:
+  port: 666
