@@ -1,6 +1,6 @@
 package com.qywk.user.service.impl;
 
-import com.qywk.user.service.UserService;
+import com.qywk.user.service.UserInfoService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Service;
  * @description
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserInfoServiceImpl implements UserInfoService {
 }
