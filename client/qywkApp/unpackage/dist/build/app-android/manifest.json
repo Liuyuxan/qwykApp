@@ -7,7 +7,7 @@
     "code": 1
   },
   "uni-app-x": {
-    "compilerVersion": "4.11"
+    "compilerVersion": "4.12"
   },
   "app": {
     "distribute": {
@@ -27,9 +27,9 @@
         }
       },
       "modules": {
-        "uni-network": {},
-        "uni-prompt": {},
         "uni-storage": {},
+        "uni-prompt": {},
+        "uni-network": {},
         "uni-exit": {}
       }
     }

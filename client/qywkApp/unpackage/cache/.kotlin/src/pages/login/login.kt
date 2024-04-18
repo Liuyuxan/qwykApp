@@ -1,4 +1,3 @@
-@file:Suppress("UNCHECKED_CAST", "USELESS_CAST", "INAPPLICABLE_JVM_NAME")
 package uni.UNIB7338A2;
 import io.dcloud.uniapp.*;
 import io.dcloud.uniapp.extapi.*;
@@ -22,31 +21,39 @@ import io.dcloud.uniapp.extapi.showToast as uni_showToast;
 open class GenPagesLoginLogin : BasePage {
     constructor(instance: ComponentInternalInstance) : super(instance) {}
     @Suppress("UNUSED_PARAMETER", "UNUSED_VARIABLE")
-    override fun `$render`(): Any? {
+    override fun `$render`(): VNode? {
         val _ctx = this;
         val _cache = this.`$`.renderCache;
+        val _component_button = resolveComponent("button");
         return createElementVNode("view", utsMapOf("class" to "login"), utsArrayOf(
             createElementVNode("image", utsMapOf("class" to "bg-img", "src" to "/static/image/login/bg.png", "mode" to "widthFix")),
             createElementVNode("view", utsMapOf("class" to "window flex flex-column align-center"), utsArrayOf(
                 createElementVNode("view", utsMapOf("class" to "top flex align-center"), utsArrayOf(
-                    createElementVNode("image", utsMapOf("src" to "/static/image/login/chacha.png", "mode" to "widthFix", "style" to normalizeStyle(utsMapOf("width" to "36rpx", "margin-right" to "10rpx"))), null, 4),
+                    createElementVNode("image", utsMapOf("src" to "/static/image/login/chacha.png", "mode" to "widthFix", "style" to "width: 36rpx;margin-right: 10rpx;")),
                     createElementVNode("text", utsMapOf("class" to "title justify-start"), "登录")
                 )),
-                createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.username, "onInput" to fun(`$event`: InputEvent){
+                createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.username, "onInput" to fun(`$event`: InputEvent): Any {
                     _ctx.loginInfo.username = `$event`.detail.value;
+                    return `$event`.detail.value;
                 }
                 , "class" to "uni-input space", "placeholder" to "账号/手机号"), null, 40, utsArrayOf(
                     "modelValue",
                     "onInput"
                 )),
-                createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.password, "onInput" to fun(`$event`: InputEvent){
+                createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.password, "onInput" to fun(`$event`: InputEvent): Any {
                     _ctx.loginInfo.password = `$event`.detail.value;
+                    return `$event`.detail.value;
                 }
                 , "class" to "uni-input space", "password" to "", "type" to "text", "placeholder" to "密码"), null, 40, utsArrayOf(
                     "modelValue",
                     "onInput"
                 )),
-                createElementVNode("button", utsMapOf("class" to "space", "hover-class" to "btn-hover", "onClick" to _ctx.clickLogin, "style" to normalizeStyle(utsMapOf("width" to "600rpx", "height" to "76rpx", "border-radius" to "32rpx", "color" to "#fff", "line-height" to "76rpx", "text-align" to "center", "background-color" to "#b19983"))), "登录", 12, utsArrayOf(
+                createVNode(_component_button, utsMapOf("class" to "space", "hover-class" to "btn-hover", "onClick" to _ctx.clickLogin, "style" to "width: 600rpx;height: 76rpx;border-radius: 32rpx;color: #fff;line-height: 76rpx;text-align: center;background-color: #b19983;"), utsMapOf("default" to withSlotCtx(fun(): UTSArray<Any> {
+                    return utsArrayOf(
+                        "登录"
+                    );
+                }
+                ), "_" to 1), 8, utsArrayOf(
                     "onClick"
                 )),
                 createElementVNode("view", utsMapOf("class" to "sub space flex justify-between"), utsArrayOf(
@@ -111,7 +118,7 @@ open class GenPagesLoginLogin : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("login" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".login " to utsMapOf("width" to "750rpx", "position" to "absolute", "top" to 0)), "window" to utsMapOf(".login " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "766rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "#f5f5f5", "borderRadius" to "48rpx")), "space" to utsMapOf(".login .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".login .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "btn-hover" to utsMapOf(".login .window " to utsMapOf("backgroundColor" to "#94806e")), "sub" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx")), "text" to utsMapOf(".login .window .sub " to utsMapOf("fontSize" to 12, "color" to "#937152")), "icons" to utsMapOf(".login .window " to utsMapOf("width" to "500rpx", "height" to "56rpx")), "img-icon" to utsMapOf(".login .window .icons " to utsMapOf("width" to "56rpx", "height" to "56rpx")));
+                return utsMapOf("login" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".login " to utsMapOf("width" to "750rpx", "position" to "absolute", "top" to 0)), "window" to utsMapOf(".login " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "766rpx", "padding" to "30rpx", "margin" to "300rpx auto 0 auto", "backgroundColor" to "#f5f5f5", "borderRadius" to "48rpx")), "space" to utsMapOf(".login .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".login .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "margin" to "0 auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "btn-hover" to utsMapOf(".login .window " to utsMapOf("backgroundColor" to "#94806e")), "sub" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx")), "text" to utsMapOf(".login .window .sub " to utsMapOf("fontSize" to 12, "color" to "#937152")), "icons" to utsMapOf(".login .window " to utsMapOf("width" to "500rpx", "height" to "56rpx")), "img-icon" to utsMapOf(".login .window .icons " to utsMapOf("width" to "56rpx", "height" to "56rpx")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

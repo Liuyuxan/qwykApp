@@ -71,7 +71,10 @@ open class GenPagesLoginLogin : BasePage {
     }
     override fun `$initMethods`() {
         this.clickLogin = fun() {
-            console.log(this.loginInfo, " at pages/login/login.uvue:20");
+            if ((this.loginInfo.username.length <= 0) || (this.loginInfo.password.length <= 0)) {
+                return;
+            }
+            console.log(this.loginInfo, " at pages/login/login.uvue:22");
             uni_request<IResponse<IToken>>(RequestOptions(url = BASE_URL + "/qywk/login/normal", method = "POST", data = let {
                 object : UTSJSONObject() {
                     var username = it.loginInfo.username
@@ -79,16 +82,17 @@ open class GenPagesLoginLogin : BasePage {
                 }
             }, dataType = "json", success = fun(res){
                 var r = res.data;
-                console.log(r, " at pages/login/login.uvue:32");
+                console.log("登录返回信息", r, " at pages/login/login.uvue:34");
                 if (r!!.code == 200) {
                     uni_setStorageSync("token", r!!.data!!.token);
                     uni_reLaunch(ReLaunchOptions(url = "/pages/index/index"));
                 } else {
-                    uni_showToast(ShowToastOptions(title = r!!.message));
+                    uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
                 }
             }
             , fail = fun(err){
-                console.log(err, " at pages/login/login.uvue:46");
+                console.log(err, " at pages/login/login.uvue:50");
+                uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
             }
             ));
         }

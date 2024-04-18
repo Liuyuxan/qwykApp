@@ -1,7 +1,31 @@
 
 	let firstBackTime = 0
+	// const interceptor = {
+	//     invoke: function (options : NavigateToOptions) {
+	//       console.log('拦截 navigateTo 接口传入参数为：', options)
+	//       const url = './page2'
+	// 			const token = uni.getStorageSync('token')
+	// 			// if(token!.length <= 0) {
+	// 			// 	uni.showToast({
+	// 			// 	  title: `请登录`
+	// 			// 	})
+	// 			// 	options.url = '/pages/login/login'
+	// 			// }
+	      
+	//     },
+	//     success: function (res : NavigateBackSuccess) {
+	//       console.log('拦截 navigateTo 接口 success 返回参数为：', res)
+	//     },
+	//     fail: function (err : NavigateToFail) {
+	//       console.log('拦截 navigateTo 接口 fail 返回参数为：', err)
+	//     },
+	//     complete: function (res : NavigateToComplete) {
+	//       console.log('拦截 navigateTo 接口 complete 返回参数为：', res)
+	//     }
+	//   } as Interceptor
 	export default {
 		onLaunch: function () {
+			// uni.addInterceptor('navigateTo', interceptor)
 			console.log('App Launch')
 		},
 		onShow: function () {
@@ -29,6 +53,7 @@
 		},
 
 		onExit: function () {
+			uni.removeInterceptor('navigateTo')
 			console.log('App Exit')
 		},
 	}
