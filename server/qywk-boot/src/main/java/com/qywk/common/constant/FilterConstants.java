@@ -13,7 +13,7 @@ public class FilterConstants {
     // 登录
     public static final String LOGIN = "login";
     // 用户名
-    public static final String USERNAME = "username";
+    public static final String USERNAME = "user_id";
     // 权限
     public static final String PERMISSION = "permission";
     // token

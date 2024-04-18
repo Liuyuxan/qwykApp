@@ -20,35 +20,35 @@ public class AuthController {
 
     /**
      * 刷新用户的权限
-     * @param username 用户名
+     * @param userId 用户名
      * @return
      */
     @PostMapping("/refresh")
-    public ResultBody refresh(@RequestParam(value = "username") String username){
-        return authService.refresh(username);
+    public ResultBody refresh(@RequestParam(value = "user_id") String userId){
+        return authService.refresh(userId);
     }
 
     /**
      * 添加权限
-     * @param username
+     * @param userId
      * @param ao
      * @return
      */
     @PostMapping("/permission/save")
-    public ResultBody insertPermission(@RequestHeader("username") String username,
+    public ResultBody insertPermission(@RequestHeader("user_id") String userId,
                                        @RequestBody PermissionAO ao){
         return authService.insertPermission(ao);
     }
 
     /**
      * 更新权限
-     * @param username
+     * @param userId
      * @param id
      * @param ao
      * @return
      */
     @PostMapping("/permission/update")
-    public ResultBody updatePermission(@RequestHeader("username") String username,
+    public ResultBody updatePermission(@RequestHeader("user_id") String userId,
                                        @RequestParam(value = "id") String id,
                                        @RequestBody RoleAO ao){
         return authService.updatePermission(id, ao);
@@ -56,26 +56,26 @@ public class AuthController {
 
     /**
      * 删除权限
-     * @param username
+     * @param userId
      * @param id
      * @return
      */
     @PostMapping("/permission/delete")
-    public ResultBody deletePermission(@RequestHeader("username") String username,
+    public ResultBody deletePermission(@RequestHeader("user_id") String userId,
                                        @RequestParam(value = "id") String id){
         return authService.deletePermission(id);
     }
 
     /**
      * 查看权限
-     * @param username
+     * @param userId
      * @param ao
      * @param pageNum
      * @param pageSize
      * @return
      */
     @GetMapping("/permission/getAll")
-    public ResultBody getAllPermission(@RequestHeader("username") String username,
+    public ResultBody getAllPermission(@RequestHeader("user_id") String userId,
                                        @RequestBody PermissionAO ao,
                                        @RequestParam(value = "page") Integer pageNum,
                                        @RequestParam(value = "size") Integer pageSize){
@@ -84,12 +84,12 @@ public class AuthController {
 
     /**
      *
-     * @param username
+     * @param userId
      * @param id
      * @return
      */
     @PostMapping("/permission/getById")
-    public ResultBody getByIdPermission(@RequestHeader("username") String username,
+    public ResultBody getByIdPermission(@RequestHeader("user_id") String userId,
                                   @RequestParam(value = "id") String id){
         return authService.getByPermission(id);
     }

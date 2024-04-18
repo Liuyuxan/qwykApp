@@ -6,7 +6,7 @@ package com.qywk.pojo.ao;
  * @description
  */
 public class ForgetAO {
-    private String username;
+    private String userId;
     private String phoneNum;
     private String email;
     private String password;

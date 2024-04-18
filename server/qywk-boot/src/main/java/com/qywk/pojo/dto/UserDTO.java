@@ -32,8 +32,8 @@ public class UserDTO {
     /**
      * 账号
      */
-    @TableField("username")
-    private String username;
+    @TableField("user_id")
+    private String userId;
 
     /**
      * 密码
@@ -83,7 +83,7 @@ public class UserDTO {
     private LocalDateTime updateTime;
 
     /**
-     * 是否激活（举报中2/激活1/删除0/待审核-1/封禁-2）
+     * 激活状态
      */
     @TableField(value = "enable", fill = FieldFill.INSERT)
     private String enable;
