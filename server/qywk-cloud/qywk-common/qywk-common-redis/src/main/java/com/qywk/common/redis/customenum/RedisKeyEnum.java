@@ -11,6 +11,7 @@ public enum RedisKeyEnum {
     AUTH("auth:", "用户的权限树模型"),
     LIMIT("limit:", "接口限流redis键"),
     LIMIT_USER_LOGIN("limit-user-login:", "登陆接口专用限流键"),
+    REGISTER_TEL_CODE("register-tel-code:", "注册电话验证码"),
     COURSE("course:", "用户课表数据缓存"),
     TEACHER_SIGN("teacherSign:", "教师打卡数据缓存"),
     TEACHER_SIGN_SPORT("teacherSign-sport:", "运动场：教师打卡数据缓存"),
@@ -36,6 +37,7 @@ public enum RedisKeyEnum {
     COMMUNITY_USER_INFO("community_user_info:", "社区用户信息"),
     COMMUNITY_USER_SETTING("community_user_setting", "社区用户设置")
     ;
+
     public final String prefix; // redis统一前缀
     public final String details; // redis键功能描述
 
