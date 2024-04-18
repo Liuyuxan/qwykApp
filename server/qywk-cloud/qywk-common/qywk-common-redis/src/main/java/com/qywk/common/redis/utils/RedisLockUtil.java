@@ -62,7 +62,6 @@ public class RedisLockUtil {
     public Lock lockUntilGet(String lockName, long autoExpireTime, TimeUnit timeUnit) {
 
         long startTime = System.currentTimeMillis(); // 记录开始获取锁的时间
-
         Lock lock = tryToGetLock(lockName, autoExpireTime, timeUnit); // 尝试单次获取锁
 
         while (lock == null) {

@@ -14,7 +14,7 @@ public class SecurityConstants {
     /**
      * 用户名字段 (这个字段被直接用作了保存用户的姓名)
      */
-    public static final String DETAILS_USERNAME = "username";
+    public static final String DETAILS_NICKNAME = "nickname";
 
     /**
      * 授权信息字段

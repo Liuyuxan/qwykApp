@@ -46,7 +46,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
         String url = request.getURI().getPath();
         // 跳过不需要验证的路径
-        System.out.println(ignoreWhite.getWhites());
         if (StringUtils.matches(url, ignoreWhite.getWhites())) {
 
             // 但是如果请求仍然携带了token且token正确，我们仍然要为请求添加上header参数，在模块内部可以使用@RequestHeader直接注入用户id等属性
@@ -62,7 +61,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
                     String userKey = JwtUtils.getUserKey(claims);
                     addHeader(mutate, SecurityConstants.USER_KEY, userKey);
                     addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userId);
-                    addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
+                    addHeader(mutate, SecurityConstants.DETAILS_NICKNAME, username);
                 }
             }
 
@@ -96,12 +95,12 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
 
         // 先看redis有没有用户权限节点的缓存
-        if(!redisService.hasKey("auth:" + userid)){
-            // redis 没有权限记录，直接让用户重新登录以刷新权限
-            return unauthorizedResponse(exchange,
-                    CodeStateEnum.AUTH_FLUSH_FAIL.message,
-                    CodeStateEnum.AUTH_FLUSH_FAIL.code);
-        }
+//        if(!redisService.hasKey("auth:" + userid)){
+//            // redis 没有权限记录，直接让用户重新登录以刷新权限
+//            return unauthorizedResponse(exchange,
+//                    CodeStateEnum.AUTH_FLUSH_FAIL.message,
+//                    CodeStateEnum.AUTH_FLUSH_FAIL.code);
+//        }
 
         // 权限判断
 //        PermissionTree permissionTree = redisService.getCacheObject("auth:" + userid);
@@ -127,7 +126,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         // 设置用户信息到请求
         addHeader(mutate, SecurityConstants.USER_KEY, userkey);
         addHeader(mutate, SecurityConstants.DETAILS_USER_ID, userid);
-        addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
+        addHeader(mutate, SecurityConstants.DETAILS_NICKNAME, username);
         // 内部请求来源参数清除
         removeHeader(mutate, SecurityConstants.FROM_SOURCE);
         return chain.filter(exchange.mutate().request(mutate.build()).build());

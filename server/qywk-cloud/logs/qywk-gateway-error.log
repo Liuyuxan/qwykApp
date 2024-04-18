@@ -168,3 +168,75 @@ java.lang.IllegalArgumentException: no server available
 2024-04-17 22:16:27,307 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login,异常信息:JWT expired at 2024-03-19T23:11:33Z. Current time: 2024-04-17T22:16:27Z, a difference of 2502294306 milliseconds.  Allowed clock skew: 0 milliseconds.
 2024-04-17 22:18:36,032 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login,异常信息:JWT expired at 2024-03-19T23:11:33Z. Current time: 2024-04-17T22:18:36Z, a difference of 2502423031 milliseconds.  Allowed clock skew: 0 milliseconds.
 2024-04-17 22:18:38,061 [reactor-http-nio-5] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for zjyt-user-center"
+2024-04-18 15:53:37,037 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 15:56:14,455 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 15:58:24,755 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/lostFound/getAllByState,异常信息:404 NOT_FOUND
+2024-04-18 16:01:41,051 [restartedMain] ERROR [o.s.b.diagnostics.LoggingFailureAnalysisReporter] LoggingFailureAnalysisReporter.java:40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9000 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9000 or configure this application to listen on another port.
+
+2024-04-18 16:03:12,549 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/chatai/inquiry,异常信息:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to 127.0.0.1:6379
+2024-04-18 16:06:17,834 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/chatai/inquiry,异常信息:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to 127.0.0.1:6379
+2024-04-18 16:13:08,512 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/chatai/inquiry,异常信息:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to 127.0.0.1:6379
+2024-04-18 16:22:19,763 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/chatai/inquiry,异常信息:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to 127.0.0.1:6379
+2024-04-18 16:28:49,028 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/chatai/inquiry,异常信息:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to 127.0.0.1:6379
+2024-04-18 17:08:31,216 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:33,157 [restartedMain] ERROR [c.a.cloud.nacos.registry.NacosServiceRegistry] NacosServiceRegistry.java:66 - nacos registry, qywk-gateway register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='192.168.11.1:8848', endpoint='', namespace='aea957b5-a967-49a7-9fda-f133f2837954', watchDelay=30000, logName='', service='qywk-gateway', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.11.1', networkInterface='', port=9000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([192.168.11.1:8848]) tried: failed to req API:192.168.11.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464)
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386)
+	at com.alibaba.nacos.client.naming.net.NamingProxy.registerService(NamingProxy.java:188)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:205)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:184)
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:61)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:239)
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:74)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:138)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:101)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:88)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:47)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:403)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:360)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.finishRefresh(ReactiveWebServerApplicationContext.java:132)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:553)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at com.qywk.QYWKGateWayApplication.main(QYWKGateWayApplication.java:24)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+2024-04-18 17:08:33,229 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:34,582 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:35,597 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:36,620 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:37,724 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:39,228 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:40,299 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:41,426 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:54,067 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:55,961 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:57,742 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:08:59,243 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:09:00,465 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:09:01,761 [reactor-http-nio-3] ERROR [com.qywk.handler.GatewayExceptionHandler] GatewayExceptionHandler.java:43 - [网关异常处理]请求路径:/user/login/normal,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for qywk-user"
+2024-04-18 17:12:22,836 [reactor-http-nio-3] ERROR [com.qywk.filter.AuthFilter] AuthFilter.java:149 - 错误码：406,错误信息：权限模块: 权限刷新失败，请重新登录,[鉴权异常处理]请求路径:/chatai/inquiry
+2024-04-18 17:12:26,603 [reactor-http-nio-3] ERROR [com.qywk.filter.AuthFilter] AuthFilter.java:149 - 错误码：406,错误信息：权限模块: 权限刷新失败，请重新登录,[鉴权异常处理]请求路径:/chatai/inquiry
+2024-04-18 17:13:30,616 [reactor-http-nio-3] ERROR [com.qywk.filter.AuthFilter] AuthFilter.java:149 - 错误码：406,错误信息：权限模块: 权限刷新失败，请重新登录,[鉴权异常处理]请求路径:/chatai/inquiry
+2024-04-18 17:15:02,489 [reactor-http-nio-3] ERROR [com.qywk.filter.AuthFilter] AuthFilter.java:149 - 错误码：406,错误信息：权限模块: 权限刷新失败，请重新登录,[鉴权异常处理]请求路径:/chatai/inquiry

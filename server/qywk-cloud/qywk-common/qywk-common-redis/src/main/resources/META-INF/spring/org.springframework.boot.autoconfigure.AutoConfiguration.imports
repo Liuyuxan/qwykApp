@@ -1,4 +1,6 @@
 com.qywk.common.redis.configure.RedisConfig
 com.qywk.common.redis.service.RedisService
 com.qywk.common.redis.configure.RequestLimitInterceptor
+com.qywk.common.redis.utils.RedisLockUtil
+
 

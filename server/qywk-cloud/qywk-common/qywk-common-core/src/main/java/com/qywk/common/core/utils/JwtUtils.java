@@ -88,7 +88,7 @@ public class JwtUtils {
      */
     public static String getUserName(String token) {
         Claims claims = parseToken(token);
-        return getValue(claims, SecurityConstants.DETAILS_USERNAME);
+        return getValue(claims, SecurityConstants.DETAILS_NICKNAME);
     }
 
     /**
@@ -98,7 +98,7 @@ public class JwtUtils {
      * @return 用户名
      */
     public static String getUserName(Claims claims) {
-        return getValue(claims, SecurityConstants.DETAILS_USERNAME);
+        return getValue(claims, SecurityConstants.DETAILS_NICKNAME);
     }
 
     /**
