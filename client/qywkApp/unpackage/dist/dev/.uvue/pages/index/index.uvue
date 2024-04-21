@@ -1,89 +1,18 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	type signInDataType = {
+	type functionListType = { __$originalPosition: UTSSourceMapPosition<"functionListType", "pages/index/index.uvue", 121, 7>;
 		icon: string
+		navgiateUrl: string
 		text: string
 	}
-	
+	type signInDataType = { __$originalPosition: UTSSourceMapPosition<"signInDataType", "pages/index/index.uvue", 126, 7>;
+		icon: string
+		text: string
+		isSignIn: boolean
+		currentSignIn: boolean
+	}
+	type gandeplantType = { __$originalPosition: UTSSourceMapPosition<"gandeplantType", "pages/index/index.uvue", 132, 7>;
+		plant: string
+	}
 	export default {
 		data() {
 			return {
@@ -94,58 +23,108 @@
 				challengeDays: 2 as number,
 				treeHeight: 5 as number,
 				currentPercenter: 20 as number, // 顶部当前进度
-				signInData: [
+				functionList: [  // 功能栏
 					{
-						icon: '/static/image/icons/money/money-box.png',
-						text: '第七天：未知的惊喜'
+						icon: '/static/image/icons/plan.png',
+						navgiateUrl: '',
+						text: '计划'
 					},
 					{
-						icon: '/static/image/icons/money/money-chinese.png',
-						text: '第六天：中国结*2'
+						icon: '/static/image/icons/clothes.png',
+						navgiateUrl: '',
+						text: '装扮'
 					},
 					{
-						icon: '/static/image/icons/money/money.png',
-						text: '第五天：铜钱*4'
-					},
-					{
-						icon: '/static/image/icons/money/money.png',
-						text: '第四天：铜钱*3'
-					},
-					{
-						icon: '/static/image/icons/money/money-box.png',
-						text: '第三天：未知的惊喜'
-					},
-					{
-						icon: '/static/image/icons/money/money-chinese.png',
-						text: '第二天：中国结*1'
-					},
-					{
-						icon: '/static/image/icons/money/money.png',
-						text: '第一天：铜钱*2'
+						icon: '/static/image/icons/message.png',
+						navgiateUrl: '',
+						text: '对话'
 					}
-				] as signInDataType[]
+				] as functionListType[],
+				
+				signInScrollToTop: 67,  // 打卡栏距离顶部距离
+				signInData: [  // 打卡栏模拟配置
+					{
+						icon: '/static/image/icons/money/money-box.png',
+						text: '第七天：未知的惊喜',
+						isSignIn: false,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money-chinese.png',
+						text: '第六天：中国结*2',
+						isSignIn: false,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第五天：铜钱*4',
+						isSignIn: false,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第四天：铜钱*3',
+						isSignIn: true,
+						currentSignIn: true
+					},
+					{
+						icon: '/static/image/icons/money/money-box.png',
+						text: '第三天：未知的惊喜',
+						isSignIn: true,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money-chinese.png',
+						text: '第二天：中国结*1',
+						isSignIn: true,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第一天：铜钱*2',
+						isSignIn: true,
+						currentSignIn: false
+					}
+				] as signInDataType[],
+				gandeplants: [
+					{
+						plant: '/static/image/plant/pot.png'
+					},
+					{
+						plant: '/static/image/plant/garden-plant.png'
+					},
+					{
+						plant: '/static/image/plant/pot.png'
+					},
+				] as gandeplantType[]
 			}
 		},
 		onLoad() {
-			const token = uni.getStorageSync('token')
-			console.log('token', token);
+			
+			
 		},
 		methods: {
-			
+			// 功能栏跳转
+			clickFunction(item: functionListType) {
+				uni.navigateTo({
+					url: item.navgiateUrl
+				})
+			}
 		}
 	}
 
 
-function GenPagesIndexIndexRender(): VNode | null {
+function GenPagesIndexIndexRender(): any | null {
 const _ctx = this
 const _cache = this.$.renderCache
 const _component_progress = resolveComponent("progress")
 
   return createElementVNode("scroll-view", utsMapOf({
     direction: "vertical",
-    style: "flex:1",
+    style: normalizeStyle(utsMapOf({"flex":"1"})),
     "show-scrollbar": false
   }), [
+    createElementVNode("view", utsMapOf({ class: "sign-in-btn" })),
     createElementVNode("view", utsMapOf({ class: "content" }), [
       createElementVNode("image", utsMapOf({
         class: "bg-img",
@@ -157,8 +136,8 @@ const _component_progress = resolveComponent("progress")
           class: "plant-avatar",
           src: "/static/image/bg/圆扇.png",
           mode: "heightFix",
-          style: "height: 140rpx;"
-        })),
+          style: normalizeStyle(utsMapOf({"height":"140rpx"}))
+        }), null, 4 /* STYLE */),
         createElementVNode("view", utsMapOf({ class: "right" }), [
           createElementVNode("view", utsMapOf({ class: "title-top flex" }), [
             createElementVNode("text", utsMapOf({ class: "title" }), toDisplayString(_ctx.plantTitle), 1 /* TEXT */),
@@ -178,6 +157,26 @@ const _component_progress = resolveComponent("progress")
           ])
         ])
       ]),
+      createElementVNode("view", utsMapOf({ class: "function-tab" }), [
+        createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.functionList, (item, index, _, _): VNode => {
+          return createElementVNode("view", utsMapOf({
+            class: "item",
+            key: index,
+            onClick: () => {_ctx.clickFunction(item)}
+          }), [
+            createElementVNode("view", utsMapOf({ class: "icon" }), [
+              createElementVNode("image", utsMapOf({
+                class: "img",
+                src: item.icon,
+                mode: "widthFix"
+              }), null, 8 /* PROPS */, ["src"])
+            ]),
+            createElementVNode("text", utsMapOf({
+              style: normalizeStyle(utsMapOf({"font-size":"20rpx","margin-top":"6rpx"}))
+            }), toDisplayString(item.text), 5 /* TEXT, STYLE */)
+          ], 8 /* PROPS */, ["onClick"])
+        }), 128 /* KEYED_FRAGMENT */)
+      ]),
       createElementVNode("image", utsMapOf({
         class: "bg2-img center",
         src: "/static/image/bg/圆扇.png",
@@ -188,11 +187,18 @@ const _component_progress = resolveComponent("progress")
         src: "/static/image/bg/桌子.png",
         mode: "widthFix"
       })),
-      createElementVNode("image", utsMapOf({
-        class: "plant center",
-        src: "/static/image/bg/植物.png",
-        mode: "widthFix"
-      })),
+      createElementVNode("view", utsMapOf({ class: "plant-part center" }), [
+        createElementVNode("image", utsMapOf({
+          class: "expression",
+          src: "/static/image/expression/expression_Happy.png",
+          mode: "widthFix"
+        })),
+        createElementVNode("image", utsMapOf({
+          class: "plant",
+          src: "/static/image/bg/植物.png",
+          mode: "widthFix"
+        }))
+      ]),
       createElementVNode("view", utsMapOf({ class: "user-bar" }), [
         createElementVNode("view", utsMapOf({ class: "user-info flex" }), [
           createElementVNode("view", utsMapOf({ class: "avatar" }), [
@@ -229,6 +235,7 @@ const _component_progress = resolveComponent("progress")
         ]),
         createElementVNode("scroll-view", utsMapOf({
           direction: "vertical",
+          "scroll-top": _ctx.signInScrollToTop * 3,
           class: "sign-in-scroll",
           "show-scrollbar": false
         }), [
@@ -237,29 +244,67 @@ const _component_progress = resolveComponent("progress")
               class: "item flex",
               key: index
             }), [
-              createElementVNode("view", utsMapOf({ class: "money-icon" }), [
+              createElementVNode("view", utsMapOf({
+                class: normalizeClass(['money-icon', item.currentSignIn === true ? 'active-icon' : ''])
+              }), [
                 createElementVNode("image", utsMapOf({
-                  style: "width: 50px;height: 50px;",
+                  style: normalizeStyle(utsMapOf({"width":"44px"})),
                   src: item.icon,
                   mode: "widthFix"
-                }), null, 8 /* PROPS */, ["src"])
-              ]),
+                }), null, 12 /* STYLE, PROPS */, ["src"])
+              ], 2 /* CLASS */),
               createElementVNode("view", utsMapOf({ class: "line-time" }), [
-                createElementVNode("view", utsMapOf({ class: "top" })),
-                createElementVNode("view", utsMapOf({ class: "current" }), [
-                  createElementVNode("text", utsMapOf({ class: "day" }), toDisplayString(index + 1), 1 /* TEXT */)
-                ]),
-                createElementVNode("view", utsMapOf({ class: "bottom" }))
+                createElementVNode("view", utsMapOf({
+                  class: normalizeClass(['top', item?.isSignIn === true && item.currentSignIn === false ? 'active-top' : ''])
+                }), null, 2 /* CLASS */),
+                isTrue(item?.isSignIn)
+                  ? createElementVNode("view", utsMapOf({
+                      key: 0,
+                      class: "active-current flex justify-center align-center"
+                    }), [
+                      createElementVNode("image", utsMapOf({
+                        class: "img",
+                        src: "/static/image/tabBar/未选择3.png",
+                        mode: "widthFix"
+                      })),
+                      createElementVNode("text", utsMapOf({ class: "active-day" }), "day" + toDisplayString(_ctx.signInData.length - index), 1 /* TEXT */)
+                    ])
+                  : createElementVNode("view", utsMapOf({
+                      key: 1,
+                      class: "current flex justify-center align-center"
+                    }), [
+                      createElementVNode("text", utsMapOf({ class: "day" }), toDisplayString(_ctx.signInData.length - index), 1 /* TEXT */)
+                    ]),
+                createElementVNode("view", utsMapOf({
+                  class: normalizeClass(['bottom', item?.isSignIn === true ? 'active-bottom' : ''])
+                }), null, 2 /* CLASS */)
               ]),
-              createElementVNode("text", utsMapOf({ style: "font-size: 24rpx;color: #584717;font-weight: 700;" }), toDisplayString(item.text), 1 /* TEXT */)
+              createElementVNode("text", utsMapOf({
+                class: "text-info",
+                style: normalizeStyle(utsMapOf({"font-size":"24rpx","color":"#584717","font-weight":"700"}))
+              }), toDisplayString(item.text), 5 /* TEXT, STYLE */)
             ])
           }), 128 /* KEYED_FRAGMENT */)
-        ])
+        ], 8 /* PROPS */, ["scroll-top"])
       ]),
       createElementVNode("view", utsMapOf({ class: "garden center flex flex-column justify-around align-center" }), [
         createElementVNode("view", utsMapOf({ class: "title" }), [
           createElementVNode("view", utsMapOf({ class: "circular" })),
           createElementVNode("text", utsMapOf({ class: "text" }), "花圃")
+        ]),
+        createElementVNode("view", utsMapOf({ class: "plants" }), [
+          createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.gandeplants, (item, index, _, _): VNode => {
+            return createElementVNode("view", utsMapOf({
+              class: "plant",
+              key: index
+            }), [
+              createElementVNode("image", utsMapOf({
+                class: "plant-img",
+                src: item.plant,
+                mode: "widthFix"
+              }), null, 8 /* PROPS */, ["src"])
+            ])
+          }), 128 /* KEYED_FRAGMENT */)
         ]),
         createElementVNode("image", utsMapOf({
           class: "graden-bg",
@@ -268,6 +313,6 @@ const _component_progress = resolveComponent("progress")
         }))
       ])
     ])
-  ])
+  ], 4 /* STYLE */)
 }
-const GenPagesIndexIndexStyles = [utsMapOf([["content", padStyleMapOf(utsMapOf([["paddingBottom", "150rpx"]]))], ["bg-img", padStyleMapOf(utsMapOf([["transform", "scale(1.8)"], ["width", "750rpx"], ["height", "2000rpx"], ["position", "absolute"], ["zIndex", 0]]))], ["top-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "130rpx"], ["backgroundColor", "#f2f2e9"], ["borderRadius", 100], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#c2a587"], ["padding", "20rpx"], ["zIndex", 999], ["top", "3%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["right", utsMapOf([[".top-bar ", utsMapOf([["marginLeft", "28rpx"]])]])], ["level", utsMapOf([[".top-bar .right .title-top ", utsMapOf([["color", "#965D30"], ["fontWeight", "700"], ["fontSize", "32rpx"]])]])], ["today", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["color", "#BF9350"], ["fontSize", "28rpx"]])]])], ["jindutiao", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["margin", "0 14rpx"], ["width", "340rpx"]])]])], ["jindutiao-count", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["fontSize", "28rpx"], ["color", "#BF9350"]])]])], ["bg2-img", padStyleMapOf(utsMapOf([["width", "700rpx"], ["zIndex", 99], ["top", "4%"]]))], ["desk", padStyleMapOf(utsMapOf([["position", "absolute"], ["width", "750rpx"], ["zIndex", 3], ["top", "9%"]]))], ["plant", padStyleMapOf(utsMapOf([["position", "absolute"], ["width", "560rpx"], ["zIndex", 999], ["top", "22%"]]))], ["user-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["padding", "20rpx"], ["zIndex", 999], ["bottom", "-2%"], ["left", "50%"], ["transform", "translateX(-50%)"], ["width", "680rpx"], ["height", "780rpx"], ["backgroundColor", "#f9f8f6"], ["borderRadius", "46rpx"]]))], ["user-info", utsMapOf([[".user-bar ", utsMapOf([["height", "140rpx"]])]])], ["hexagon-img", utsMapOf([[".user-bar .user-info ", utsMapOf([["width", "120rpx"]])]])], ["line", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["width", "6rpx"], ["height", "26rpx"], ["backgroundColor", "#e5e5e5"], ["borderRadius", 10], ["margin", "0 40rpx"]])]])], ["icon", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["width", "32rpx"], ["marginRight", "16rpx"]])]])], ["text", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["fontSize", "24rpx"]])], [".garden .title ", utsMapOf([["backgroundColor", "#ffeec7"], ["color", "#7a4923"], ["borderRadius", 50], ["textAlign", "center"], ["lineHeight", "60rpx"]])]])], ["sign-in-scroll", utsMapOf([[".user-bar ", utsMapOf([["width", "100%"], ["height", "580rpx"], ["backgroundColor", "#cccccc"]])]])], ["item", utsMapOf([[".user-bar .sign-in-scroll ", utsMapOf([["marginBottom", "20rpx"], ["backgroundColor", "#965D30"], ["overflow", "visible"]])]])], ["money-icon", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["width", "128rpx"], ["height", "128rpx"], ["borderRadius", "20rpx"], ["backgroundColor", "#ededed"]])]])], ["line-time", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["overflow", "visible"], ["display", "flex"], ["justifyContent", "center"]])]])], ["top", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", 3], ["height", 80], ["backgroundColor", "#ededed"]])]])], ["current", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#ededed"]])]])], ["day", utsMapOf([[".user-bar .sign-in-scroll .item .line-time .current ", utsMapOf([["textAlign", "center"], ["lineHeight", "32rpx"]])]])], ["bottom", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", 3], ["height", 100], ["backgroundColor", "#ededed"]])]])], ["garden", padStyleMapOf(utsMapOf([["overflow", "visible"], ["width", "680rpx"], ["height", "400rpx"], ["backgroundColor", "#FFEEC7"], ["borderRadius", "46rpx"], ["top", "4%"], ["position", "relative"]]))], ["title", utsMapOf([[".garden ", utsMapOf([["position", "absolute"], ["top", "-7%"], ["zIndex", 99], ["width", "160rpx"], ["height", "60rpx"]])]])], ["circular", utsMapOf([[".garden .title ", utsMapOf([["position", "absolute"], ["width", "22rpx"], ["height", "22rpx"], ["backgroundColor", "#7a4923"], ["borderRadius", 50], ["top", "50%"], ["transform", "translateY(-50%)"], ["left", "8%"], ["zIndex", 99]])]])], ["graden-bg", utsMapOf([[".garden ", utsMapOf([["width", "700rpx"], ["position", "absolute"], ["left", "2%"], ["top", "-32%"]])]])]])]
+const GenPagesIndexIndexStyles = [utsMapOf([["content", padStyleMapOf(utsMapOf([["paddingBottom", "150rpx"]]))], ["sign-btn", padStyleMapOf(utsMapOf([["width", 100], ["height", 100], ["borderRadius", 100], ["backgroundColor", "#87CEEB"], ["position", "fixed"], ["zIndex", 999], ["bottom", -10]]))], ["bg-img", padStyleMapOf(utsMapOf([["width", "750rpx"], ["height", "2600rpx"], ["position", "absolute"], ["zIndex", 0]]))], ["top-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "130rpx"], ["backgroundColor", "#f2f2e9"], ["borderRadius", 100], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#c2a587"], ["paddingTop", "20rpx"], ["paddingRight", "20rpx"], ["paddingBottom", "20rpx"], ["paddingLeft", "20rpx"], ["zIndex", 999], ["top", "3%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["right", utsMapOf([[".top-bar ", utsMapOf([["marginLeft", "28rpx"]])]])], ["level", utsMapOf([[".top-bar .right .title-top ", utsMapOf([["color", "#965D30"], ["fontWeight", "700"], ["fontSize", "32rpx"]])]])], ["today", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["color", "#BF9350"], ["fontSize", "28rpx"]])]])], ["jindutiao", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["marginTop", 0], ["marginRight", "14rpx"], ["marginBottom", 0], ["marginLeft", "14rpx"], ["width", "340rpx"]])]])], ["jindutiao-count", utsMapOf([[".top-bar .right .bottom ", utsMapOf([["fontSize", "28rpx"], ["color", "#BF9350"]])]])], ["function-tab", padStyleMapOf(utsMapOf([["paddingTop", "20rpx"], ["paddingRight", 0], ["paddingBottom", "20rpx"], ["paddingLeft", 0], ["width", "120rpx"], ["height", "360rpx"], ["borderRadius", "40rpx"], ["backgroundColor", "#ece0c5"], ["position", "absolute"], ["zIndex", 999], ["left", "2%"], ["top", "34%"], ["display", "flex"], ["flexDirection", "column"], ["justifyContent", "space-around"], ["alignItems", "center"]]))], ["item", utsMapOf([[".function-tab ", utsMapOf([["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"]])], [".user-bar .sign-in-scroll ", utsMapOf([["boxSizing", "border-box"], ["width", "100%"], ["height", "200rpx"], ["justifyContent", "center"], ["alignItems", "center"], ["backgroundColor", "#fffcf5"], ["overflow", "visible"]])]])], ["icon", utsMapOf([[".function-tab .item ", utsMapOf([["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["width", "64rpx"], ["height", "64rpx"], ["backgroundColor", "#fcf6e6"], ["borderRadius", "20rpx"]])], [".user-bar .user-info .right ", utsMapOf([["width", "32rpx"], ["marginRight", "16rpx"]])]])], ["img", utsMapOf([[".function-tab .item .icon ", utsMapOf([["width", "48rpx"]])], [".user-bar .sign-in-scroll .item .line-time .active-current ", utsMapOf([["width", "12rpx"]])]])], ["bg2-img", padStyleMapOf(utsMapOf([["width", "700rpx"], ["zIndex", 99], ["top", "4%"]]))], ["desk", padStyleMapOf(utsMapOf([["position", "absolute"], ["width", "750rpx"], ["zIndex", 3], ["top", "9%"]]))], ["plant-part", padStyleMapOf(utsMapOf([["position", "absolute"], ["width", "560rpx"], ["zIndex", 99], ["bottom", "48%"]]))], ["expression", utsMapOf([[".plant-part ", utsMapOf([["width", "120rpx"], ["position", "absolute"], ["zIndex", 999], ["bottom", "400rpx"], ["right", "80rpx"]])]])], ["plant", utsMapOf([[".plant-part ", utsMapOf([["width", "560rpx"]])]])], ["user-bar", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["paddingTop", "20rpx"], ["paddingRight", "20rpx"], ["paddingBottom", "20rpx"], ["paddingLeft", "20rpx"], ["zIndex", 999], ["bottom", "-2%"], ["left", "50%"], ["transform", "translateX(-50%)"], ["width", "680rpx"], ["height", "780rpx"], ["backgroundColor", "#fffcf5"], ["borderRadius", "46rpx"]]))], ["user-info", utsMapOf([[".user-bar ", utsMapOf([["height", "140rpx"]])]])], ["hexagon-img", utsMapOf([[".user-bar .user-info ", utsMapOf([["width", "120rpx"]])]])], ["line", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["width", "6rpx"], ["height", "26rpx"], ["backgroundColor", "#e5e5e5"], ["borderRadius", 10], ["marginTop", 0], ["marginRight", "40rpx"], ["marginBottom", 0], ["marginLeft", "40rpx"]])]])], ["text", utsMapOf([[".user-bar .user-info .right ", utsMapOf([["fontSize", "24rpx"]])], [".garden .title ", utsMapOf([["backgroundColor", "#ffeec7"], ["color", "#7a4923"], ["borderRadius", 50], ["textAlign", "center"], ["lineHeight", "60rpx"]])]])], ["sign-in-scroll", utsMapOf([[".user-bar ", utsMapOf([["width", "100%"], ["height", "580rpx"]])]])], ["money-icon", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["boxSizing", "border-box"], ["paddingTop", "30rpx"], ["paddingRight", "30rpx"], ["paddingBottom", "30rpx"], ["paddingLeft", "30rpx"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["width", "128rpx"], ["height", "128rpx"], ["borderRadius", "20rpx"], ["backgroundColor", "#ededed"]])]])], ["active-icon", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#f9ba62"]])]])], ["line-time", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["width", "40rpx"], ["marginTop", 0], ["marginRight", "80rpx"], ["marginBottom", 0], ["marginLeft", "80rpx"], ["overflow", "visible"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"]])]])], ["active-top", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["backgroundColor", "#f9ba62"]])]])], ["top", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", 3], ["height", 80], ["backgroundColor", "#ededed"]])]])], ["active-current", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", "72rpx"], ["height", "28rpx"], ["borderRadius", "50rpx"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#ffb921"]])]])], ["active-day", utsMapOf([[".user-bar .sign-in-scroll .item .line-time .active-current ", utsMapOf([["color", "#FFC300"], ["fontSize", "20rpx"]])]])], ["current", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#ededed"]])]])], ["day", utsMapOf([[".user-bar .sign-in-scroll .item .line-time .current ", utsMapOf([["fontSize", "20rpx"]])]])], ["active-bottom", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["backgroundColor", "#f9ba62"]])]])], ["bottom", utsMapOf([[".user-bar .sign-in-scroll .item .line-time ", utsMapOf([["width", 3], ["height", 80], ["backgroundColor", "#ededed"]])]])], ["text-info", utsMapOf([[".user-bar .sign-in-scroll .item ", utsMapOf([["width", "200rpx"]])]])], ["garden", padStyleMapOf(utsMapOf([["overflow", "visible"], ["width", "680rpx"], ["height", "400rpx"], ["backgroundColor", "#FFEEC7"], ["borderRadius", "46rpx"], ["top", "4%"], ["position", "relative"]]))], ["title", utsMapOf([[".garden ", utsMapOf([["position", "absolute"], ["top", "-7%"], ["zIndex", 99], ["width", "160rpx"], ["height", "60rpx"]])]])], ["circular", utsMapOf([[".garden .title ", utsMapOf([["position", "absolute"], ["width", "22rpx"], ["height", "22rpx"], ["backgroundColor", "#7a4923"], ["borderRadius", 50], ["top", "50%"], ["transform", "translateY(-50%)"], ["left", "8%"], ["zIndex", 99]])]])], ["plants", utsMapOf([[".garden ", utsMapOf([["width", "100%"], ["height", "100%"], ["display", "flex"], ["flexDirection", "row"], ["justifyContent", "space-around"], ["alignItems", "center"]])]])], ["plant-img", utsMapOf([[".garden .plants ", utsMapOf([["width", "220rpx"]])]])], ["graden-bg", utsMapOf([[".garden ", utsMapOf([["width", "700rpx"], ["position", "absolute"], ["zIndex", -1], ["left", "2%"], ["top", "-32%"]])]])]])]

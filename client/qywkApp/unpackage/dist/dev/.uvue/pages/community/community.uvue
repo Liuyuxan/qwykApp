@@ -1,20 +1,15 @@
 
-
-
-
-
-
-
 	export default {
 		data() {
 			return {
 				
 			};
-		}
+		},
+		
 	}
 
 
-function GenPagesCommunityCommunityRender(): VNode | null {
+function GenPagesCommunityCommunityRender(): any | null {
 const _ctx = this
 const _cache = this.$.renderCache
   return createElementVNode("view", utsMapOf({ class: "community" }), " 社区 ")
