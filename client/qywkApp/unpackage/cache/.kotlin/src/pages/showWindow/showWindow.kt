@@ -22,6 +22,7 @@ open class GenPagesShowWindowShowWindow : BasePage {
     override fun `$render`(): Any? {
         val _ctx = this;
         val _cache = this.`$`.renderCache;
+        val _component_tabbar = resolveEasyComponent("tabbar", GenComponentsTabbarTabbarClass);
         return createElementVNode("scroll-view", utsMapOf("class" to "show-window", "direction" to "vertical"), utsArrayOf(
             createElementVNode("text", utsMapOf("style" to normalizeStyle(utsMapOf("color" to "#383838", "font-size" to "32rpx"))), "植物收集进度", 4),
             createElementVNode("text", utsMapOf("class" to "mt-1", "style" to normalizeStyle(utsMapOf("color" to "#3C6A5D", "font-weight" to "700", "font-size" to "40rpx"))), "3/16", 4),
@@ -45,7 +46,8 @@ open class GenPagesShowWindowShowWindow : BasePage {
                     ));
                 }
                 ), 128)
-            ))
+            )),
+            createVNode(_component_tabbar, utsMapOf("currentIndex" to 0))
         ));
     }
     open var plantListData: UTSArray<plantListType> by `$data`;

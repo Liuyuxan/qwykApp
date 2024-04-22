@@ -1,0 +1,222 @@
+
+	import { UxTab } from '@/uni_modules/ux-frame/libs/types/types.uts'
+
+	export default {
+		data() {
+			return {
+				tabIndex: 2,
+				centerIndex: true,//  处于中间页面
+				direction: 'right',
+				loop: 0,
+				clickShow: false,
+				longClickShow: false,
+				tabs: [
+					{
+						name: '展架',
+						selectedIcon: '/static/image/tabBar/选择1.png',
+						unselectedIcon: '/static/image/tabBar/未选择1.png',
+					},
+					{
+						name: '集市',
+						selectedIcon: '/static/image/tabBar/选择2.png',
+						unselectedIcon: '/static/image/tabBar/未选择2.png',
+					},
+					{
+						name: '植物',
+						selectedIcon: '/static/image/tabBar/选择3.png',
+						unselectedIcon: '/static/image/tabBar/未选择3.png',
+					},
+					{
+						name: '膳食',
+						selectedIcon: '/static/image/tabBar/选择4.png',
+						unselectedIcon: '/static/image/tabBar/未选择4.png',
+					},
+					{
+						name: '我的',
+						selectedIcon: '/static/image/tabBar/选择5.png',
+						unselectedIcon: '/static/image/tabBar/未选择5.png',
+					}
+				] as UxTab[],
+				pageUrls: [
+					'/pages/showWindow/showWindow',
+					'/pages/community/community',
+					'/pages/health/health',
+					'/pages/myPage/myPage'
+				]
+			}
+		},
+		methods: {
+			changeTab(index: number) {
+				if(index === this.tabIndex) return
+				this.tabIndex = index
+				
+			},
+			handlerTouchstart() {
+				this.loop = setTimeout(() => {
+					this.loop = 0
+					// 执行长按要执行的内容
+					console.log('长按', " at pages/tabbar/tabbar.uvue:122");
+					
+					this.clickShow = false
+					this.longClickShow = true
+				}, 500) // 定时的时间
+				// return false
+			},
+			handlerTouchmove() {
+				// 清除定时器
+				clearTimeout(this.loop)
+				this.loop = 0
+			},
+			handlerTouchend() {
+				// 清除定时器
+				clearTimeout(this.loop)
+				if (this.loop !== 0) {
+					// 单击操作
+					console.log('单击', " at pages/tabbar/tabbar.uvue:139");
+					if(this.centerIndex === true) return
+					
+					this.centerIndex = true
+					this.tabIndex = 2
+					console.log(this.tabIndex, this.centerIndex, " at pages/tabbar/tabbar.uvue:144");
+					
+					this.clickShow = true
+					this.longClickShow = false
+				}
+			},
+			tabChange(index : number) {
+				this.centerIndex = false
+				this.tabIndex = index
+				console.log(index, this.tabIndex, " at pages/tabbar/tabbar.uvue:153");
+			}
+		}
+	}
+
+
+import _easycom_showWindow from '@/components/showWindow/showWindow.uvue'
+import _easycom_community from '@/components/community/community.uvue'
+import _easycom_home from '@/components/home/home.uvue'
+import _easycom_healthComponent from '@/components/healthComponent/healthComponent.uvue'
+import _easycom_myPage from '@/components/myPage/myPage.uvue'
+function GenPagesTabbarTabbarRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+const _component_showWindow = resolveEasyComponent("showWindow",_easycom_showWindow)
+const _component_community = resolveEasyComponent("community",_easycom_community)
+const _component_home = resolveEasyComponent("home",_easycom_home)
+const _component_healthComponent = resolveEasyComponent("healthComponent",_easycom_healthComponent)
+const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
+
+  return createElementVNode("scroll-view", utsMapOf({
+    style: normalizeStyle(utsMapOf({"flex":"1"}))
+  }), [
+    withDirectives(createElementVNode("view", null, [
+      createVNode(_component_showWindow)
+    ], 512 /* NEED_PATCH */), [
+      [vShow, _ctx.tabIndex === 0]
+    ]),
+    withDirectives(createElementVNode("view", null, [
+      createVNode(_component_community)
+    ], 512 /* NEED_PATCH */), [
+      [vShow, _ctx.tabIndex === 1]
+    ]),
+    withDirectives(createElementVNode("view", null, [
+      createVNode(_component_home)
+    ], 512 /* NEED_PATCH */), [
+      [vShow, _ctx.tabIndex === 2]
+    ]),
+    withDirectives(createElementVNode("view", null, [
+      createVNode(_component_healthComponent)
+    ], 512 /* NEED_PATCH */), [
+      [vShow, _ctx.tabIndex === 3]
+    ]),
+    withDirectives(createElementVNode("view", null, [
+      createVNode(_component_myPage)
+    ], 512 /* NEED_PATCH */), [
+      [vShow, _ctx.tabIndex === 4]
+    ]),
+    createElementVNode("view", utsMapOf({ class: "tabbar" }), [
+      createElementVNode("view", utsMapOf({
+        class: "tab-item",
+        onClick: () => {_ctx.changeTab(0)}
+      }), [
+        createElementVNode("image", utsMapOf({
+          class: "tab-icon",
+          src: 0 === _ctx.tabIndex ? _ctx.tabs[0].selectedIcon : _ctx.tabs[0].unselectedIcon,
+          mode: "widthFix"
+        }), null, 8 /* PROPS */, ["src"]),
+        createElementVNode("text", utsMapOf({
+          class: normalizeClass(['tab-text', 0 === _ctx.tabIndex ? 'active-text' : ''])
+        }), toDisplayString(_ctx.tabs[0].name), 3 /* TEXT, CLASS */)
+      ], 8 /* PROPS */, ["onClick"]),
+      createElementVNode("view", utsMapOf({
+        class: "tab-item",
+        onClick: () => {_ctx.changeTab(1)}
+      }), [
+        createElementVNode("image", utsMapOf({
+          class: "tab-icon",
+          src: 1 === _ctx.tabIndex ? _ctx.tabs[1].selectedIcon : _ctx.tabs[1].unselectedIcon,
+          mode: "widthFix"
+        }), null, 8 /* PROPS */, ["src"]),
+        createElementVNode("text", utsMapOf({
+          class: normalizeClass(['tab-text', 1 === _ctx.tabIndex ? 'active-text' : ''])
+        }), toDisplayString(_ctx.tabs[1].name), 3 /* TEXT, CLASS */)
+      ], 8 /* PROPS */, ["onClick"]),
+      createElementVNode("view", utsMapOf({
+        class: "tab-item",
+        onClick: () => {_ctx.changeTab(2)},
+        style: normalizeStyle([_ctx.tabIndex == 2 ? 'display: visible;' : 'display: none;'])
+      }), [
+        createElementVNode("view", utsMapOf({ class: "bg-img" }), [
+          createElementVNode("image", utsMapOf({
+            class: "center-icon",
+            src: _ctx.tabs[2].selectedIcon,
+            mode: "widthFix"
+          }), null, 8 /* PROPS */, ["src"])
+        ])
+      ], 12 /* STYLE, PROPS */, ["onClick"]),
+      _ctx.tabIndex !== 2
+        ? createElementVNode("view", utsMapOf({
+            key: 0,
+            class: "tab-item",
+            onClick: () => {_ctx.changeTab(2)}
+          }), [
+            createElementVNode("image", utsMapOf({
+              class: "tab-icon",
+              src: _ctx.tabs[2].unselectedIcon,
+              mode: "widthFix"
+            }), null, 8 /* PROPS */, ["src"]),
+            createElementVNode("text", utsMapOf({
+              class: normalizeClass(['tab-text', 2 === _ctx.tabIndex ? 'active-text' : ''])
+            }), toDisplayString(_ctx.tabs[2].name), 3 /* TEXT, CLASS */)
+          ], 8 /* PROPS */, ["onClick"])
+        : createCommentVNode("v-if", true),
+      createElementVNode("view", utsMapOf({
+        class: "tab-item",
+        onClick: () => {_ctx.changeTab(3)}
+      }), [
+        createElementVNode("image", utsMapOf({
+          class: "tab-icon",
+          src: 3 === _ctx.tabIndex ? _ctx.tabs[3].selectedIcon : _ctx.tabs[3].unselectedIcon,
+          mode: "widthFix"
+        }), null, 8 /* PROPS */, ["src"]),
+        createElementVNode("text", utsMapOf({
+          class: normalizeClass(['tab-text', 3 === _ctx.tabIndex ? 'active-text' : ''])
+        }), toDisplayString(_ctx.tabs[3].name), 3 /* TEXT, CLASS */)
+      ], 8 /* PROPS */, ["onClick"]),
+      createElementVNode("view", utsMapOf({
+        class: "tab-item",
+        onClick: () => {_ctx.changeTab(4)}
+      }), [
+        createElementVNode("image", utsMapOf({
+          class: "tab-icon",
+          src: 4 === _ctx.tabIndex ? _ctx.tabs[4].selectedIcon : _ctx.tabs[4].unselectedIcon,
+          mode: "widthFix"
+        }), null, 8 /* PROPS */, ["src"]),
+        createElementVNode("text", utsMapOf({
+          class: normalizeClass(['tab-text', 4 === _ctx.tabIndex ? 'active-text' : ''])
+        }), toDisplayString(_ctx.tabs[4].name), 3 /* TEXT, CLASS */)
+      ], 8 /* PROPS */, ["onClick"])
+    ])
+  ], 4 /* STYLE */)
+}
+const GenPagesTabbarTabbarStyles = [utsMapOf([["center-img", padStyleMapOf(utsMapOf([["width", 40]]))], ["tabbar", padStyleMapOf(utsMapOf([["position", "fixed"], ["zIndex", 1000], ["bottom", 0], ["left", 0], ["right", 0], ["backgroundColor", "#ffffff"], ["width", "100%"], ["height", "7%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "row"], ["justifyContent", "space-around"], ["alignItems", "center"]]))], ["tab-item", utsMapOf([[".tabbar ", utsMapOf([["width", "20%"], ["height", "100%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"], ["transitionDuration", "2s"], ["transitionTimingFunction", "ease"]])]])], ["bg-img", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 70], ["height", 70], ["borderRadius", 70], ["backgroundColor", "#f2eee9"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["position", "absolute"], ["bottom", 16]])]])], ["center-icon", utsMapOf([[".tabbar .tab-item .bg-img ", utsMapOf([["width", 52]])]])], ["tab-icon", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 24]])]])], ["tab-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["fontSize", 12], ["color", "#808080"]])]])], ["active-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["color", "#937152"]])]])], ["@TRANSITION", utsMapOf([["tab-item", utsMapOf([["duration", "2s"], ["timingFunction", "ease"]])]])]])]

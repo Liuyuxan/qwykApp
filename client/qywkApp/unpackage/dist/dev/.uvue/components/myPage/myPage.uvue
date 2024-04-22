@@ -1,0 +1,20 @@
+
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		
+		methods: {
+			
+		}
+	}
+
+
+function GenComponentsMyPageMyPageRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("view", utsMapOf({ class: "my-page" }), " 我的 ")
+}
+const GenComponentsMyPageMyPageStyles = []

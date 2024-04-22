@@ -1,0 +1,2 @@
+function GenUniModulesUxFrameComponentsUxSkeletonUxSkeletonRender(): any | null { return null }
+const GenUniModulesUxFrameComponentsUxSkeletonUxSkeletonStyles = []

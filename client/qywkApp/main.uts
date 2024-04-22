@@ -1,9 +1,13 @@
 import App from './App.uvue'
 
 import { createSSRApp } from 'vue'
+import { install } from '@/uni_modules/ux-frame/index.uts'
 
 export function createApp() {
 	const app = createSSRApp(App)
+	
+	app.config.globalProperties.$ux = install()
+	
 	return {
 		app
 	}

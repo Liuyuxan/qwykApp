@@ -1,0 +1,93 @@
+
+	export default {
+		data() {
+			return {
+				
+			};
+		},
+		methods: {
+			clickOption() {
+				uni.navigateTo({
+					url: '/pages/healthDetail/healthDetail'
+				})
+			}
+		}
+	}
+
+
+import _easycom_ux_button from '@/uni_modules/ux-frame/components/ux-button/ux-button.uvue'
+function GenComponentsHealthComponentHealthComponentRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+const _component_ux_button = resolveEasyComponent("ux-button",_easycom_ux_button)
+
+  return createElementVNode("scroll-view", utsMapOf({
+    direction: "vertical",
+    class: "health"
+  }), [
+    createVNode(_component_ux_button, utsMapOf({
+      type: "info",
+      text: "默认",
+      mr: 10
+    })),
+    createElementVNode("image", utsMapOf({
+      class: "title fixed",
+      style: normalizeStyle(utsMapOf({"top":"5%","left":"5%"})),
+      src: "/static/image/health/title.png",
+      mode: "widthFix"
+    }), null, 4 /* STYLE */),
+    createElementVNode("view", utsMapOf({
+      class: "link fixed",
+      style: normalizeStyle(utsMapOf({"top":"-20%","right":"-22%"})),
+      onClick: _ctx.clickOption
+    }), [
+      createElementVNode("image", utsMapOf({
+        style: normalizeStyle(utsMapOf({"width":"460rpx"})),
+        class: "img",
+        src: "/static/image/health/prescription.png",
+        mode: "widthFix"
+      }), null, 4 /* STYLE */),
+      createElementVNode("image", utsMapOf({
+        class: "img-btn",
+        src: "/static/image/showWindow/unlocked_Pattern.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("text", utsMapOf({ class: "text" }), "名方")
+    ], 12 /* STYLE, PROPS */, ["onClick"]),
+    createElementVNode("view", utsMapOf({
+      class: "link fixed",
+      style: normalizeStyle(utsMapOf({"top":"-16%","left":"-30%"})),
+      onClick: _ctx.clickOption
+    }), [
+      createElementVNode("image", utsMapOf({
+        class: "img",
+        src: "/static/image/health/eat.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("image", utsMapOf({
+        class: "img-btn",
+        src: "/static/image/showWindow/unlocked_Pattern.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("text", utsMapOf({ class: "text" }), "药膳")
+    ], 12 /* STYLE, PROPS */, ["onClick"]),
+    createElementVNode("view", utsMapOf({
+      class: "link fixed",
+      style: normalizeStyle(utsMapOf({"top":"-30%","left":"30%"})),
+      onClick: _ctx.clickOption
+    }), [
+      createElementVNode("image", utsMapOf({
+        class: "img",
+        src: "/static/image/health/tea.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("text", utsMapOf({ class: "text" }), "茶饮"),
+      createElementVNode("image", utsMapOf({
+        class: "img-btn",
+        src: "/static/image/showWindow/unlocked_Pattern.png",
+        mode: "widthFix"
+      }))
+    ], 12 /* STYLE, PROPS */, ["onClick"])
+  ])
+}
+const GenComponentsHealthComponentHealthComponentStyles = [utsMapOf([["fixed", padStyleMapOf(utsMapOf([["position", "relative"]]))], ["health", padStyleMapOf(utsMapOf([["width", "100%"], ["height", "100%"], ["backgroundColor", "#f2eee9"]]))], ["title", utsMapOf([[".health ", utsMapOf([["width", "250rpx"]])]])], ["link", utsMapOf([[".health ", utsMapOf([["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"]])]])], ["img", utsMapOf([[".health ", utsMapOf([["width", "400rpx"]])]])], ["img-btn", utsMapOf([[".health ", utsMapOf([["width", "224rpx"]])]])], ["text", utsMapOf([[".health ", utsMapOf([["position", "absolute"], ["bottom", 0], ["left", "50%"], ["transform", "translateX(-50%)"], ["color", "#7a927a"], ["fontSize", "48rpx"]])]])]])]

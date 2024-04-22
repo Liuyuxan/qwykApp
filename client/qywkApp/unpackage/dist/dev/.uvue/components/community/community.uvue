@@ -1,0 +1,17 @@
+
+	export default {
+		data() {
+			return {
+				
+			};
+		},
+		
+	}
+
+
+function GenComponentsCommunityCommunityRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("view", utsMapOf({ class: "community" }), " 社区 ")
+}
+const GenComponentsCommunityCommunityStyles = []

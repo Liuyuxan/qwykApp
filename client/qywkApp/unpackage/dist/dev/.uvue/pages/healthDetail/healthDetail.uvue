@@ -2,7 +2,13 @@
 	export default {
 		data() {
 			return {
-				
+				title: '膳食-四神粥',
+				subtitle: '———— 健脾|除湿养心 ————',
+				info: `原料：
+							芡实15克，莲子15克,淮山药干10克，茯苓10克；糯米半碗，白芸豆、红枣适量。\n做法：
+							1、芡实、莲子、淮山药、茯苓基本上用等量的，食材都放入清水中浸泡30分钟以上。
+							2、将除了红枣以外的所有食材，一同放入锅中，加足够煮粥的水，大火煮开后，中小火慢熬45分钟。
+							3、将红枣切开，放入锅中，盖上锅盖继续煮5分钟后即可出锅。`
 			};
 		}
 	}
@@ -12,7 +18,31 @@ function GenPagesHealthDetailHealthDetailRender(): any | null {
 const _ctx = this
 const _cache = this.$.renderCache
   return createElementVNode("scroll-view", utsMapOf({
-    style: normalizeStyle(utsMapOf({"flex":"1"}))
-  }), null, 4 /* STYLE */)
+    style: normalizeStyle(utsMapOf({"flex":"1","padding-top":"100rpx"})),
+    class: "align-center"
+  }), [
+    createElementVNode("view", null, [
+      createElementVNode("image", utsMapOf({
+        class: "border-img",
+        src: "/static/image/bg/border_2.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("text", utsMapOf({ class: "text title center" }), toDisplayString(_ctx.title), 1 /* TEXT */),
+      createElementVNode("text", utsMapOf({ class: "text subtitle center" }), toDisplayString(_ctx.subtitle), 1 /* TEXT */)
+    ]),
+    createElementVNode("image", utsMapOf({
+      class: "mt-2",
+      src: "/static/image/health/image_1.png",
+      mode: "widthFix"
+    })),
+    createElementVNode("view", utsMapOf({ class: "info mt-2" }), [
+      createElementVNode("text", utsMapOf({ class: "text-info" }), toDisplayString(_ctx.info), 1 /* TEXT */)
+    ]),
+    createElementVNode("image", utsMapOf({
+      class: "bg",
+      src: "/static/image/bg/bg_2.png",
+      mode: "widthFix"
+    }))
+  ], 4 /* STYLE */)
 }
-const GenPagesHealthDetailHealthDetailStyles = []
+const GenPagesHealthDetailHealthDetailStyles = [utsMapOf([["bg", padStyleMapOf(utsMapOf([["width", "100%"], ["transform", "scale(1.4)"], ["position", "fixed"], ["zIndex", -1], ["top", 0], ["left", 0], ["right", 0], ["bottom", 0]]))], ["text", padStyleMapOf(utsMapOf([["position", "absolute"]]))], ["title", padStyleMapOf(utsMapOf([["top", "12%"], ["fontSize", "56rpx"], ["fontWeight", "700"], ["color", "#937152"]]))], ["subtitle", padStyleMapOf(utsMapOf([["bottom", "14%"], ["fontSize", "32rpx"], ["color", "#937152"]]))], ["info", padStyleMapOf(utsMapOf([["width", "632rpx"]]))], ["text-info", utsMapOf([[".info ", utsMapOf([["fontSize", "32rpx"], ["color", "#937152"]])]])]])]

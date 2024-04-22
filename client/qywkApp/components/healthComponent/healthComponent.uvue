@@ -1,0 +1,75 @@
+<template>
+	<scroll-view direction="vertical" class="health">
+		<ux-button type="info" text="默认" :mr="10"></ux-button>
+		<image class="title fixed" style="top: 5%;left: 5%;" src="/static/image/health/title.png" mode="widthFix"></image>
+		<view class="link fixed" style="top: -20%;right: -22%;" @click="clickOption">
+			<image style="width: 460rpx;" class="img" src="/static/image/health/prescription.png" mode="widthFix"></image>
+			<image class="img-btn" src="/static/image/showWindow/unlocked_Pattern.png" mode="widthFix"></image>
+			<text class="text">名方</text>
+		</view>
+		<view class="link fixed" style="top: -16%;left: -30%;" @click="clickOption">
+			<image class="img" src="/static/image/health/eat.png" mode="widthFix"></image>
+			<image class="img-btn" src="/static/image/showWindow/unlocked_Pattern.png" mode="widthFix"></image>
+			<text class="text">药膳</text>
+		</view>
+		<view class="link fixed" style="top: -30%;left: 30%;" @click="clickOption">
+			<image class="img" src="/static/image/health/tea.png" mode="widthFix"></image>
+			<text class="text">茶饮</text>
+			<image class="img-btn" src="/static/image/showWindow/unlocked_Pattern.png" mode="widthFix"></image>
+			
+		</view>
+		
+	</scroll-view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		},
+		methods: {
+			clickOption() {
+				uni.navigateTo({
+					url: '/pages/healthDetail/healthDetail'
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+.fixed {
+	position: relative;
+}
+.health {
+	width: 100%;
+	height: 100%;
+	background-color: $uni-bg-color;
+	.title {
+		width: 250rpx;
+	}
+	.link {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.img {
+		width: 400rpx;
+	}
+	.img-btn {
+		width: 224rpx;
+		
+	}
+	.text {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		color: #7a927a;
+		font-size: 48rpx;
+	}
+}
+</style>

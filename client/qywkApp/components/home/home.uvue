@@ -1,0 +1,547 @@
+<template>
+	<scroll-view direction="vertical" style="flex:1" :show-scrollbar="false" >
+		
+		<view class="content">
+			<image class="bg-img" src="/static/image/bg/宣纸纹理背景.png" mode="scaleToFill"></image>
+
+			<view class="top-bar flex justify-center">
+				<image class="plant-avatar" src="/static/image/bg/圆扇.png" mode="heightFix" style="height: 140rpx;"></image>
+				<view class="right">
+					<view class="title-top flex">
+						<text class="title">{{ plantTitle }}</text>
+						<text class="level ml-1">Lv{{ level }}</text>
+					</view>
+					<view class="bottom flex align-center mt-1">
+						<text class="today">今天</text>
+						<!-- 进度条 -->
+						<progress class="jindutiao" :percent="currentPercenter" :stroke-width="12"  :border-radius="20" activeColor="#BF9350" backgroundColor="#c3c3c0" />
+						<!-- <view class="jindutiao ml-1 mr-1"></view> -->
+						<text class="jindutiao-count">{{ currentPercenter }}%</text> 
+					</view>
+				</view>
+			</view>
+			
+			<!-- 功能栏 -->
+			<view class="function-tab">
+				<view class="item" v-for="(item, index) in functionList" :key="index" @click="clickFunction(item)">
+					<view class="icon">
+						<image class="img" :src="item.icon" mode="widthFix"></image>
+					</view>
+					<text style="font-size: 20rpx;margin-top: 6rpx;">{{ item.text }}</text>
+				</view>
+			</view>
+			<!-- 背景 -->
+			<image class="bg2-img center" src="/static/image/bg/圆扇.png" mode="widthFix"></image>
+			<!-- 桌子 -->
+			<image class="desk center" src="/static/image/bg/桌子.png" mode="widthFix"></image>
+			<!-- 植物 -->
+			<view class="plant-part center">
+				<image class="expression" src="/static/image/expression/expression_Happy.png" mode="widthFix"></image>
+				<image class="plant" src="/static/image/bg/植物.png" mode="widthFix"></image>
+			</view>
+			
+
+			<view class="user-bar">
+				<!-- 用户信息部分 -->
+				<view class="user-info flex">
+					<view class="avatar">
+						<image class="hexagon-img" src="/static/image/bg/圆扇.png" mode="widthFix"></image>
+					</view>
+					<view class="right ml-3">
+						<view class="top-text">
+							<text class="username">{{ username }}</text>
+						</view>
+						<view class="flex align-center mt-2">
+							<view class="flex align-center">
+								<image class="icon" src="../../static/image/icons/挑战icon.png" mode="widthFix"></image>
+								<text class="challenge-days text">挑战{{ challengeDays }}天</text>
+							</view>
+
+							<view class="line"></view>
+							<view class="flex align-center">
+								<image class="icon" src="../../static/image/icons/植物状态icon.png" mode="widthFix"></image>
+								<text class="tree-height text">树高{{ treeHeight }}M</text>
+							</view>
+						</view>
+					</view>
+				</view>
+				
+				<!-- 七天打卡滚动区域 -->
+				<scroll-view direction="vertical" :scroll-top="signInScrollToTop * 3" class="sign-in-scroll" :show-scrollbar="false">
+					<view class="item flex" v-for="(item,index) in signInData" :key="index">
+						<view :class="['money-icon', item.currentSignIn === true ? 'active-icon' : '']">
+							<image style="width: 44px;" :src="item.icon" mode="widthFix"></image>
+						</view>
+						<!-- 线条部分，三部分组成 -->
+						<view class="line-time">
+							<!-- 上面的线 -->
+							<view :class="['top', item?.isSignIn === true && item.currentSignIn === false ? 'active-top' : '']"></view>
+							<!-- 中间的部分 -->
+							<view class="active-current flex justify-center align-center" v-if="item?.isSignIn">
+								<image class="img" src="/static/image/tabBar/未选择3.png" mode="widthFix"></image>
+								<text class="active-day">day{{ signInData.length - index }}</text>
+							</view>
+							<view class="current flex justify-center align-center" v-else>
+								<text class="day">{{ signInData.length - index }}</text>
+							</view>
+							<!-- 下面的线 -->
+							<view :class="['bottom', item?.isSignIn === true ? 'active-bottom' : '']"></view>
+						</view>
+						<!-- 文字：第几天：什么什么奖励 -->
+						<text class="text-info" style="font-size: 24rpx;color: #584717;font-weight: 700;">{{ item.text }}</text>
+
+					</view>
+				</scroll-view>
+			</view>
+			
+			<!-- 花圃 -->
+			<view class="garden center flex flex-column justify-around align-center">
+				<view class="title">
+					<view class="circular"></view>
+					<text class="text">花圃</text>	
+				</view>
+				<view class="plants">
+					<view class="plant" v-for="(item, index) in gandeplants" :key="index">
+						<image class="plant-img" :src="item.plant" mode="widthFix"></image>
+					</view>
+				</view>
+				<image class="graden-bg" src="/static/image/bg/花圃背景.png" mode="widthFix"></image>
+			</view>
+		</view>
+
+	</scroll-view>
+</template>
+
+<script lang="uts">
+	type functionListType = {
+		icon: string
+		navgiateUrl: string
+		text: string
+	}
+	type signInDataType = {
+		icon: string
+		text: string
+		isSignIn: boolean
+		currentSignIn: boolean
+	}
+	type gandeplantType = {
+		plant: string
+	}
+	export default {
+		data() {
+			return {
+				plantTitle: '人参' as string,
+				level: 2 as number,
+				schedule: 25 as number,
+				username: '初心平原' as string,
+				challengeDays: 2 as number,
+				treeHeight: 5 as number,
+				currentPercenter: 20 as number, // 顶部当前进度
+				functionList: [  // 功能栏
+					{
+						icon: '/static/image/icons/plan.png',
+						navgiateUrl: '',
+						text: '计划'
+					},
+					{
+						icon: '/static/image/icons/clothes.png',
+						navgiateUrl: '',
+						text: '装扮'
+					},
+					{
+						icon: '/static/image/icons/message.png',
+						navgiateUrl: '',
+						text: '对话'
+					}
+				] as functionListType[],
+				
+				signInScrollToTop: 67,  // 打卡栏距离顶部距离
+				signInData: [  // 打卡栏模拟配置
+					{
+						icon: '/static/image/icons/money/money-box.png',
+						text: '第七天：未知的惊喜',
+						isSignIn: false,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money-chinese.png',
+						text: '第六天：中国结*2',
+						isSignIn: false,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第五天：铜钱*4',
+						isSignIn: false,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第四天：铜钱*3',
+						isSignIn: true,
+						currentSignIn: true
+					},
+					{
+						icon: '/static/image/icons/money/money-box.png',
+						text: '第三天：未知的惊喜',
+						isSignIn: true,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money-chinese.png',
+						text: '第二天：中国结*1',
+						isSignIn: true,
+						currentSignIn: false
+					},
+					{
+						icon: '/static/image/icons/money/money.png',
+						text: '第一天：铜钱*2',
+						isSignIn: true,
+						currentSignIn: false
+					}
+				] as signInDataType[],
+				gandeplants: [
+					{
+						plant: '/static/image/plant/pot.png'
+					},
+					{
+						plant: '/static/image/plant/garden-plant.png'
+					},
+					{
+						plant: '/static/image/plant/pot.png'
+					},
+				] as gandeplantType[]
+			}
+		},
+		onLoad() {
+			
+			
+		},
+		methods: {
+			// 功能栏跳转
+			clickFunction(item: functionListType) {
+				uni.navigateTo({
+					url: item.navgiateUrl
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.content {
+		padding-bottom: 150rpx;
+	}
+	
+	.bg-img {
+		// transform: scale(1.2);
+		width: 750rpx;
+		height: 2600rpx;
+		position: absolute;
+		z-index: 0;
+	}
+
+	.top-bar {
+		box-sizing: border-box;
+		width: 650rpx;
+		height: 130rpx;
+		background-color: #f2f2e9;
+		border-radius: 100px;
+		border: 1px solid #c2a587;
+		padding: 20rpx;
+
+		z-index: 999;
+		top: 3%;
+		left: 50%;
+		transform: translateX(-50%);
+
+		.right {
+			margin-left: 28rpx;
+
+			.title-top {
+				.level {
+					color: #965D30;
+					font-weight: 700;
+					font-size: 32rpx;
+				}
+			}
+
+			.bottom {
+
+				.today {
+					color: #BF9350;
+					font-size: 28rpx;
+				}
+
+				.jindutiao {
+					margin: 0 14rpx;
+					width: 340rpx;
+				}
+				.jindutiao-count {
+					font-size: 28rpx;
+					color: #BF9350;
+				}
+			}
+		}
+	}
+	
+	// 功能栏
+	.function-tab {
+		padding: 20rpx 0;
+		width: 120rpx;
+		height: 360rpx;
+		border-radius: 40rpx;
+		background-color: #ece0c5;
+		
+		position: absolute;
+		z-index: 999;
+		left: 2%;
+		top: 34%;
+		
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		.item {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			.icon {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 64rpx;
+				height: 64rpx;
+				background-color: #fcf6e6;
+				border-radius: 20rpx;
+				
+				.img {
+					width: 48rpx;
+				}
+			}
+		}
+	}
+	
+	// 窗口背景
+	.bg2-img {
+		width: 700rpx;
+		z-index: 99;
+		top: 4%;
+	
+	}
+	
+	// 桌子
+	.desk {
+		position: absolute;
+		width: 750rpx;
+		z-index: 3;
+		top: 9%;
+	}
+	
+	// 植物药材
+	.plant-part {
+		position: absolute;
+		width: 560rpx;
+		z-index: 99;
+		bottom: 48%;
+		.expression {
+			width: 120rpx;
+			position: absolute;
+			z-index: 999;
+			bottom: 400rpx;
+			right: 80rpx;
+		}
+		.plant {
+			width: 560rpx;	
+		}
+	}
+	
+	// 用户栏
+	.user-bar {
+		box-sizing: border-box;
+		padding: 20rpx;
+		z-index: 999;
+		bottom: -2%;
+		left: 50%;
+		transform: translateX(-50%);
+
+		width: 680rpx;
+		height: 780rpx;
+		background-color: #fffcf5;
+		border-radius: 46rpx;
+		.user-info {
+			height: 140rpx;
+			.hexagon-img {
+				width: 120rpx;
+			}
+			
+			.right {
+				.line {
+					width: 6rpx;
+					height: 26rpx;
+					background-color: #e5e5e5;
+					border-radius: 10px;
+					margin: 0 40rpx;
+				}
+			
+				.icon {
+					width: 32rpx;
+					margin-right: 16rpx;
+				}
+			
+				.text {
+					font-size: 24rpx;
+				}
+			}
+		}
+		
+
+		// 打卡区域
+		.sign-in-scroll {
+			width: 100%;
+			height: 580rpx;
+			
+			.item {
+				box-sizing: border-box;
+				width: 100%;
+				height: 200rpx;
+				justify-content: center;
+				align-items: center;
+				
+				background-color: #fffcf5;
+				overflow: visible;
+				
+				.money-icon {
+					box-sizing: border-box;
+					padding: 30rpx;
+					
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 128rpx;
+					height: 128rpx;
+					border-radius: 20rpx;
+					background-color: #ededed;
+				}
+				.active-icon {
+					border: 1px solid #f9ba62;
+				}
+				.line-time {
+					width: 40rpx;
+					margin: 0 80rpx;
+					overflow: visible;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					
+					.active-top {
+						background-color: #f9ba62;
+					}
+					
+					.top {
+						width: 3px;
+						height: 80px;
+						background-color: #ededed;
+					}
+					
+					// 打卡过的样式
+					.active-current {
+						width: 72rpx;
+						height: 28rpx;
+						border-radius: 50rpx;
+						border: 1px solid #ffb921;
+						.img {
+							width: 12rpx;
+						}
+						.active-day {
+							color: #FFC300;
+							font-size: 20rpx;
+							
+						}
+					}
+					// 未打卡样式
+					.current {
+						width: 32rpx;
+						height: 32rpx;
+						border-radius: 32rpx;
+						border: 1px solid #ededed;
+						.day {
+							font-size: 20rpx;							
+						}
+						
+					}
+					.active-bottom {
+						background-color: #f9ba62;
+					}
+					.bottom {
+						width: 3px;
+						height: 80px;
+						background-color: #ededed;
+						
+					}
+				}
+				.text-info {
+					width: 200rpx;
+					
+				}
+			}
+		}
+	}
+	
+	// 花圃
+	.garden {
+		overflow: visible;
+		width: 680rpx;
+		height: 400rpx;
+		background-color: #FFEEC7;
+		border-radius: 46rpx;
+		top: 4%;
+		position: relative;
+		.title {
+			position: absolute;
+			top: -7%;
+			z-index: 99;
+			width: 160rpx;
+			height: 60rpx;
+			.circular {
+				position: absolute;
+				width: 22rpx;
+				height: 22rpx;
+				background-color: #7a4923;
+				border-radius: 50px;
+				top: 50%;
+				transform: translateY(-50%);
+				left: 8%;
+				z-index: 99;
+			}
+			.text {
+				background-color: #ffeec7;
+				color: #7a4923;
+				border-radius: 50px;
+				text-align: center;
+				line-height: 60rpx;
+			}
+		}
+		.plants {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			.plant-img {
+				width: 220rpx;
+			}
+		}
+		.graden-bg {
+			width: 700rpx;
+			position: absolute;
+			z-index: -1;
+			left: 2%;
+			top: -32%;
+		}
+	}
+	
+	
+</style>

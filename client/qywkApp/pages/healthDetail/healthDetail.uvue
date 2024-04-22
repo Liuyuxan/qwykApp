@@ -1,7 +1,19 @@
 <template>
 	<!-- #ifdef APP -->
-	<scroll-view style="flex:1">
+	<scroll-view style="flex:1;padding-top: 100rpx;" class="align-center" >
 	<!-- #endif -->
+
+		<view>
+			<image class="border-img" src="/static/image/bg/border_2.png" mode="widthFix"></image>
+			<text class="text title center">{{ title }}</text>
+			<text class="text subtitle center">{{ subtitle }}</text>
+		</view>
+		<image class="mt-2" src="/static/image/health/image_1.png" mode="widthFix"></image>
+		<view class="info mt-2">
+			<text class="text-info">{{ info }}</text>
+		</view>
+		
+		<image class="bg" src="/static/image/bg/bg_2.png" mode="widthFix"></image>
 		
 	<!-- #ifdef APP -->
 	</scroll-view>
@@ -12,12 +24,51 @@
 	export default {
 		data() {
 			return {
-				
+				title: '膳食-四神粥',
+				subtitle: '———— 健脾|除湿养心 ————',
+				info: `原料：
+							芡实15克，莲子15克,淮山药干10克，茯苓10克；糯米半碗，白芸豆、红枣适量。\n做法：
+							1、芡实、莲子、淮山药、茯苓基本上用等量的，食材都放入清水中浸泡30分钟以上。
+							2、将除了红枣以外的所有食材，一同放入锅中，加足够煮粥的水，大火煮开后，中小火慢熬45分钟。
+							3、将红枣切开，放入锅中，盖上锅盖继续煮5分钟后即可出锅。`
 			};
 		}
 	}
 </script>
 
 <style lang="scss">
+	.bg {
+		width: 100%;
+		transform: scale(1.4);
+		position: fixed;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	.text {
+		position: absolute;
+	}
 
+	.title {
+		top: 12%;
+		font-size: 56rpx;
+		font-weight: 700;
+		color: $uni-text-color;
+	}
+
+	.subtitle {
+		bottom: 14%;
+		font-size: 32rpx;
+		color: $uni-text-color;
+	}
+	.info {
+		width: 632rpx;
+		.text-info {
+			font-size: 32rpx;
+			color: $uni-text-color;
+		}
+	}
+	
 </style>

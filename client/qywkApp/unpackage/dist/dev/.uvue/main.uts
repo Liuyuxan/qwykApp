@@ -1,9 +1,13 @@
 import App from './App.uvue'
 
 import { createSSRApp } from 'vue'
+import { install } from '@/uni_modules/ux-frame/index.uts'
 
 export function createApp() {
 	const app = createSSRApp(App)
+	
+	app.config.globalProperties.$ux = install()
+	
 	return {
 		app
 	}
@@ -26,29 +30,21 @@ export class UniAppConfig extends AppConfig {
     constructor() {}
 }
 
-import GenPagesIndexIndexClass from './pages/index/index.uvue?type=page'
 import GenPagesLoginLoginClass from './pages/login/login.uvue?type=page'
-import GenPagesShowWindowShowWindowClass from './pages/showWindow/showWindow.uvue?type=page'
-import GenPagesCommunityCommunityClass from './pages/community/community.uvue?type=page'
-import GenPagesHealthHealthClass from './pages/health/health.uvue?type=page'
-import GenPagesMyPageMyPageClass from './pages/myPage/myPage.uvue?type=page'
+import GenPagesTabbarTabbarClass from './pages/tabbar/tabbar.uvue?type=page'
 import GenPagesPlantDetailPlantDetailClass from './pages/plantDetail/plantDetail.uvue?type=page'
 import GenPagesHealthDetailHealthDetailClass from './pages/healthDetail/healthDetail.uvue?type=page'
 function definePageRoutes() {
-__uniRoutes.push({ path: "pages/index/index", component: GenPagesIndexIndexClass, meta: { isQuit: true } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/login/login", component: GenPagesLoginLoginClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/showWindow/showWindow", component: GenPagesShowWindowShowWindowClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/community/community", component: GenPagesCommunityCommunityClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/health/health", component: GenPagesHealthHealthClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/myPage/myPage", component: GenPagesMyPageMyPageClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""],["enablePullDownRefresh",false]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/login/login", component: GenPagesLoginLoginClass, meta: { isQuit: true } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/tabbar/tabbar", component: GenPagesTabbarTabbarClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/plantDetail/plantDetail", component: GenPagesPlantDetailPlantDetailClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/healthDetail/healthDetail", component: GenPagesHealthDetailHealthDetailClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/healthDetail/healthDetail", component: GenPagesHealthDetailHealthDetailClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText","每日药膳推荐"]]) } as PageRoute)
 }
-const __uniTabBar: Map<string, any | null> | null = utsMapOf([["color","#323232"],["selectedColor","#b19983"],["backgroundColor","#fff"],["borderStyle","#fff"],["iconWidth","28px"],["fontSize","12px"],["height","60px"],["list",[utsMapOf([["pagePath","pages/showWindow/showWindow"],["text","展架"],["iconPath","static/image/tabBar/未选择1.png"],["selectedIconPath","static/image/tabBar/选择1.png"]]),utsMapOf([["pagePath","pages/community/community"],["text","集市"],["iconPath","static/image/tabBar/未选择2.png"],["selectedIconPath","static/image/tabBar/选择2.png"]]),utsMapOf([["pagePath","pages/index/index"],["text","药材"],["iconPath","static/image/tabBar/未选择3.png"],["selectedIconPath","static/image/tabBar/选择3.png"]]),utsMapOf([["pagePath","pages/health/health"],["text","膳食"],["iconPath","static/image/tabBar/未选择4.png"],["selectedIconPath","static/image/tabBar/选择4.png"]]),utsMapOf([["pagePath","pages/myPage/myPage"],["text","我的"],["iconPath","static/image/tabBar/未选择5.png"],["selectedIconPath","static/image/tabBar/选择5.png"]])]]])
-const __uniLaunchPage: Map<string, any | null> = utsMapOf([["url","pages/index/index"],["style",utsMapOf([["navigationBarTitleText",""]])]])
+const __uniTabBar: Map<string, any | null> | null = utsMapOf()
+const __uniLaunchPage: Map<string, any | null> = utsMapOf([["url","pages/login/login"],["style",utsMapOf([["navigationBarTitleText",""]])]])
 @Suppress("UNCHECKED_CAST")
 function defineAppConfig(){
-  __uniConfig.entryPagePath = '/pages/index/index'
+  __uniConfig.entryPagePath = '/pages/login/login'
   __uniConfig.globalStyle = utsMapOf([["navigationBarTextStyle","black"],["navigationBarTitleText","uni-app x"],["navigationBarBackgroundColor","#F8F8F8"],["backgroundColor","#F8F8F8"],["navigationStyle","custom"]])
   __uniConfig.tabBar = __uniTabBar as Map<string, any> | null
   __uniConfig.conditionUrl = ''

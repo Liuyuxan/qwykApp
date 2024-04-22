@@ -15,13 +15,14 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
+import io.dcloud.uniapp.extapi.navigateTo as uni_navigateTo;
 open class GenPagesHealthHealth : BasePage {
     constructor(instance: ComponentInternalInstance) : super(instance) {}
     @Suppress("UNUSED_PARAMETER", "UNUSED_VARIABLE")
     override fun `$render`(): Any? {
         val _ctx = this;
         val _cache = this.`$`.renderCache;
-        val _component_ux_button = resolveComponent("ux-button");
+        val _component_ux_button = resolveEasyComponent("ux-button", GenUniModulesUxFrameComponentsUxButtonUxButtonClass);
         return createElementVNode("view", utsMapOf("class" to "health"), utsArrayOf(
             createVNode(_component_ux_button, utsMapOf("type" to "info", "text" to "默认", "mr" to 10)),
             createElementVNode("image", utsMapOf("class" to "title fixed", "style" to normalizeStyle(utsMapOf("top" to "10%", "left" to "5%")), "src" to "/static/image/health/title.png", "mode" to "widthFix"), null, 4),
@@ -32,20 +33,27 @@ open class GenPagesHealthHealth : BasePage {
             ), 12, utsArrayOf(
                 "onClick"
             )),
-            createElementVNode("view", utsMapOf("class" to "link fixed", "style" to normalizeStyle(utsMapOf("top" to "46%", "left" to "-4%"))), utsArrayOf(
+            createElementVNode("view", utsMapOf("class" to "link fixed", "style" to normalizeStyle(utsMapOf("top" to "46%", "left" to "-4%")), "onClick" to _ctx.clickOption), utsArrayOf(
                 createElementVNode("image", utsMapOf("class" to "img", "src" to "/static/image/health/eat.png", "mode" to "widthFix")),
                 createElementVNode("image", utsMapOf("class" to "img-btn", "src" to "/static/image/showWindow/unlocked_Pattern.png", "mode" to "widthFix")),
                 createElementVNode("text", utsMapOf("class" to "text"), "药膳")
-            ), 4),
-            createElementVNode("view", utsMapOf("class" to "link fixed", "style" to normalizeStyle(utsMapOf("top" to "66%", "right" to "-4%"))), utsArrayOf(
+            ), 12, utsArrayOf(
+                "onClick"
+            )),
+            createElementVNode("view", utsMapOf("class" to "link fixed", "style" to normalizeStyle(utsMapOf("top" to "66%", "right" to "-4%")), "onClick" to _ctx.clickOption), utsArrayOf(
                 createElementVNode("image", utsMapOf("class" to "img", "src" to "/static/image/health/tea.png", "mode" to "widthFix")),
                 createElementVNode("text", utsMapOf("class" to "text"), "茶饮"),
                 createElementVNode("image", utsMapOf("class" to "img-btn", "src" to "/static/image/showWindow/unlocked_Pattern.png", "mode" to "widthFix"))
-            ), 4)
+            ), 12, utsArrayOf(
+                "onClick"
+            ))
         ));
     }
     override fun `$initMethods`() {
-        this.clickOption = fun() {};
+        this.clickOption = fun() {
+            uni_navigateTo(NavigateToOptions(url = "/pages/healthDetail/healthDetail"));
+        }
+        ;
     }
     open lateinit var clickOption: () -> Unit;
     companion object {

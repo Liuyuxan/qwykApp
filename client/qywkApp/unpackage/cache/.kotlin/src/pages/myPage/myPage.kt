@@ -20,7 +20,11 @@ open class GenPagesMyPageMyPage : BasePage {
     @Suppress("UNUSED_PARAMETER", "UNUSED_VARIABLE")
     override fun `$render`(): Any? {
         val _cache = this.`$`.renderCache;
-        return createElementVNode("view", utsMapOf("class" to "my-page"), " 我的 ");
+        val _component_tabbar = resolveEasyComponent("tabbar", GenComponentsTabbarTabbarClass);
+        return createElementVNode("view", utsMapOf("class" to "my-page"), utsArrayOf(
+            " 我的 ",
+            createVNode(_component_tabbar, utsMapOf("currentIndex" to 3))
+        ));
     }
     companion object {
         val styles: Map<String, Map<String, Map<String, Any>>>

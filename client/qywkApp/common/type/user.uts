@@ -18,7 +18,7 @@ export type TUserDetail = {
 }
 
 export type TloginInfo = {
-	username: string
+	userId: string
 	password: string
 }
 export type IToken = {
