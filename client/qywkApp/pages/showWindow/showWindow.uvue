@@ -1,19 +1,113 @@
 <template>
-	<view class="community">
-		社区
-	</view>
+		<!-- 展架页面 -->
+		<scroll-view class="show-window" direction="vertical">
+			<text style="color:#383838;font-size: 32rpx;">植物收集进度</text>
+			<text class="mt-1" style="color: #3C6A5D;font-weight: 700;font-size: 40rpx;">3/16</text>
+			<text class="mt-2" style="color: #a6a6a6;font-size: 32rpx;">轻松培养健康生活习惯</text>
+			
+			<view class="list mt-3">
+				<view v-for="(item, index) in plantListData" :key="index" @click="clickPlant(item, index)">
+					<image class="img" :src="item.imgUrl" mode="widthFix"></image>
+					<text class="text" v-if="item.isUnlock === false">未解锁</text>
+				</view>
+			</view>
+		</scroll-view>
 </template>
 
-<script>
+<script lang="uts">
+	type plantListType = {
+		imgUrl: string
+		isUnlock: boolean
+	}
+	
 	export default {
 		data() {
 			return {
-				
+				plantListData:[
+					{
+						imgUrl: '/static/image/showWindow/Unlocked_hawthorn.png',
+						isUnlock: true
+					},
+					{
+						imgUrl: '/static/image/showWindow/Unlocked_ginseng.png',
+						isUnlock: true
+					},
+					{
+						imgUrl: '/static/image/showWindow/Unlocked_peony.png',
+						isUnlock: true
+					},
+					{
+						imgUrl: '/static/image/showWindow/Not_Unlocked_1.png',
+						isUnlock: false
+					},
+					{
+						imgUrl: '/static/image/showWindow/Not_Unlocked_2.png',
+						isUnlock: false,
+					},
+					{
+						imgUrl: '/static/image/showWindow/Not_Unlocked_3.png',
+						isUnlock: false,
+					},
+					
+					{
+						imgUrl: '/static/image/showWindow/Not_Unlocked_1.png',
+						isUnlock: false
+					},
+					{
+						imgUrl: '/static/image/showWindow/Not_Unlocked_2.png',
+						isUnlock: false,
+					},
+					
+				] as plantListType[]
 			};
+		},
+		methods: {
+			clickPlant(item:any, index:number) {
+				uni.navigateTo({
+					url: '/pages/plantDetail/plantDetail'
+				})
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-
+.show-window {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #f8f5ed;
+	padding: 100rpx 36rpx 0 36rpx;
+	
+}
+.list {
+	width: 100%;
+	
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+	.img {
+		width: 310rpx;
+		margin-bottom: 16px;
+		position: relative;
+		
+	}
+	.text {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100rpx;
+		height: 40rpx;
+		border-radius: 40rpx;
+		background-color: #d6aaa7;
+		line-height: 40rpx;
+		text-align: center;
+		color: #fff;
+		font-size: 24rpx;
+	}
+}
 </style>

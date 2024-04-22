@@ -1,0 +1,118 @@
+<template>
+	<view class="plant-detail">
+		<image class="plant-img" src="../../static/image/plant/hawthorn.png" mode="widthFix"></image>
+		<view class="info center flex justify-center align-center">
+			<view class="plant-name">
+				<image class="img-border" style="width: 100rpx;" src="../../static/image/showWindow/Pattern.png" mode="widthFix"></image>
+				<text class="text text1">山</text>
+				<text class="text text2">楂</text>
+			</view>
+			
+			<view class="info-content ml-3" style="width: 400rpx;">
+				<view class="tags flex justify-between">
+					<text class="tag">酸</text>
+					<text class="tag">味甘</text>
+					<text class="tag">性温</text>
+				</view>
+				<view class="mt-2">
+					<text class="text">【用药部位】：干燥成熟的果实</text>
+					<text class="text">【功能主治】：消食健脾，行气消淤，化浊降脂，用于肉食积滞，淤血闭经，产后瘀阻，岔气疼痛等。</text>
+				</view>
+				
+			</view>
+		</view>
+		<view class="btn center">
+			<image class="btn-img" style="width: 310rpx;" src="../../static/image/showWindow/unlocked_Pattern.png" mode="widthFix"></image>
+			<text class="text">已解锁</text>
+		</view>
+		
+		<image class="bg-img" src="../../static/image/showWindow/画卷.png.png" mode="widthFix"></image>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
+</script>
+
+<style lang="scss">
+	.plant-detail {
+		width: 100%;
+		height: 100%;
+		background-color: $uni-bg-color;
+	}
+	.plant-img {
+		width: 460rpx;
+		position: fixed;
+		top: 130rpx;
+		left: 150rpx;
+		z-index: 1;
+	}
+	.bg-img {
+		width: 90%;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%);
+		z-index: 0;
+	}
+	.info {
+		position: fixed;
+		top: 56%;
+		z-index: 9;
+		.plant-name {
+			.img-border {
+				position: relative;
+			}
+			.text {
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				font-size: 64rpx;
+				color: #594532;
+			}
+			.text1 {
+				top: 30%;
+			}
+			.text2 {
+				top: 60%;
+			}
+		}
+		.info-content {
+			.tags {
+				.tag {
+					width: 100rpx;
+					height: 56rpx;
+					line-height: 56rpx;
+					background-color: #7a927a;
+					border-radius: 12rpx;
+					text-align: center;
+					color: #fff;
+					
+				}
+			}
+			.text {
+				color: #937152;
+				font-size: 24rpx;
+			}
+		}
+	}
+	.btn {
+		position: fixed;
+		z-index: 9;
+		bottom: 8%;
+		.text {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%);
+			color: #7a927a;
+			font-size: 52rpx;
+		}
+	}
+</style>

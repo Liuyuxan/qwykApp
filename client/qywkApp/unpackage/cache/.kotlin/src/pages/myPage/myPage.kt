@@ -1,3 +1,4 @@
+@file:Suppress("UNCHECKED_CAST", "USELESS_CAST", "INAPPLICABLE_JVM_NAME")
 package uni.UNIB7338A2;
 import io.dcloud.uniapp.*;
 import io.dcloud.uniapp.extapi.*;
@@ -17,7 +18,7 @@ import kotlinx.coroutines.async;
 open class GenPagesMyPageMyPage : BasePage {
     constructor(instance: ComponentInternalInstance) : super(instance) {}
     @Suppress("UNUSED_PARAMETER", "UNUSED_VARIABLE")
-    override fun `$render`(): VNode? {
+    override fun `$render`(): Any? {
         val _cache = this.`$`.renderCache;
         return createElementVNode("view", utsMapOf("class" to "my-page"), " 我的 ");
     }
