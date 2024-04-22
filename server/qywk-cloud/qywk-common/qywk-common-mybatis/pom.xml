@@ -44,6 +44,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.qywk</groupId>
+            <artifactId>qywk-common-core</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

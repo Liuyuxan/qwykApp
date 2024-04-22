@@ -1,4 +1,4 @@
-package com.qywk.community.controller.article;
+package com.qywk.community.controller;
 
 import com.qywk.common.core.entity.ResultBody;
 import com.qywk.common.core.utils.SensitiveWordFilter;

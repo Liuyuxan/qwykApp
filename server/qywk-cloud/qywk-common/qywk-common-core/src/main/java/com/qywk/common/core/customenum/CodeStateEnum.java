@@ -35,7 +35,7 @@ public enum CodeStateEnum {
      */
     LOGIN_USER_NOT_NULL(301, "用户名不存在"),
     LOGIN_PASSWORD_FAIL(302, "密码错误"),
-    LOGIN_USER_TO_REGISTER(303, "用户以注册使用，请勿重复注册"),
+    LOGIN_USER_TO_REGISTER(303, "手机号以注册使用，请勿重复注册"),
 
     /**
      * 服务器错误状态码 5xx
