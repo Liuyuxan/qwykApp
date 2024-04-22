@@ -1,19 +1,14 @@
 package com.qywk.user.pojo.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 /**
  * @author qlh
- * @date 2024/04/18 21:56
+ * @date 2024/04/22 11:15
  * @description
  */
 @Data
-public class UserInfoVO {
+public class UserBasicInfoVO {
     /**
      * 用户名
      * */
@@ -23,16 +18,6 @@ public class UserInfoVO {
      * 用户的昵称
      * */
     private String nickname;
-
-    /**
-     * 电话
-     * */
-    private String tel;
-
-    /**
-     * 邮箱
-     * */
-    private String email;
 
     /**
      * 用户的头像图片名

@@ -1,11 +1,6 @@
-package com.qywk.user.pojo.vo;
+package com.qywk.community.pojo.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 /**
  * @author qlh

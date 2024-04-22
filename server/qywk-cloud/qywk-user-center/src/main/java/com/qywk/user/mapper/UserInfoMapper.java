@@ -3,6 +3,7 @@ package com.qywk.user.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.qywk.user.pojo.dto.UserInfoDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author qlh
@@ -11,5 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 
 @Mapper
+@Transactional(rollbackFor = Exception.class)
 public interface UserInfoMapper extends BaseMapper<UserInfoDTO> {
 }
