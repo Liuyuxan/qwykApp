@@ -46,4 +46,11 @@ public interface LoginService {
      * @return
      */
     ResultBody changePassword(ChangeAO ao);
+
+    /**
+     * Send the verification code / 发送验证码
+     * @param tel   手机号
+     * @return
+     */
+    ResultBody sentCode(String tel);
 }

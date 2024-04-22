@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -157,15 +158,12 @@ public class LoginServiceImpl implements LoginService {
                     .message(CodeStateEnum.LOGIN_USER_TO_REGISTER.message);
         }
 
-        // todo 验证码校验
-        String key = RedisKeyEnum.REGISTER_TEL_CODE.create(ao.getTel());
-        // todo 后续对验证码进行验证加锁，防止爆破
-        if(redisService.hasKey(key)){
-            String code =  redisService.getCacheObject(key);
-            if(!code.equals(ao.getCode())){
-                return ResultBody.error().message("验证码错误");
-            }
+        // 验证码校验
+        if(!verification(ao.getTel(), ao.getCode())){
+            // todo 添加验证码限流
+            return ResultBody.error().message("验证码有误");
         }
+
 
         // 强密码校验
         if(!strongCryptographicCheck(ao.getPassword())){
@@ -181,7 +179,7 @@ public class LoginServiceImpl implements LoginService {
             BeanUtils.copyProperties(ao, user);
             user.setPassword(MD5.getInstance().getMD5String(ao.getPassword()));
             if(userInfoMapper.insert(user) >= 1){
-                return ResultBody.ok().message("创建成功").data("user_id", user.getUserId());
+                return ResultBody.ok().message("创建成功").data("userId", user.getUserId());
             }
         }
 
@@ -209,15 +207,12 @@ public class LoginServiceImpl implements LoginService {
             return ResultBody.error().message("手机号错误");
         }
 
-        // todo 验证码校验
-        String key = RedisKeyEnum.REGISTER_TEL_CODE.create(ao.getTel());
-        // todo 后续对验证码进行验证加锁，防止爆破
-        if(redisService.hasKey(key)){
-            String code =  redisService.getCacheObject(key);
-            if(!code.equals(ao.getCode())){
-                return ResultBody.error().message("验证码错误");
-            }
+        // 验证码校验
+        if(!verification(ao.getTel(), ao.getCode())){
+            // todo 添加验证码限流
+            return ResultBody.error().message("验证码有误");
         }
+
 
         // 强密码校验
         if(!strongCryptographicCheck(ao.getPassword())){
@@ -226,6 +221,8 @@ public class LoginServiceImpl implements LoginService {
         }
 
         user.setPassword(MD5.getInstance().getMD5String(ao.getPassword()));
+
+        // todo 清除登录相关缓存，刷新用户权限
 
         return userInfoMapper.updateById(user) > 0 ?
                 ResultBody.ok().message("修改密码成功") :
@@ -261,13 +258,44 @@ public class LoginServiceImpl implements LoginService {
                     message(CodeStateEnum.LOGIN_PASSWORD_FAIL.message);
         }
 
+        if(user.getPassword().equals(MD5.getInstance().getMD5String(ao.getNewPassword()))){
+            return ResultBody.error().message("新密码与旧密码相同");
+        }
+
+        // 验证码校验
+        if(!verification(ao.getTel(), ao.getCode())){
+            // todo 添加验证码限流
+            return ResultBody.error().message("验证码有误");
+        }
+
         // 修改密码
         user.setPassword(MD5.getInstance().getMD5String(ao.getNewPassword()));
+
+        // todo 清除登录相关缓存，刷新用户权限
 
         return userInfoMapper.updateById(user) > 0 ?
                 ResultBody.ok().message("修改成功") :
                 ResultBody.error().code(CodeStateEnum.LOGIN_USER_NOT_NULL.code).
                         message(CodeStateEnum.LOGIN_USER_NOT_NULL.message);
+    }
+
+    /**
+     * Send the verification code / 发送验证码
+     * @param tel   手机号
+     * @return
+     */
+    @Override
+    public ResultBody sentCode(String tel) {
+        String key = RedisKeyEnum.REGISTER_TEL_CODE.create(tel);
+
+        if(redisService.hasKey(key)){
+            return ResultBody.error().message("请勿重复发送！！！");
+        }
+        String code = UUID.randomUUID().toString().substring(0, 8);
+        // 设置一分钟缓存
+        redisService.setCacheObject(key, code, 1L, TimeUnit.MINUTES);
+        // todo 先直接返回给前端展示，后续更改消息推送
+        return ResultBody.ok().message("发送成功").data("code", code);
     }
 
 
@@ -322,5 +350,26 @@ public class LoginServiceImpl implements LoginService {
         String token = JwtUtils.createToken(map);
         redisService.setCacheObject(RedisKeyEnum.LOGIN_TOKENS.create(userId), token, 3L, TimeUnit.DAYS); // 加入redis缓存中，过期时间设置为3天
         return token;
+    }
+
+    /**
+     * 验证码校验
+     * @param tel
+     * @param code
+     * @return
+     */
+    private boolean verification(String tel, String code){
+        // 验证码校验
+        String key = RedisKeyEnum.REGISTER_TEL_CODE.create(tel);
+        if(redisService.hasKey(key)){
+            String verificationCode =  redisService.getCacheObject(key);
+            if(!verificationCode.equals(code)){
+                return false;
+            }
+        }else {
+            return false;
+        }
+        redisService.deleteObject(key);
+        return true;
     }
 }

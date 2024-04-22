@@ -7,12 +7,8 @@ import com.qywk.user.pojo.ao.*;
 import com.qywk.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -74,7 +70,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("register")
-    public ResultBody register(@RequestBody @NotNull RegisterAO ao){
+    public ResultBody register(@RequestBody @Validated RegisterAO ao){
         // 分布式锁防止重复的登陆请求
         RedisLockUtil.Lock lock = redisLockUtil.tryToGetLock("register_" + ao.getTel(), 10, TimeUnit.SECONDS);
 
@@ -93,7 +89,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("forget")
-    ResultBody forget(ForgetAO ao){
+    ResultBody forget(@RequestBody @Validated ForgetAO ao){
         // 分布式锁防止重复的登陆请求
         RedisLockUtil.Lock lock = redisLockUtil.tryToGetLock("forgotPassword_" + ao.getUserId(), 10, TimeUnit.SECONDS);
 
@@ -111,13 +107,32 @@ public class LoginController {
      * @return
      */
     @PostMapping("change")
-    ResultBody changePassword(ChangeAO ao){
+    ResultBody changePassword(@RequestBody @Validated ChangeAO ao){
         // 分布式锁防止重复的登陆请求
         RedisLockUtil.Lock lock = redisLockUtil.tryToGetLock("changePassword_" + ao.getUserId(), 10, TimeUnit.SECONDS);
 
         if (lock == null) return ResultBody.error().code(CodeStateEnum.AUTH_REQUEST_LIMIT.code).message(CodeStateEnum.AUTH_REQUEST_LIMIT.message);
 
         ResultBody resultBody = loginService.changePassword(ao);
+
+        lock.delete(); // 释放锁
+        return resultBody;
+    }
+
+
+    /**
+     * Send the verification code / 发送验证码
+     * @param tel   手机号
+     * @return
+     */
+    @PostMapping("/sent/code")
+    ResultBody sentCode(@RequestParam(value = "tel") String tel){
+        // 分布式锁防止重复的发送验证码请求
+        RedisLockUtil.Lock lock = redisLockUtil.tryToGetLock("tel_" + tel, 10, TimeUnit.SECONDS);
+
+        if (lock == null) return ResultBody.error().code(CodeStateEnum.AUTH_REQUEST_LIMIT.code).message(CodeStateEnum.AUTH_REQUEST_LIMIT.message);
+
+        ResultBody resultBody = loginService.sentCode(tel);
 
         lock.delete(); // 释放锁
         return resultBody;
