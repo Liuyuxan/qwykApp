@@ -1,6 +1,8 @@
 package com.qywk.user.pojo.ao;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author qlh
@@ -8,6 +10,8 @@ import lombok.Data;
  * @description  登录相关
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginAO {
     private String userId;
     private String password;

@@ -82,5 +82,17 @@ public class UserInfoDTO {
      * */
     @TableField(value = "enable", fill = FieldFill.INSERT)
     private String enable;
+
+    /**
+     * 用户经验值
+     */
+    @TableField("exp")
+    private Integer exp;
+
+    /**
+     * 货币
+     */
+    @TableField("currency")
+    private Integer currency;
 }
 

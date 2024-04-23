@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date 2024/04/22 11:07
  * @description
  */
-@FeignClient("qywk-user-center")
+@FeignClient("qywk-user")
 public interface UserInfoClient {
     @GetMapping("/api/info/basic")
     UserBasicInfoVO queryBasicInfo(@RequestParam(value = "user_id") String userId);

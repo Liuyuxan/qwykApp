@@ -10,22 +10,22 @@
 		data() {
 			return {
 				loginInfo: {
-					username: '',
+					userId: '',
 					password: ''
 				} as TloginInfo
 			}
 		},
 		methods: {
 			clickLogin() {
-				if((this.loginInfo.username.length <= 0) || (this.loginInfo.password.length <= 0)) return 
+				if((this.loginInfo.userId.length <= 0) || (this.loginInfo.password.length <= 0)) return 
 				
 				console.log(this.loginInfo);
 				// Http.post('/qywk/login/normal', this.loginInfo)
 				uni.request<IResponse<IToken>>({
-					url: BASE_URL + '/qywk/login/normal',
+					url: BASE_URL + '/user/login/normal',
 					method: 'POST',
 					data: {
-						username: this.loginInfo.username,
+						userId: this.loginInfo.userId,
 						password: this.loginInfo.password
 					},
 					dataType: 'json',
@@ -35,7 +35,7 @@
 						if(r!.code == 200) {
 							uni.setStorageSync('token', r!.data!.token)
 							uni.reLaunch({
-								url: '/pages/index/index',
+								url: '/pages/tabbar/tabbar',
 							})
 						} else {
 							
@@ -79,8 +79,8 @@ const _cache = this.$.renderCache
         createElementVNode("text", utsMapOf({ class: "title justify-start" }), "登录")
       ]),
       createElementVNode("input", utsMapOf({
-        modelValue: _ctx.loginInfo.username,
-        onInput: ($event: InputEvent) => {(_ctx.loginInfo.username) = $event.detail.value},
+        modelValue: _ctx.loginInfo.userId,
+        onInput: ($event: InputEvent) => {(_ctx.loginInfo.userId) = $event.detail.value},
         class: "uni-input space",
         placeholder: "账号/手机号"
       }), null, 40, ["modelValue", "onInput"]),

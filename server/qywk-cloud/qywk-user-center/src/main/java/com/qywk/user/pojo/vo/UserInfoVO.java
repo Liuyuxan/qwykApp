@@ -40,6 +40,21 @@ public class UserInfoVO {
     private String profile;
 
     /**
+     * 用户经验值
+     */
+    private Integer exp;
+
+    /**
+     * 用户等级
+     */
+    private Integer grade;
+
+    /**
+     * 货币
+     */
+    private Integer currency;
+
+    /**
      * 是否激活
      * */
     private String enable;
