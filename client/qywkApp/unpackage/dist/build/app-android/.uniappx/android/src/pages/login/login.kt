@@ -31,8 +31,8 @@ open class GenPagesLoginLogin : BasePage {
                     createElementVNode("image", utsMapOf("src" to "/static/image/login/chacha.png", "mode" to "widthFix", "style" to normalizeStyle(utsMapOf("width" to "36rpx", "margin-right" to "10rpx"))), null, 4),
                     createElementVNode("text", utsMapOf("class" to "title justify-start"), "登录")
                 )),
-                createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.username, "onInput" to fun(`$event`: InputEvent){
-                    _ctx.loginInfo.username = `$event`.detail.value;
+                createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.userId, "onInput" to fun(`$event`: InputEvent){
+                    _ctx.loginInfo.userId = `$event`.detail.value;
                 }
                 , "class" to "uni-input space", "placeholder" to "账号/手机号"), null, 40, utsArrayOf(
                     "modelValue",
@@ -67,17 +67,17 @@ open class GenPagesLoginLogin : BasePage {
     open var loginInfo: TloginInfo by `$data`;
     @Suppress("USELESS_CAST")
     override fun data(): Map<String, Any?> {
-        return utsMapOf("loginInfo" to TloginInfo(username = "", password = ""));
+        return utsMapOf("loginInfo" to TloginInfo(userId = "", password = ""));
     }
     override fun `$initMethods`() {
         this.clickLogin = fun() {
-            if ((this.loginInfo.username.length <= 0) || (this.loginInfo.password.length <= 0)) {
+            if ((this.loginInfo.userId.length <= 0) || (this.loginInfo.password.length <= 0)) {
                 return;
             }
             console.log(this.loginInfo, " at pages/login/login.uvue:22");
-            uni_request<IResponse<IToken>>(RequestOptions(url = BASE_URL + "/qywk/login/normal", method = "POST", data = let {
+            uni_request<IResponse<IToken>>(RequestOptions(url = BASE_URL + "/user/login/normal", method = "POST", data = let {
                 object : UTSJSONObject() {
-                    var username = it.loginInfo.username
+                    var userId = it.loginInfo.userId
                     var password = it.loginInfo.password
                 }
             }, dataType = "json", success = fun(res){
@@ -85,7 +85,7 @@ open class GenPagesLoginLogin : BasePage {
                 console.log("登录返回信息", r, " at pages/login/login.uvue:34");
                 if (r!!.code == 200) {
                     uni_setStorageSync("token", r!!.data!!.token);
-                    uni_reLaunch(ReLaunchOptions(url = "/pages/index/index"));
+                    uni_reLaunch(ReLaunchOptions(url = "/pages/tabbar/tabbar"));
                 } else {
                     uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
                 }

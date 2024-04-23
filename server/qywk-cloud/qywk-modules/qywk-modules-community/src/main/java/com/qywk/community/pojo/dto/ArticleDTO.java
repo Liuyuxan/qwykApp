@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -56,13 +57,13 @@ public class ArticleDTO {
      * 文章的发布时间
      * */
     @TableField("publish_time")
-    private Date publishTime;
+    private LocalDateTime publishTime;
 
     /**
      * 文章的最近一次状态更新的时间
      * */
     @TableField("update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 进行文章的最近一次更新的用户的id

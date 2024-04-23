@@ -25,6 +25,11 @@ public class UserBasicInfoVO {
     private String profile;
 
     /**
+     * 用户等级
+     */
+    private Integer grade;
+
+    /**
      * 是否激活
      * */
     private String enable;

@@ -72,24 +72,32 @@ public class LoginServiceImpl implements LoginService {
             return ResultBody.error().message("短时间尝试次数太多啦!请等待" + (expire / 60) + "分" + (expire % 60) + "秒后重试!");
         }
 
-        // token令牌和权限树的redis键名称
-        String tokenKey = RedisKeyEnum.LOGIN_TOKENS.create(ao.getUserId());
-        String authKey = RedisKeyEnum.AUTH.create(ao.getUserId());
+
 
         // 获取用户对象
-        UserInfoDTO userInfoDTO = userInfoMapper.selectById(ao.getUserId());
-        if (userInfoDTO == null) {
+        UserInfoDTO user = null;
+        if(ao.getUserId().length() == 11){
+            user = userInfoMapper.selectOne(new QueryWrapper<UserInfoDTO>().eq("tel", ao.getUserId()));
+        }else {
+            user = userInfoMapper.selectById(ao.getUserId());
+        }
+
+        if (user == null) {
             return ResultBody.error().message("未找到该用户");
         }
 
         // 密码正确性校验
-        if (!MD5.getInstance().getMD5String(ao.getPassword()).equals(userInfoDTO.getPassword())) {
+        if (!MD5.getInstance().getMD5String(ao.getPassword()).equals(user.getPassword())) {
             // 密码错误一次，开始统计接口访问次数
             limit ++;
             redisService.setCacheObject(limitTokenKey, limit, 5L, TimeUnit.MINUTES);
             // 密码错误
             return ResultBody.error().message("错误的用户名或密码!你还可以尝试:" + (5 - limit) + "次!");
         }
+
+        // token令牌和权限树的redis键名称
+        String tokenKey = RedisKeyEnum.LOGIN_TOKENS.create(user.getUserId());
+        String authKey = RedisKeyEnum.AUTH.create(user.getUserId());
 
         if (redisService.hasKey(tokenKey) && redisService.hasKey(authKey)) {
             // 登陆成功，且redis中具有令牌和权限的缓存，直接返回
@@ -103,7 +111,7 @@ public class LoginServiceImpl implements LoginService {
 //        }
 
         // 生成一个token并设置缓存
-        String token = createUserToken(ao.getUserId(), userInfoDTO.getNickname());
+        String token = createUserToken(user.getUserId(), user.getNickname());
         return ResultBody.ok().message("登陆成功!").data("token", token);
     }
 
@@ -179,7 +187,8 @@ public class LoginServiceImpl implements LoginService {
             BeanUtils.copyProperties(ao, user);
             user.setPassword(MD5.getInstance().getMD5String(ao.getPassword()));
             if(userInfoMapper.insert(user) >= 1){
-                return ResultBody.ok().message("创建成功").data("userId", user.getUserId());
+                LoginAO loginAO = new LoginAO(user.getUserId(), ao.getPassword());
+                return login(loginAO);
             }
         }
 
@@ -325,7 +334,7 @@ public class LoginServiceImpl implements LoginService {
      * @return true/false
      */
 
-    public boolean strongCryptographicCheck(String password) {
+    private boolean strongCryptographicCheck(String password) {
         if (password == null || password.length() < 8) {
             return false;
         }

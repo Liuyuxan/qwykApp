@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @date 2024/04/22 9:09
  * @description
  */
-@FeignClient("qywk-modules-chat-ai")
+@FeignClient(value = "qywk-chatai", url = "127.0.0.1:20241")
 public interface ChatAiClient {
     @PostMapping("/api/inquiry")
-    public String inquiry(@RequestBody String description);
+    String inquiry(@RequestBody String description);
 }
