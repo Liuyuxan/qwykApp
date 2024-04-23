@@ -1,0 +1,126 @@
+<template>
+	<view class="validateCode">
+		<image class="bg-img" src="../../static/image/login/bg.png" mode="widthFix"></image>
+		<view class="window flex flex-column  align-center">
+			<view class="top flex align-center">
+				<image src="../../static/image/login/chacha.png" mode="widthFix" style="width: 36rpx;margin-right: 10rpx;"></image>
+				<text class="title justify-start">注册</text>
+			</view>
+			<input v-model="numberPhone" class="uni-input space" placeholder="手机号" />
+			<button class="space" hover-class="btn-hover" @click="clickRegiter"
+				style="width: 600rpx;height: 76rpx;border-radius: 32rpx;color: #fff;line-height: 76rpx;text-align: center;background-color: #b19983;">发送验证码</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	import type { ICode } from "@/common/type/user.uts"
+	import type { IResponse } from "@/common/type/http.uts"
+	import { BASE_URL } from "@/config/index.uts"
+	
+	export default {
+		data() {
+			return {
+				numberPhone: '' as string
+			}
+		},
+		methods: {
+			clickRegiter() {
+				if(this.numberPhone.length <= 0) return 
+				if(this.numberPhone.length != 11) return
+				
+				console.log(this.numberPhone)
+				uni.request<IResponse<ICode>>({
+					url: BASE_URL + `/user/login/sent/code?tel=${this.numberPhone}`,
+					method: 'POST',
+					
+					success: (res) => {
+						let r = res.data
+						console.log('验证码返回信息', r);
+						if(r!.code == 200) {
+							let code = r!.data!.code
+							console.log(code);
+							uni.showToast({
+								title: '获取验证码成功，已帮您自动填写',
+								icon: "none"
+							})
+							uni.navigateTo({
+								url: `/pages/register/register?code=${code}&tel=${this.numberPhone}`
+							})
+						} else {
+							uni.showToast({
+								title: '网络超时',
+								icon: "none"
+							})
+						}
+						
+					},
+					fail: (err) => {
+						console.log(err);
+						uni.showToast({
+							title: err.errMsg,
+							icon: "none"
+						})
+					}
+				})
+
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.validateCode {
+		width: 100%;
+		height: 100%;
+		background-color: $uni-bg-color;
+		.bg-img {
+			width: 750rpx;
+			position: absolute;
+			top: 0;
+		}
+		.window {
+			box-sizing: border-box;
+			width: 650rpx;
+			height: 466rpx;
+			padding: 30rpx;
+			margin: 300rpx auto 0 auto;
+			background-color: $uni-bg-color-grey;
+			border-radius: 48rpx;
+
+			.space {
+				margin-bottom: 62rpx;
+			}
+
+			.top {
+				width: 600rpx;
+				margin-bottom: 64rpx;
+
+				.title {
+					font-size: $uni-font-size-lg;
+					color: #937152;
+				}
+			}
+
+			.uni-input {
+				width: 600rpx;
+				height: 76rpx;
+				border-radius: 32rpx;
+				margin: 0 auto;
+				padding-left: 10px;
+				font-size: $uni-font-size-sm;
+				background-color: $uni-bg-color;
+			}
+
+			.uni-input::placeholder {
+				font-size: 28rpx;
+				margin-left: 100rpx;
+			}
+
+			.btn-hover {
+				background-color: #94806e;
+			}
+
+		}
+	}
+</style>

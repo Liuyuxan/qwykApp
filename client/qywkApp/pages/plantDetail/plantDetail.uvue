@@ -44,18 +44,18 @@
 	.plant-detail {
 		width: 100%;
 		height: 100%;
-		background-color: $uni-bg-color;
+		background-color: #f2eee9;
 	}
 	.plant-img {
 		width: 460rpx;
 		position: fixed;
-		top: 130rpx;
+		top: 18%;
 		left: 150rpx;
 		z-index: 1;
 	}
 	.bg-img {
-		width: 90%;
-		position: fixed;
+		width: 96%;
+		position: absolute;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%);
@@ -105,7 +105,7 @@
 	.btn {
 		position: fixed;
 		z-index: 9;
-		bottom: 8%;
+		bottom: 16%;
 		.text {
 			position: absolute;
 			top: 50%;

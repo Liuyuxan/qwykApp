@@ -1,0 +1,173 @@
+
+	type chartType = { __$originalPosition: UTSSourceMapPosition<"chartType", "pages/resultHealth/resultHealth.uvue", 72, 7>;
+		name : string
+		area : number
+	}
+	export default {
+		data() {
+			return {
+				acHeight: '',
+				chartData: [
+					{
+						name: '气虚',
+						area: 30
+					},
+					{
+						name: '阳虚',
+						area: 20
+					},
+					{
+						name: '阴虚',
+						area: 50
+					},
+					{
+						name: '痰湿',
+						area: 26
+					},
+					{
+						name: '湿热',
+						area: 28
+					},
+					{
+						name: '血瘀',
+						area: 45
+					},
+					{
+						name: '气郁',
+						area: 10
+					},
+					{
+						name: '特禀',
+						area: 60
+					},
+				] as chartType[]
+			};
+		},
+		methods: {
+			submit() {
+				uni.navigateTo({
+					url: '/pages/drawPlan/drawPlan'
+				})
+			}
+		},
+		onLoad() {
+
+		},
+		mounted() {
+			uni.showToast({
+				title: '体质检测成功，报告已生成'
+			})
+			this.$nextTick(() => {
+				this.acHeight = 'animate-ac-height'
+			})
+		}
+	}
+
+
+function GenPagesResultHealthResultHealthRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("scroll-view", utsMapOf({
+    direction: "vertical",
+    class: "flex flex-column align-center",
+    style: normalizeStyle(utsMapOf({"flex":"1","background-color":"#eeede4"}))
+  }), [
+    createElementVNode("view", utsMapOf({
+      class: "top flex flex-column align-center",
+      style: normalizeStyle(utsMapOf({"margin-top":"50px"}))
+    }), [
+      createElementVNode("text", utsMapOf({
+        style: normalizeStyle(utsMapOf({"font-size":"18px","color":"#937152"}))
+      }), "你的体质", 4 /* STYLE */),
+      createElementVNode("view", utsMapOf({
+        class: "flex justify-between mt-2",
+        style: normalizeStyle(utsMapOf({"width":"120px","height":"34px"}))
+      }), [
+        createElementVNode("text", utsMapOf({ class: "body-text" }), "特"),
+        createElementVNode("text", utsMapOf({ class: "body-text" }), "禀"),
+        createElementVNode("text", utsMapOf({ class: "body-text" }), "质")
+      ], 4 /* STYLE */)
+    ], 4 /* STYLE */),
+    createElementVNode("view", utsMapOf({ class: "caritry flex" }), [
+      createElementVNode("text", utsMapOf({
+        class: "body",
+        style: normalizeStyle(utsMapOf({"width":"58px","border":"1px solid #594532"}))
+      }), "兼有体质", 4 /* STYLE */),
+      createElementVNode("text", utsMapOf({ class: "body" }), "阴虚质"),
+      createElementVNode("text", utsMapOf({ class: "body" }), "特禀质")
+    ]),
+    createElementVNode("view", utsMapOf({ class: "charts" }), [
+      createElementVNode("text", utsMapOf({ class: "line" }), "判定"),
+      createElementVNode("view", utsMapOf({ class: "inner flex justify-around" }), [
+        createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.chartData, (item, index, _, _): VNode => {
+          return createElementVNode("view", utsMapOf({
+            class: "item flex flex-column align-center justify-around",
+            key: index
+          }), [
+            createElementVNode("view", utsMapOf({ class: "top" }), [
+              createElementVNode("view", utsMapOf({
+                class: normalizeClass(["area animate-height", [_ctx.acHeight, item.area > 50 ? 'ac-bgc' : 'bgc']]),
+                style: normalizeStyle(utsMapOf({'height':(item.area) + '%'}))
+              }), null, 6 /* CLASS, STYLE */)
+            ]),
+            createElementVNode("text", utsMapOf({ class: "name" }), toDisplayString(item.name), 1 /* TEXT */)
+          ])
+        }), 128 /* KEYED_FRAGMENT */)
+      ])
+    ]),
+    createElementVNode("view", utsMapOf({ class: "result-info" }), [
+      createElementVNode("view", utsMapOf({ class: "top flex align-center" }), [
+        createElementVNode("text", utsMapOf({ class: "score" }), [
+          "46",
+          createElementVNode("text", utsMapOf({ class: "fen" }), "分")
+        ]),
+        createElementVNode("text", utsMapOf({
+          class: "ml-3",
+          style: normalizeStyle(utsMapOf({"font-size":"24rpx","width":"100%"}))
+        }), [
+          "你的体质在20-24岁的女性中，优于他人",
+          createElementVNode("text", utsMapOf({
+            style: normalizeStyle(utsMapOf({"font-size":"28rpx","color":"#594532"}))
+          }), "56%", 4 /* STYLE */)
+        ], 4 /* STYLE */)
+      ]),
+      createElementVNode("view", utsMapOf({ class: "line mt-3 mb-3" })),
+      createElementVNode("text", utsMapOf({
+        style: normalizeStyle(utsMapOf({"font-size":"28rpx","color":"#937152"}))
+      }), "特禀体质的成因主要是肺、肾、脾三脏的气血功能失调造成的", 4 /* STYLE */)
+    ]),
+    createElementVNode("text", utsMapOf({
+      style: normalizeStyle(utsMapOf({"margin-top":"30px","font-size":"32rpx","color":"#937152"}))
+    }), "根据您的体质，该中药材与您相匹配", 4 /* STYLE */),
+    createElementVNode("view", utsMapOf({
+      class: "mt-5 flex justify-center align-center",
+      style: normalizeStyle(utsMapOf({"width":"120rpx","height":"120rpx","border-radius":"16rpx","background-color":"#eee4cf","border":"1px solid #594532"}))
+    }), [
+      createElementVNode("image", utsMapOf({
+        style: normalizeStyle(utsMapOf({"width":"140rpx"})),
+        src: "/static/image/plant/plant_1.png",
+        mode: "widthFix"
+      }), null, 4 /* STYLE */)
+    ], 4 /* STYLE */),
+    createElementVNode("text", utsMapOf({
+      class: "mt-2",
+      style: normalizeStyle(utsMapOf({"font-size":"24rpx"}))
+    }), "芍药", 4 /* STYLE */),
+    createElementVNode("view", utsMapOf({ class: "plant-info mt-2" }), [
+      createElementVNode("text", utsMapOf({
+        style: normalizeStyle(utsMapOf({"font-size":"12px","color":"#937152"}))
+      }), "芍药是一种草本花卉，常被用在中药药方里，功效与作用很丰富。 \n1.养血柔肝，散郁祛瘀，改善面部黄褐斑，皮肤粗糙衰老。 \n2.养血调经、敛阴止汗、柔肝止痛、平抑肝阳，用于治疗血虚萎黄、月 经不调、自汗、盗汗、胁痛、腹痛、四肢拘挛疼痛以及头痛、眩晕等症状。 \n3.具有养血敛阴、平抑肝阳、柔肝止痛的功效，用于治疗肝血亏虚、月经 不调、痛经、崩漏、胎产诸证、体虚多汗、阴虚动风、肝阳上亢、胁肋脘 腹疼痛、四肢拘挛作痛等。 \n4. 白芍有广谱抗菌作用；对中枢性及末梢性的肌肉痉挛，以及因痉挛引起的 疼痛有效。 对胸腹痛、腓肠肌痉挛有止疼效果。", 4 /* STYLE */)
+    ]),
+    createElementVNode("button", utsMapOf({
+      class: "btn mt-5",
+      "hover-class": "btn-is-hover",
+      onClick: _ctx.submit
+    }), "种植并制定我的养生计划", 8 /* PROPS */, ["onClick"]),
+    createElementVNode("image", utsMapOf({
+      class: "bg",
+      src: "/static/image/bg/bg_1.png",
+      mode: "widthFix"
+    }))
+  ], 4 /* STYLE */)
+}
+const GenPagesResultHealthResultHealthStyles = [utsMapOf([["bg", padStyleMapOf(utsMapOf([["position", "absolute"], ["zIndex", -1], ["width", "100%"], ["top", -100], ["left", 0], ["right", 0]]))], ["body-text", padStyleMapOf(utsMapOf([["width", 32], ["height", 32], ["lineHeight", "32px"], ["textAlign", "center"], ["backgroundColor", "#f3efeb"], ["borderRadius", 4], ["boxShadow", "0 4px #b79e86"]]))], ["caritry", padStyleMapOf(utsMapOf([["marginTop", 35], ["width", "90%"], ["height", 26], ["borderBottomWidth", 1], ["borderBottomStyle", "solid"], ["borderBottomColor", "#6B6A3D"]]))], ["body", utsMapOf([[".caritry ", utsMapOf([["marginRight", 6], ["height", 18], ["lineHeight", "18px"], ["textAlign", "center"], ["color", "#594532"], ["fontSize", 12]])]])], ["charts", padStyleMapOf(utsMapOf([["marginTop", 30], ["width", 375], ["height", 156], ["position", "relative"]]))], ["line", utsMapOf([[".charts ", utsMapOf([["position", "absolute"], ["zIndex", 9], ["top", "44%"], ["width", 375], ["height", 10], ["lineHeight", "10px"], ["fontSize", 8], ["textAlign", "right"], ["borderTopWidth", 2], ["borderTopStyle", "dashed"], ["borderTopColor", "#594532"]])], [".result-info ", utsMapOf([["width", "100%"], ["height", 1], ["borderTopWidth", 1], ["borderTopStyle", "dashed"], ["borderTopColor", "#937152"]])]])], ["inner", utsMapOf([[".charts ", utsMapOf([["width", "100%"], ["height", "100%"], ["display", "flex"], ["paddingTop", 0], ["paddingRight", 10], ["paddingBottom", 0], ["paddingLeft", 10]])]])], ["item", utsMapOf([[".charts ", utsMapOf([["width", 26], ["height", "100%"]])]])], ["top", utsMapOf([[".charts .item ", utsMapOf([["width", "100%"], ["height", 136], ["borderRadius", 4], ["position", "relative"], ["backgroundColor", "#f8f2e0"]])]])], ["area", utsMapOf([[".charts .item .top ", utsMapOf([["position", "absolute"], ["bottom", 0], ["width", "100%"]])]])], ["animate-height", utsMapOf([[".charts .item .top ", utsMapOf([["transform", "scaleY(0.1)"], ["transitionProperty", "transform"], ["transitionDuration", "1.2s"]])]])], ["animate-ac-height", utsMapOf([[".charts .item .top ", utsMapOf([["transform", "scaleY(1)"], ["transitionProperty", "transform"], ["transitionDuration", "1.2s"]])]])], ["ac-bgc", utsMapOf([[".charts .item .top ", utsMapOf([["backgroundColor", "#a78b73"]])]])], ["bgc", utsMapOf([[".charts .item .top ", utsMapOf([["backgroundColor", "#c8b584"]])]])], ["name", utsMapOf([[".charts .item ", utsMapOf([["fontSize", 10], ["color", "#000000"]])]])], ["result-info", padStyleMapOf(utsMapOf([["marginTop", 30], ["width", "690rpx"], ["borderRadius", 6], ["backgroundColor", "#f8f2e0"], ["paddingTop", 10], ["paddingRight", 10], ["paddingBottom", 10], ["paddingLeft", 10]]))], ["score", utsMapOf([[".result-info .top ", utsMapOf([["width", "124rpx"], ["height", "60rpx"], ["lineHeight", "-60rpx"], ["textAlign", "center"], ["backgroundColor", "#fdfbe3"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#d2bf97"], ["fontSize", "32rpx"], ["color", "#a78b73"]])]])], ["fen", utsMapOf([[".result-info .top .score ", utsMapOf([["fontSize", "20rpx"], ["color", "#a78b73"]])]])], ["plant-info", padStyleMapOf(utsMapOf([["width", "690rpx"], ["backgroundColor", "#f8f2e0"], ["borderRadius", 6], ["paddingTop", 20], ["paddingRight", 20], ["paddingBottom", 20], ["paddingLeft", 20]]))], ["btn", padStyleMapOf(utsMapOf([["width", "496rpx"], ["height", "84rpx"], ["lineHeight", "84rpx"], ["backgroundColor", "#d2bf97"], ["fontSize", "28rpx"], ["color", "#ffffff"]]))], ["btn-is-hover", padStyleMapOf(utsMapOf([["backgroundColor", "#594532"]]))], ["@TRANSITION", utsMapOf([["animate-height", utsMapOf([["property", "transform"], ["duration", "1.2s"]])], ["animate-ac-height", utsMapOf([["property", "transform"], ["duration", "1.2s"]])]])]])]

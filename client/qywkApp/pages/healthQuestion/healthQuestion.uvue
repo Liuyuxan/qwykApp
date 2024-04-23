@@ -1,0 +1,536 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view class="question flex flex-column align-center" style="flex:1">
+	<!-- #endif -->
+		<text class="top-text">体质测试以当下感受为准作答，人的体质有可能会随季节变化。</text>
+		<text class="name mt-2">体质检测</text>
+		<view class="content mt-2">
+			<view class="question-item mt-2" v-for="(item, index) in listData" :key="index">
+				<text class="title">{{ index + 1 + '.' + item.problem }}</text>
+				<view class="options flex mt-2">
+					<text :class="['option-item', optionItem.isSelected==true ? 'active-option': '']" :style="{'width': (100/item.optionBox.length) + '%'}"
+						v-for="(optionItem, indey) in item.optionBox" :key="indey"
+						@click="selectOption(item,optionItem,index,indey)">{{ optionItem.option }}</text>
+				</view>
+			</view>
+
+			<button class="btn" hover-class="btn-is-hover" @click="submit">提交</button>
+		</view>
+		
+		<image class="bg" src="/static/image/bg/bg_3.png" mode="widthFix"></image>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+</template>
+
+<script>
+	import type { IResponse } from "@/common/type/http.uts"
+	type optionBoxType = {
+		option: string
+		isSelected: boolean
+	}
+	type listDataType = {
+		problem : string
+		optionBox : optionBoxType[]
+	}
+	type resType = {
+		total: number
+		recoreds: listDataType[]
+	}
+	export default {
+		data() {
+			return {
+				currentIndex: 0,
+
+				listData: [
+					{
+						problem: "请选择您的性别:",
+						optionBox: [
+							{
+								option: "男",
+								isSelected: false
+							},
+							{
+								option: "女",
+								isSelected: false
+							},
+							
+						]
+					},
+					{
+						problem: "你喜欢安静懒得说话吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你面色晦暗或容易出现褐斑吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你容易有黑眼圈吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你口唇颜色偏暗吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你口唇的颜色比一般人红吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你皮肤或口唇干吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你面部两颧潮红或偏红嘛?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你两颧部有细微红丝吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你腹部肥满松软吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你有额部油脂分泌多的现象吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你面部或鼻部有油腻感或者油亮发光吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你精力充沛吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你容易生痤疮或疮疖吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你的皮肤在不知不觉中会出现青紫瘀斑（皮下出血)吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+				] as listDataType[],
+				
+			};
+		},
+		methods: {
+			selectOption(item : any, optionItem : any, index : number,indey:number) {
+				console.log(item, optionItem, index, indey);
+				for (let i=0; i < this.listData[index].optionBox.length;i++) {
+					this.listData[index].optionBox[i].isSelected = false
+				}
+				this.listData[index].optionBox[indey].isSelected = true
+				// console.log(this.listData[index].optionBox[indey].isSelected)
+			},
+			submit() {
+				uni.showLoading({
+					title: '检测体质中'
+				})
+				setTimeout(() => {
+					uni.hideLoading()
+					uni.navigateTo({
+						url: '/pages/resultHealth/resultHealth'
+					})
+				},2000)
+				
+			}
+		},
+		onLoad() {
+			let token = 'eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzg4NjI1MzI4NywidXNlcl9pZCI6InJvb3QiLCJuaWNrbmFtZSI6ImFkaW1pbiIsInVzZXJfa2V5IjoibG9naW4tdG9rZW5zOnJvb3QifQ.UMwlkYwqvLtV9ZPomVOf2i7aZAxQfnakhMUWAhKRzs60U49ai5ZH8rp8px161KGhc4xfLHX4E53NH37sncKFjQ'
+			// let header = uni.getStorageSync('token')
+			
+			// let JSONHeader : UTSJSONObject = JSON.parseObject(JSON.stringify(token)) as UTSJSONObject
+			// console.log('JSONHeader', JSONHeader);
+			uni.request<IResponse<resType>>({
+				url: `/health/questionnaire/getAllProblem?page=${1}&size=${15}`,
+				header: {
+					Authorization: token
+				},
+				success: (res) => {
+					let r = res.data
+					if(r == null) return
+					console.log('问卷数据', r);
+				},
+				fail: err => {
+					console.log(err);
+				}
+			})
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	$primary-color: #B49B70;
+
+	.question {
+		padding-top: 50px;
+		background-color: $uni-bg-color;
+	}
+	// 背景图-花
+	.bg {
+		position: absolute;
+		z-index: 0;
+		width: 350px;
+		bottom: -10%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	
+	.top-text {
+		width: 100%;
+		height: 18px;
+		font-size: 10px;
+		color: #fff;
+		background-color: $primary-color;
+		text-align: center;
+		line-height: 18px;
+	}
+
+	.name {
+		font-size: 24px;
+		color: $primary-color;
+	}
+
+	.content {
+		box-sizing: border-box;
+		width: 670rpx;
+		position: absolute;
+		z-index: 9;
+		background-color: rgba(255, 255, 255, .3);
+		padding: 50rpx;
+		border-radius: 24px;
+
+		.title {
+			font-size: 16px;
+			color: $primary-color;
+		}
+
+		.options {
+			width: 100%;
+
+			.option-item {
+				height: 64rpx;
+				line-height: 64rpx;
+				text-align: center;
+				border: 1px solid $primary-color;
+				background-color: #f2efeb;
+				font-size: 16px;
+				color: $primary-color;
+			}
+			.active-option {
+				color: #fff;
+				background-color: #b49b70;
+			}
+		}
+		.btn {
+			width: 130px;
+			height: 40px;
+			font-size: 24px;
+			line-height: 40px;
+			background-color: #b49b70;
+			color: #fff;
+			margin: 30px auto;
+		}
+		.btn-is-hover {
+			background-color: #594532;
+		}
+	}
+</style>

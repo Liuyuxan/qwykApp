@@ -1,20 +1,227 @@
 
+	type tagType = { __$originalPosition: UTSSourceMapPosition<"tagType", "components/myPage/myPage.uvue", 84, 7>;
+		title : string
+		count : number
+	}
+	type planType = { __$originalPosition: UTSSourceMapPosition<"planType", "components/myPage/myPage.uvue", 88, 7>;
+		name: string
+		color: string
+	}
 	export default {
 		data() {
 			return {
-				
+				tagBars: [
+					{
+						title: '计划',
+						count: 16
+					},
+					{
+						title: '收藏膳食',
+						count: 0
+					},
+					{
+						title: '好友',
+						count: 8
+					},
+				] as tagType[],
+				planOptions: [
+					{
+						name: '健康（4/5）',
+						color: '#c9b17f'
+					},
+					{
+						name: '运动（3/4）',
+						color: '#e09e10'
+					},
+					{
+						name: '养发（2/6）',
+						color: '#a5d63f'
+					},
+					{
+						name: '健脾（1/3）',
+						color: '#2a82e4'
+					}
+				] as planType[]
 			}
 		},
 		
 		methods: {
-			
-		}
+			out() {
+				uni.clearStorageSync()
+				uni.reLaunch({
+					url: '/pages/login/login'
+				})
+			},
+		},
+		
 	}
 
 
 function GenComponentsMyPageMyPageRender(): any | null {
 const _ctx = this
 const _cache = this.$.renderCache
-  return createElementVNode("view", utsMapOf({ class: "my-page" }), " 我的 ")
+  return createElementVNode("scroll-view", utsMapOf({
+    class: "flex flex-column align-center",
+    direction: "vertical",
+    style: normalizeStyle(utsMapOf({"flex":"1","padding-top":"50px","background-color":"#f2eee9"}))
+  }), [
+    createElementVNode("view", utsMapOf({ class: "top-icons flex justify-end" }), [
+      createElementVNode("image", utsMapOf({
+        class: "top-icon",
+        src: "/static/image/icons/health.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("image", utsMapOf({
+        class: "top-icon",
+        src: "/static/image/icons/message_my.png",
+        mode: "widthFix"
+      })),
+      createElementVNode("image", utsMapOf({
+        onClick: _ctx.out,
+        class: "top-icon",
+        src: "/static/image/icons/setting.png",
+        mode: "widthFix"
+      }), null, 8 /* PROPS */, ["onClick"])
+    ]),
+    createElementVNode("image", utsMapOf({
+      class: "avatar",
+      src: "/static/image/icons/avatar.png",
+      mode: "widthFix"
+    })),
+    createElementVNode("view", utsMapOf({ class: "bg flex flex-column align-center" }), [
+      createElementVNode("text", utsMapOf({
+        style: normalizeStyle(utsMapOf({"margin-top":"60px","font-size":"16px","color":"#594532"}))
+      }), "爱吃汉堡哥的卡皮巴拉", 4 /* STYLE */),
+      createElementVNode("text", utsMapOf({
+        class: "mt-2",
+        style: normalizeStyle(utsMapOf({"font-size":"10px","color":"#8A6913"}))
+      }), "账号：210312", 4 /* STYLE */),
+      createElementVNode("view", utsMapOf({ class: "tag-bar mt-2 flex justify-around" }), [
+        createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.tagBars, (item, index, _, _): VNode => {
+          return createElementVNode("view", utsMapOf({
+            class: "item flex flex-column align-center",
+            key: index
+          }), [
+            createElementVNode("text", utsMapOf({
+              class: "mt-1",
+              style: normalizeStyle(utsMapOf({"font-size":"12px","color":"#808080"}))
+            }), toDisplayString(item.title), 5 /* TEXT, STYLE */),
+            createElementVNode("text", utsMapOf({
+              class: "mt-1",
+              style: normalizeStyle(utsMapOf({"font-size":"12px","color":"#000"}))
+            }), toDisplayString(item.count) + "个", 5 /* TEXT, STYLE */)
+          ])
+        }), 128 /* KEYED_FRAGMENT */)
+      ]),
+      createElementVNode("view", utsMapOf({ class: "report mt-5" }), [
+        createElementVNode("view", utsMapOf({ class: "title flex" }), [
+          createElementVNode("view", utsMapOf({ class: "dot ml-1 mr-1" })),
+          createElementVNode("text", utsMapOf({
+            style: normalizeStyle(utsMapOf({"font-size":"12px"}))
+          }), "统计报告", 4 /* STYLE */)
+        ]),
+        createElementVNode("view", utsMapOf({ class: "center-box flex flex-column align-center justify-center" }), [
+          createElementVNode("view", utsMapOf({ class: "box flex" }), [
+            createElementVNode("view", utsMapOf({ class: "left flex flex-column align-center justify-center" }), [
+              createElementVNode("view", utsMapOf({ class: "inner-left flex flex-column align-center justify-center" }), [
+                createElementVNode("text", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"font-size":"12px","color":"#8A6913"}))
+                }), "连续坚持(天)", 4 /* STYLE */),
+                createElementVNode("text", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"font-size":"30px","color":"#594532"}))
+                }), "07", 4 /* STYLE */),
+                createElementVNode("text", utsMapOf({
+                  style: normalizeStyle(utsMapOf({"font-size":"14px","color":"#8A6913"}))
+                }), "打卡率100%", 4 /* STYLE */)
+              ])
+            ]),
+            createElementVNode("view", utsMapOf({ class: "right" }), [
+              createElementVNode("text", utsMapOf({ class: "title" }), "日期"),
+              createElementVNode("text", utsMapOf({ class: "text" }), "2024.03.22-2024.04.22"),
+              createElementVNode("text", utsMapOf({ class: "title" }), "计划种类"),
+              createElementVNode("text", utsMapOf({ class: "text" }), "健康;运动;养发...")
+            ])
+          ]),
+          createElementVNode("view", utsMapOf({ class: "box flex justify-center align-center" }), [
+            createElementVNode("view", utsMapOf({
+              class: "flex justify-center align-center",
+              style: normalizeStyle(utsMapOf({"width":"50%"}))
+            }), [
+              createElementVNode("image", utsMapOf({
+                style: normalizeStyle(utsMapOf({"width":"70%"})),
+                src: "/static/image/bg/circular_chart.webp",
+                mode: "widthFix"
+              }), null, 4 /* STYLE */)
+            ], 4 /* STYLE */),
+            createElementVNode("view", utsMapOf({
+              style: normalizeStyle(utsMapOf({"width":"50%"}))
+            }), [
+              createElementVNode("view", utsMapOf({
+                class: "flex flex-wrap",
+                style: normalizeStyle(utsMapOf({"width":"100%"}))
+              }), [
+                createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.planOptions, (item, index, _, _): VNode => {
+                  return createElementVNode("view", utsMapOf({
+                    class: "mt-1 flex justify-center align-center option-item",
+                    key: index
+                  }), [
+                    createElementVNode("view", utsMapOf({
+                      style: normalizeStyle([utsMapOf({"width":"6px","height":"6px","border-radius":"6px"}), utsMapOf({'background-color':item.color})])
+                    }), null, 4 /* STYLE */),
+                    createElementVNode("text", utsMapOf({
+                      class: "ml-1",
+                      style: normalizeStyle(utsMapOf({"font-size":"10px"}))
+                    }), toDisplayString(item.name), 5 /* TEXT, STYLE */)
+                  ])
+                }), 128 /* KEYED_FRAGMENT */)
+              ], 4 /* STYLE */),
+              createElementVNode("text", utsMapOf({
+                class: "mt-2",
+                style: normalizeStyle(utsMapOf({"font-size":"12px"}))
+              }), "完成计划数：18", 4 /* STYLE */),
+              createElementVNode("text", utsMapOf({
+                style: normalizeStyle(utsMapOf({"font-size":"12px"}))
+              }), "待完成计划数：10", 4 /* STYLE */)
+            ], 4 /* STYLE */)
+          ]),
+          createElementVNode("text", utsMapOf({
+            class: "mt-2",
+            style: normalizeStyle(utsMapOf({"color":"#8A6913"}))
+          }), "更多打卡记录（生成我的打卡报告）", 4 /* STYLE */)
+        ])
+      ]),
+      createElementVNode("view", utsMapOf({ class: "sign-in-box mt-5" }), [
+        createElementVNode("image", utsMapOf({
+          style: normalizeStyle(utsMapOf({"width":"100%"})),
+          src: "/static/image/bg/bg_4.webp",
+          mode: "widthFix"
+        }), null, 4 /* STYLE */),
+        createElementVNode("view", utsMapOf({ class: "text flex flex-column align-center" }), [
+          createElementVNode("text", utsMapOf({
+            style: normalizeStyle(utsMapOf({"height":"20px","line-height":"20px","font-size":"14px","color":"#fff","font-weight":"700"}))
+          }), [
+            "累计获得",
+            createElementVNode("text", utsMapOf({
+              style: normalizeStyle(utsMapOf({"font-weight":"700","font-size":"16px","color":"#594532"}))
+            }), " 1000 ", 4 /* STYLE */),
+            createElementVNode("text", utsMapOf({
+              style: normalizeStyle(utsMapOf({"font-size":"14px","color":"#fff","font-weight":"700"}))
+            }), "能量", 4 /* STYLE */)
+          ], 4 /* STYLE */),
+          createElementVNode("text", utsMapOf({
+            style: normalizeStyle(utsMapOf({"font-size":"10px","color":"#fff","font-weight":"700"}))
+          }), "快去解锁新的装扮吧！", 4 /* STYLE */)
+        ]),
+        createElementVNode("image", utsMapOf({
+          style: normalizeStyle(utsMapOf({"width":"100%"})),
+          src: "/static/image/bg/bg_5.png",
+          mode: "widthFix"
+        }), null, 4 /* STYLE */),
+        createElementVNode("text", utsMapOf({
+          style: normalizeStyle(utsMapOf({"width":"100%","height":"40px","background-color":"#fffaf5","line-height":"40px","text-align":"center","font-size":"12px","color":"#C9B17F"}))
+        }), "坚持养生打卡，植物和你都会健康成长哦！", 4 /* STYLE */)
+      ])
+    ])
+  ], 4 /* STYLE */)
 }
-const GenComponentsMyPageMyPageStyles = []
+const GenComponentsMyPageMyPageStyles = [utsMapOf([["avatar", padStyleMapOf(utsMapOf([["width", 96], ["borderRadius", 96], ["marginBottom", -48], ["zIndex", 99]]))], ["top-icons", padStyleMapOf(utsMapOf([["width", "100%"]]))], ["top-icon", utsMapOf([[".top-icons ", utsMapOf([["width", 24], ["marginRight", 18]])]])], ["bg", padStyleMapOf(utsMapOf([["width", "100%"], ["backgroundColor", "#fff5e0"], ["borderRadius", 30], ["paddingBottom", 70]]))], ["tag-bar", utsMapOf([[".bg ", utsMapOf([["width", "90%"], ["borderRadius", 16], ["backgroundColor", "#fffaf5"]])]])], ["item", utsMapOf([[".bg .tag-bar ", utsMapOf([["width", "33%"]])]])], ["report", utsMapOf([[".bg ", utsMapOf([["width", "90%"], ["borderRadius", 16], ["backgroundColor", "#fffaf5"], ["paddingTop", 10], ["paddingRight", 10], ["paddingBottom", 10], ["paddingLeft", 10]])]])], ["dot", utsMapOf([[".bg .report .title ", utsMapOf([["width", 10], ["height", 10], ["borderRadius", 10], ["backgroundColor", "#DEB867"]])]])], ["box", utsMapOf([[".bg .report ", utsMapOf([["display", "flex"], ["flexDirection", "row"], ["width", 300], ["height", 150], ["paddingBottom", 16], ["borderBottomWidth", 1], ["borderBottomStyle", "dashed"], ["borderBottomColor", "#594532"]])]])], ["left", utsMapOf([[".bg .report ", utsMapOf([["width", "50%"]])]])], ["inner-left", utsMapOf([[".bg .report .left ", utsMapOf([["width", 100], ["height", 100], ["marginTop", 20], ["backgroundColor", "#fcf6e6"], ["borderRadius", 12]])]])], ["right", utsMapOf([[".bg .report ", utsMapOf([["width", "50%"], ["height", "100%"], ["display", "flex"], ["justifyContent", "space-between"]])]])], ["title", utsMapOf([[".bg .report .right ", utsMapOf([["fontSize", 14], ["color", "#594532"]])]])], ["text", utsMapOf([[".bg .report .right ", utsMapOf([["width", 158], ["paddingTop", 4], ["paddingRight", 12], ["paddingBottom", 4], ["paddingLeft", 12], ["backgroundColor", "#fcf6e6"], ["borderRadius", 8], ["fontSize", 12], ["color", "#594532"]])], [".bg .sign-in-box ", utsMapOf([["top", "50%"], ["right", "5%"], ["position", "absolute"]])]])], ["sign-in-box", utsMapOf([[".bg ", utsMapOf([["width", "90%"], ["borderRadius", 16], ["position", "relative"]])]])]])]

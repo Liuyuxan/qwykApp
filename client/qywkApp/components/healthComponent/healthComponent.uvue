@@ -1,6 +1,6 @@
 <template>
 	<scroll-view direction="vertical" class="health">
-		<ux-button type="info" text="默认" :mr="10"></ux-button>
+		
 		<image class="title fixed" style="top: 5%;left: 5%;" src="/static/image/health/title.png" mode="widthFix"></image>
 		<view class="link fixed" style="top: -20%;right: -22%;" @click="clickOption">
 			<image style="width: 460rpx;" class="img" src="/static/image/health/prescription.png" mode="widthFix"></image>

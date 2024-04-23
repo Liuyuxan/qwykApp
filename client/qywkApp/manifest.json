@@ -36,6 +36,9 @@
                     "xhdpi" : "unpackage/res/icons/96x96.png",
                     "xxhdpi" : "unpackage/res/icons/144x144.png",
                     "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png"
                 }
             },
             "splashScreens" : {

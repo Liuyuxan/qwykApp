@@ -12,6 +12,12 @@
 function GenComponentsCommunityCommunityRender(): any | null {
 const _ctx = this
 const _cache = this.$.renderCache
-  return createElementVNode("view", utsMapOf({ class: "community" }), " 社区 ")
+  return createElementVNode("view", utsMapOf({ class: "community" }), [
+    createElementVNode("image", utsMapOf({
+      style: normalizeStyle(utsMapOf({"width":"100%"})),
+      src: "/static/image/bg/bg_community.webp",
+      mode: "widthFix"
+    }), null, 4 /* STYLE */)
+  ])
 }
 const GenComponentsCommunityCommunityStyles = []

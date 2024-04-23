@@ -4,6 +4,7 @@
 	export default {
 		data() {
 			return {
+				acAnimate: '',  // 控制中间tab-icon动画
 				tabIndex: 2,
 				centerIndex: true,//  处于中间页面
 				direction: 'right',
@@ -49,13 +50,21 @@
 			changeTab(index: number) {
 				if(index === this.tabIndex) return
 				this.tabIndex = index
-				
+				if(index !== 2) {
+					this.$nextTick(() => {
+						this.acAnimate = ''
+					})
+				} else {
+					this.$nextTick(() => {
+						this.acAnimate = 'animate-ac'
+					})
+				}
 			},
 			handlerTouchstart() {
 				this.loop = setTimeout(() => {
 					this.loop = 0
 					// 执行长按要执行的内容
-					console.log('长按', " at pages/tabbar/tabbar.uvue:122");
+					console.log('长按', " at pages/tabbar/tabbar.uvue:123");
 					
 					this.clickShow = false
 					this.longClickShow = true
@@ -72,22 +81,22 @@
 				clearTimeout(this.loop)
 				if (this.loop !== 0) {
 					// 单击操作
-					console.log('单击', " at pages/tabbar/tabbar.uvue:139");
+					console.log('单击', " at pages/tabbar/tabbar.uvue:140");
 					if(this.centerIndex === true) return
 					
 					this.centerIndex = true
 					this.tabIndex = 2
-					console.log(this.tabIndex, this.centerIndex, " at pages/tabbar/tabbar.uvue:144");
+					console.log(this.tabIndex, this.centerIndex, " at pages/tabbar/tabbar.uvue:145");
 					
 					this.clickShow = true
 					this.longClickShow = false
 				}
-			},
-			tabChange(index : number) {
-				this.centerIndex = false
-				this.tabIndex = index
-				console.log(index, this.tabIndex, " at pages/tabbar/tabbar.uvue:153");
 			}
+		},
+		mounted() {
+			this.$nextTick(() => {
+				this.acAnimate = 'animate-ac'
+			})
 		}
 	}
 
@@ -112,27 +121,27 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
     withDirectives(createElementVNode("view", null, [
       createVNode(_component_showWindow)
     ], 512 /* NEED_PATCH */), [
-      [vShow, _ctx.tabIndex === 0]
+      [vShow, _ctx.tabIndex == 0]
     ]),
     withDirectives(createElementVNode("view", null, [
       createVNode(_component_community)
     ], 512 /* NEED_PATCH */), [
-      [vShow, _ctx.tabIndex === 1]
+      [vShow, _ctx.tabIndex == 1]
     ]),
     withDirectives(createElementVNode("view", null, [
       createVNode(_component_home)
     ], 512 /* NEED_PATCH */), [
-      [vShow, _ctx.tabIndex === 2]
+      [vShow, _ctx.tabIndex == 2]
     ]),
     withDirectives(createElementVNode("view", null, [
       createVNode(_component_healthComponent)
     ], 512 /* NEED_PATCH */), [
-      [vShow, _ctx.tabIndex === 3]
+      [vShow, _ctx.tabIndex == 3]
     ]),
     withDirectives(createElementVNode("view", null, [
       createVNode(_component_myPage)
     ], 512 /* NEED_PATCH */), [
-      [vShow, _ctx.tabIndex === 4]
+      [vShow, _ctx.tabIndex == 4]
     ]),
     createElementVNode("view", utsMapOf({ class: "tabbar" }), [
       createElementVNode("view", utsMapOf({
@@ -162,8 +171,10 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
         }), toDisplayString(_ctx.tabs[1].name), 3 /* TEXT, CLASS */)
       ], 8 /* PROPS */, ["onClick"]),
       createElementVNode("view", utsMapOf({
-        class: "tab-item",
-        onClick: () => {_ctx.changeTab(2)},
+        class: normalizeClass(["tab-item animate-base", [_ctx.acAnimate]]),
+        onTouchstart: _ctx.handlerTouchstart,
+        onTouchmove: _ctx.handlerTouchmove,
+        onTouchend: _ctx.handlerTouchend,
         style: normalizeStyle([_ctx.tabIndex == 2 ? 'display: visible;' : 'display: none;'])
       }), [
         createElementVNode("view", utsMapOf({ class: "bg-img" }), [
@@ -173,7 +184,7 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
             mode: "widthFix"
           }), null, 8 /* PROPS */, ["src"])
         ])
-      ], 12 /* STYLE, PROPS */, ["onClick"]),
+      ], 46 /* CLASS, STYLE, PROPS, NEED_HYDRATION */, ["onTouchstart", "onTouchmove", "onTouchend"]),
       _ctx.tabIndex !== 2
         ? createElementVNode("view", utsMapOf({
             key: 0,
@@ -219,4 +230,4 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
     ])
   ], 4 /* STYLE */)
 }
-const GenPagesTabbarTabbarStyles = [utsMapOf([["center-img", padStyleMapOf(utsMapOf([["width", 40]]))], ["tabbar", padStyleMapOf(utsMapOf([["position", "fixed"], ["zIndex", 1000], ["bottom", 0], ["left", 0], ["right", 0], ["backgroundColor", "#ffffff"], ["width", "100%"], ["height", "7%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "row"], ["justifyContent", "space-around"], ["alignItems", "center"]]))], ["tab-item", utsMapOf([[".tabbar ", utsMapOf([["width", "20%"], ["height", "100%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"], ["transitionDuration", "2s"], ["transitionTimingFunction", "ease"]])]])], ["bg-img", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 70], ["height", 70], ["borderRadius", 70], ["backgroundColor", "#f2eee9"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["position", "absolute"], ["bottom", 16]])]])], ["center-icon", utsMapOf([[".tabbar .tab-item .bg-img ", utsMapOf([["width", 52]])]])], ["tab-icon", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 24]])]])], ["tab-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["fontSize", 12], ["color", "#808080"]])]])], ["active-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["color", "#937152"]])]])], ["@TRANSITION", utsMapOf([["tab-item", utsMapOf([["duration", "2s"], ["timingFunction", "ease"]])]])]])]
+const GenPagesTabbarTabbarStyles = [utsMapOf([["center-img", padStyleMapOf(utsMapOf([["width", 40]]))], ["animate-base", padStyleMapOf(utsMapOf([["transform", "scale(0.1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.2s"]]))], ["animate-ac", padStyleMapOf(utsMapOf([["transform", "scale(1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.2s"]]))], ["tabbar", padStyleMapOf(utsMapOf([["position", "fixed"], ["zIndex", 1000], ["bottom", 0], ["left", 0], ["right", 0], ["backgroundColor", "#ffffff"], ["width", "100%"], ["height", "7%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "row"], ["justifyContent", "space-around"], ["alignItems", "center"]]))], ["tab-item", utsMapOf([[".tabbar ", utsMapOf([["width", "20%"], ["height", "100%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"]])]])], ["bg-img", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 70], ["height", 70], ["borderRadius", 70], ["backgroundColor", "#f2eee9"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["position", "absolute"], ["bottom", 16]])]])], ["center-icon", utsMapOf([[".tabbar .tab-item .bg-img ", utsMapOf([["width", 52]])]])], ["tab-icon", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 24]])]])], ["tab-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["marginTop", 4], ["fontSize", 12], ["color", "#808080"]])]])], ["active-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["color", "#937152"]])]])], ["@TRANSITION", utsMapOf([["animate-base", utsMapOf([["property", "transform"], ["duration", "0.2s"]])], ["animate-ac", utsMapOf([["property", "transform"], ["duration", "0.2s"]])]])]])]

@@ -24,3 +24,6 @@ export type TloginInfo = {
 export type IToken = {
 	token: string
 }
+export type ICode = {
+	code: string
+}

@@ -213,9 +213,8 @@
 				] as gandeplantType[]
 			}
 		},
-		onLoad() {
-			
-			
+		mounted() {
+			console.log('首页333进入');
 		},
 		methods: {
 			// 功能栏跳转
@@ -230,11 +229,10 @@
 
 <style lang="scss" scoped>
 	.content {
-		padding-bottom: 150rpx;
+		padding-bottom: 150px;
 	}
 	
 	.bg-img {
-		// transform: scale(1.2);
 		width: 750rpx;
 		height: 2600rpx;
 		position: absolute;
@@ -296,7 +294,7 @@
 		position: absolute;
 		z-index: 999;
 		left: 2%;
-		top: 34%;
+		top: 32%;
 		
 		display: flex;
 		flex-direction: column;
@@ -345,6 +343,7 @@
 		width: 560rpx;
 		z-index: 99;
 		bottom: 48%;
+		// bottom: 52%;
 		.expression {
 			width: 120rpx;
 			position: absolute;

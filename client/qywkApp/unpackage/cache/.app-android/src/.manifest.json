@@ -1,0 +1,68 @@
+{
+  "version": "1",
+  "env": {
+    "compiler_version": "4.13.2024042321-alpha"
+  },
+  "files": {
+    "pages/resultHealth/resultHealth.kt": {
+      "md5": "98a64bc8f9c5317fc4b89487855d72ceef428829",
+      "class": "GenPagesResultHealthResultHealth"
+    },
+    "index.kt": {
+      "md5": "437a8e31c88672ddd15d1ca662df26280812ae8f",
+      "class": ""
+    },
+    "pages/drawPlan/drawPlan.kt": {
+      "class": "GenPagesDrawPlanDrawPlan",
+      "md5": "f067fbd0a0e6343480199933a8e13bd5d3e38f0b"
+    },
+    "pages/register/register.kt": {
+      "md5": "97fae667d5ed03f7d7cd2ec2047177fa2904aa7a",
+      "class": "GenPagesRegisterRegister"
+    },
+    "components/showWindow/showWindow.kt": {
+      "md5": "2342384786d2bf51b61929140ab7424e924c8587",
+      "class": "GenComponentsShowWindowShowWindow"
+    },
+    "pages/login/login.kt": {
+      "class": "GenPagesLoginLogin",
+      "md5": "eccd28276965089f1dd425feacfc3eba58fb3b47"
+    },
+    "pages/plantDetail/plantDetail.kt": {
+      "class": "GenPagesPlantDetailPlantDetail",
+      "md5": "84e89a129c05a9c6ac0447074a17d9e9837ec178"
+    },
+    "pages/healthDetail/healthDetail.kt": {
+      "class": "GenPagesHealthDetailHealthDetail",
+      "md5": "daa7313e7ea43af86edc616644bbe7c6188d753b"
+    },
+    "pages/healthQuestion/healthQuestion.kt": {
+      "md5": "9c31ef7e1a6ec8caf5f7d42f5cd821aba24fc559",
+      "class": "GenPagesHealthQuestionHealthQuestion"
+    },
+    "components/healthComponent/healthComponent.kt": {
+      "md5": "46838043f7e80cde764d4b886f4205485e3e7120",
+      "class": "GenComponentsHealthComponentHealthComponent"
+    },
+    "components/home/home.kt": {
+      "md5": "7e8ea8a52e69c0ba984f6dbd28c7f7bbca30c13b",
+      "class": "GenComponentsHomeHome"
+    },
+    "components/community/community.kt": {
+      "md5": "9432ed258a48dcfbc05012df6a734a46feeaab04",
+      "class": "GenComponentsCommunityCommunity"
+    },
+    "pages/validateCode/validateCode.kt": {
+      "class": "GenPagesValidateCodeValidateCode",
+      "md5": "00bae72b1249abd6af5eae98a053c6c9d6708721"
+    },
+    "components/myPage/myPage.kt": {
+      "class": "GenComponentsMyPageMyPage",
+      "md5": "d751e541a7097bc7c65b2c87f031b1a1c6e2435a"
+    },
+    "pages/tabbar/tabbar.kt": {
+      "md5": "7f1d5b5752b0905fc3dcc0feea53f53a1dff110b",
+      "class": "GenPagesTabbarTabbar"
+    }
+  }
+}

@@ -1,0 +1,343 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view class="flex flex-column align-center" direction="vertical" style="flex:1;background-color: #f2eee9;padding-top: 50px;">
+	<!-- #endif -->
+		<text class="title">请选择本周打卡计划</text>
+		<text class="sub-title mt-3">-------------------------  根据体质检测结果智能推荐  -------------------------</text>
+		<button class="select-plan-btn mt-3"
+		 style="color:#594532;backgroundColor:#f2eee9;borderColor:#594532;border-radius: 8px;width: 86%;height: 70rpx;line-height: 70rpx;"
+		 hover-class="btn-is-hover">选择推荐计划</button>
+		<text class="sub-title mt-3">------------------------------  创建自定义计划  ------------------------------</text>
+		<view class="menu mt-3 flex">
+			<view class="left" style="width: 100px;height: 100%;" >
+				<view class="flex align-center option" :class="[index == currentOptionIndex ? 'active-option' : '']" 
+					v-for="(item,index) in menuOptions" :key="index"
+					@click="clickMenuOptions(index)"
+					>
+					<view class="line" v-show="index == currentOptionIndex"></view>
+					<text :class="['option-text', index == currentOptionIndex ? 'ac-text' : '']">{{ item }}</text>
+				</view>
+				
+			</view>
+			<view class="right flex flex-column align-center" style="flex: 1">
+				<view class="plan flex align-center mt-3" v-for="(item,index) in plans" :key="index">
+					<view class="line mr-3" :style="{'background-color': (colors[index%9])}"></view>
+					<view class="texts">
+						<text class="text" style="font-size: 24rpx;">{{ item.name }}</text>
+						<text class="text" style="font-size: 20rpx;">{{ item.punchCycle }}</text>
+					</view>
+					<view :class="[item.isSelected ? 'select' : 'unselect']"
+								:style="{'backgroundColor': (item.isSelected ? colors[index%9] : '#f2eee9')}"
+								@click="select(index)"
+					></view>
+				</view>
+			</view>
+		</view>
+		<button class="create-btn" hover-class="create-btn-is-hover" @click="createPlan">创建</button>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+</template>
+
+<script>
+	type planType = {
+		id: string,
+		plantId: string | null,
+		name: string,
+		subarea: string,
+		punchCycle: string,
+		punchSize: number,
+		remindTime: string,
+		remindMusic: string,
+		automatic: string,
+		startTime: string | null,
+		endTime: string | null,
+		isSelected: boolean
+	}
+	export default {
+		data() {
+			return {
+				currentOptionIndex: 0 as number,
+				menuOptions: ["生活","健康","运动"] as string[],
+				colors: [
+					"#3b361a",
+					"#a27046",
+					"#46a398",
+					"#4679a3",
+					"#a34646",
+					"#83a346",
+					"#a39746",
+					"#a37246",
+					"#46a353"
+				],
+				plans: [
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "泡脚",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "艾灸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "拔火罐",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "刮痧",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "针灸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "中医熏蒸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "推拿",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "打坐",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "深呼吸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "冥想",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					}
+				] as planType[]
+			};
+		},
+		methods: {
+			clickMenuOptions(index:number) {
+				this.currentOptionIndex = index
+			},
+			select(index:number) {
+				this.plans[index].isSelected = !this.plans[index].isSelected
+			},
+			createPlan() {
+				uni.showLoading({
+					title: '创建养生计划中'
+				})
+				setTimeout(() => {
+					uni.hideLoading()
+					uni.showToast({
+						title: '创建成功，开始养生叭！'
+					})
+					uni.navigateTo({
+						url: '/pages/tabbar/tabbar'
+					})
+				},1000)
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+$primaryColor: #594532;
+
+.title {
+	font-size: 16px;
+	color: $primaryColor;
+	width: 100%;
+	padding-left: 40rpx;
+	padding-bottom: 20rpx;
+	border-bottom:2px solid $primaryColor;
+}
+.sub-title {
+	font-size: 10px;
+	color: $primaryColor;
+}
+.btn-is-hover {
+	background-color: $primaryColor;
+	color: #fff;
+}
+.create-btn {
+	position: absolute;
+	bottom: -3%;
+	width: 80%;
+	height: 648rpx;
+	height: 100rpx;
+	border-radius: 16rpx;
+	line-height: 100rpx;
+	background-color: #b19983;
+	color: #fff;
+}
+.create-btn-is-hover {
+	background-color: #594532;
+}
+// 菜单项
+.menu {
+	width: 100%;
+	height: 100%;
+	.left {
+		background-color: #eee1ce;
+		.option {
+			width: 100%;
+			height: 128rpx;
+			display: flex;
+			flex-direction: row;
+			
+			.line {
+				width: 	12rpx;
+				height: 80rpx;
+				border-radius: 12rpx;
+				background-color: #faf4f0;
+			}
+			.option-text {
+				width: 100%;
+				height: 100%;
+				line-height: 128rpx;
+				text-align: center;
+				font-size: 16px;
+				color: $primaryColor;
+			}
+			.ac-text {
+				margin-left: -6px;
+			}
+		}
+		.active-option {
+			background-color: #b19983;
+		}
+	}
+	.right {
+		background-color: #e3cead;
+		.plan {
+			width: 480rpx;
+			height: 96rpx;
+			background-color: #f2eee9;
+			border-radius: 16rpx;
+			
+			.line {
+				width: 	10rpx;
+				height: 48rpx;
+				border-radius: 12rpx;
+				// background-color: #3b361a;
+				.text {
+					color: $primaryColor;
+				}
+			}
+			.texts {
+				width: 380rpx;
+			}
+			.select {
+				width: 32rpx;
+				height: 32rpx;
+				border-radius: 32rpx;
+			}
+			.unselect {
+				width: 32rpx;
+				height: 32rpx;
+				border-radius: 32rpx;
+				border: 1px solid #b19983;
+			}
+		}
+	}
+}
+</style>

@@ -12,7 +12,7 @@
 				style="width: 600rpx;height: 76rpx;border-radius: 32rpx;color: #fff;line-height: 76rpx;text-align: center;background-color: #b19983;">登录</button>
 			<view class="sub space flex justify-between">
 				<view class="forget"><text class="text">忘记密码</text></view>
-				<view class="sign-up"><text class="text">手机注册</text></view>
+				<view class="sign-up"><text class="text" @click="register">注册账号</text></view>
 			</view>
 			<view class="icons flex justify-around">
 				<image class="img-icon" src="../../static/image/login/QQ.png" mode="widthFix"></image>
@@ -28,9 +28,6 @@
 	import type { IResponse } from "@/common/type/http.uts"
 	import { BASE_URL } from "@/config/index.uts"
 	
-	// import Http from "@/utils/http"
-	// import utils from "@/utils/utils.uts"
-	
 	export default {
 		data() {
 			return {
@@ -41,11 +38,17 @@
 			}
 		},
 		methods: {
+			register() {
+				uni.navigateTo({
+					url: '/pages/validateCode/validateCode'
+				})
+			},
 			clickLogin() {
 				if((this.loginInfo.userId.length <= 0) || (this.loginInfo.password.length <= 0)) return 
-				
+				uni.showLoading({
+					title: '登录中'
+				})
 				console.log(this.loginInfo);
-				// Http.post('/qywk/login/normal', this.loginInfo)
 				uni.request<IResponse<IToken>>({
 					url: BASE_URL + '/user/login/normal',
 					method: 'POST',
@@ -53,7 +56,7 @@
 						userId: this.loginInfo.userId,
 						password: this.loginInfo.password
 					},
-					dataType: 'json',
+					
 					success: (res) => {
 						let r = res.data
 						console.log('登录返回信息', r);
@@ -77,6 +80,9 @@
 							title: "账号或密码错误",
 							icon: "none"
 						})
+					},
+					complete:() => {
+						uni.hideLoading()
 					}
 				})
 

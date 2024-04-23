@@ -3,19 +3,19 @@
 	<scroll-view style="flex:1">
 	<!-- #endif -->
 	
-	<view v-show="tabIndex === 0">
+	<view v-show="tabIndex == 0">
 		<showWindow></showWindow>
 	</view>
-	<view v-show="tabIndex === 1">
+	<view v-show="tabIndex == 1">
 		<community></community>
 	</view>	
-	<view v-show="tabIndex === 2">
+	<view v-show="tabIndex == 2">
 		<home></home>
 	</view>	
-	<view v-show="tabIndex === 3">
+	<view v-show="tabIndex == 3">
 		<healthComponent></healthComponent>
 	</view>	
-	<view v-show="tabIndex === 4">
+	<view v-show="tabIndex == 4">
 		<myPage></myPage>
 	</view>
 	
@@ -29,7 +29,7 @@
 				<text :class="['tab-text', 1 === tabIndex ? 'active-text' : '']">{{ tabs[1].name }}</text>
 			</view>
 			
-			<view class="tab-item" @click="changeTab(2)" :style="[tabIndex == 2 ? 'display: visible;' : 'display: none;']">
+			<view class="tab-item animate-base" :class="[acAnimate]" @touchstart="handlerTouchstart" @touchmove="handlerTouchmove" @touchend="handlerTouchend" :style="[tabIndex == 2 ? 'display: visible;' : 'display: none;']">
 				<view class="bg-img">
 					<image class="center-icon" :src="tabs[2].selectedIcon" mode="widthFix"></image>
 				</view>
@@ -49,14 +49,6 @@
 			</view>
 		</view>
 		
-		<!-- <ux-tabbar type="special" :index="tabIndex" anim="scroll" :iconSize="30" selectedColor="#965D30" unselectedColor="#808080"
-			:data="tabs" :corner="20" :border="false" @change="tabChange">
-			<template v-slot:center>
-				<image @touchstart="handlerTouchstart" @touchmove="handlerTouchmove" @touchend="handlerTouchend"
-					class="center-img" :src="[centerIndex === true ? '/static/image/tabBar/选择3.png' : '/static/image/tabBar/未选择3.png']" mode="widthFix"></image>
-			</template>
-		</ux-tabbar> -->
-		
 	<!-- #ifdef APP -->
 	</scroll-view>
 	<!-- #endif -->
@@ -68,6 +60,7 @@
 	export default {
 		data() {
 			return {
+				acAnimate: '',  // 控制中间tab-icon动画
 				tabIndex: 2,
 				centerIndex: true,//  处于中间页面
 				direction: 'right',
@@ -113,7 +106,15 @@
 			changeTab(index: number) {
 				if(index === this.tabIndex) return
 				this.tabIndex = index
-				
+				if(index !== 2) {
+					this.$nextTick(() => {
+						this.acAnimate = ''
+					})
+				} else {
+					this.$nextTick(() => {
+						this.acAnimate = 'animate-ac'
+					})
+				}
 			},
 			handlerTouchstart() {
 				this.loop = setTimeout(() => {
@@ -146,12 +147,12 @@
 					this.clickShow = true
 					this.longClickShow = false
 				}
-			},
-			tabChange(index : number) {
-				this.centerIndex = false
-				this.tabIndex = index
-				console.log(index, this.tabIndex);
 			}
+		},
+		mounted() {
+			this.$nextTick(() => {
+				this.acAnimate = 'animate-ac'
+			})
 		}
 	}
 </script>
@@ -159,6 +160,15 @@
 <style lang="scss" scoped>
 	.center-img {
 		width: 40px;
+	}
+	.animate-base {
+		transform: scale(0.1);
+		transition: transform .2s;
+	}
+	
+	.animate-ac {
+		transform: scale(1);
+		transition: transform .2s;
 	}
 	.tabbar {
 		position: fixed;
@@ -184,7 +194,7 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			transition: all 2s ease;
+			
 			// 中间的特殊样式
 			.bg-img {
 				width: 70px;
@@ -209,6 +219,7 @@
 				width: 24px;
 			}
 			.tab-text {
+				margin-top: 4px;
 				font-size: 12px;
 				color: #808080;
 			}

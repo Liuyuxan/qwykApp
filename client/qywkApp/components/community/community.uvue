@@ -1,6 +1,6 @@
 <template>
 	<view class="community">
-		社区
+		<image style="width: 100%;" src="/static/image/bg/bg_community.webp" mode="widthFix"></image>
 		
 	</view>
 </template>
