@@ -18,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("questionnaire_result")
 public class QuestionnaireResultDTO {
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     @TableField("user_id") // 用户id

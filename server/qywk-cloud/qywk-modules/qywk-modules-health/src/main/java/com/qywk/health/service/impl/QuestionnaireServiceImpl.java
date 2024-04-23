@@ -67,14 +67,32 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
             String res = chatAiClient.inquiry(prefix.append(problem).toString());
 
             String[] score = res.split(";");
+            List<String> constitution = new ArrayList<>();
+
             int sum = 800;
+            int max = 0;
+            int idx = 0;
             for(int i = 0; i < score.length; i++){
-                indicators[i].setScore(Integer. parseInt(score[i]));
+                int t = Integer. parseInt(score[i]);
+                indicators[i].setScore(t);
+                if(t >= 50) constitution.add(indicators[i].getInfo() + "质");
                 sum -= indicators[i].getScore();
+                if(max < t){
+                    max = t;
+                    idx = i;
+                }
             }
-            String suggest = chatAiClient.inquiry( problem + "请给出20~30个字的简单的健康建议");
+
+            if(constitution.isEmpty()){
+                constitution.add(indicators[idx].getInfo() + "质");
+            }else {
+                constitution.remove(indicators[idx].getInfo() + "质");
+                constitution.add(0, indicators[idx].getInfo() + "质");
+            }
+            String compareInfo = chatAiClient.inquiry(problem + ";更具给出的回答给出大概的结论， 严格返回给我的信息只要这几个字，例子如下：{你的体质在xx-xx岁的x性中，优于xx%的人}，只修改xx的内容");
+            String suggest = chatAiClient.inquiry(  "请对 " + indicators[idx].getInfo() + "体质给出20~30个字的简单的解释与科普");
             // 初始化健康指标对象
-            HealthIndicator healthIndicator = new HealthIndicator(indicators, sum / 8, suggest);
+            HealthIndicator healthIndicator = new HealthIndicator(indicators, constitution, sum / 8, compareInfo, suggest);
             QuestionnaireResultDTO result = new QuestionnaireResultDTO();
             result.setUserId(userId);
             result.setJson(JSONObject.toJSONString(healthIndicator));

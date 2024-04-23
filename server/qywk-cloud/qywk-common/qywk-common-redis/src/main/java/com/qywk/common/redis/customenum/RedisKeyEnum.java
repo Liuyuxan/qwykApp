@@ -22,6 +22,9 @@ public enum RedisKeyEnum {
     PLANT_INFO("plant-info:", "植物信息缓存"),
     PLANT_USER("plant-user", "用户与拥有的植物关联表缓存"),
 
+    // 计划相关
+    PLAN_PUNCH("plan_punch:", "计划打卡缓存"),
+
     // 以下是社区功能的redis-key
     COMMUNITY_COMMENT("community_comment:", "社区评论信息"),
     COMMUNITY_UPVOTE("community_upvote:", "点赞信息"),

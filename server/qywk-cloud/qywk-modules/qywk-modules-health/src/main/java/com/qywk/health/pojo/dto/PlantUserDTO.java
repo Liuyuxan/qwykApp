@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @TableName("plant_user")
 public class PlantUserDTO {
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     @TableField("user_id") // 用户id

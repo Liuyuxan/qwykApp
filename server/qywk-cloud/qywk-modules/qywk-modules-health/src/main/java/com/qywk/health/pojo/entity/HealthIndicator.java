@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,10 +19,22 @@ public class HealthIndicator{
      * 指标对象
      */
     private Indicator[] indicators;
+
+    /**
+     * 体质
+     */
+    private List<String> constitution;
+
     /**
      * 平均分
      */
     private int avg;
+
+    /**
+     * Compare information
+     */
+    private String compareInfo;
+
     /**
      * 建议
      */
