@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  * @author qlh
@@ -22,4 +23,6 @@ public class PlanAO {
     private String remindTime;
     private String remindMusic;
     private String automatic;
+    private String startTime;
+    private String endTime;
 }

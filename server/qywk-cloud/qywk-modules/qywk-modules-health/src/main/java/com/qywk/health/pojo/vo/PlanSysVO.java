@@ -1,4 +1,5 @@
 package com.qywk.health.pojo.vo;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -20,9 +21,17 @@ public class PlanSysVO {
 
     private String punchCycle;
 
+    private String punchCycleInfo;
+
+    private Integer punchSize;
+
     private String remindTime;
 
     private String remindMusic;
 
     private String automatic;
+
+    private String startTime;
+
+    private String endTime;
 }

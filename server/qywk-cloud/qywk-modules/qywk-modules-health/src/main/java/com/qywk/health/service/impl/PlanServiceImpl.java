@@ -13,6 +13,7 @@ import com.qywk.health.pojo.ao.PlanAO;
 import com.qywk.health.pojo.ao.PlanSysAO;
 import com.qywk.health.pojo.dto.PlanSysDTO;
 import com.qywk.health.pojo.dto.PlanUserDTO;
+import com.qywk.health.pojo.vo.PlanPunchStateVO;
 import com.qywk.health.pojo.vo.PlanSysVO;
 import com.qywk.health.service.PlanService;
 import org.springframework.beans.BeanUtils;
@@ -71,6 +72,7 @@ public class PlanServiceImpl implements PlanService {
         List<PlanSysVO> records = new ArrayList<>();
         for(PlanSysDTO dto : pageUtils.getRecords()){
             PlanSysVO vo = new PlanSysVO();
+            vo.setPunchCycleInfo(createPunchCycleInfo(dto.getPunchCycle()));
             BeanUtils.copyProperties(dto, vo);
             records.add(vo);
         }
@@ -135,13 +137,93 @@ public class PlanServiceImpl implements PlanService {
         // 输出秒差值
         long secondsDifference = duration.getSeconds();
         redisService.setCacheObject(key, punchSize + 1,  secondsDifference, TimeUnit.SECONDS);
-        return null;
+        return ResultBody.ok().message("打卡成功");
+    }
+
+    // todo 后续优化了，时间来不及了了
+    @Override
+    public ResultBody queryPunchState(String userId, String subarea, Integer page, Integer size) {
+        List<PlanUserDTO> list = null;
+        if(subarea.equals("all") || subarea.equals("finish")){
+            list = planUserMapper.selectList(
+                    new QueryWrapper<PlanUserDTO>()
+                    .eq("enable", EnableConstants.ACTIVATION)
+                    .eq("user_id", userId)
+            );
+        }else {
+            list = planUserMapper.selectList(
+                    new QueryWrapper<PlanUserDTO>()
+                            .eq("enable", EnableConstants.ACTIVATION)
+                            .eq("user_id", userId)
+                            .eq("subarea", subarea)
+            );
+        }
+        if(list == null || list.isEmpty()){
+            return ResultBody.error().message("暂无计划");
+        }
+
+        if(subarea.equals("finish")){
+            List<PlanPunchStateVO> finish = new ArrayList<>();
+            for(PlanUserDTO dto : list){
+                if (isFinishPunch(userId, dto.getPlanId())){
+                    PlanPunchStateVO vo = new PlanPunchStateVO();
+                    BeanUtils.copyProperties(dto, vo);
+                    vo.setPunchCycleInfo(createPunchCycleInfo(dto.getPunchCycle()));
+                    vo.setFinish(true);
+                    finish.add(vo);
+                }
+            }
+            PageUtils<PlanPunchStateVO> pageUtils = new PageUtils<>(finish, page, size);
+            return ResultBody.ok().data("total", pageUtils.getTotal()).data("records", pageUtils.getRecords());
+        }else {
+            List<PlanPunchStateVO> voList = new ArrayList<>();
+            for(PlanUserDTO dto : list){
+                PlanPunchStateVO vo = new PlanPunchStateVO();
+                BeanUtils.copyProperties(dto, vo);
+                vo.setPunchCycleInfo(createPunchCycleInfo(dto.getPunchCycle()));
+                vo.setFinish(isFinishPunch(userId, dto.getPlanId()));
+                voList.add(vo);
+            }
+            PageUtils<PlanPunchStateVO> pageUtils = new PageUtils<>(voList, page, size);
+            return ResultBody.ok().data("total", pageUtils.getTotal()).data("records", pageUtils.getRecords());
+        }
     }
 
     @Override
-    public ResultBody queryPunchState(String userId, String subarea, Integer page, Integer size) {
+    public ResultBody queryUserSubarea(String userId, Integer page, Integer size) {
+        List<PlanUserDTO> list = planUserMapper.selectList(
+                new QueryWrapper<PlanUserDTO>()
+                        .eq("enable", EnableConstants.ACTIVATION)
+                        .groupBy("subarea")
+        );
 
-
-        return null;
+        PageUtils<PlanUserDTO> pageUtils = new PageUtils<>(list, page, size);
+        List<String> subareaList = new ArrayList<>();
+        subareaList.add("全部");
+        for(PlanUserDTO dto : pageUtils.getRecords()){
+            subareaList.add(dto.getSubarea());
+        }
+        subareaList.add("已完成");
+        return ResultBody.ok().data("total", pageUtils.getTotal()).data("records", subareaList);
     }
+
+
+    private boolean isFinishPunch(String userId, String planId){
+        PlanUserDTO dto = planUserMapper.selectById(planId);
+        if (dto == null || !dto.getUserId().equals(userId)) return false;
+        String key = RedisKeyEnum.PLAN_PUNCH.create(planId);
+
+        int punchSize = 0;
+        if(redisService.hasKey(key)){
+            punchSize = redisService.getCacheObject(key);
+        }
+        return punchSize >= dto.getPunchSize();
+    }
+
+    private String createPunchCycleInfo(String punchCycle){
+        int size = punchCycle.split(";").length;
+        return  size == 7 ? "每天": "每周" + size + "次";
+    }
+
+
 }

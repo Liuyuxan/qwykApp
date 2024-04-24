@@ -88,6 +88,29 @@ public class PlanController {
         return planService.punch(userId, planId);
     }
 
+
+    /**
+     * 查询自己的计划的分区
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("queryUserSubarea")
+    public ResultBody queryUserSubarea(@RequestHeader(value = "user_id") String userId,
+                                      @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                      @RequestParam(value = "size", defaultValue = "10") Integer size){
+        return planService.queryUserSubarea(userId, page, size);
+    }
+
+    /**
+     * 查询打卡状态
+     * @param userId
+     * @param subarea
+     * @param page
+     * @param size
+     * @return
+     */
     @PostMapping("queryPunchState")
     public ResultBody queryPunchState(@RequestHeader(value = "user_id") String userId,
                                       @RequestParam(value = "subarea", defaultValue = "all") String subarea,
@@ -95,5 +118,8 @@ public class PlanController {
                                       @RequestParam(value = "size", defaultValue = "10") Integer size){
         return planService.queryPunchState(userId, subarea, page, size);
     }
+
+
+
 
 }

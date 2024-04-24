@@ -17,7 +17,7 @@ public class UserInfoDTO {
     /**
      * 用户名
      * */
-    @TableId(value = "user_id", type = IdType.AUTO)
+    @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
     private String userId;
 
     /**

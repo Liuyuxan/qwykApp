@@ -23,4 +23,6 @@ public class PlanSysAO {
     private String remindTime;
     private String remindMusic;
     private String automatic;
+    private String startTime;
+    private String endTime;
 }

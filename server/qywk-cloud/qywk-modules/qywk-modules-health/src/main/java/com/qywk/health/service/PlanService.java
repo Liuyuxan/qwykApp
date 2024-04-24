@@ -24,4 +24,6 @@ public interface PlanService {
     ResultBody punch(String userId, String planId);
 
     ResultBody queryPunchState(String userId, String subarea, Integer page, Integer size);
+
+    ResultBody queryUserSubarea(String userId, Integer page, Integer size);
 }
