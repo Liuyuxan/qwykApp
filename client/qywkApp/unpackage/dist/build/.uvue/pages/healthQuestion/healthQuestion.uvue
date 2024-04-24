@@ -1,0 +1,476 @@
+
+	import type { IResponse } from "@/common/type/http.uts"
+	type optionBoxType = {
+		option: string
+		isSelected: boolean
+	}
+	type listDataType = {
+		problem : string
+		optionBox : optionBoxType[]
+	}
+	type resType = {
+		total: number
+		recoreds: listDataType[]
+	}
+	export default {
+		data() {
+			return {
+				currentIndex: 0,
+
+				listData: [
+					{
+						problem: "请选择您的性别:",
+						optionBox: [
+							{
+								option: "男",
+								isSelected: false
+							},
+							{
+								option: "女",
+								isSelected: false
+							},
+							
+						]
+					},
+					{
+						problem: "你喜欢安静懒得说话吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你面色晦暗或容易出现褐斑吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你容易有黑眼圈吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你口唇颜色偏暗吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你口唇的颜色比一般人红吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你皮肤或口唇干吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你面部两颧潮红或偏红嘛?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你两颧部有细微红丝吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你腹部肥满松软吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你有额部油脂分泌多的现象吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你面部或鼻部有油腻感或者油亮发光吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你精力充沛吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你容易生痤疮或疮疖吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+					{
+						problem: "你的皮肤在不知不觉中会出现青紫瘀斑（皮下出血)吗?",
+						optionBox: [
+							{
+								option: "没有",
+								isSelected: false
+							},
+							{
+								option: "很少",
+								isSelected: false
+							},
+							{
+								option: "有时",
+								isSelected: false
+							},
+							{
+								option: "经常",
+								isSelected: false
+							},
+							{
+								option: "总是",
+								isSelected: false
+							},
+						]
+					},
+				] as listDataType[],
+				
+			};
+		},
+		methods: {
+			selectOption(item : any, optionItem : any, index : number,indey:number) {
+				console.log(item, optionItem, index, indey);
+				for (let i=0; i < this.listData[index].optionBox.length;i++) {
+					this.listData[index].optionBox[i].isSelected = false
+				}
+				this.listData[index].optionBox[indey].isSelected = true
+				// console.log(this.listData[index].optionBox[indey].isSelected)
+			},
+			submit() {
+				uni.showLoading({
+					title: '检测体质中'
+				})
+				setTimeout(() => {
+					uni.hideLoading()
+					uni.navigateTo({
+						url: '/pages/resultHealth/resultHealth'
+					})
+				},2000)
+				
+			}
+		},
+		onLoad() {
+			let token = 'eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzg4NjI1MzI4NywidXNlcl9pZCI6InJvb3QiLCJuaWNrbmFtZSI6ImFkaW1pbiIsInVzZXJfa2V5IjoibG9naW4tdG9rZW5zOnJvb3QifQ.UMwlkYwqvLtV9ZPomVOf2i7aZAxQfnakhMUWAhKRzs60U49ai5ZH8rp8px161KGhc4xfLHX4E53NH37sncKFjQ'
+			// let header = uni.getStorageSync('token')
+			
+			// let JSONHeader : UTSJSONObject = JSON.parseObject(JSON.stringify(token)) as UTSJSONObject
+			// console.log('JSONHeader', JSONHeader);
+			uni.request<IResponse<resType>>({
+				url: `/health/questionnaire/getAllProblem?page=${1}&size=${15}`,
+				header: {
+					Authorization: token
+				},
+				success: (res) => {
+					let r = res.data
+					if(r == null) return
+					console.log('问卷数据', r);
+				},
+				fail: err => {
+					console.log(err);
+				}
+			})
+		}
+	}
+
+
+function GenPagesHealthQuestionHealthQuestionRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("scroll-view", utsMapOf({
+    class: "question flex flex-column align-center",
+    style: normalizeStyle(utsMapOf({"flex":"1"}))
+  }), [
+    createElementVNode("text", utsMapOf({ class: "top-text" }), "体质测试以当下感受为准作答，人的体质有可能会随季节变化。"),
+    createElementVNode("text", utsMapOf({ class: "name mt-2" }), "体质检测"),
+    createElementVNode("view", utsMapOf({ class: "content mt-2" }), [
+      createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.listData, (item, index, _, _): VNode => {
+        return createElementVNode("view", utsMapOf({
+          class: "question-item mt-2",
+          key: index
+        }), [
+          createElementVNode("text", utsMapOf({ class: "title" }), toDisplayString(index + 1 + '.' + item.problem), 1),
+          createElementVNode("view", utsMapOf({ class: "options flex mt-2" }), [
+            createElementVNode(Fragment, null, RenderHelpers.renderList(item.optionBox, (optionItem, indey, _, _): VNode => {
+              return createElementVNode("text", utsMapOf({
+                class: normalizeClass(['option-item', optionItem.isSelected==true ? 'active-option': '']),
+                style: normalizeStyle(utsMapOf({'width': (100/item.optionBox.length) + '%'})),
+                key: indey,
+                onClick: () => {_ctx.selectOption(item,optionItem,index,indey)}
+              }), toDisplayString(optionItem.option), 15, ["onClick"])
+            }), 128 /* KEYED_FRAGMENT */)
+          ])
+        ])
+      }), 128 /* KEYED_FRAGMENT */),
+      createElementVNode("button", utsMapOf({
+        class: "btn",
+        "hover-class": "btn-is-hover",
+        onClick: _ctx.submit
+      }), "提交", 8, ["onClick"])
+    ]),
+    createElementVNode("image", utsMapOf({
+      class: "bg",
+      src: "/static/image/bg/bg_3.png",
+      mode: "widthFix"
+    }))
+  ], 4)
+}
+const GenPagesHealthQuestionHealthQuestionStyles = [utsMapOf([["question", padStyleMapOf(utsMapOf([["paddingTop", 50], ["backgroundColor", "#f2eee9"]]))], ["bg", padStyleMapOf(utsMapOf([["position", "absolute"], ["zIndex", 0], ["width", 350], ["bottom", "-10%"], ["left", "50%"], ["transform", "translateX(-50%)"]]))], ["top-text", padStyleMapOf(utsMapOf([["width", "100%"], ["height", 18], ["fontSize", 10], ["color", "#ffffff"], ["backgroundColor", "#B49B70"], ["textAlign", "center"], ["lineHeight", "18px"]]))], ["name", padStyleMapOf(utsMapOf([["fontSize", 24], ["color", "#B49B70"]]))], ["content", padStyleMapOf(utsMapOf([["boxSizing", "border-box"], ["width", "670rpx"], ["position", "absolute"], ["zIndex", 9], ["backgroundColor", "rgba(255,255,255,0.3)"], ["paddingTop", "50rpx"], ["paddingRight", "50rpx"], ["paddingBottom", "50rpx"], ["paddingLeft", "50rpx"], ["borderRadius", 24]]))], ["title", utsMapOf([[".content ", utsMapOf([["fontSize", 16], ["color", "#B49B70"]])]])], ["options", utsMapOf([[".content ", utsMapOf([["width", "100%"]])]])], ["option-item", utsMapOf([[".content .options ", utsMapOf([["height", "64rpx"], ["lineHeight", "64rpx"], ["textAlign", "center"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#B49B70"], ["backgroundColor", "#f2efeb"], ["fontSize", 16], ["color", "#B49B70"]])]])], ["active-option", utsMapOf([[".content .options ", utsMapOf([["color", "#ffffff"], ["backgroundColor", "#b49b70"]])]])], ["btn", utsMapOf([[".content ", utsMapOf([["width", 130], ["height", 40], ["fontSize", 24], ["lineHeight", "40px"], ["backgroundColor", "#b49b70"], ["color", "#ffffff"], ["marginTop", 30], ["marginRight", "auto"], ["marginBottom", 30], ["marginLeft", "auto"]])]])], ["btn-is-hover", utsMapOf([[".content ", utsMapOf([["backgroundColor", "#594532"]])]])]])]

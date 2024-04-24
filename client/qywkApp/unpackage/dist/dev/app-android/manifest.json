@@ -7,7 +7,7 @@
     "code": 1
   },
   "uni-app-x": {
-    "compilerVersion": "4.13"
+    "compilerVersion": "4.12"
   },
   "app": {
     "distribute": {
@@ -24,9 +24,9 @@
       },
       "splashScreens": {
         "android": {
-          "xhdpi": "",
-          "xxhdpi": "",
-          "xxxhdpi": ""
+          "xhdpi": "D:/项目代码/qywk-启动页/drawable-xhdpi/qidong.9.png",
+          "xxhdpi": "D:/项目代码/qywk-启动页/drawable-xxhdpi/qidong.9.png",
+          "xxxhdpi": "D:/项目代码/qywk-启动页/drawable-xxxhdpi/qidong.9.png"
         }
       }
     }

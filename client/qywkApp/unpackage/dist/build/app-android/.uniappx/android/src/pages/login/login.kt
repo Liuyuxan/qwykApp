@@ -14,9 +14,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
+import io.dcloud.uniapp.extapi.hideLoading as uni_hideLoading;
+import io.dcloud.uniapp.extapi.navigateTo as uni_navigateTo;
 import io.dcloud.uniapp.extapi.reLaunch as uni_reLaunch;
 import io.dcloud.uniapp.extapi.request as uni_request;
 import io.dcloud.uniapp.extapi.setStorageSync as uni_setStorageSync;
+import io.dcloud.uniapp.extapi.showLoading as uni_showLoading;
 import io.dcloud.uniapp.extapi.showToast as uni_showToast;
 open class GenPagesLoginLogin : BasePage {
     constructor(instance: ComponentInternalInstance) : super(instance) {}
@@ -53,7 +56,9 @@ open class GenPagesLoginLogin : BasePage {
                         createElementVNode("text", utsMapOf("class" to "text"), "忘记密码")
                     )),
                     createElementVNode("view", utsMapOf("class" to "sign-up"), utsArrayOf(
-                        createElementVNode("text", utsMapOf("class" to "text"), "手机注册")
+                        createElementVNode("text", utsMapOf("class" to "text", "onClick" to _ctx.register), "注册账号", 8, utsArrayOf(
+                            "onClick"
+                        ))
                     ))
                 )),
                 createElementVNode("view", utsMapOf("class" to "icons flex justify-around"), utsArrayOf(
@@ -70,19 +75,24 @@ open class GenPagesLoginLogin : BasePage {
         return utsMapOf("loginInfo" to TloginInfo(userId = "", password = ""));
     }
     override fun `$initMethods`() {
+        this.register = fun() {
+            uni_navigateTo(NavigateToOptions(url = "/pages/validateCode/validateCode"));
+        }
+        ;
         this.clickLogin = fun() {
             if ((this.loginInfo.userId.length <= 0) || (this.loginInfo.password.length <= 0)) {
                 return;
             }
-            console.log(this.loginInfo, " at pages/login/login.uvue:22");
+            uni_showLoading(ShowLoadingOptions(title = "登录中"));
+            console.log(this.loginInfo, " at pages/login/login.uvue:26");
             uni_request<IResponse<IToken>>(RequestOptions(url = BASE_URL + "/user/login/normal", method = "POST", data = let {
                 object : UTSJSONObject() {
                     var userId = it.loginInfo.userId
                     var password = it.loginInfo.password
                 }
-            }, dataType = "json", success = fun(res){
+            }, success = fun(res){
                 var r = res.data;
-                console.log("登录返回信息", r, " at pages/login/login.uvue:34");
+                console.log("登录返回信息", r, " at pages/login/login.uvue:37");
                 if (r!!.code == 200) {
                     uni_setStorageSync("token", r!!.data!!.token);
                     uni_reLaunch(ReLaunchOptions(url = "/pages/tabbar/tabbar"));
@@ -91,13 +101,17 @@ open class GenPagesLoginLogin : BasePage {
                 }
             }
             , fail = fun(err){
-                console.log(err, " at pages/login/login.uvue:50");
+                console.log(err, " at pages/login/login.uvue:53");
                 uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
+            }
+            , complete = fun(_){
+                uni_hideLoading();
             }
             ));
         }
         ;
     }
+    open lateinit var register: () -> Unit;
     open lateinit var clickLogin: () -> Unit;
     companion object {
         val styles: Map<String, Map<String, Map<String, Any>>>

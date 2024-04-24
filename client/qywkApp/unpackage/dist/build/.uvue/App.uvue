@@ -1,13 +1,13 @@
 
-	
+	import Utils from '@/utils/utils.uts'
 	let firstBackTime = 0
 	
 	export default {
 		onLaunch: function () {
-			
 			console.log('App Launch')
 		},
 		onShow: function () {
+			Utils.checkLogin()
 			console.log('App Show')
 		},
 		onHide: function () {

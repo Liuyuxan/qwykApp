@@ -1,10 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path" : "pages/healthQuestion/healthQuestion",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/healthQuestion/healthQuestion",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
@@ -39,27 +38,24 @@
 			}
 		},
 		{
-			"path" : "pages/register/register",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/resultHealth/resultHealth",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/resultHealth/resultHealth",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/drawPlan/drawPlan",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/drawPlan/drawPlan",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		}
-		
+
 
 	],
 	"globalStyle": {

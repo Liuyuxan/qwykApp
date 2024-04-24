@@ -68,7 +68,7 @@
 			
 			<view class="sign-in-box mt-5">
 				<image style="width: 100%;" src="/static/image/bg/bg_4.webp" mode="widthFix"></image>
-				<view class="text flex flex-column align-center">
+				<view class="texts flex flex-column align-center">
 					<text style="height: 20px;line-height: 20px; font-size: 14px;color: #fff;font-weight: 700;">累计获得<text style="font-weight: 700;font-size: 16px;color: #594532;">&nbsp;1000&nbsp;</text><text style="font-size: 14px;color: #fff;font-weight: 700;">能量</text></text>
 					<text style="font-size: 10px;color: #fff;font-weight: 700;">快去解锁新的装扮吧！</text>
 				</view>
@@ -240,7 +240,7 @@
 			width: 90%;
 			border-radius: 16px;
 			position: relative;
-			.text {
+			.texts {
 				top: 50%;
 				right: 5%;
 				position: absolute;

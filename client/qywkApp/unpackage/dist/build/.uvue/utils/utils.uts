@@ -1,0 +1,27 @@
+import { BASE_URL } from "@/config/index.uts"
+
+
+export default class Utils {
+	
+	// 检查token，判断是否登录
+	static checkLogin() {
+		const token = uni.getStorageSync('token') as string
+		console.log('token', token);
+		if(token.length <= 0) {
+			uni.showToast({
+				title: '您暂未登录，请登录'
+			})
+			uni.reLaunch({
+				url: '/pages/login/login'
+			})
+			uni.clearStorageSync()
+		}
+	}
+	
+	// 拼接baseUrl
+	static getBaseURL(url:string) : string {
+		return BASE_URL + url
+	}
+	
+	
+}

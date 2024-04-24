@@ -15,19 +15,40 @@ import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
 import io.dcloud.uniapp.appframe.AppConfig;
+import io.dcloud.uniapp.extapi.clearStorageSync as uni_clearStorageSync;
 import io.dcloud.uniapp.extapi.connectSocket as uni_connectSocket;
 import io.dcloud.uniapp.extapi.exit as uni_exit;
+import io.dcloud.uniapp.extapi.getStorageSync as uni_getStorageSync;
 import io.dcloud.uniapp.extapi.getSystemInfoSync as uni_getSystemInfoSync;
+import io.dcloud.uniapp.extapi.reLaunch as uni_reLaunch;
 import io.dcloud.uniapp.extapi.removeInterceptor as uni_removeInterceptor;
 import io.dcloud.uniapp.extapi.showToast as uni_showToast;
+val BASE_URL = "http://192.168.252.249:9000";
+open class Utils {
+    companion object {
+        fun checkLogin() {
+            val token = uni_getStorageSync("token") as String;
+            console.log("token", token, " at utils/utils.uts:9");
+            if (token.length <= 0) {
+                uni_showToast(ShowToastOptions(title = "您暂未登录，请登录"));
+                uni_reLaunch(ReLaunchOptions(url = "/pages/login/login"));
+                uni_clearStorageSync();
+            }
+        }
+        fun getBaseURL(url: String): String {
+            return BASE_URL + url;
+        }
+    }
+}
 var firstBackTime: Number = 0;
 open class GenApp : BaseApp {
     constructor(instance: ComponentInternalInstance) : super(instance) {
         onLaunch(fun(_: OnLaunchOptions) {
-            console.log("App Launch", " at App.uvue:8");
+            console.log("App Launch", " at App.uvue:7");
         }
         , instance);
         onAppShow(fun(_: OnShowOptions) {
+            Utils.checkLogin();
             console.log("App Show", " at App.uvue:11");
         }
         , instance);
@@ -79,7 +100,7 @@ open class GenApp : BaseApp {
     }
 }
 val GenAppClass = CreateVueAppComponent(GenApp::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = true, inject = Map(), props = Map(), propsNeedCastKeys = utsArrayOf(), emits = Map(), components = Map(), styles = GenApp.styles);
+    return VueComponentOptions(type = "app", name = "", inheritAttrs = true, inject = Map(), props = Map(), propsNeedCastKeys = utsArrayOf(), emits = Map(), components = Map(), styles = GenApp.styles);
 }
 , fun(instance): GenApp {
     return GenApp(instance);
@@ -1741,7 +1762,6 @@ open class Socket {
                 var data = JSON.parse(res.data as String) as UTSJSONObject;
                 var heartBeat = data.getBoolean("heartBeat");
                 if (heartBeat != null && heartBeat) {
-                    ;
                 } else {
                     this.onMsg?.invoke(res.data);
                 }
@@ -1811,7 +1831,6 @@ open class Core {
     constructor(){
         SetTheme(uni.UNIB7338A2.theme, null);
         if (this.debugLog) {
-            ;
         }
     }
     open fun setThemes(conf: UxTheme) {
@@ -1982,59 +2001,6 @@ val install = fun(): Core {
     return `$ux`;
 }
 ;
-open class TloginInfo (
-    @JsonNotNull
-    open var userId: String,
-    @JsonNotNull
-    open var password: String,
-) : UTSReactiveObject() {
-    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
-        return TloginInfoReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
-    }
-}
-open class TloginInfoReactiveObject : TloginInfo, IUTSReactive<TloginInfo> {
-    override var __v_raw: TloginInfo;
-    override var __v_isReadonly: Boolean;
-    override var __v_isShallow: Boolean;
-    override var __v_skip: Boolean;
-    constructor(__v_raw: TloginInfo, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(userId = __v_raw.userId, password = __v_raw.password) {
-        this.__v_raw = __v_raw;
-        this.__v_isReadonly = __v_isReadonly;
-        this.__v_isShallow = __v_isShallow;
-        this.__v_skip = __v_skip;
-    }
-    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): TloginInfoReactiveObject {
-        return TloginInfoReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
-    }
-    override var userId: String
-        get() {
-            return trackReactiveGet(__v_raw, "userId", __v_raw.userId, this.__v_isReadonly, this.__v_isShallow);
-        }
-        set(value) {
-            if (!this.__v_canSet("userId")) {
-                return;
-            }
-            val oldValue = __v_raw.userId;
-            __v_raw.userId = value;
-            triggerReactiveSet(__v_raw, "userId", oldValue, value);
-        }
-    override var password: String
-        get() {
-            return trackReactiveGet(__v_raw, "password", __v_raw.password, this.__v_isReadonly, this.__v_isShallow);
-        }
-        set(value) {
-            if (!this.__v_canSet("password")) {
-                return;
-            }
-            val oldValue = __v_raw.password;
-            __v_raw.password = value;
-            triggerReactiveSet(__v_raw, "password", oldValue, value);
-        }
-}
-open class IToken (
-    @JsonNotNull
-    open var token: String,
-) : UTSObject()
 open class IResponse<T> (
     @JsonNotNull
     open var code: Number,
@@ -2046,12 +2012,115 @@ open class IResponse<T> (
     @JsonNotNull
     open var expound: Any,
 ) : UTSObject()
-val BASE_URL = "192.168.79.249:9000";
-val GenPagesLoginLoginClass = CreateVueComponent(GenPagesLoginLogin::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenPagesLoginLogin.inheritAttrs, inject = GenPagesLoginLogin.inject, props = GenPagesLoginLogin.props, propsNeedCastKeys = GenPagesLoginLogin.propsNeedCastKeys, emits = GenPagesLoginLogin.emits, components = GenPagesLoginLogin.components, styles = GenPagesLoginLogin.styles);
+open class optionBoxType (
+    @JsonNotNull
+    open var option: String,
+    @JsonNotNull
+    open var isSelected: Boolean = false,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return optionBoxTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
 }
-, fun(instance): GenPagesLoginLogin {
-    return GenPagesLoginLogin(instance);
+open class optionBoxTypeReactiveObject : optionBoxType, IUTSReactive<optionBoxType> {
+    override var __v_raw: optionBoxType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: optionBoxType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(option = __v_raw.option, isSelected = __v_raw.isSelected) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): optionBoxTypeReactiveObject {
+        return optionBoxTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var option: String
+        get() {
+            return trackReactiveGet(__v_raw, "option", __v_raw.option, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("option")) {
+                return;
+            }
+            val oldValue = __v_raw.option;
+            __v_raw.option = value;
+            triggerReactiveSet(__v_raw, "option", oldValue, value);
+        }
+    override var isSelected: Boolean
+        get() {
+            return trackReactiveGet(__v_raw, "isSelected", __v_raw.isSelected, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("isSelected")) {
+                return;
+            }
+            val oldValue = __v_raw.isSelected;
+            __v_raw.isSelected = value;
+            triggerReactiveSet(__v_raw, "isSelected", oldValue, value);
+        }
+}
+open class listDataType (
+    @JsonNotNull
+    open var problem: String,
+    @JsonNotNull
+    open var optionBox: UTSArray<optionBoxType>,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return listDataTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class listDataTypeReactiveObject : listDataType, IUTSReactive<listDataType> {
+    override var __v_raw: listDataType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: listDataType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(problem = __v_raw.problem, optionBox = __v_raw.optionBox) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): listDataTypeReactiveObject {
+        return listDataTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var problem: String
+        get() {
+            return trackReactiveGet(__v_raw, "problem", __v_raw.problem, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("problem")) {
+                return;
+            }
+            val oldValue = __v_raw.problem;
+            __v_raw.problem = value;
+            triggerReactiveSet(__v_raw, "problem", oldValue, value);
+        }
+    override var optionBox: UTSArray<optionBoxType>
+        get() {
+            return trackReactiveGet(__v_raw, "optionBox", __v_raw.optionBox, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("optionBox")) {
+                return;
+            }
+            val oldValue = __v_raw.optionBox;
+            __v_raw.optionBox = value;
+            triggerReactiveSet(__v_raw, "optionBox", oldValue, value);
+        }
+}
+open class resType (
+    @JsonNotNull
+    open var total: Number,
+    @JsonNotNull
+    open var recoreds: UTSArray<listDataType>,
+) : UTSObject()
+val GenPagesHealthQuestionHealthQuestionClass = CreateVueComponent(GenPagesHealthQuestionHealthQuestion::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesHealthQuestionHealthQuestion.inheritAttrs, inject = GenPagesHealthQuestionHealthQuestion.inject, props = GenPagesHealthQuestionHealthQuestion.props, propsNeedCastKeys = GenPagesHealthQuestionHealthQuestion.propsNeedCastKeys, emits = GenPagesHealthQuestionHealthQuestion.emits, components = GenPagesHealthQuestionHealthQuestion.components, styles = GenPagesHealthQuestionHealthQuestion.styles);
+}
+, fun(instance): GenPagesHealthQuestionHealthQuestion {
+    return GenPagesHealthQuestionHealthQuestion(instance);
 }
 );
 open class plantListType (
@@ -2104,14 +2173,14 @@ open class plantListTypeReactiveObject : plantListType, IUTSReactive<plantListTy
         }
 }
 val GenComponentsShowWindowShowWindowClass = CreateVueComponent(GenComponentsShowWindowShowWindow::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenComponentsShowWindowShowWindow.inheritAttrs, inject = GenComponentsShowWindowShowWindow.inject, props = GenComponentsShowWindowShowWindow.props, propsNeedCastKeys = GenComponentsShowWindowShowWindow.propsNeedCastKeys, emits = GenComponentsShowWindowShowWindow.emits, components = GenComponentsShowWindowShowWindow.components, styles = GenComponentsShowWindowShowWindow.styles);
+    return VueComponentOptions(type = "component", name = "", inheritAttrs = GenComponentsShowWindowShowWindow.inheritAttrs, inject = GenComponentsShowWindowShowWindow.inject, props = GenComponentsShowWindowShowWindow.props, propsNeedCastKeys = GenComponentsShowWindowShowWindow.propsNeedCastKeys, emits = GenComponentsShowWindowShowWindow.emits, components = GenComponentsShowWindowShowWindow.components, styles = GenComponentsShowWindowShowWindow.styles);
 }
 , fun(instance): GenComponentsShowWindowShowWindow {
     return GenComponentsShowWindowShowWindow(instance);
 }
 );
 val GenComponentsCommunityCommunityClass = CreateVueComponent(GenComponentsCommunityCommunity::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenComponentsCommunityCommunity.inheritAttrs, inject = GenComponentsCommunityCommunity.inject, props = GenComponentsCommunityCommunity.props, propsNeedCastKeys = GenComponentsCommunityCommunity.propsNeedCastKeys, emits = GenComponentsCommunityCommunity.emits, components = GenComponentsCommunityCommunity.components, styles = GenComponentsCommunityCommunity.styles);
+    return VueComponentOptions(type = "component", name = "", inheritAttrs = GenComponentsCommunityCommunity.inheritAttrs, inject = GenComponentsCommunityCommunity.inject, props = GenComponentsCommunityCommunity.props, propsNeedCastKeys = GenComponentsCommunityCommunity.propsNeedCastKeys, emits = GenComponentsCommunityCommunity.emits, components = GenComponentsCommunityCommunity.components, styles = GenComponentsCommunityCommunity.styles);
 }
 , fun(instance): GenComponentsCommunityCommunity {
     return GenComponentsCommunityCommunity(instance);
@@ -2293,170 +2362,533 @@ open class gandeplantTypeReactiveObject : gandeplantType, IUTSReactive<gandeplan
         }
 }
 val GenComponentsHomeHomeClass = CreateVueComponent(GenComponentsHomeHome::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenComponentsHomeHome.inheritAttrs, inject = GenComponentsHomeHome.inject, props = GenComponentsHomeHome.props, propsNeedCastKeys = GenComponentsHomeHome.propsNeedCastKeys, emits = GenComponentsHomeHome.emits, components = GenComponentsHomeHome.components, styles = GenComponentsHomeHome.styles);
+    return VueComponentOptions(type = "component", name = "", inheritAttrs = GenComponentsHomeHome.inheritAttrs, inject = GenComponentsHomeHome.inject, props = GenComponentsHomeHome.props, propsNeedCastKeys = GenComponentsHomeHome.propsNeedCastKeys, emits = GenComponentsHomeHome.emits, components = GenComponentsHomeHome.components, styles = GenComponentsHomeHome.styles);
 }
 , fun(instance): GenComponentsHomeHome {
     return GenComponentsHomeHome(instance);
 }
 );
-val GenUniModulesUxFrameComponentsUxLoadingUxLoadingClass = CreateVueComponent(GenUniModulesUxFrameComponentsUxLoadingUxLoading::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = GenUniModulesUxFrameComponentsUxLoadingUxLoading.name, inheritAttrs = GenUniModulesUxFrameComponentsUxLoadingUxLoading.inheritAttrs, inject = GenUniModulesUxFrameComponentsUxLoadingUxLoading.inject, props = GenUniModulesUxFrameComponentsUxLoadingUxLoading.props, propsNeedCastKeys = GenUniModulesUxFrameComponentsUxLoadingUxLoading.propsNeedCastKeys, emits = GenUniModulesUxFrameComponentsUxLoadingUxLoading.emits, components = GenUniModulesUxFrameComponentsUxLoadingUxLoading.components, styles = GenUniModulesUxFrameComponentsUxLoadingUxLoading.styles);
-}
-, fun(instance): GenUniModulesUxFrameComponentsUxLoadingUxLoading {
-    return GenUniModulesUxFrameComponentsUxLoadingUxLoading(instance);
-}
-);
-val icons: UTSJSONObject = object : UTSJSONObject() {
-    var happy = "\ue801"
-    var wink = "\ue802"
-    var wink2 = "\ue813"
-    var unhappy = "\ue803"
-    var sleep = "\ue804"
-    var devil = "\ue800"
-    var surprised = "\ue806"
-    var tongue = "\ue807"
-    var coffee = "\ue808"
-    var sunglasses = "\ue809"
-    var displeased = "\ue80a"
-    var grin = "\ue80c"
-    var angry = "\ue80d"
-    var saint = "\ue80e"
-    var cry = "\ue80f"
-    var shoot = "\ue810"
-    var squint = "\ue811"
-    var laugh = "\ue812"
-    var triangledown = "\ue80B"
-    var trianglerup = "\ue814"
-    var triangleleft = "\ue815"
-    var triangleright = "\ue816"
-    var arrowleft = "\uf104"
-    var arrowright = "\uf105"
-    var arrowup = "\uf106"
-    var arrowdown = "\uf107"
-    var arrow2left = "\uf100"
-    var arrow2right = "\uf101"
-    var arrow2up = "\uf102"
-    var arrow2down = "\uf103"
-    var reply = "\ue818"
-    var forward = "\ue819"
-    var pencil = "\ue81a"
-    var code = "\ue81b"
-    var share = "\ue81c"
-    var backintime = "\ue81e"
-    var paperplane = "\ue81f"
-    var brush = "\ue820"
-    var megaphone = "\ue821"
-    var refresh = "\ue822"
-    var thumbsup = "\ue824"
-    var thumbsdown = "\ue825"
-    var useradd = "\ue826"
-    var users = "\ue827"
-    var user = "\ue828"
-    var select = "\ue82d"
-    var cancel = "\ue82e"
-    var plus = "\ue82f"
-    var minus = "\ue830"
-    var link = "\ue831"
-    var info = "\ue832"
-    var help = "\ue833"
-    var camera = "\ue834"
-    var picture = "\ue835"
-    var basket = "\ue837"
-    var trash = "\ue838"
-    var flag = "\ue839"
-    var tag = "\ue83a"
-    var search = "\ue83b"
-    var music = "\ue83c"
-    var cloudthunder = "\ue83d"
-    var chartbar = "\ue840"
-    var chartpie = "\uf200"
-    var bug = "\uf188"
-    var chartarea = "\uf1fe"
-    var paste = "\uf0ea"
-    var mic = "\uf130"
-    var mute = "\uf131"
-    var volumeup = "\ue81d"
-    var volumedown = "\ue823"
-    var signal = "\ue83e"
-    var wifi = "\uf1eb"
-    var more = "\uf141"
-    var morevert = "\uf142"
-    var heart = "\ue829"
-    var heartempty = "\ue82a"
-    var star = "\ue82b"
-    var starempty = "\ue82c"
-    var starhalf = "\uf123"
-    var down = "\ue805"
-    var left = "\ue83f"
-    var right = "\ue841"
-    var up = "\ue843"
-    var phone = "\ue844"
-    var chat = "\ue845"
-    var bell = "\uf0f3"
-    var belloff = "\uf1f7"
-    var location = "\ue836"
-    var wechat = "\uf1d7"
-    var eye = "\ue817"
-    var eyeoff = "\ue842"
-    var setting = "\ue846"
-    var toggleon = "\uf205"
-    var toggleoff = "\uf204"
-    var home = "\ue847"
-    var layout = "\ue848"
-    var crop = "\uf125"
-    var female = "\ue849"
-    var male = "\ue84a"
-    var checkempty = "\uf096"
-    var check = "\ue84d"
-    var scan = "\uf31c"
-};
-val GenUniModulesUxFrameComponentsUxIconUxIconClass = CreateVueComponent(GenUniModulesUxFrameComponentsUxIconUxIcon::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = GenUniModulesUxFrameComponentsUxIconUxIcon.name, inheritAttrs = GenUniModulesUxFrameComponentsUxIconUxIcon.inheritAttrs, inject = GenUniModulesUxFrameComponentsUxIconUxIcon.inject, props = GenUniModulesUxFrameComponentsUxIconUxIcon.props, propsNeedCastKeys = GenUniModulesUxFrameComponentsUxIconUxIcon.propsNeedCastKeys, emits = GenUniModulesUxFrameComponentsUxIconUxIcon.emits, components = GenUniModulesUxFrameComponentsUxIconUxIcon.components, styles = GenUniModulesUxFrameComponentsUxIconUxIcon.styles);
-}
-, fun(instance): GenUniModulesUxFrameComponentsUxIconUxIcon {
-    return GenUniModulesUxFrameComponentsUxIconUxIcon(instance);
-}
-);
-val GenUniModulesUxFrameComponentsUxButtonUxButtonClass = CreateVueComponent(GenUniModulesUxFrameComponentsUxButtonUxButton::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = GenUniModulesUxFrameComponentsUxButtonUxButton.name, inheritAttrs = GenUniModulesUxFrameComponentsUxButtonUxButton.inheritAttrs, inject = GenUniModulesUxFrameComponentsUxButtonUxButton.inject, props = GenUniModulesUxFrameComponentsUxButtonUxButton.props, propsNeedCastKeys = GenUniModulesUxFrameComponentsUxButtonUxButton.propsNeedCastKeys, emits = GenUniModulesUxFrameComponentsUxButtonUxButton.emits, components = GenUniModulesUxFrameComponentsUxButtonUxButton.components, styles = GenUniModulesUxFrameComponentsUxButtonUxButton.styles);
-}
-, fun(instance): GenUniModulesUxFrameComponentsUxButtonUxButton {
-    return GenUniModulesUxFrameComponentsUxButtonUxButton(instance);
-}
-);
 val GenComponentsHealthComponentHealthComponentClass = CreateVueComponent(GenComponentsHealthComponentHealthComponent::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenComponentsHealthComponentHealthComponent.inheritAttrs, inject = GenComponentsHealthComponentHealthComponent.inject, props = GenComponentsHealthComponentHealthComponent.props, propsNeedCastKeys = GenComponentsHealthComponentHealthComponent.propsNeedCastKeys, emits = GenComponentsHealthComponentHealthComponent.emits, components = GenComponentsHealthComponentHealthComponent.components, styles = GenComponentsHealthComponentHealthComponent.styles);
+    return VueComponentOptions(type = "component", name = "", inheritAttrs = GenComponentsHealthComponentHealthComponent.inheritAttrs, inject = GenComponentsHealthComponentHealthComponent.inject, props = GenComponentsHealthComponentHealthComponent.props, propsNeedCastKeys = GenComponentsHealthComponentHealthComponent.propsNeedCastKeys, emits = GenComponentsHealthComponentHealthComponent.emits, components = GenComponentsHealthComponentHealthComponent.components, styles = GenComponentsHealthComponentHealthComponent.styles);
 }
 , fun(instance): GenComponentsHealthComponentHealthComponent {
     return GenComponentsHealthComponentHealthComponent(instance);
 }
 );
+open class tagType (
+    @JsonNotNull
+    open var title: String,
+    @JsonNotNull
+    open var count: Number,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return tagTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class tagTypeReactiveObject : tagType, IUTSReactive<tagType> {
+    override var __v_raw: tagType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: tagType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(title = __v_raw.title, count = __v_raw.count) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): tagTypeReactiveObject {
+        return tagTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var title: String
+        get() {
+            return trackReactiveGet(__v_raw, "title", __v_raw.title, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("title")) {
+                return;
+            }
+            val oldValue = __v_raw.title;
+            __v_raw.title = value;
+            triggerReactiveSet(__v_raw, "title", oldValue, value);
+        }
+    override var count: Number
+        get() {
+            return trackReactiveGet(__v_raw, "count", __v_raw.count, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("count")) {
+                return;
+            }
+            val oldValue = __v_raw.count;
+            __v_raw.count = value;
+            triggerReactiveSet(__v_raw, "count", oldValue, value);
+        }
+}
+open class planType (
+    @JsonNotNull
+    open var name: String,
+    @JsonNotNull
+    open var color: String,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return planTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class planTypeReactiveObject : planType, IUTSReactive<planType> {
+    override var __v_raw: planType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: planType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(name = __v_raw.name, color = __v_raw.color) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): planTypeReactiveObject {
+        return planTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var name: String
+        get() {
+            return trackReactiveGet(__v_raw, "name", __v_raw.name, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("name")) {
+                return;
+            }
+            val oldValue = __v_raw.name;
+            __v_raw.name = value;
+            triggerReactiveSet(__v_raw, "name", oldValue, value);
+        }
+    override var color: String
+        get() {
+            return trackReactiveGet(__v_raw, "color", __v_raw.color, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("color")) {
+                return;
+            }
+            val oldValue = __v_raw.color;
+            __v_raw.color = value;
+            triggerReactiveSet(__v_raw, "color", oldValue, value);
+        }
+}
 val GenComponentsMyPageMyPageClass = CreateVueComponent(GenComponentsMyPageMyPage::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenComponentsMyPageMyPage.inheritAttrs, inject = GenComponentsMyPageMyPage.inject, props = GenComponentsMyPageMyPage.props, propsNeedCastKeys = GenComponentsMyPageMyPage.propsNeedCastKeys, emits = GenComponentsMyPageMyPage.emits, components = GenComponentsMyPageMyPage.components, styles = GenComponentsMyPageMyPage.styles);
+    return VueComponentOptions(type = "component", name = "", inheritAttrs = GenComponentsMyPageMyPage.inheritAttrs, inject = GenComponentsMyPageMyPage.inject, props = GenComponentsMyPageMyPage.props, propsNeedCastKeys = GenComponentsMyPageMyPage.propsNeedCastKeys, emits = GenComponentsMyPageMyPage.emits, components = GenComponentsMyPageMyPage.components, styles = GenComponentsMyPageMyPage.styles);
 }
 , fun(instance): GenComponentsMyPageMyPage {
     return GenComponentsMyPageMyPage(instance);
 }
 );
 val GenPagesTabbarTabbarClass = CreateVueComponent(GenPagesTabbarTabbar::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenPagesTabbarTabbar.inheritAttrs, inject = GenPagesTabbarTabbar.inject, props = GenPagesTabbarTabbar.props, propsNeedCastKeys = GenPagesTabbarTabbar.propsNeedCastKeys, emits = GenPagesTabbarTabbar.emits, components = GenPagesTabbarTabbar.components, styles = GenPagesTabbarTabbar.styles);
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesTabbarTabbar.inheritAttrs, inject = GenPagesTabbarTabbar.inject, props = GenPagesTabbarTabbar.props, propsNeedCastKeys = GenPagesTabbarTabbar.propsNeedCastKeys, emits = GenPagesTabbarTabbar.emits, components = GenPagesTabbarTabbar.components, styles = GenPagesTabbarTabbar.styles);
 }
 , fun(instance): GenPagesTabbarTabbar {
     return GenPagesTabbarTabbar(instance);
 }
 );
+open class TloginInfo (
+    @JsonNotNull
+    open var userId: String,
+    @JsonNotNull
+    open var password: String,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return TloginInfoReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class TloginInfoReactiveObject : TloginInfo, IUTSReactive<TloginInfo> {
+    override var __v_raw: TloginInfo;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: TloginInfo, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(userId = __v_raw.userId, password = __v_raw.password) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): TloginInfoReactiveObject {
+        return TloginInfoReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var userId: String
+        get() {
+            return trackReactiveGet(__v_raw, "userId", __v_raw.userId, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("userId")) {
+                return;
+            }
+            val oldValue = __v_raw.userId;
+            __v_raw.userId = value;
+            triggerReactiveSet(__v_raw, "userId", oldValue, value);
+        }
+    override var password: String
+        get() {
+            return trackReactiveGet(__v_raw, "password", __v_raw.password, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("password")) {
+                return;
+            }
+            val oldValue = __v_raw.password;
+            __v_raw.password = value;
+            triggerReactiveSet(__v_raw, "password", oldValue, value);
+        }
+}
+open class IToken (
+    @JsonNotNull
+    open var token: String,
+) : UTSObject()
+open class ICode (
+    @JsonNotNull
+    open var code: String,
+) : UTSObject()
+val GenPagesLoginLoginClass = CreateVueComponent(GenPagesLoginLogin::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesLoginLogin.inheritAttrs, inject = GenPagesLoginLogin.inject, props = GenPagesLoginLogin.props, propsNeedCastKeys = GenPagesLoginLogin.propsNeedCastKeys, emits = GenPagesLoginLogin.emits, components = GenPagesLoginLogin.components, styles = GenPagesLoginLogin.styles);
+}
+, fun(instance): GenPagesLoginLogin {
+    return GenPagesLoginLogin(instance);
+}
+);
 val GenPagesPlantDetailPlantDetailClass = CreateVueComponent(GenPagesPlantDetailPlantDetail::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenPagesPlantDetailPlantDetail.inheritAttrs, inject = GenPagesPlantDetailPlantDetail.inject, props = GenPagesPlantDetailPlantDetail.props, propsNeedCastKeys = GenPagesPlantDetailPlantDetail.propsNeedCastKeys, emits = GenPagesPlantDetailPlantDetail.emits, components = GenPagesPlantDetailPlantDetail.components, styles = GenPagesPlantDetailPlantDetail.styles);
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesPlantDetailPlantDetail.inheritAttrs, inject = GenPagesPlantDetailPlantDetail.inject, props = GenPagesPlantDetailPlantDetail.props, propsNeedCastKeys = GenPagesPlantDetailPlantDetail.propsNeedCastKeys, emits = GenPagesPlantDetailPlantDetail.emits, components = GenPagesPlantDetailPlantDetail.components, styles = GenPagesPlantDetailPlantDetail.styles);
 }
 , fun(instance): GenPagesPlantDetailPlantDetail {
     return GenPagesPlantDetailPlantDetail(instance);
 }
 );
 val GenPagesHealthDetailHealthDetailClass = CreateVueComponent(GenPagesHealthDetailHealthDetail::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenPagesHealthDetailHealthDetail.inheritAttrs, inject = GenPagesHealthDetailHealthDetail.inject, props = GenPagesHealthDetailHealthDetail.props, propsNeedCastKeys = GenPagesHealthDetailHealthDetail.propsNeedCastKeys, emits = GenPagesHealthDetailHealthDetail.emits, components = GenPagesHealthDetailHealthDetail.components, styles = GenPagesHealthDetailHealthDetail.styles);
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesHealthDetailHealthDetail.inheritAttrs, inject = GenPagesHealthDetailHealthDetail.inject, props = GenPagesHealthDetailHealthDetail.props, propsNeedCastKeys = GenPagesHealthDetailHealthDetail.propsNeedCastKeys, emits = GenPagesHealthDetailHealthDetail.emits, components = GenPagesHealthDetailHealthDetail.components, styles = GenPagesHealthDetailHealthDetail.styles);
 }
 , fun(instance): GenPagesHealthDetailHealthDetail {
     return GenPagesHealthDetailHealthDetail(instance);
+}
+);
+val GenPagesValidateCodeValidateCodeClass = CreateVueComponent(GenPagesValidateCodeValidateCode::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesValidateCodeValidateCode.inheritAttrs, inject = GenPagesValidateCodeValidateCode.inject, props = GenPagesValidateCodeValidateCode.props, propsNeedCastKeys = GenPagesValidateCodeValidateCode.propsNeedCastKeys, emits = GenPagesValidateCodeValidateCode.emits, components = GenPagesValidateCodeValidateCode.components, styles = GenPagesValidateCodeValidateCode.styles);
+}
+, fun(instance): GenPagesValidateCodeValidateCode {
+    return GenPagesValidateCodeValidateCode(instance);
+}
+);
+open class registerLoginInfoType (
+    @JsonNotNull
+    open var tel: String,
+    @JsonNotNull
+    open var password: String,
+    @JsonNotNull
+    open var code: String,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return registerLoginInfoTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class registerLoginInfoTypeReactiveObject : registerLoginInfoType, IUTSReactive<registerLoginInfoType> {
+    override var __v_raw: registerLoginInfoType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: registerLoginInfoType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(tel = __v_raw.tel, password = __v_raw.password, code = __v_raw.code) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): registerLoginInfoTypeReactiveObject {
+        return registerLoginInfoTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var tel: String
+        get() {
+            return trackReactiveGet(__v_raw, "tel", __v_raw.tel, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("tel")) {
+                return;
+            }
+            val oldValue = __v_raw.tel;
+            __v_raw.tel = value;
+            triggerReactiveSet(__v_raw, "tel", oldValue, value);
+        }
+    override var password: String
+        get() {
+            return trackReactiveGet(__v_raw, "password", __v_raw.password, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("password")) {
+                return;
+            }
+            val oldValue = __v_raw.password;
+            __v_raw.password = value;
+            triggerReactiveSet(__v_raw, "password", oldValue, value);
+        }
+    override var code: String
+        get() {
+            return trackReactiveGet(__v_raw, "code", __v_raw.code, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("code")) {
+                return;
+            }
+            val oldValue = __v_raw.code;
+            __v_raw.code = value;
+            triggerReactiveSet(__v_raw, "code", oldValue, value);
+        }
+}
+val GenPagesRegisterRegisterClass = CreateVueComponent(GenPagesRegisterRegister::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesRegisterRegister.inheritAttrs, inject = GenPagesRegisterRegister.inject, props = GenPagesRegisterRegister.props, propsNeedCastKeys = GenPagesRegisterRegister.propsNeedCastKeys, emits = GenPagesRegisterRegister.emits, components = GenPagesRegisterRegister.components, styles = GenPagesRegisterRegister.styles);
+}
+, fun(instance): GenPagesRegisterRegister {
+    return GenPagesRegisterRegister(instance);
+}
+);
+open class chartType (
+    @JsonNotNull
+    open var name: String,
+    @JsonNotNull
+    open var area: Number,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return chartTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class chartTypeReactiveObject : chartType, IUTSReactive<chartType> {
+    override var __v_raw: chartType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: chartType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(name = __v_raw.name, area = __v_raw.area) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): chartTypeReactiveObject {
+        return chartTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var name: String
+        get() {
+            return trackReactiveGet(__v_raw, "name", __v_raw.name, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("name")) {
+                return;
+            }
+            val oldValue = __v_raw.name;
+            __v_raw.name = value;
+            triggerReactiveSet(__v_raw, "name", oldValue, value);
+        }
+    override var area: Number
+        get() {
+            return trackReactiveGet(__v_raw, "area", __v_raw.area, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("area")) {
+                return;
+            }
+            val oldValue = __v_raw.area;
+            __v_raw.area = value;
+            triggerReactiveSet(__v_raw, "area", oldValue, value);
+        }
+}
+val GenPagesResultHealthResultHealthClass = CreateVueComponent(GenPagesResultHealthResultHealth::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesResultHealthResultHealth.inheritAttrs, inject = GenPagesResultHealthResultHealth.inject, props = GenPagesResultHealthResultHealth.props, propsNeedCastKeys = GenPagesResultHealthResultHealth.propsNeedCastKeys, emits = GenPagesResultHealthResultHealth.emits, components = GenPagesResultHealthResultHealth.components, styles = GenPagesResultHealthResultHealth.styles);
+}
+, fun(instance): GenPagesResultHealthResultHealth {
+    return GenPagesResultHealthResultHealth(instance);
+}
+);
+open class planType1 (
+    @JsonNotNull
+    open var id: String,
+    open var plantId: String? = null,
+    @JsonNotNull
+    open var name: String,
+    @JsonNotNull
+    open var subarea: String,
+    @JsonNotNull
+    open var punchCycle: String,
+    @JsonNotNull
+    open var punchSize: Number,
+    @JsonNotNull
+    open var remindTime: String,
+    @JsonNotNull
+    open var remindMusic: String,
+    @JsonNotNull
+    open var automatic: String,
+    open var startTime: String? = null,
+    open var endTime: String? = null,
+    @JsonNotNull
+    open var isSelected: Boolean = false,
+) : UTSReactiveObject() {
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return planType1ReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class planType1ReactiveObject : planType1, IUTSReactive<planType1> {
+    override var __v_raw: planType1;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: planType1, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(id = __v_raw.id, plantId = __v_raw.plantId, name = __v_raw.name, subarea = __v_raw.subarea, punchCycle = __v_raw.punchCycle, punchSize = __v_raw.punchSize, remindTime = __v_raw.remindTime, remindMusic = __v_raw.remindMusic, automatic = __v_raw.automatic, startTime = __v_raw.startTime, endTime = __v_raw.endTime, isSelected = __v_raw.isSelected) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): planType1ReactiveObject {
+        return planType1ReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var id: String
+        get() {
+            return trackReactiveGet(__v_raw, "id", __v_raw.id, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("id")) {
+                return;
+            }
+            val oldValue = __v_raw.id;
+            __v_raw.id = value;
+            triggerReactiveSet(__v_raw, "id", oldValue, value);
+        }
+    override var plantId: String?
+        get() {
+            return trackReactiveGet(__v_raw, "plantId", __v_raw.plantId, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("plantId")) {
+                return;
+            }
+            val oldValue = __v_raw.plantId;
+            __v_raw.plantId = value;
+            triggerReactiveSet(__v_raw, "plantId", oldValue, value);
+        }
+    override var name: String
+        get() {
+            return trackReactiveGet(__v_raw, "name", __v_raw.name, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("name")) {
+                return;
+            }
+            val oldValue = __v_raw.name;
+            __v_raw.name = value;
+            triggerReactiveSet(__v_raw, "name", oldValue, value);
+        }
+    override var subarea: String
+        get() {
+            return trackReactiveGet(__v_raw, "subarea", __v_raw.subarea, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("subarea")) {
+                return;
+            }
+            val oldValue = __v_raw.subarea;
+            __v_raw.subarea = value;
+            triggerReactiveSet(__v_raw, "subarea", oldValue, value);
+        }
+    override var punchCycle: String
+        get() {
+            return trackReactiveGet(__v_raw, "punchCycle", __v_raw.punchCycle, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("punchCycle")) {
+                return;
+            }
+            val oldValue = __v_raw.punchCycle;
+            __v_raw.punchCycle = value;
+            triggerReactiveSet(__v_raw, "punchCycle", oldValue, value);
+        }
+    override var punchSize: Number
+        get() {
+            return trackReactiveGet(__v_raw, "punchSize", __v_raw.punchSize, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("punchSize")) {
+                return;
+            }
+            val oldValue = __v_raw.punchSize;
+            __v_raw.punchSize = value;
+            triggerReactiveSet(__v_raw, "punchSize", oldValue, value);
+        }
+    override var remindTime: String
+        get() {
+            return trackReactiveGet(__v_raw, "remindTime", __v_raw.remindTime, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("remindTime")) {
+                return;
+            }
+            val oldValue = __v_raw.remindTime;
+            __v_raw.remindTime = value;
+            triggerReactiveSet(__v_raw, "remindTime", oldValue, value);
+        }
+    override var remindMusic: String
+        get() {
+            return trackReactiveGet(__v_raw, "remindMusic", __v_raw.remindMusic, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("remindMusic")) {
+                return;
+            }
+            val oldValue = __v_raw.remindMusic;
+            __v_raw.remindMusic = value;
+            triggerReactiveSet(__v_raw, "remindMusic", oldValue, value);
+        }
+    override var automatic: String
+        get() {
+            return trackReactiveGet(__v_raw, "automatic", __v_raw.automatic, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("automatic")) {
+                return;
+            }
+            val oldValue = __v_raw.automatic;
+            __v_raw.automatic = value;
+            triggerReactiveSet(__v_raw, "automatic", oldValue, value);
+        }
+    override var startTime: String?
+        get() {
+            return trackReactiveGet(__v_raw, "startTime", __v_raw.startTime, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("startTime")) {
+                return;
+            }
+            val oldValue = __v_raw.startTime;
+            __v_raw.startTime = value;
+            triggerReactiveSet(__v_raw, "startTime", oldValue, value);
+        }
+    override var endTime: String?
+        get() {
+            return trackReactiveGet(__v_raw, "endTime", __v_raw.endTime, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("endTime")) {
+                return;
+            }
+            val oldValue = __v_raw.endTime;
+            __v_raw.endTime = value;
+            triggerReactiveSet(__v_raw, "endTime", oldValue, value);
+        }
+    override var isSelected: Boolean
+        get() {
+            return trackReactiveGet(__v_raw, "isSelected", __v_raw.isSelected, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("isSelected")) {
+                return;
+            }
+            val oldValue = __v_raw.isSelected;
+            __v_raw.isSelected = value;
+            triggerReactiveSet(__v_raw, "isSelected", oldValue, value);
+        }
+}
+val GenPagesDrawPlanDrawPlanClass = CreateVueComponent(GenPagesDrawPlanDrawPlan::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(type = "page", name = "", inheritAttrs = GenPagesDrawPlanDrawPlan.inheritAttrs, inject = GenPagesDrawPlanDrawPlan.inject, props = GenPagesDrawPlanDrawPlan.props, propsNeedCastKeys = GenPagesDrawPlanDrawPlan.propsNeedCastKeys, emits = GenPagesDrawPlanDrawPlan.emits, components = GenPagesDrawPlanDrawPlan.components, styles = GenPagesDrawPlanDrawPlan.styles);
+}
+, fun(instance): GenPagesDrawPlanDrawPlan {
+    return GenPagesDrawPlanDrawPlan(instance);
 }
 );
 fun createApp(): UTSJSONObject {
@@ -2476,20 +2908,25 @@ open class UniAppConfig : AppConfig {
     override var appid: String = "__UNI__B7338A2";
     override var versionName: String = "1.0.0";
     override var versionCode: String = "1";
-    override var uniCompileVersion: String = "4.12";
+    override var uniCompileVersion: String = "4.13";
     constructor(){}
 }
 fun definePageRoutes() {
-    __uniRoutes.push(PageRoute(path = "pages/login/login", component = GenPagesLoginLoginClass, meta = PageMeta(isQuit = true), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/healthQuestion/healthQuestion", component = GenPagesHealthQuestionHealthQuestionClass, meta = PageMeta(isQuit = true), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/tabbar/tabbar", component = GenPagesTabbarTabbarClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/login/login", component = GenPagesLoginLoginClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/plantDetail/plantDetail", component = GenPagesPlantDetailPlantDetailClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/healthDetail/healthDetail", component = GenPagesHealthDetailHealthDetailClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "每日药膳推荐")));
+    __uniRoutes.push(PageRoute(path = "pages/validateCode/validateCode", component = GenPagesValidateCodeValidateCodeClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/register/register", component = GenPagesRegisterRegisterClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/resultHealth/resultHealth", component = GenPagesResultHealthResultHealthClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/drawPlan/drawPlan", component = GenPagesDrawPlanDrawPlanClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
 }
 val __uniTabBar: Map<String, Any?>? = utsMapOf();
-val __uniLaunchPage: Map<String, Any?> = utsMapOf("url" to "pages/login/login", "style" to utsMapOf("navigationBarTitleText" to ""));
+val __uniLaunchPage: Map<String, Any?> = utsMapOf("url" to "pages/healthQuestion/healthQuestion", "style" to utsMapOf("navigationBarTitleText" to ""));
 @Suppress("UNCHECKED_CAST")
 fun defineAppConfig() {
-    __uniConfig.entryPagePath = "/pages/login/login";
+    __uniConfig.entryPagePath = "/pages/healthQuestion/healthQuestion";
     __uniConfig.globalStyle = utsMapOf("navigationBarTextStyle" to "black", "navigationBarTitleText" to "uni-app x", "navigationBarBackgroundColor" to "#F8F8F8", "backgroundColor" to "#F8F8F8", "navigationStyle" to "custom");
     __uniConfig.tabBar = __uniTabBar as Map<String, Any>?;
     __uniConfig.conditionUrl = "";

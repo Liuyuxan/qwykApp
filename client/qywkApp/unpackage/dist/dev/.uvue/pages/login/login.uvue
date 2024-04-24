@@ -34,9 +34,10 @@
 					
 					success: (res) => {
 						let r = res.data
-						console.log('登录返回信息', r, " at pages/login/login.uvue:62");
-						if(r!.code == 200) {
-							uni.setStorageSync('token', r!.data!.token)
+						if(r == null) return
+						console.log('登录返回信息', r, " at pages/login/login.uvue:63");
+						if(r.code == 200) {
+							uni.setStorageSync('token', r.data!.token)
 							uni.reLaunch({
 								url: '/pages/tabbar/tabbar',
 							})
@@ -50,7 +51,7 @@
 						
 					},
 					fail: (err) => {
-						console.log(err, " at pages/login/login.uvue:78");
+						console.log(err, " at pages/login/login.uvue:79");
 						uni.showToast({
 							title: "账号或密码错误",
 							icon: "none"
@@ -82,7 +83,7 @@ const _cache = this.$.renderCache
           mode: "widthFix",
           style: normalizeStyle(utsMapOf({"width":"36rpx","margin-right":"10rpx"}))
         }), null, 4 /* STYLE */),
-        createElementVNode("text", utsMapOf({ class: "title justify-start" }), "登录")
+        createElementVNode("text", utsMapOf({ class: "title" }), "登录")
       ]),
       createElementVNode("input", utsMapOf({
         modelValue: _ctx.loginInfo.userId,

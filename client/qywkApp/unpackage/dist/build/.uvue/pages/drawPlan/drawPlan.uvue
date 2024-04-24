@@ -1,0 +1,276 @@
+
+	type planType = {
+		id: string,
+		plantId: string | null,
+		name: string,
+		subarea: string,
+		punchCycle: string,
+		punchSize: number,
+		remindTime: string,
+		remindMusic: string,
+		automatic: string,
+		startTime: string | null,
+		endTime: string | null,
+		isSelected: boolean
+	}
+	export default {
+		data() {
+			return {
+				currentOptionIndex: 0 as number,
+				menuOptions: ["生活","健康","运动"] as string[],
+				colors: [
+					"#3b361a",
+					"#a27046",
+					"#46a398",
+					"#4679a3",
+					"#a34646",
+					"#83a346",
+					"#a39746",
+					"#a37246",
+					"#46a353"
+				],
+				plans: [
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "泡脚",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "艾灸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "拔火罐",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "刮痧",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "针灸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "中医熏蒸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "推拿",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "打坐",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "深呼吸",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "冥想",
+						subarea: "生活",
+						punchCycle: "1;2;3;4;5;6;7",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					}
+				] as planType[]
+			};
+		},
+		methods: {
+			clickMenuOptions(index:number) {
+				this.currentOptionIndex = index
+			},
+			select(index:number) {
+				this.plans[index].isSelected = !this.plans[index].isSelected
+			},
+			createPlan() {
+				uni.showLoading({
+					title: '创建养生计划中'
+				})
+				setTimeout(() => {
+					uni.hideLoading()
+					uni.showToast({
+						title: '创建成功，开始养生叭！'
+					})
+					uni.navigateTo({
+						url: '/pages/tabbar/tabbar'
+					})
+				},1000)
+			}
+		}
+	}
+
+
+function GenPagesDrawPlanDrawPlanRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("scroll-view", utsMapOf({
+    class: "flex flex-column align-center",
+    direction: "vertical",
+    style: normalizeStyle(utsMapOf({"flex":"1","background-color":"#f2eee9","padding-top":"50px"}))
+  }), [
+    createElementVNode("text", utsMapOf({ class: "title" }), "请选择本周打卡计划"),
+    createElementVNode("text", utsMapOf({ class: "sub-title mt-3" }), "------------------------- 根据体质检测结果智能推荐 -------------------------"),
+    createElementVNode("button", utsMapOf({
+      class: "select-plan-btn mt-3",
+      style: normalizeStyle(utsMapOf({"color":"#594532","backgroundColor":"#f2eee9","borderColor":"#594532","border-radius":"8px","width":"86%","height":"70rpx","line-height":"70rpx"})),
+      "hover-class": "btn-is-hover"
+    }), "选择推荐计划", 4),
+    createElementVNode("text", utsMapOf({ class: "sub-title mt-3" }), "------------------------------ 创建自定义计划 ------------------------------"),
+    createElementVNode("view", utsMapOf({ class: "menu mt-3 flex" }), [
+      createElementVNode("view", utsMapOf({
+        class: "left",
+        style: normalizeStyle(utsMapOf({"width":"100px","height":"100%"}))
+      }), [
+        createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.menuOptions, (item, index, _, _): VNode => {
+          return createElementVNode("view", utsMapOf({
+            class: normalizeClass(["flex align-center option", [index == _ctx.currentOptionIndex ? 'active-option' : '']]),
+            key: index,
+            onClick: () => {_ctx.clickMenuOptions(index)}
+          }), [
+            withDirectives(createElementVNode("view", utsMapOf({ class: "line" }), null, 512), [
+              [vShow, index == _ctx.currentOptionIndex]
+            ]),
+            createElementVNode("text", utsMapOf({
+              class: normalizeClass(['option-text', index == _ctx.currentOptionIndex ? 'ac-text' : ''])
+            }), toDisplayString(item), 3)
+          ], 10, ["onClick"])
+        }), 128 /* KEYED_FRAGMENT */)
+      ], 4),
+      createElementVNode("view", utsMapOf({
+        class: "right flex flex-column align-center",
+        style: normalizeStyle(utsMapOf({"flex":"1"}))
+      }), [
+        createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.plans, (item, index, _, _): VNode => {
+          return createElementVNode("view", utsMapOf({
+            class: "plan flex align-center mt-3",
+            key: index
+          }), [
+            createElementVNode("view", utsMapOf({
+              class: "line mr-3",
+              style: normalizeStyle(utsMapOf({'background-color': (_ctx.colors[index%9])}))
+            }), null, 4),
+            createElementVNode("view", utsMapOf({ class: "texts" }), [
+              createElementVNode("text", utsMapOf({
+                class: "text",
+                style: normalizeStyle(utsMapOf({"font-size":"24rpx"}))
+              }), toDisplayString(item.name), 5),
+              createElementVNode("text", utsMapOf({
+                class: "text",
+                style: normalizeStyle(utsMapOf({"font-size":"20rpx"}))
+              }), toDisplayString(item.punchCycle), 5)
+            ]),
+            createElementVNode("view", utsMapOf({
+              class: normalizeClass([item.isSelected ? 'select' : 'unselect']),
+              style: normalizeStyle(utsMapOf({'backgroundColor': (item.isSelected ? _ctx.colors[index%9] : '#f2eee9')})),
+              onClick: () => {_ctx.select(index)}
+            }), null, 14, ["onClick"])
+          ])
+        }), 128 /* KEYED_FRAGMENT */)
+      ], 4)
+    ]),
+    createElementVNode("button", utsMapOf({
+      class: "create-btn",
+      "hover-class": "create-btn-is-hover",
+      onClick: _ctx.createPlan
+    }), "创建", 8, ["onClick"])
+  ], 4)
+}
+const GenPagesDrawPlanDrawPlanStyles = [utsMapOf([["title", padStyleMapOf(utsMapOf([["fontSize", 16], ["color", "#594532"], ["width", "100%"], ["paddingLeft", "40rpx"], ["paddingBottom", "20rpx"], ["borderBottomWidth", 2], ["borderBottomStyle", "solid"], ["borderBottomColor", "#594532"]]))], ["sub-title", padStyleMapOf(utsMapOf([["fontSize", 10], ["color", "#594532"]]))], ["btn-is-hover", padStyleMapOf(utsMapOf([["backgroundColor", "#594532"], ["color", "#ffffff"]]))], ["create-btn", padStyleMapOf(utsMapOf([["position", "absolute"], ["bottom", "-3%"], ["width", "80%"], ["height", "100rpx"], ["borderRadius", "16rpx"], ["lineHeight", "100rpx"], ["backgroundColor", "#b19983"], ["color", "#ffffff"]]))], ["create-btn-is-hover", padStyleMapOf(utsMapOf([["backgroundColor", "#594532"]]))], ["menu", padStyleMapOf(utsMapOf([["width", "100%"], ["height", "100%"]]))], ["left", utsMapOf([[".menu ", utsMapOf([["backgroundColor", "#eee1ce"]])]])], ["option", utsMapOf([[".menu .left ", utsMapOf([["width", "100%"], ["height", "128rpx"], ["display", "flex"], ["flexDirection", "row"]])]])], ["line", utsMapOf([[".menu .left .option ", utsMapOf([["width", "12rpx"], ["height", "80rpx"], ["borderRadius", "12rpx"], ["backgroundColor", "#faf4f0"]])], [".menu .right .plan ", utsMapOf([["width", "10rpx"], ["height", "48rpx"], ["borderRadius", "12rpx"]])]])], ["option-text", utsMapOf([[".menu .left .option ", utsMapOf([["width", "100%"], ["height", "100%"], ["lineHeight", "128rpx"], ["textAlign", "center"], ["fontSize", 16], ["color", "#594532"]])]])], ["ac-text", utsMapOf([[".menu .left .option ", utsMapOf([["marginLeft", -6]])]])], ["active-option", utsMapOf([[".menu .left ", utsMapOf([["backgroundColor", "#b19983"]])]])], ["right", utsMapOf([[".menu ", utsMapOf([["backgroundColor", "#e3cead"]])]])], ["plan", utsMapOf([[".menu .right ", utsMapOf([["width", "480rpx"], ["height", "96rpx"], ["backgroundColor", "#f2eee9"], ["borderRadius", "16rpx"]])]])], ["text", utsMapOf([[".menu .right .plan .line ", utsMapOf([["color", "#594532"]])]])], ["texts", utsMapOf([[".menu .right .plan ", utsMapOf([["width", "380rpx"]])]])], ["select", utsMapOf([[".menu .right .plan ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"]])]])], ["unselect", utsMapOf([[".menu .right .plan ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#b19983"]])]])]])]

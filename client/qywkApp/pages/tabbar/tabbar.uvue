@@ -2,7 +2,8 @@
 	<!-- #ifdef APP -->
 	<scroll-view style="flex:1">
 	<!-- #endif -->
-	
+	<image v-show="isShowGif" class="gif center" style="width: 100%; bottom: 2%;" src="/static/animate/leaf_animate.gif" mode="widthFix"></image>
+	<image v-show="isShowGif" class="gif center" style="width: 60%; bottom: 38%;" src="/static/animate/energy_animate.gif" mode="widthFix"></image>
 	<view v-show="tabIndex == 0">
 		<showWindow></showWindow>
 	</view>
@@ -31,7 +32,8 @@
 			
 			<view class="tab-item animate-base" :class="[acAnimate]" @touchstart="handlerTouchstart" @touchmove="handlerTouchmove" @touchend="handlerTouchend" :style="[tabIndex == 2 ? 'display: visible;' : 'display: none;']">
 				<view class="bg-img">
-					<image class="center-icon" :src="tabs[2].selectedIcon" mode="widthFix"></image>
+					<image class="center-icon" :src="tabs[2].selectedIcon" mode="widthFix" v-if="!isShowGif"></image>
+					<image class="center-icon" style="width: 200%;" src="/static/animate/tabbar_animate.gif" mode="widthFix" v-else></image>
 				</view>
 			</view>
 			<view class="tab-item" @click="changeTab(2)" v-if="tabIndex !== 2">
@@ -60,7 +62,8 @@
 	export default {
 		data() {
 			return {
-				acAnimate: '',  // 控制中间tab-icon动画
+				acAnimate: '',  // 控制中间tab-icon过渡
+				isShowGif: false,  // 控制长按打卡动图显示
 				tabIndex: 2,
 				centerIndex: true,//  处于中间页面
 				direction: 'right',
@@ -121,7 +124,10 @@
 					this.loop = 0
 					// 执行长按要执行的内容
 					console.log('长按');
-					
+					this.isShowGif = true
+					setTimeout(() => {
+						this.isShowGif = false
+					},1500)
 					this.clickShow = false
 					this.longClickShow = true
 				}, 500) // 定时的时间
@@ -130,11 +136,15 @@
 			handlerTouchmove() {
 				// 清除定时器
 				clearTimeout(this.loop)
+				
 				this.loop = 0
 			},
 			handlerTouchend() {
 				// 清除定时器
 				clearTimeout(this.loop)
+				console.log('离开长按');
+				this.isShowGif = false
+				
 				if (this.loop !== 0) {
 					// 单击操作
 					console.log('单击');
@@ -158,6 +168,12 @@
 </script>
 
 <style lang="scss" scoped>
+	.gif {
+		position: fixed;
+		left: 50%;
+		transform: translate(-50%);
+	}
+
 	.center-img {
 		width: 40px;
 	}

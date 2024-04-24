@@ -342,8 +342,8 @@
 		position: absolute;
 		width: 560rpx;
 		z-index: 99;
-		bottom: 48%;
-		// bottom: 52%;
+		// bottom: 48%;
+		bottom: 52%;
 		.expression {
 			width: 120rpx;
 			position: absolute;

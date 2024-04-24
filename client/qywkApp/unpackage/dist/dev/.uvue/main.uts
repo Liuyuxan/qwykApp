@@ -25,7 +25,7 @@ export class UniAppConfig extends AppConfig {
     override appid: string = "__UNI__B7338A2"
     override versionName: string = "1.0.0"
     override versionCode: string = "1"
-    override uniCompileVersion: string = "4.13"
+    override uniCompileVersion: string = "4.12"
     
     constructor() {}
 }

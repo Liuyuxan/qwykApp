@@ -16,12 +16,31 @@ import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
 import io.dcloud.uniapp.appframe.AppConfig;
+import io.dcloud.uniapp.extapi.clearStorageSync as uni_clearStorageSync;
 import io.dcloud.uniapp.extapi.connectSocket as uni_connectSocket;
 import io.dcloud.uniapp.extapi.exit as uni_exit;
+import io.dcloud.uniapp.extapi.getStorageSync as uni_getStorageSync;
 import io.dcloud.uniapp.extapi.getSystemInfoSync as uni_getSystemInfoSync;
+import io.dcloud.uniapp.extapi.reLaunch as uni_reLaunch;
 import io.dcloud.uniapp.extapi.removeInterceptor as uni_removeInterceptor;
 import io.dcloud.uniapp.extapi.showToast as uni_showToast;
 val BASE_URL = "http://192.168.252.249:9000";
+open class Utils {
+    companion object {
+        fun checkLogin() {
+            val token = uni_getStorageSync("token") as String;
+            console.log("token", token, " at utils/utils.uts:9");
+            if (token.length <= 0) {
+                uni_showToast(ShowToastOptions(title = "您暂未登录，请登录"));
+                uni_reLaunch(ReLaunchOptions(url = "/pages/login/login"));
+                uni_clearStorageSync();
+            }
+        }
+        fun getBaseURL(url: String): String {
+            return BASE_URL + url;
+        }
+    }
+}
 var firstBackTime: Number = 0;
 open class GenApp : BaseApp {
     constructor(instance: ComponentInternalInstance) : super(instance) {
@@ -30,6 +49,7 @@ open class GenApp : BaseApp {
         }
         , instance);
         onAppShow(fun(_: OnShowOptions) {
+            Utils.checkLogin();
             console.log("App Show", " at App.uvue:11");
         }
         , instance);

@@ -1,0 +1,62 @@
+
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
+
+
+function GenPagesPlantDetailPlantDetailRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("view", utsMapOf({ class: "plant-detail" }), [
+    createElementVNode("image", utsMapOf({
+      class: "plant-img",
+      src: "/static/image/plant/hawthorn.png",
+      mode: "widthFix"
+    })),
+    createElementVNode("view", utsMapOf({ class: "info center flex justify-center align-center" }), [
+      createElementVNode("view", utsMapOf({ class: "plant-name" }), [
+        createElementVNode("image", utsMapOf({
+          class: "img-border",
+          style: normalizeStyle(utsMapOf({"width":"100rpx"})),
+          src: "/static/image/showWindow/Pattern.png",
+          mode: "widthFix"
+        }), null, 4),
+        createElementVNode("text", utsMapOf({ class: "text text1" }), "山"),
+        createElementVNode("text", utsMapOf({ class: "text text2" }), "楂")
+      ]),
+      createElementVNode("view", utsMapOf({
+        class: "info-content ml-3",
+        style: normalizeStyle(utsMapOf({"width":"400rpx"}))
+      }), [
+        createElementVNode("view", utsMapOf({ class: "tags flex justify-between" }), [
+          createElementVNode("text", utsMapOf({ class: "tag" }), "酸"),
+          createElementVNode("text", utsMapOf({ class: "tag" }), "味甘"),
+          createElementVNode("text", utsMapOf({ class: "tag" }), "性温")
+        ]),
+        createElementVNode("view", utsMapOf({ class: "mt-2" }), [
+          createElementVNode("text", utsMapOf({ class: "text" }), "【用药部位】：干燥成熟的果实"),
+          createElementVNode("text", utsMapOf({ class: "text" }), "【功能主治】：消食健脾，行气消淤，化浊降脂，用于肉食积滞，淤血闭经，产后瘀阻，岔气疼痛等。")
+        ])
+      ], 4)
+    ]),
+    createElementVNode("view", utsMapOf({ class: "btn center" }), [
+      createElementVNode("image", utsMapOf({
+        class: "btn-img",
+        style: normalizeStyle(utsMapOf({"width":"310rpx"})),
+        src: "/static/image/showWindow/unlocked_Pattern.png",
+        mode: "widthFix"
+      }), null, 4),
+      createElementVNode("text", utsMapOf({ class: "text" }), "已解锁")
+    ]),
+    createElementVNode("image", utsMapOf({
+      class: "bg-img",
+      src: "/static/image/showWindow/画卷.png.png",
+      mode: "widthFix"
+    }))
+  ])
+}
+const GenPagesPlantDetailPlantDetailStyles = [utsMapOf([["plant-detail", padStyleMapOf(utsMapOf([["width", "100%"], ["height", "100%"], ["backgroundColor", "#f2eee9"]]))], ["plant-img", padStyleMapOf(utsMapOf([["width", "460rpx"], ["position", "fixed"], ["top", "18%"], ["left", "150rpx"], ["zIndex", 1]]))], ["bg-img", padStyleMapOf(utsMapOf([["width", "96%"], ["position", "absolute"], ["left", "50%"], ["top", "50%"], ["transform", "translate(-50%)"], ["zIndex", 0]]))], ["info", padStyleMapOf(utsMapOf([["position", "fixed"], ["top", "56%"], ["zIndex", 9]]))], ["img-border", utsMapOf([[".info .plant-name ", utsMapOf([["position", "relative"]])]])], ["text", utsMapOf([[".info .plant-name ", utsMapOf([["position", "absolute"], ["left", "50%"], ["transform", "translateX(-50%)"], ["fontSize", "64rpx"], ["color", "#594532"]])], [".info .info-content ", utsMapOf([["color", "#937152"], ["fontSize", "24rpx"]])], [".btn ", utsMapOf([["position", "absolute"], ["top", "50%"], ["left", "50%"], ["transform", "translate(-50%)"], ["color", "#7a927a"], ["fontSize", "52rpx"]])]])], ["text1", utsMapOf([[".info .plant-name ", utsMapOf([["top", "30%"]])]])], ["text2", utsMapOf([[".info .plant-name ", utsMapOf([["top", "60%"]])]])], ["tag", utsMapOf([[".info .info-content .tags ", utsMapOf([["width", "100rpx"], ["height", "56rpx"], ["lineHeight", "56rpx"], ["backgroundColor", "#7a927a"], ["borderRadius", "12rpx"], ["textAlign", "center"], ["color", "#ffffff"]])]])], ["btn", padStyleMapOf(utsMapOf([["position", "fixed"], ["zIndex", 9], ["bottom", "16%"]]))]])]

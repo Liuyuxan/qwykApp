@@ -1,0 +1,68 @@
+{
+  "version": "1",
+  "env": {
+    "compiler_version": "4.12.2024041009-alpha"
+  },
+  "files": {
+    "pages/plantDetail/plantDetail.kt": {
+      "md5": "84e89a129c05a9c6ac0447074a17d9e9837ec178",
+      "class": "GenPagesPlantDetailPlantDetail"
+    },
+    "pages/healthDetail/healthDetail.kt": {
+      "class": "GenPagesHealthDetailHealthDetail",
+      "md5": "daa7313e7ea43af86edc616644bbe7c6188d753b"
+    },
+    "components/community/community.kt": {
+      "md5": "9432ed258a48dcfbc05012df6a734a46feeaab04",
+      "class": "GenComponentsCommunityCommunity"
+    },
+    "pages/drawPlan/drawPlan.kt": {
+      "class": "GenPagesDrawPlanDrawPlan",
+      "md5": "f067fbd0a0e6343480199933a8e13bd5d3e38f0b"
+    },
+    "components/myPage/myPage.kt": {
+      "md5": "cd7c94601765fb522f2d6b065e7ba1fe636c8657",
+      "class": "GenComponentsMyPageMyPage"
+    },
+    "components/showWindow/showWindow.kt": {
+      "md5": "2342384786d2bf51b61929140ab7424e924c8587",
+      "class": "GenComponentsShowWindowShowWindow"
+    },
+    "components/home/home.kt": {
+      "class": "GenComponentsHomeHome",
+      "md5": "16f737239a7a8b0ec9761852baa0678c32ad85b7"
+    },
+    "index.kt": {
+      "md5": "174d0d5765499fa9284cbfc388a6e9853eb83d2f",
+      "class": ""
+    },
+    "pages/register/register.kt": {
+      "md5": "97fae667d5ed03f7d7cd2ec2047177fa2904aa7a",
+      "class": "GenPagesRegisterRegister"
+    },
+    "pages/login/login.kt": {
+      "md5": "284214c5bce61ea514f6fc5268b8fd36ed3806ca",
+      "class": "GenPagesLoginLogin"
+    },
+    "pages/validateCode/validateCode.kt": {
+      "md5": "00bae72b1249abd6af5eae98a053c6c9d6708721",
+      "class": "GenPagesValidateCodeValidateCode"
+    },
+    "pages/healthQuestion/healthQuestion.kt": {
+      "md5": "b7f331f16ebd9ccb462370926896ec96419dc1de",
+      "class": "GenPagesHealthQuestionHealthQuestion"
+    },
+    "pages/tabbar/tabbar.kt": {
+      "md5": "c1ca1389487cbf0652d9574baa0ea12648fd06c0",
+      "class": "GenPagesTabbarTabbar"
+    },
+    "pages/resultHealth/resultHealth.kt": {
+      "class": "GenPagesResultHealthResultHealth",
+      "md5": "98a64bc8f9c5317fc4b89487855d72ceef428829"
+    },
+    "components/healthComponent/healthComponent.kt": {
+      "md5": "46838043f7e80cde764d4b886f4205485e3e7120",
+      "class": "GenComponentsHealthComponentHealthComponent"
+    }
+  }
+}

@@ -434,13 +434,15 @@
 			}
 		},
 		onLoad() {
-			let token = 'eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzg4NjI1MzI4NywidXNlcl9pZCI6InJvb3QiLCJuaWNrbmFtZSI6ImFkaW1pbiIsInVzZXJfa2V5IjoibG9naW4tdG9rZW5zOnJvb3QifQ.UMwlkYwqvLtV9ZPomVOf2i7aZAxQfnakhMUWAhKRzs60U49ai5ZH8rp8px161KGhc4xfLHX4E53NH37sncKFjQ'
+			// let token = 'eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzg4NjI1MzI4NywidXNlcl9pZCI6InJvb3QiLCJuaWNrbmFtZSI6ImFkaW1pbiIsInVzZXJfa2V5IjoibG9naW4tdG9rZW5zOnJvb3QifQ.UMwlkYwqvLtV9ZPomVOf2i7aZAxQfnakhMUWAhKRzs60U49ai5ZH8rp8px161KGhc4xfLHX4E53NH37sncKFjQ'
+			let token = 'eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzQ1MTU3NDMwMSwidXNlcl9pZCI6IjIwMjIyMTI3OTYiLCJ1c2VyX2tleSI6ImxvZ2luLXRva2VuczoyMDIyMjEyNzk2IiwidXNlcm5hbWUiOiLliJjlrofovakifQ.Uz5L1X_Brb2bnrxarXU0ggj-xt1wYKJsaFC4MaqWkvp7Mit6ru68hxSghtL7pLq0THR1RF7pXQVislnwTYmDnQ'
 			// let header = uni.getStorageSync('token')
 			
 			// let JSONHeader : UTSJSONObject = JSON.parseObject(JSON.stringify(token)) as UTSJSONObject
 			// console.log('JSONHeader', JSONHeader);
-			uni.request<IResponse<resType>>({
-				url: `/health/questionnaire/getAllProblem?page=${1}&size=${15}`,
+			uni.request({
+				// url: `/health/questionnaire/getAllProblem?page=${1}&size=${15}`,
+				url: 'https://zjyt.cqytxy.edu.cn/user/info/get',
 				header: {
 					Authorization: token
 				},

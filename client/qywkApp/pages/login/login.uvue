@@ -4,7 +4,7 @@
 		<view class="window flex flex-column  align-center">
 			<view class="top flex align-center">
 				<image src="../../static/image/login/chacha.png" mode="widthFix" style="width: 36rpx;margin-right: 10rpx;"></image>
-				<text class="title justify-start">登录</text>
+				<text class="title">登录</text>
 			</view>
 			<input v-model="loginInfo.userId" class="uni-input space" placeholder="账号/手机号" />
 			<input v-model="loginInfo.password" class="uni-input space" password type="text" placeholder="密码" />
@@ -59,9 +59,10 @@
 					
 					success: (res) => {
 						let r = res.data
+						if(r == null) return
 						console.log('登录返回信息', r);
-						if(r!.code == 200) {
-							uni.setStorageSync('token', r!.data!.token)
+						if(r.code == 200) {
+							uni.setStorageSync('token', r.data!.token)
 							uni.reLaunch({
 								url: '/pages/tabbar/tabbar',
 							})

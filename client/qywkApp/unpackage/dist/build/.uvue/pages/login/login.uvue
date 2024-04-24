@@ -3,9 +3,6 @@
 	import type { IResponse } from "@/common/type/http.uts"
 	import { BASE_URL } from "@/config/index.uts"
 	
-	// import Http from "@/utils/http"
-	// import utils from "@/utils/utils.uts"
-	
 	export default {
 		data() {
 			return {
@@ -16,11 +13,17 @@
 			}
 		},
 		methods: {
+			register() {
+				uni.navigateTo({
+					url: '/pages/validateCode/validateCode'
+				})
+			},
 			clickLogin() {
 				if((this.loginInfo.userId.length <= 0) || (this.loginInfo.password.length <= 0)) return 
-				
+				uni.showLoading({
+					title: '登录中'
+				})
 				console.log(this.loginInfo);
-				// Http.post('/qywk/login/normal', this.loginInfo)
 				uni.request<IResponse<IToken>>({
 					url: BASE_URL + '/user/login/normal',
 					method: 'POST',
@@ -28,7 +31,7 @@
 						userId: this.loginInfo.userId,
 						password: this.loginInfo.password
 					},
-					dataType: 'json',
+					
 					success: (res) => {
 						let r = res.data
 						console.log('登录返回信息', r);
@@ -52,6 +55,9 @@
 							title: "账号或密码错误",
 							icon: "none"
 						})
+					},
+					complete:() => {
+						uni.hideLoading()
 					}
 				})
 
@@ -103,7 +109,10 @@ const _cache = this.$.renderCache
           createElementVNode("text", utsMapOf({ class: "text" }), "忘记密码")
         ]),
         createElementVNode("view", utsMapOf({ class: "sign-up" }), [
-          createElementVNode("text", utsMapOf({ class: "text" }), "手机注册")
+          createElementVNode("text", utsMapOf({
+            class: "text",
+            onClick: _ctx.register
+          }), "注册账号", 8, ["onClick"])
         ])
       ]),
       createElementVNode("view", utsMapOf({ class: "icons flex justify-around" }), [
