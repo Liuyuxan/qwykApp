@@ -56,4 +56,10 @@ public class PlanSysDTO {
 
     @TableField("automatic")
     private String automatic;
+
+    @TableField("start_time")
+    private String startTime;
+
+    @TableField("end_time")
+    private String endTime;
 }

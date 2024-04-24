@@ -51,6 +51,12 @@ public class PlanUserDTO {
     @TableField("automatic")
     private String automatic;
 
+    @TableField("start_time")
+    private String startTime;
+
+    @TableField("end_time")
+    private String endTime;
+
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 

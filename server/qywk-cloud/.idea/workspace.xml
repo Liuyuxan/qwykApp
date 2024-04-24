@@ -5,68 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca67a8f2-7784-4aed-9e03-5a65cbc0fb2a" name="默认变更列表" comment="fix(qywk-modules-health)">
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/PlanController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/PlantController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/mapper/PlantMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/mapper/PlantUserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/mapper/QuestionnaireResultMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlantDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlantUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/QuestionnaireResultDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlantVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/PlantService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/PlantServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/QuestionnaireServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/debug/android_debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/debug/android_debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/App.uvue" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/App.uvue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/common/type/user.uts" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/common/type/user.uts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/components/u-icon/u-icon.uvue" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/components/u-icon/u-icon.uvue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/config/index.uts" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/config/index.uts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/main.uts" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/main.uts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/node-modules/@dcloudio/uni-components/lib-x/unicloud-db/unicloud-db.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/node-modules/@dcloudio/uni-components/lib-x/unicloud-db/unicloud-db.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/output.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/output.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/community/community.uvue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/index/index.uvue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/login/login.uvue" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/login/login.uvue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/message/message.uvue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/myPage/myPage.uvue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/.uvue/pages/showWindow/showWindow.uvue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/index.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/index.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/community/community.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/index/index.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/login/login.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/login/login.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/message/message.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/myPage/myPage.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/.uniappx/android/src/pages/showWindow/showWindow.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/未选择1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/未选择2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/未选择3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/未选择4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/未选择5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/选择1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/选择2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/选择3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/选择4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../client/qywkApp/unpackage/dist/build/app-android/static/image/icons/选择5.png" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/HealthIndicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/entity/HealthIndicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-common/qywk-common-core/src/main/java/com/qywk/common/core/entity/Indicator.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/entity/Indicator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/customenum/RedisKeyEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-common/qywk-common-redis/src/main/java/com/qywk/common/redis/customenum/RedisKeyEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-community/src/main/java/com/qywk/community/client/UserInfoClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-community/src/main/java/com/qywk/community/client/UserInfoClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/QYWKHealthApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/QYWKHealthApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/client/ChatAiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/client/ChatAiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/HealthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/QuestionnaireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/HealthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/QuestionnaireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/HealthServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/controller/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/controller/UserInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/ao/LoginAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/ao/LoginAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/PlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/PlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanSysAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanSysAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanSysDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanSysDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanUserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanUserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanPunchStateVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanPunchStateVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanSysVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanSysVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/PlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/PlanService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/PlanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/PlanServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/dto/UserInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/dto/UserInfoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/vo/UserBasicInfoVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/vo/UserBasicInfoVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/vo/UserInfoVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/vo/UserInfoVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/service/impl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/service/impl/LoginServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,12 +47,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/entity" />
@@ -136,25 +89,13 @@
       <recent name="com.qywk" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.qywk.health.mapper" />
       <recent name="com.qywk.file.controller" />
       <recent name="com.qywk.common.constant" />
       <recent name="com.qywk.common.customenum" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.QYWKUserCenterApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="QYWKChatAiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="qywk-modules-chat-ai" />
       <extension name="coverage">
@@ -223,9 +164,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.QYWKUserCenterApplication" />
-        <item itemvalue="Spring Boot.QYWKHealthApplication" />
-        <item itemvalue="Spring Boot.QYWKChatAiApplication" />
         <item itemvalue="Spring Boot.QYWKGateWayApplication" />
+        <item itemvalue="Spring Boot.QYWKChatAiApplication" />
+        <item itemvalue="Spring Boot.QYWKHealthApplication" />
         <item itemvalue="Spring Boot.QYWKCommunityApplication" />
       </list>
     </recent_temporary>
@@ -254,7 +195,13 @@
       <workItem from="1713766084881" duration="8671000" />
       <workItem from="1713775230506" duration="10840000" />
       <workItem from="1713794416224" duration="2635000" />
-      <workItem from="1713798815552" duration="6246000" />
+      <workItem from="1713798815552" duration="6574000" />
+      <workItem from="1713846700996" duration="4459000" />
+      <workItem from="1713862127194" duration="3660000" />
+      <workItem from="1713866462103" duration="11989000" />
+      <workItem from="1713884525976" duration="1432000" />
+      <workItem from="1713886150424" duration="658000" />
+      <workItem from="1713924589114" duration="4721000" />
     </task>
     <task id="LOCAL-00001" summary="init(qywk-modules-community): 初始化社区模块">
       <created>1713450282309</created>
@@ -284,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713754170234</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix(qywk-modules-health)">
+      <created>1713843389256</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713843389256</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

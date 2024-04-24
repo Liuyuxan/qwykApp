@@ -186,10 +186,15 @@ public class LoginServiceImpl implements LoginService {
             user.setUserId(generateUserAccount(i));
             BeanUtils.copyProperties(ao, user);
             user.setPassword(MD5.getInstance().getMD5String(ao.getPassword()));
-            if(userInfoMapper.insert(user) >= 1){
-                LoginAO loginAO = new LoginAO(user.getUserId(), ao.getPassword());
-                return login(loginAO);
+            try {
+                if(userInfoMapper.insert(user) >= 1){
+                    LoginAO loginAO = new LoginAO(user.getUserId(), ao.getPassword());
+                    return login(loginAO);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
+
         }
 
         return ResultBody.error().code(CodeStateEnum.ERROR.code).message(CodeStateEnum.ERROR.message + ",请稍后重试");
