@@ -16,12 +16,30 @@ import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
 import io.dcloud.uniapp.appframe.AppConfig;
+import io.dcloud.uniapp.extapi.clearStorageSync as uni_clearStorageSync;
 import io.dcloud.uniapp.extapi.connectSocket as uni_connectSocket;
 import io.dcloud.uniapp.extapi.exit as uni_exit;
+import io.dcloud.uniapp.extapi.getStorageSync as uni_getStorageSync;
 import io.dcloud.uniapp.extapi.getSystemInfoSync as uni_getSystemInfoSync;
+import io.dcloud.uniapp.extapi.reLaunch as uni_reLaunch;
 import io.dcloud.uniapp.extapi.removeInterceptor as uni_removeInterceptor;
 import io.dcloud.uniapp.extapi.showToast as uni_showToast;
-val BASE_URL = "http://192.168.252.249:9000";
+val BASE_URL = "https://47aebe35.r3.cpolar.cn";
+open class Utils {
+    companion object {
+        fun checkLogin() {
+            val token = uni_getStorageSync("token") as String;
+            if (token.length <= 0) {
+                uni_showToast(ShowToastOptions(title = "您暂未登录，请登录"));
+                uni_reLaunch(ReLaunchOptions(url = "/pages/login/login"));
+                uni_clearStorageSync();
+            }
+        }
+        fun getBaseURL(url: String): String {
+            return BASE_URL + url;
+        }
+    }
+}
 var firstBackTime: Number = 0;
 open class GenApp : BaseApp {
     constructor(instance: ComponentInternalInstance) : super(instance) {
@@ -30,6 +48,7 @@ open class GenApp : BaseApp {
         }
         , instance);
         onAppShow(fun(_: OnShowOptions) {
+            Utils.checkLogin();
             console.log("App Show", " at App.uvue:11");
         }
         , instance);
@@ -72,7 +91,7 @@ open class GenApp : BaseApp {
             }
         val styles1: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("p-5" to padStyleMapOf(utsMapOf("paddingTop" to "50rpx", "paddingRight" to "50rpx", "paddingBottom" to "50rpx", "paddingLeft" to "50rpx")), "pt-0" to padStyleMapOf(utsMapOf("paddingTop" to 0)), "pt" to padStyleMapOf(utsMapOf("paddingTop" to "5rpx")), "pt-1" to padStyleMapOf(utsMapOf("paddingTop" to "10rpx")), "pt-2" to padStyleMapOf(utsMapOf("paddingTop" to "20rpx")), "pt-3" to padStyleMapOf(utsMapOf("paddingTop" to "30rpx")), "pt-4" to padStyleMapOf(utsMapOf("paddingTop" to "40rpx")), "pt-5" to padStyleMapOf(utsMapOf("paddingTop" to "50rpx")), "pb-0" to padStyleMapOf(utsMapOf("paddingBottom" to 0)), "pb-1" to padStyleMapOf(utsMapOf("paddingBottom" to "10rpx")), "pb" to padStyleMapOf(utsMapOf("paddingBottom" to "5rpx")), "pb-2" to padStyleMapOf(utsMapOf("paddingBottom" to "20rpx")), "pb-3" to padStyleMapOf(utsMapOf("paddingBottom" to "30rpx")), "pb-4" to padStyleMapOf(utsMapOf("paddingBottom" to "40rpx")), "pb-5" to padStyleMapOf(utsMapOf("paddingBottom" to "50rpx")), "pl-0" to padStyleMapOf(utsMapOf("paddingLeft" to 0)), "pl" to padStyleMapOf(utsMapOf("paddingLeft" to "5rpx")), "pl-1" to padStyleMapOf(utsMapOf("paddingLeft" to "10rpx")), "pl-2" to padStyleMapOf(utsMapOf("paddingLeft" to "20rpx")), "pl-3" to padStyleMapOf(utsMapOf("paddingLeft" to "30rpx")), "pl-4" to padStyleMapOf(utsMapOf("paddingLeft" to "40rpx")), "pl-5" to padStyleMapOf(utsMapOf("paddingLeft" to "50rpx")), "pr-0" to padStyleMapOf(utsMapOf("paddingRight" to 0)), "pr" to padStyleMapOf(utsMapOf("paddingRight" to "5rpx")), "pr-1" to padStyleMapOf(utsMapOf("paddingRight" to "10rpx")), "pr-2" to padStyleMapOf(utsMapOf("paddingRight" to "20rpx")), "pr-3" to padStyleMapOf(utsMapOf("paddingRight" to "30rpx")), "pr-4" to padStyleMapOf(utsMapOf("paddingRight" to "40rpx")), "pr-5" to padStyleMapOf(utsMapOf("paddingRight" to "50rpx")), "py-0" to padStyleMapOf(utsMapOf("paddingTop" to 0, "paddingBottom" to 0)), "py" to padStyleMapOf(utsMapOf("paddingTop" to "5rpx", "paddingBottom" to "5rpx")), "py-1" to padStyleMapOf(utsMapOf("paddingTop" to "10rpx", "paddingBottom" to "10rpx")), "py-2" to padStyleMapOf(utsMapOf("paddingTop" to "20rpx", "paddingBottom" to "20rpx")), "py-3" to padStyleMapOf(utsMapOf("paddingTop" to "30rpx", "paddingBottom" to "30rpx")), "py-4" to padStyleMapOf(utsMapOf("paddingTop" to "40rpx", "paddingBottom" to "40rpx")), "py-5" to padStyleMapOf(utsMapOf("paddingTop" to "50rpx", "paddingBottom" to "50rpx")), "px-0" to padStyleMapOf(utsMapOf("paddingLeft" to 0, "paddingRight" to 0)), "px-1" to padStyleMapOf(utsMapOf("paddingLeft" to "10rpx", "paddingRight" to "10rpx")), "px" to padStyleMapOf(utsMapOf("paddingLeft" to "5rpx", "paddingRight" to "5rpx")), "px-2" to padStyleMapOf(utsMapOf("paddingLeft" to "20rpx", "paddingRight" to "20rpx")), "px-3" to padStyleMapOf(utsMapOf("paddingLeft" to "30rpx", "paddingRight" to "30rpx")), "px-4" to padStyleMapOf(utsMapOf("paddingLeft" to "40rpx", "paddingRight" to "40rpx")), "px-5" to padStyleMapOf(utsMapOf("paddingLeft" to "50rpx", "paddingRight" to "50rpx")), "font-smaller" to padStyleMapOf(utsMapOf("fontSize" to "15rpx")), "font-small" to padStyleMapOf(utsMapOf("fontSize" to "20rpx")), "font-sm" to padStyleMapOf(utsMapOf("fontSize" to "25rpx")), "font" to padStyleMapOf(utsMapOf("!fontSize" to "30rpx")), "font-md" to padStyleMapOf(utsMapOf("!fontSize" to "35rpx")), "font-lg" to padStyleMapOf(utsMapOf("fontSize" to "40rpx")), "h1" to padStyleMapOf(utsMapOf("fontSize" to "80rpx", "lineHeight" to 1.8)), "h2" to padStyleMapOf(utsMapOf("fontSize" to "60rpx", "lineHeight" to 1.8)), "h3" to padStyleMapOf(utsMapOf("fontSize" to "45rpx", "lineHeight" to 1.8)), "h4" to padStyleMapOf(utsMapOf("fontSize" to "32rpx", "lineHeight" to 1.8)), "h5" to padStyleMapOf(utsMapOf("fontSize" to "30rpx", "lineHeight" to 1.8)), "h6" to padStyleMapOf(utsMapOf("fontSize" to "28rpx", "lineHeight" to 1.8)), "text-left" to padStyleMapOf(utsMapOf("textAlign" to "left")), "text-right" to padStyleMapOf(utsMapOf("textAlign" to "right")), "text-center" to padStyleMapOf(utsMapOf("textAlign" to "center")), "text-ellipsis" to padStyleMapOf(utsMapOf("lines" to 1)), "font-weight-normal" to padStyleMapOf(utsMapOf("fontWeight" to "normal")), "font-weight-bold" to padStyleMapOf(utsMapOf("fontWeight" to "bold")), "font-weight-bolder" to padStyleMapOf(utsMapOf("fontWeight" to "400")), "font-italic" to padStyleMapOf(utsMapOf("fontStyle" to "italic")), "text-white" to padStyleMapOf(utsMapOf("color" to "#ffffff")), "text-primary" to padStyleMapOf(utsMapOf("color" to "#007bff")), "text-hover-primary" to padStyleMapOf(utsMapOf("color" to "#0056b3")), "text-secondary" to padStyleMapOf(utsMapOf("color" to "#6c757d")), "text-hover-secondary" to padStyleMapOf(utsMapOf("color" to "#494f54")), "text-success" to padStyleMapOf(utsMapOf("color" to "#28a745")), "text-hover-success" to padStyleMapOf(utsMapOf("color" to "#19692c")), "text-info" to padStyleMapOf(utsMapOf("color" to "#17a2b8")), "text-hover-info" to padStyleMapOf(utsMapOf("color" to "#0f6674")), "text-warning" to padStyleMapOf(utsMapOf("color" to "#ffc107")), "text-hover-warning" to padStyleMapOf(utsMapOf("color" to "#ba8b00")), "text-danger" to padStyleMapOf(utsMapOf("color" to "#dc3545")), "text-hover-danger" to padStyleMapOf(utsMapOf("color" to "#a71d2a")), "text-light" to padStyleMapOf(utsMapOf("color" to "#f8f9fa")), "text-hover-light" to padStyleMapOf(utsMapOf("color" to "#cbd3da")), "text-dark" to padStyleMapOf(utsMapOf("color" to "#343a40")), "text-hover-dark" to padStyleMapOf(utsMapOf("color" to "#121416")), "text-body" to padStyleMapOf(utsMapOf("color" to "#212529")), "text-muted" to padStyleMapOf(utsMapOf("color" to "#6c757d")), "text-light-muted" to padStyleMapOf(utsMapOf("color" to "#A9A5A0")), "text-light-black" to padStyleMapOf(utsMapOf("color" to "rgba(0,0,0,0.5)")), "text-light-white" to padStyleMapOf(utsMapOf("color" to "rgba(255,255,255,0.5)")), "bg-primary" to padStyleMapOf(utsMapOf("backgroundColor" to "#007bff")), "bg-hover-primary" to padStyleMapOf(utsMapOf("backgroundColor:hover" to "#0062cc")), "bg-secondary" to padStyleMapOf(utsMapOf("backgroundColor" to "#6c757d")), "bg-hover-secondary" to padStyleMapOf(utsMapOf("backgroundColor:hover" to "#545b62")), "bg-success" to padStyleMapOf(utsMapOf("backgroundColor" to "#28a745")), "bg-hover-success" to padStyleMapOf(utsMapOf("backgroundColor" to "#1e7e34")), "bg-info" to padStyleMapOf(utsMapOf("backgroundColor" to "#17a2b8")), "bg-hover-info" to padStyleMapOf(utsMapOf("backgroundColor" to "#117a8b")), "bg-warning" to padStyleMapOf(utsMapOf("backgroundColor" to "#ffc107")), "bg-hover-warning" to padStyleMapOf(utsMapOf("backgroundColor" to "#d39e00")), "bg-danger" to padStyleMapOf(utsMapOf("backgroundColor" to "#dc3545")), "bg-hover-danger" to padStyleMapOf(utsMapOf("backgroundColor" to "#bd2130")), "bg-white" to padStyleMapOf(utsMapOf("backgroundColor" to "#ffffff")), "bg-light" to padStyleMapOf(utsMapOf("backgroundColor" to "#f8f9fa")), "bg-hover-light" to padStyleMapOf(utsMapOf("backgroundColor" to "#dae0e5")));
+                return utsMapOf("p-5" to padStyleMapOf(utsMapOf("paddingTop" to "50rpx", "paddingRight" to "50rpx", "paddingBottom" to "50rpx", "paddingLeft" to "50rpx")), "pt-0" to padStyleMapOf(utsMapOf("paddingTop" to 0)), "pt" to padStyleMapOf(utsMapOf("paddingTop" to "100rpx")), "pt-1" to padStyleMapOf(utsMapOf("paddingTop" to "10rpx")), "pt-2" to padStyleMapOf(utsMapOf("paddingTop" to "20rpx")), "pt-3" to padStyleMapOf(utsMapOf("paddingTop" to "30rpx")), "pt-4" to padStyleMapOf(utsMapOf("paddingTop" to "40rpx")), "pt-5" to padStyleMapOf(utsMapOf("paddingTop" to "50rpx")), "pb-0" to padStyleMapOf(utsMapOf("paddingBottom" to 0)), "pb-1" to padStyleMapOf(utsMapOf("paddingBottom" to "10rpx")), "pb" to padStyleMapOf(utsMapOf("paddingBottom" to "5rpx")), "pb-2" to padStyleMapOf(utsMapOf("paddingBottom" to "20rpx")), "pb-3" to padStyleMapOf(utsMapOf("paddingBottom" to "30rpx")), "pb-4" to padStyleMapOf(utsMapOf("paddingBottom" to "40rpx")), "pb-5" to padStyleMapOf(utsMapOf("paddingBottom" to "50rpx")), "pl-0" to padStyleMapOf(utsMapOf("paddingLeft" to 0)), "pl" to padStyleMapOf(utsMapOf("paddingLeft" to "5rpx")), "pl-1" to padStyleMapOf(utsMapOf("paddingLeft" to "10rpx")), "pl-2" to padStyleMapOf(utsMapOf("paddingLeft" to "20rpx")), "pl-3" to padStyleMapOf(utsMapOf("paddingLeft" to "30rpx")), "pl-4" to padStyleMapOf(utsMapOf("paddingLeft" to "40rpx")), "pl-5" to padStyleMapOf(utsMapOf("paddingLeft" to "50rpx")), "pr-0" to padStyleMapOf(utsMapOf("paddingRight" to 0)), "pr" to padStyleMapOf(utsMapOf("paddingRight" to "5rpx")), "pr-1" to padStyleMapOf(utsMapOf("paddingRight" to "10rpx")), "pr-2" to padStyleMapOf(utsMapOf("paddingRight" to "20rpx")), "pr-3" to padStyleMapOf(utsMapOf("paddingRight" to "30rpx")), "pr-4" to padStyleMapOf(utsMapOf("paddingRight" to "40rpx")), "pr-5" to padStyleMapOf(utsMapOf("paddingRight" to "50rpx")), "py-0" to padStyleMapOf(utsMapOf("paddingTop" to 0, "paddingBottom" to 0)), "py" to padStyleMapOf(utsMapOf("paddingTop" to "5rpx", "paddingBottom" to "5rpx")), "py-1" to padStyleMapOf(utsMapOf("paddingTop" to "10rpx", "paddingBottom" to "10rpx")), "py-2" to padStyleMapOf(utsMapOf("paddingTop" to "20rpx", "paddingBottom" to "20rpx")), "py-3" to padStyleMapOf(utsMapOf("paddingTop" to "30rpx", "paddingBottom" to "30rpx")), "py-4" to padStyleMapOf(utsMapOf("paddingTop" to "40rpx", "paddingBottom" to "40rpx")), "py-5" to padStyleMapOf(utsMapOf("paddingTop" to "50rpx", "paddingBottom" to "50rpx")), "px-0" to padStyleMapOf(utsMapOf("paddingLeft" to 0, "paddingRight" to 0)), "px-1" to padStyleMapOf(utsMapOf("paddingLeft" to "10rpx", "paddingRight" to "10rpx")), "px" to padStyleMapOf(utsMapOf("paddingLeft" to "5rpx", "paddingRight" to "5rpx")), "px-2" to padStyleMapOf(utsMapOf("paddingLeft" to "20rpx", "paddingRight" to "20rpx")), "px-3" to padStyleMapOf(utsMapOf("paddingLeft" to "30rpx", "paddingRight" to "30rpx")), "px-4" to padStyleMapOf(utsMapOf("paddingLeft" to "40rpx", "paddingRight" to "40rpx")), "px-5" to padStyleMapOf(utsMapOf("paddingLeft" to "50rpx", "paddingRight" to "50rpx")), "font-smaller" to padStyleMapOf(utsMapOf("fontSize" to "15rpx")), "font-small" to padStyleMapOf(utsMapOf("fontSize" to "20rpx")), "font-sm" to padStyleMapOf(utsMapOf("fontSize" to "25rpx")), "font" to padStyleMapOf(utsMapOf("!fontSize" to "30rpx")), "font-md" to padStyleMapOf(utsMapOf("!fontSize" to "35rpx")), "font-lg" to padStyleMapOf(utsMapOf("fontSize" to "40rpx")), "h1" to padStyleMapOf(utsMapOf("fontSize" to "80rpx", "lineHeight" to 1.8)), "h2" to padStyleMapOf(utsMapOf("fontSize" to "60rpx", "lineHeight" to 1.8)), "h3" to padStyleMapOf(utsMapOf("fontSize" to "45rpx", "lineHeight" to 1.8)), "h4" to padStyleMapOf(utsMapOf("fontSize" to "32rpx", "lineHeight" to 1.8)), "h5" to padStyleMapOf(utsMapOf("fontSize" to "30rpx", "lineHeight" to 1.8)), "h6" to padStyleMapOf(utsMapOf("fontSize" to "28rpx", "lineHeight" to 1.8)), "text-left" to padStyleMapOf(utsMapOf("textAlign" to "left")), "text-right" to padStyleMapOf(utsMapOf("textAlign" to "right")), "text-center" to padStyleMapOf(utsMapOf("textAlign" to "center")), "text-ellipsis" to padStyleMapOf(utsMapOf("lines" to 1)), "font-weight-normal" to padStyleMapOf(utsMapOf("fontWeight" to "normal")), "font-weight-bold" to padStyleMapOf(utsMapOf("fontWeight" to "bold")), "font-weight-bolder" to padStyleMapOf(utsMapOf("fontWeight" to "400")), "font-italic" to padStyleMapOf(utsMapOf("fontStyle" to "italic")), "text-white" to padStyleMapOf(utsMapOf("color" to "#ffffff")), "text-primary" to padStyleMapOf(utsMapOf("color" to "#007bff")), "text-hover-primary" to padStyleMapOf(utsMapOf("color" to "#0056b3")), "text-secondary" to padStyleMapOf(utsMapOf("color" to "#6c757d")), "text-hover-secondary" to padStyleMapOf(utsMapOf("color" to "#494f54")), "text-success" to padStyleMapOf(utsMapOf("color" to "#28a745")), "text-hover-success" to padStyleMapOf(utsMapOf("color" to "#19692c")), "text-info" to padStyleMapOf(utsMapOf("color" to "#17a2b8")), "text-hover-info" to padStyleMapOf(utsMapOf("color" to "#0f6674")), "text-warning" to padStyleMapOf(utsMapOf("color" to "#ffc107")), "text-hover-warning" to padStyleMapOf(utsMapOf("color" to "#ba8b00")), "text-danger" to padStyleMapOf(utsMapOf("color" to "#dc3545")), "text-hover-danger" to padStyleMapOf(utsMapOf("color" to "#a71d2a")), "text-light" to padStyleMapOf(utsMapOf("color" to "#f8f9fa")), "text-hover-light" to padStyleMapOf(utsMapOf("color" to "#cbd3da")), "text-dark" to padStyleMapOf(utsMapOf("color" to "#343a40")), "text-hover-dark" to padStyleMapOf(utsMapOf("color" to "#121416")), "text-body" to padStyleMapOf(utsMapOf("color" to "#212529")), "text-muted" to padStyleMapOf(utsMapOf("color" to "#6c757d")), "text-light-muted" to padStyleMapOf(utsMapOf("color" to "#A9A5A0")), "text-light-black" to padStyleMapOf(utsMapOf("color" to "rgba(0,0,0,0.5)")), "text-light-white" to padStyleMapOf(utsMapOf("color" to "rgba(255,255,255,0.5)")), "bg-primary" to padStyleMapOf(utsMapOf("backgroundColor" to "#007bff")), "bg-hover-primary" to padStyleMapOf(utsMapOf("backgroundColor:hover" to "#0062cc")), "bg-secondary" to padStyleMapOf(utsMapOf("backgroundColor" to "#6c757d")), "bg-hover-secondary" to padStyleMapOf(utsMapOf("backgroundColor:hover" to "#545b62")), "bg-success" to padStyleMapOf(utsMapOf("backgroundColor" to "#28a745")), "bg-hover-success" to padStyleMapOf(utsMapOf("backgroundColor" to "#1e7e34")), "bg-info" to padStyleMapOf(utsMapOf("backgroundColor" to "#17a2b8")), "bg-hover-info" to padStyleMapOf(utsMapOf("backgroundColor" to "#117a8b")), "bg-warning" to padStyleMapOf(utsMapOf("backgroundColor" to "#ffc107")), "bg-hover-warning" to padStyleMapOf(utsMapOf("backgroundColor" to "#d39e00")), "bg-danger" to padStyleMapOf(utsMapOf("backgroundColor" to "#dc3545")), "bg-hover-danger" to padStyleMapOf(utsMapOf("backgroundColor" to "#bd2130")), "bg-white" to padStyleMapOf(utsMapOf("backgroundColor" to "#ffffff")), "bg-light" to padStyleMapOf(utsMapOf("backgroundColor" to "#f8f9fa")), "bg-hover-light" to padStyleMapOf(utsMapOf("backgroundColor" to "#dae0e5")));
             }
         val styles2: Map<String, Map<String, Map<String, Any>>>
             get() {
@@ -2002,132 +2021,6 @@ val install = fun(): Core {
     return `$ux`;
 }
 ;
-open class IResponse<T> (
-    @JsonNotNull
-    open var code: Number,
-    @JsonNotNull
-    open var success: Boolean = false,
-    @JsonNotNull
-    open var message: String,
-    open var data: T? = null,
-    @JsonNotNull
-    open var expound: Any,
-) : UTSObject(), IUTSSourceMap {
-    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
-        return UTSSourceMapPosition("IResponse", "common/type/http.uts", 1, 13)
-    }
-}
-open class optionBoxType (
-    @JsonNotNull
-    open var option: String,
-    @JsonNotNull
-    open var isSelected: Boolean = false,
-) : UTSReactiveObject(), IUTSSourceMap {
-    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
-        return UTSSourceMapPosition("optionBoxType", "pages/healthQuestion/healthQuestion.uvue", 28, 7)
-    }
-    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
-        return optionBoxTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
-    }
-}
-open class optionBoxTypeReactiveObject : optionBoxType, IUTSReactive<optionBoxType> {
-    override var __v_raw: optionBoxType;
-    override var __v_isReadonly: Boolean;
-    override var __v_isShallow: Boolean;
-    override var __v_skip: Boolean;
-    constructor(__v_raw: optionBoxType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(option = __v_raw.option, isSelected = __v_raw.isSelected) {
-        this.__v_raw = __v_raw;
-        this.__v_isReadonly = __v_isReadonly;
-        this.__v_isShallow = __v_isShallow;
-        this.__v_skip = __v_skip;
-    }
-    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): optionBoxTypeReactiveObject {
-        return optionBoxTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
-    }
-    override var option: String
-        get() {
-            return trackReactiveGet(__v_raw, "option", __v_raw.option, this.__v_isReadonly, this.__v_isShallow);
-        }
-        set(value) {
-            if (!this.__v_canSet("option")) {
-                return;
-            }
-            val oldValue = __v_raw.option;
-            __v_raw.option = value;
-            triggerReactiveSet(__v_raw, "option", oldValue, value);
-        }
-    override var isSelected: Boolean
-        get() {
-            return trackReactiveGet(__v_raw, "isSelected", __v_raw.isSelected, this.__v_isReadonly, this.__v_isShallow);
-        }
-        set(value) {
-            if (!this.__v_canSet("isSelected")) {
-                return;
-            }
-            val oldValue = __v_raw.isSelected;
-            __v_raw.isSelected = value;
-            triggerReactiveSet(__v_raw, "isSelected", oldValue, value);
-        }
-}
-open class listDataType (
-    @JsonNotNull
-    open var problem: String,
-    @JsonNotNull
-    open var optionBox: UTSArray<optionBoxType>,
-) : UTSReactiveObject(), IUTSSourceMap {
-    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
-        return UTSSourceMapPosition("listDataType", "pages/healthQuestion/healthQuestion.uvue", 32, 7)
-    }
-    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
-        return listDataTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
-    }
-}
-open class listDataTypeReactiveObject : listDataType, IUTSReactive<listDataType> {
-    override var __v_raw: listDataType;
-    override var __v_isReadonly: Boolean;
-    override var __v_isShallow: Boolean;
-    override var __v_skip: Boolean;
-    constructor(__v_raw: listDataType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(problem = __v_raw.problem, optionBox = __v_raw.optionBox) {
-        this.__v_raw = __v_raw;
-        this.__v_isReadonly = __v_isReadonly;
-        this.__v_isShallow = __v_isShallow;
-        this.__v_skip = __v_skip;
-    }
-    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): listDataTypeReactiveObject {
-        return listDataTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
-    }
-    override var problem: String
-        get() {
-            return trackReactiveGet(__v_raw, "problem", __v_raw.problem, this.__v_isReadonly, this.__v_isShallow);
-        }
-        set(value) {
-            if (!this.__v_canSet("problem")) {
-                return;
-            }
-            val oldValue = __v_raw.problem;
-            __v_raw.problem = value;
-            triggerReactiveSet(__v_raw, "problem", oldValue, value);
-        }
-    override var optionBox: UTSArray<optionBoxType>
-        get() {
-            return trackReactiveGet(__v_raw, "optionBox", __v_raw.optionBox, this.__v_isReadonly, this.__v_isShallow);
-        }
-        set(value) {
-            if (!this.__v_canSet("optionBox")) {
-                return;
-            }
-            val oldValue = __v_raw.optionBox;
-            __v_raw.optionBox = value;
-            triggerReactiveSet(__v_raw, "optionBox", oldValue, value);
-        }
-}
-val GenPagesHealthQuestionHealthQuestionClass = CreateVueComponent(GenPagesHealthQuestionHealthQuestion::class.java, fun(): VueComponentOptions {
-    return VueComponentOptions(name = "", inheritAttrs = GenPagesHealthQuestionHealthQuestion.inheritAttrs, inject = GenPagesHealthQuestionHealthQuestion.inject, props = GenPagesHealthQuestionHealthQuestion.props, propsNeedCastKeys = GenPagesHealthQuestionHealthQuestion.propsNeedCastKeys, emits = GenPagesHealthQuestionHealthQuestion.emits, components = GenPagesHealthQuestionHealthQuestion.components, styles = GenPagesHealthQuestionHealthQuestion.styles);
-}
-, fun(instance): GenPagesHealthQuestionHealthQuestion {
-    return GenPagesHealthQuestionHealthQuestion(instance);
-}
-);
 open class plantListType (
     @JsonNotNull
     open var imgUrl: String,
@@ -2397,6 +2290,8 @@ open class tagType (
     open var title: String,
     @JsonNotNull
     open var count: Number,
+    @JsonNotNull
+    open var navigateUrl: String,
 ) : UTSReactiveObject(), IUTSSourceMap {
     override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
         return UTSSourceMapPosition("tagType", "components/myPage/myPage.uvue", 84, 7)
@@ -2410,7 +2305,7 @@ open class tagTypeReactiveObject : tagType, IUTSReactive<tagType> {
     override var __v_isReadonly: Boolean;
     override var __v_isShallow: Boolean;
     override var __v_skip: Boolean;
-    constructor(__v_raw: tagType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(title = __v_raw.title, count = __v_raw.count) {
+    constructor(__v_raw: tagType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(title = __v_raw.title, count = __v_raw.count, navigateUrl = __v_raw.navigateUrl) {
         this.__v_raw = __v_raw;
         this.__v_isReadonly = __v_isReadonly;
         this.__v_isShallow = __v_isShallow;
@@ -2443,6 +2338,18 @@ open class tagTypeReactiveObject : tagType, IUTSReactive<tagType> {
             __v_raw.count = value;
             triggerReactiveSet(__v_raw, "count", oldValue, value);
         }
+    override var navigateUrl: String
+        get() {
+            return trackReactiveGet(__v_raw, "navigateUrl", __v_raw.navigateUrl, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("navigateUrl")) {
+                return;
+            }
+            val oldValue = __v_raw.navigateUrl;
+            __v_raw.navigateUrl = value;
+            triggerReactiveSet(__v_raw, "navigateUrl", oldValue, value);
+        }
 }
 open class planType (
     @JsonNotNull
@@ -2451,7 +2358,7 @@ open class planType (
     open var color: String,
 ) : UTSReactiveObject(), IUTSSourceMap {
     override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
-        return UTSSourceMapPosition("planType", "components/myPage/myPage.uvue", 88, 7)
+        return UTSSourceMapPosition("planType", "components/myPage/myPage.uvue", 89, 7)
     }
     override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
         return planTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
@@ -2508,6 +2415,132 @@ val GenPagesTabbarTabbarClass = CreateVueComponent(GenPagesTabbarTabbar::class.j
 }
 , fun(instance): GenPagesTabbarTabbar {
     return GenPagesTabbarTabbar(instance);
+}
+);
+open class IResponse<T> (
+    @JsonNotNull
+    open var code: Number,
+    @JsonNotNull
+    open var success: Boolean = false,
+    @JsonNotNull
+    open var message: String,
+    open var data: T? = null,
+    @JsonNotNull
+    open var expound: Any,
+) : UTSObject(), IUTSSourceMap {
+    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
+        return UTSSourceMapPosition("IResponse", "common/type/http.uts", 1, 13)
+    }
+}
+open class optionBoxType (
+    @JsonNotNull
+    open var option: String,
+    @JsonNotNull
+    open var isSelected: Boolean = false,
+) : UTSReactiveObject(), IUTSSourceMap {
+    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
+        return UTSSourceMapPosition("optionBoxType", "pages/healthQuestion/healthQuestion.uvue", 28, 7)
+    }
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return optionBoxTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class optionBoxTypeReactiveObject : optionBoxType, IUTSReactive<optionBoxType> {
+    override var __v_raw: optionBoxType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: optionBoxType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(option = __v_raw.option, isSelected = __v_raw.isSelected) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): optionBoxTypeReactiveObject {
+        return optionBoxTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var option: String
+        get() {
+            return trackReactiveGet(__v_raw, "option", __v_raw.option, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("option")) {
+                return;
+            }
+            val oldValue = __v_raw.option;
+            __v_raw.option = value;
+            triggerReactiveSet(__v_raw, "option", oldValue, value);
+        }
+    override var isSelected: Boolean
+        get() {
+            return trackReactiveGet(__v_raw, "isSelected", __v_raw.isSelected, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("isSelected")) {
+                return;
+            }
+            val oldValue = __v_raw.isSelected;
+            __v_raw.isSelected = value;
+            triggerReactiveSet(__v_raw, "isSelected", oldValue, value);
+        }
+}
+open class listDataType (
+    @JsonNotNull
+    open var problem: String,
+    @JsonNotNull
+    open var optionBox: UTSArray<optionBoxType>,
+) : UTSReactiveObject(), IUTSSourceMap {
+    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
+        return UTSSourceMapPosition("listDataType", "pages/healthQuestion/healthQuestion.uvue", 32, 7)
+    }
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return listDataTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class listDataTypeReactiveObject : listDataType, IUTSReactive<listDataType> {
+    override var __v_raw: listDataType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: listDataType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(problem = __v_raw.problem, optionBox = __v_raw.optionBox) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): listDataTypeReactiveObject {
+        return listDataTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var problem: String
+        get() {
+            return trackReactiveGet(__v_raw, "problem", __v_raw.problem, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("problem")) {
+                return;
+            }
+            val oldValue = __v_raw.problem;
+            __v_raw.problem = value;
+            triggerReactiveSet(__v_raw, "problem", oldValue, value);
+        }
+    override var optionBox: UTSArray<optionBoxType>
+        get() {
+            return trackReactiveGet(__v_raw, "optionBox", __v_raw.optionBox, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("optionBox")) {
+                return;
+            }
+            val oldValue = __v_raw.optionBox;
+            __v_raw.optionBox = value;
+            triggerReactiveSet(__v_raw, "optionBox", oldValue, value);
+        }
+}
+val GenPagesHealthQuestionHealthQuestionClass = CreateVueComponent(GenPagesHealthQuestionHealthQuestion::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesHealthQuestionHealthQuestion.inheritAttrs, inject = GenPagesHealthQuestionHealthQuestion.inject, props = GenPagesHealthQuestionHealthQuestion.props, propsNeedCastKeys = GenPagesHealthQuestionHealthQuestion.propsNeedCastKeys, emits = GenPagesHealthQuestionHealthQuestion.emits, components = GenPagesHealthQuestionHealthQuestion.components, styles = GenPagesHealthQuestionHealthQuestion.styles);
+}
+, fun(instance): GenPagesHealthQuestionHealthQuestion {
+    return GenPagesHealthQuestionHealthQuestion(instance);
 }
 );
 open class TloginInfo (
@@ -2615,7 +2648,7 @@ open class registerLoginInfoType (
     open var code: String,
 ) : UTSReactiveObject(), IUTSSourceMap {
     override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
-        return UTSSourceMapPosition("registerLoginInfoType", "pages/register/register.uvue", 22, 7)
+        return UTSSourceMapPosition("registerLoginInfoType", "pages/register/register.uvue", 21, 7)
     }
     override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
         return registerLoginInfoTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
@@ -2934,6 +2967,348 @@ val GenPagesDrawPlanDrawPlanClass = CreateVueComponent(GenPagesDrawPlanDrawPlan:
     return GenPagesDrawPlanDrawPlan(instance);
 }
 );
+open class tabType (
+    @JsonNotNull
+    open var id: Number,
+    @JsonNotNull
+    open var name: String,
+) : UTSReactiveObject(), IUTSSourceMap {
+    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
+        return UTSSourceMapPosition("tabType", "pages/myPlan/myPlan.uvue", 27, 7)
+    }
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return tabTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class tabTypeReactiveObject : tabType, IUTSReactive<tabType> {
+    override var __v_raw: tabType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: tabType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(id = __v_raw.id, name = __v_raw.name) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): tabTypeReactiveObject {
+        return tabTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var id: Number
+        get() {
+            return trackReactiveGet(__v_raw, "id", __v_raw.id, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("id")) {
+                return;
+            }
+            val oldValue = __v_raw.id;
+            __v_raw.id = value;
+            triggerReactiveSet(__v_raw, "id", oldValue, value);
+        }
+    override var name: String
+        get() {
+            return trackReactiveGet(__v_raw, "name", __v_raw.name, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("name")) {
+                return;
+            }
+            val oldValue = __v_raw.name;
+            __v_raw.name = value;
+            triggerReactiveSet(__v_raw, "name", oldValue, value);
+        }
+}
+open class planType2 (
+    @JsonNotNull
+    open var id: String,
+    open var plantId: String? = null,
+    @JsonNotNull
+    open var name: String,
+    @JsonNotNull
+    open var subarea: String,
+    @JsonNotNull
+    open var punchCycle: String,
+    @JsonNotNull
+    open var punchSize: Number,
+    @JsonNotNull
+    open var remindTime: String,
+    @JsonNotNull
+    open var remindMusic: String,
+    @JsonNotNull
+    open var automatic: String,
+    open var startTime: String? = null,
+    open var endTime: String? = null,
+    @JsonNotNull
+    open var isSelected: Boolean = false,
+) : UTSReactiveObject(), IUTSSourceMap {
+    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
+        return UTSSourceMapPosition("planType", "pages/myPlan/myPlan.uvue", 31, 7)
+    }
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return planType2ReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class planType2ReactiveObject : planType2, IUTSReactive<planType2> {
+    override var __v_raw: planType2;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: planType2, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(id = __v_raw.id, plantId = __v_raw.plantId, name = __v_raw.name, subarea = __v_raw.subarea, punchCycle = __v_raw.punchCycle, punchSize = __v_raw.punchSize, remindTime = __v_raw.remindTime, remindMusic = __v_raw.remindMusic, automatic = __v_raw.automatic, startTime = __v_raw.startTime, endTime = __v_raw.endTime, isSelected = __v_raw.isSelected) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): planType2ReactiveObject {
+        return planType2ReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var id: String
+        get() {
+            return trackReactiveGet(__v_raw, "id", __v_raw.id, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("id")) {
+                return;
+            }
+            val oldValue = __v_raw.id;
+            __v_raw.id = value;
+            triggerReactiveSet(__v_raw, "id", oldValue, value);
+        }
+    override var plantId: String?
+        get() {
+            return trackReactiveGet(__v_raw, "plantId", __v_raw.plantId, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("plantId")) {
+                return;
+            }
+            val oldValue = __v_raw.plantId;
+            __v_raw.plantId = value;
+            triggerReactiveSet(__v_raw, "plantId", oldValue, value);
+        }
+    override var name: String
+        get() {
+            return trackReactiveGet(__v_raw, "name", __v_raw.name, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("name")) {
+                return;
+            }
+            val oldValue = __v_raw.name;
+            __v_raw.name = value;
+            triggerReactiveSet(__v_raw, "name", oldValue, value);
+        }
+    override var subarea: String
+        get() {
+            return trackReactiveGet(__v_raw, "subarea", __v_raw.subarea, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("subarea")) {
+                return;
+            }
+            val oldValue = __v_raw.subarea;
+            __v_raw.subarea = value;
+            triggerReactiveSet(__v_raw, "subarea", oldValue, value);
+        }
+    override var punchCycle: String
+        get() {
+            return trackReactiveGet(__v_raw, "punchCycle", __v_raw.punchCycle, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("punchCycle")) {
+                return;
+            }
+            val oldValue = __v_raw.punchCycle;
+            __v_raw.punchCycle = value;
+            triggerReactiveSet(__v_raw, "punchCycle", oldValue, value);
+        }
+    override var punchSize: Number
+        get() {
+            return trackReactiveGet(__v_raw, "punchSize", __v_raw.punchSize, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("punchSize")) {
+                return;
+            }
+            val oldValue = __v_raw.punchSize;
+            __v_raw.punchSize = value;
+            triggerReactiveSet(__v_raw, "punchSize", oldValue, value);
+        }
+    override var remindTime: String
+        get() {
+            return trackReactiveGet(__v_raw, "remindTime", __v_raw.remindTime, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("remindTime")) {
+                return;
+            }
+            val oldValue = __v_raw.remindTime;
+            __v_raw.remindTime = value;
+            triggerReactiveSet(__v_raw, "remindTime", oldValue, value);
+        }
+    override var remindMusic: String
+        get() {
+            return trackReactiveGet(__v_raw, "remindMusic", __v_raw.remindMusic, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("remindMusic")) {
+                return;
+            }
+            val oldValue = __v_raw.remindMusic;
+            __v_raw.remindMusic = value;
+            triggerReactiveSet(__v_raw, "remindMusic", oldValue, value);
+        }
+    override var automatic: String
+        get() {
+            return trackReactiveGet(__v_raw, "automatic", __v_raw.automatic, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("automatic")) {
+                return;
+            }
+            val oldValue = __v_raw.automatic;
+            __v_raw.automatic = value;
+            triggerReactiveSet(__v_raw, "automatic", oldValue, value);
+        }
+    override var startTime: String?
+        get() {
+            return trackReactiveGet(__v_raw, "startTime", __v_raw.startTime, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("startTime")) {
+                return;
+            }
+            val oldValue = __v_raw.startTime;
+            __v_raw.startTime = value;
+            triggerReactiveSet(__v_raw, "startTime", oldValue, value);
+        }
+    override var endTime: String?
+        get() {
+            return trackReactiveGet(__v_raw, "endTime", __v_raw.endTime, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("endTime")) {
+                return;
+            }
+            val oldValue = __v_raw.endTime;
+            __v_raw.endTime = value;
+            triggerReactiveSet(__v_raw, "endTime", oldValue, value);
+        }
+    override var isSelected: Boolean
+        get() {
+            return trackReactiveGet(__v_raw, "isSelected", __v_raw.isSelected, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("isSelected")) {
+                return;
+            }
+            val oldValue = __v_raw.isSelected;
+            __v_raw.isSelected = value;
+            triggerReactiveSet(__v_raw, "isSelected", oldValue, value);
+        }
+}
+val GenPagesMyPlanMyPlanClass = CreateVueComponent(GenPagesMyPlanMyPlan::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesMyPlanMyPlan.inheritAttrs, inject = GenPagesMyPlanMyPlan.inject, props = GenPagesMyPlanMyPlan.props, propsNeedCastKeys = GenPagesMyPlanMyPlan.propsNeedCastKeys, emits = GenPagesMyPlanMyPlan.emits, components = GenPagesMyPlanMyPlan.components, styles = GenPagesMyPlanMyPlan.styles);
+}
+, fun(instance): GenPagesMyPlanMyPlan {
+    return GenPagesMyPlanMyPlan(instance);
+}
+);
+val GenPagesMessageMessageClass = CreateVueComponent(GenPagesMessageMessage::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesMessageMessage.inheritAttrs, inject = GenPagesMessageMessage.inject, props = GenPagesMessageMessage.props, propsNeedCastKeys = GenPagesMessageMessage.propsNeedCastKeys, emits = GenPagesMessageMessage.emits, components = GenPagesMessageMessage.components, styles = GenPagesMessageMessage.styles);
+}
+, fun(instance): GenPagesMessageMessage {
+    return GenPagesMessageMessage(instance);
+}
+);
+val GenPagesDecorationDecorationClass = CreateVueComponent(GenPagesDecorationDecoration::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesDecorationDecoration.inheritAttrs, inject = GenPagesDecorationDecoration.inject, props = GenPagesDecorationDecoration.props, propsNeedCastKeys = GenPagesDecorationDecoration.propsNeedCastKeys, emits = GenPagesDecorationDecoration.emits, components = GenPagesDecorationDecoration.components, styles = GenPagesDecorationDecoration.styles);
+}
+, fun(instance): GenPagesDecorationDecoration {
+    return GenPagesDecorationDecoration(instance);
+}
+);
+val GenComponentsSearchSearchClass = CreateVueComponent(GenComponentsSearchSearch::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = GenComponentsSearchSearch.name, inheritAttrs = GenComponentsSearchSearch.inheritAttrs, inject = GenComponentsSearchSearch.inject, props = GenComponentsSearchSearch.props, propsNeedCastKeys = GenComponentsSearchSearch.propsNeedCastKeys, emits = GenComponentsSearchSearch.emits, components = GenComponentsSearchSearch.components, styles = GenComponentsSearchSearch.styles);
+}
+, fun(instance): GenComponentsSearchSearch {
+    return GenComponentsSearchSearch(instance);
+}
+);
+open class foodType (
+    @JsonNotNull
+    open var name: String,
+    @JsonNotNull
+    open var `function`: String,
+    @JsonNotNull
+    open var img: String,
+) : UTSReactiveObject(), IUTSSourceMap {
+    override fun `__$getOriginalPosition`(): UTSSourceMapPosition? {
+        return UTSSourceMapPosition("foodType", "pages/myCollection/myCollection.uvue", 26, 7)
+    }
+    override fun __v_create(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): UTSReactiveObject {
+        return foodTypeReactiveObject(this, __v_isReadonly, __v_isShallow, __v_skip)
+    }
+}
+open class foodTypeReactiveObject : foodType, IUTSReactive<foodType> {
+    override var __v_raw: foodType;
+    override var __v_isReadonly: Boolean;
+    override var __v_isShallow: Boolean;
+    override var __v_skip: Boolean;
+    constructor(__v_raw: foodType, __v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean) : super(name = __v_raw.name, `function` = __v_raw.`function`, img = __v_raw.img) {
+        this.__v_raw = __v_raw;
+        this.__v_isReadonly = __v_isReadonly;
+        this.__v_isShallow = __v_isShallow;
+        this.__v_skip = __v_skip;
+    }
+    override fun __v_clone(__v_isReadonly: Boolean, __v_isShallow: Boolean, __v_skip: Boolean): foodTypeReactiveObject {
+        return foodTypeReactiveObject(this.__v_raw, __v_isReadonly, __v_isShallow, __v_skip);
+    }
+    override var name: String
+        get() {
+            return trackReactiveGet(__v_raw, "name", __v_raw.name, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("name")) {
+                return;
+            }
+            val oldValue = __v_raw.name;
+            __v_raw.name = value;
+            triggerReactiveSet(__v_raw, "name", oldValue, value);
+        }
+    override var `function`: String
+        get() {
+            return trackReactiveGet(__v_raw, "function", __v_raw.`function`, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("function")) {
+                return;
+            }
+            val oldValue = __v_raw.`function`;
+            __v_raw.`function` = value;
+            triggerReactiveSet(__v_raw, "function", oldValue, value);
+        }
+    override var img: String
+        get() {
+            return trackReactiveGet(__v_raw, "img", __v_raw.img, this.__v_isReadonly, this.__v_isShallow);
+        }
+        set(value) {
+            if (!this.__v_canSet("img")) {
+                return;
+            }
+            val oldValue = __v_raw.img;
+            __v_raw.img = value;
+            triggerReactiveSet(__v_raw, "img", oldValue, value);
+        }
+}
+val GenPagesMyCollectionMyCollectionClass = CreateVueComponent(GenPagesMyCollectionMyCollection::class.java, fun(): VueComponentOptions {
+    return VueComponentOptions(name = "", inheritAttrs = GenPagesMyCollectionMyCollection.inheritAttrs, inject = GenPagesMyCollectionMyCollection.inject, props = GenPagesMyCollectionMyCollection.props, propsNeedCastKeys = GenPagesMyCollectionMyCollection.propsNeedCastKeys, emits = GenPagesMyCollectionMyCollection.emits, components = GenPagesMyCollectionMyCollection.components, styles = GenPagesMyCollectionMyCollection.styles);
+}
+, fun(instance): GenPagesMyCollectionMyCollection {
+    return GenPagesMyCollectionMyCollection(instance);
+}
+);
 fun createApp(): UTSJSONObject {
     val app = createSSRApp(GenAppClass);
     app.config.globalProperties["\$ux"] = true;
@@ -2955,8 +3330,8 @@ open class UniAppConfig : AppConfig {
     constructor(){}
 }
 fun definePageRoutes() {
-    __uniRoutes.push(PageRoute(path = "pages/healthQuestion/healthQuestion", component = GenPagesHealthQuestionHealthQuestionClass, meta = PageMeta(isQuit = true), style = utsMapOf("navigationBarTitleText" to "")));
-    __uniRoutes.push(PageRoute(path = "pages/tabbar/tabbar", component = GenPagesTabbarTabbarClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/tabbar/tabbar", component = GenPagesTabbarTabbarClass, meta = PageMeta(isQuit = true), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/healthQuestion/healthQuestion", component = GenPagesHealthQuestionHealthQuestionClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/login/login", component = GenPagesLoginLoginClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/plantDetail/plantDetail", component = GenPagesPlantDetailPlantDetailClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/healthDetail/healthDetail", component = GenPagesHealthDetailHealthDetailClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "每日药膳推荐")));
@@ -2964,12 +3339,16 @@ fun definePageRoutes() {
     __uniRoutes.push(PageRoute(path = "pages/register/register", component = GenPagesRegisterRegisterClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/resultHealth/resultHealth", component = GenPagesResultHealthResultHealthClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
     __uniRoutes.push(PageRoute(path = "pages/drawPlan/drawPlan", component = GenPagesDrawPlanDrawPlanClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/myPlan/myPlan", component = GenPagesMyPlanMyPlanClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/message/message", component = GenPagesMessageMessageClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/decoration/decoration", component = GenPagesDecorationDecorationClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
+    __uniRoutes.push(PageRoute(path = "pages/myCollection/myCollection", component = GenPagesMyCollectionMyCollectionClass, meta = PageMeta(isQuit = false), style = utsMapOf("navigationBarTitleText" to "")));
 }
 val __uniTabBar: Map<String, Any?>? = utsMapOf();
-val __uniLaunchPage: Map<String, Any?> = utsMapOf("url" to "pages/healthQuestion/healthQuestion", "style" to utsMapOf("navigationBarTitleText" to ""));
+val __uniLaunchPage: Map<String, Any?> = utsMapOf("url" to "pages/tabbar/tabbar", "style" to utsMapOf("navigationBarTitleText" to ""));
 @Suppress("UNCHECKED_CAST")
 fun defineAppConfig() {
-    __uniConfig.entryPagePath = "/pages/healthQuestion/healthQuestion";
+    __uniConfig.entryPagePath = "/pages/tabbar/tabbar";
     __uniConfig.globalStyle = utsMapOf("navigationBarTextStyle" to "black", "navigationBarTitleText" to "uni-app x", "navigationBarBackgroundColor" to "#F8F8F8", "backgroundColor" to "#F8F8F8", "navigationStyle" to "custom");
     __uniConfig.tabBar = __uniTabBar as Map<String, Any>?;
     __uniConfig.conditionUrl = "";

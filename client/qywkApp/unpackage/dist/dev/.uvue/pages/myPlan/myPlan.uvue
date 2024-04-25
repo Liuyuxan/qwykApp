@@ -1,0 +1,265 @@
+
+	type tabType = { __$originalPosition: UTSSourceMapPosition<"tabType", "pages/myPlan/myPlan.uvue", 27, 7>;
+		id : number
+		name : string
+	}
+	type planType = { __$originalPosition: UTSSourceMapPosition<"planType", "pages/myPlan/myPlan.uvue", 31, 7>;
+		id: string,
+		plantId: string | null,
+		name: string,
+		subarea: string,
+		punchCycle: string,
+		punchSize: number,
+		remindTime: string,
+		remindMusic: string,
+		automatic: string,
+		startTime: string | null,
+		endTime: string | null,
+		isSelected: boolean
+	}
+	export default {
+		data() {
+			return {
+				currentOptionIndex: 0,
+				
+				colors: [
+					"#3b361a",
+					"#a27046",
+					"#46a398",
+					"#4679a3",
+					"#a34646",
+					"#83a346",
+					"#a39746",
+					"#a37246",
+					"#46a353"
+				],
+				tabs: [
+					{
+						id: 1,
+						name: '全部'
+					},
+					{
+						id: 2,
+						name: '运动'
+					},
+					{
+						id: 3,
+						name: '健康'
+					},
+					{
+						id: 4,
+						name: '养发'
+					},
+					{
+						id: 5,
+						name: '健脾'
+					},
+					{
+						id: 6,
+						name: '已完成'
+					},
+				] as tabType[],
+				plans: [
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "泡脚",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "艾灸",
+						subarea: "生活",
+						punchCycle: "每周一次",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "拔火罐",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "刮痧",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "针灸",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "中医熏蒸",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "推拿",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "打坐",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "深呼吸",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "冥想",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					}
+				] as planType[]
+
+			};
+		},
+		methods: {
+			clickOption(index:number) {
+				this.currentOptionIndex = index
+			},
+			addPlan() {
+				uni.navigateTo({
+					url: '/pages/drawPlan/drawPlan'
+				})
+			}
+		}
+	}
+
+
+function GenPagesMyPlanMyPlanRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("scroll-view", utsMapOf({
+    class: "flex flex-column align-center",
+    style: normalizeStyle(utsMapOf({"flex":"1","background-color":"#f2eee9","padding-top":"50px"}))
+  }), [
+    createElementVNode("text", utsMapOf({ class: "title" }), "我的计划（4个）"),
+    createElementVNode("view", utsMapOf({ class: "options flex mt-2" }), [
+      createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.tabs, (item, index, _, _): VNode => {
+        return createElementVNode("text", utsMapOf({
+          class: normalizeClass(['option mr-2 ml-1', _ctx.currentOptionIndex == index ? 'ac-option' : '']),
+          key: item.id,
+          onClick: () => {_ctx.clickOption(index)}
+        }), toDisplayString(item.name), 11 /* TEXT, CLASS, PROPS */, ["onClick"])
+      }), 128 /* KEYED_FRAGMENT */)
+    ]),
+    createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.plans, (item, index, _, _): VNode => {
+      return createElementVNode("view", utsMapOf({
+        class: "plan flex align-center mt-3",
+        key: index
+      }), [
+        createElementVNode("view", utsMapOf({
+          class: "line mr-3",
+          style: normalizeStyle(utsMapOf({'background-color': (_ctx.colors[index%9])}))
+        }), null, 4 /* STYLE */),
+        createElementVNode("view", utsMapOf({ class: "texts" }), [
+          createElementVNode("text", utsMapOf({
+            class: "text",
+            style: normalizeStyle(utsMapOf({"font-size":"24rpx"}))
+          }), toDisplayString(item.name), 5 /* TEXT, STYLE */),
+          createElementVNode("text", utsMapOf({
+            class: "text",
+            style: normalizeStyle(utsMapOf({"font-size":"20rpx"}))
+          }), toDisplayString(item.punchCycle), 5 /* TEXT, STYLE */)
+        ])
+      ])
+    }), 128 /* KEYED_FRAGMENT */),
+    createElementVNode("button", utsMapOf({
+      class: "add-btn mt-5",
+      "hover-class": "add-btn-is-hover",
+      onClick: _ctx.addPlan
+    }), "添加计划", 8 /* PROPS */, ["onClick"])
+  ], 4 /* STYLE */)
+}
+const GenPagesMyPlanMyPlanStyles = [utsMapOf([["title", padStyleMapOf(utsMapOf([["fontSize", 20], ["color", "#594532"], ["width", "100%"], ["paddingLeft", "40rpx"], ["paddingBottom", "20rpx"], ["borderBottomWidth", 2], ["borderBottomStyle", "dashed"], ["borderBottomColor", "#594532"]]))], ["options", padStyleMapOf(utsMapOf([["width", "94%"]]))], ["option", utsMapOf([[".options ", utsMapOf([["fontSize", "28rpx"], ["color", "#796856"], ["transform", "scale(1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.5s"]])]])], ["ac-option", utsMapOf([[".options ", utsMapOf([["transform", "scale(1.2)"], ["transitionProperty", "transform"], ["transitionDuration", "0.5s"]])]])], ["plan", padStyleMapOf(utsMapOf([["width", "94%"], ["height", "96rpx"], ["backgroundColor", "#fcf6e6"], ["borderRadius", "16rpx"]]))], ["line", utsMapOf([[".plan ", utsMapOf([["width", "10rpx"], ["height", "48rpx"], ["borderRadius", "12rpx"]])]])], ["text", utsMapOf([[".plan .line ", utsMapOf([["color", "#594532"]])]])], ["texts", utsMapOf([[".plan ", utsMapOf([["width", "380rpx"]])]])], ["select", utsMapOf([[".plan ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"]])]])], ["unselect", utsMapOf([[".plan ", utsMapOf([["width", "32rpx"], ["height", "32rpx"], ["borderRadius", "32rpx"], ["borderWidth", 1], ["borderStyle", "solid"], ["borderColor", "#b19983"]])]])], ["add-btn", padStyleMapOf(utsMapOf([["width", "80%"], ["height", "100rpx"], ["borderRadius", "16rpx"], ["lineHeight", "100rpx"], ["backgroundColor", "#b19983"], ["color", "#ffffff"]]))], ["add-btn-is-hover", padStyleMapOf(utsMapOf([["backgroundColor", "#594532"]]))], ["@TRANSITION", utsMapOf([["option", utsMapOf([["property", "transform"], ["duration", "0.5s"]])], ["ac-option", utsMapOf([["property", "transform"], ["duration", "0.5s"]])]])]])]

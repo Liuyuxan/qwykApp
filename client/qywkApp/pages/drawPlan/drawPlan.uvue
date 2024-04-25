@@ -76,7 +76,7 @@
 						plantId: null,
 						name: "泡脚",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -90,7 +90,7 @@
 						plantId: null,
 						name: "艾灸",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每周一次",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -104,7 +104,7 @@
 						plantId: null,
 						name: "拔火罐",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -118,7 +118,7 @@
 						plantId: null,
 						name: "刮痧",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -132,7 +132,7 @@
 						plantId: null,
 						name: "针灸",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -146,7 +146,7 @@
 						plantId: null,
 						name: "中医熏蒸",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -160,7 +160,7 @@
 						plantId: null,
 						name: "推拿",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -174,7 +174,7 @@
 						plantId: null,
 						name: "打坐",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -188,7 +188,7 @@
 						plantId: null,
 						name: "深呼吸",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -202,7 +202,7 @@
 						plantId: null,
 						name: "冥想",
 						subarea: "生活",
-						punchCycle: "1;2;3;4;5;6;7",
+						punchCycle: "每天",
 						punchSize: 1,
 						remindTime: "8:00:00",
 						remindMusic: "小叮当.mp3",
@@ -230,7 +230,7 @@
 					uni.showToast({
 						title: '创建成功，开始养生叭！'
 					})
-					uni.navigateTo({
+					uni.reLaunch({
 						url: '/pages/tabbar/tabbar'
 					})
 				},1000)

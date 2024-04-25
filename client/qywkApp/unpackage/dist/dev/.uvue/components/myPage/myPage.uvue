@@ -2,8 +2,9 @@
 	type tagType = { __$originalPosition: UTSSourceMapPosition<"tagType", "components/myPage/myPage.uvue", 84, 7>;
 		title : string
 		count : number
+		navigateUrl: string
 	}
-	type planType = { __$originalPosition: UTSSourceMapPosition<"planType", "components/myPage/myPage.uvue", 88, 7>;
+	type planType = { __$originalPosition: UTSSourceMapPosition<"planType", "components/myPage/myPage.uvue", 89, 7>;
 		name: string
 		color: string
 	}
@@ -13,15 +14,18 @@
 				tagBars: [
 					{
 						title: '计划',
-						count: 16
+						count: 16,
+						navigateUrl: '/pages/myPlan/myPlan'
 					},
 					{
 						title: '收藏膳食',
-						count: 0
+						count: 0,
+						navigateUrl: '/pages/myCollection/myCollection'
 					},
 					{
 						title: '好友',
-						count: 8
+						count: 8,
+						navigateUrl: '/pages/friend/friend'
 					},
 				] as tagType[],
 				planOptions: [
@@ -46,6 +50,12 @@
 		},
 		
 		methods: {
+			clickTagbar(item: tagType) {
+				console.log(item, " at components/myPage/myPage.uvue:136");
+				uni.navigateTo({
+					url: item.navigateUrl
+				})
+			},
 			out() {
 				uni.clearStorageSync()
 				uni.reLaunch({
@@ -100,7 +110,8 @@ const _cache = this.$.renderCache
         createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.tagBars, (item, index, _, _): VNode => {
           return createElementVNode("view", utsMapOf({
             class: "item flex flex-column align-center",
-            key: index
+            key: index,
+            onClick: () => {_ctx.clickTagbar(item)}
           }), [
             createElementVNode("text", utsMapOf({
               class: "mt-1",
@@ -110,7 +121,7 @@ const _cache = this.$.renderCache
               class: "mt-1",
               style: normalizeStyle(utsMapOf({"font-size":"12px","color":"#000"}))
             }), toDisplayString(item.count) + "个", 5 /* TEXT, STYLE */)
-          ])
+          ], 8 /* PROPS */, ["onClick"])
         }), 128 /* KEYED_FRAGMENT */)
       ]),
       createElementVNode("view", utsMapOf({ class: "report mt-5" }), [

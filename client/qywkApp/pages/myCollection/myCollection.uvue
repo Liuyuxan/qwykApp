@@ -1,0 +1,93 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view class="flex flex-column align-center pt" style="flex:1;background-color: #fffaf5;">
+	<!-- #endif -->
+		<text class="title mt-3">我的收藏</text>
+		<search placeholder="输入主要食材,名称,功效搜索"></search>
+		<view class="cards">
+			<view class="card mt-4 flex justify-center align-center" v-for="(item, index) in foods" :key="index" :style="{'background-color': (colors[index%5])}">
+				<view style="width: 10rpx; height: 66%;">
+					<view style="width: 100%;height: 40rpx;border-radius: 10rpx;background-color: rgba(255,255,255,0.5);"></view>
+				</view>
+				<view class="ml-3" style="width: 70%;">
+					<text style="color: #fff;font-size: 12px;font-weight: 700;">{{ item.name }}</text>
+					<text style="color: #fff;font-size: 12px;">{{ item.function }}</text>
+				</view>
+				<image class="img ml-2" :src="item.img" mode="widthFix"></image>
+			</view>
+		</view>
+		<text class="mt-5" style="font-size: 24rpx;color: #B5A491;">膳食调理只可作为养生辅助，如若身体不适请线下就医</text>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+</template>
+
+<script>
+	type foodType = {
+		name: string
+		function: string
+		img: string
+	}
+	export default {
+		data() {
+			return {
+				colors: [
+					"#a77e8e",
+					"#7a927a",
+					"#7a8d91",
+					"#91897a",
+					"#7e7a91"
+				],
+				foods: [
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/1.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/2.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/3.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/4.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/5.png'
+					}
+				] as foodType[]
+			};
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.title {
+		font-size: 20px;
+		color: #594532;
+		padding-left: 40rpx;
+		padding-bottom: 20rpx;
+	}
+	.cards {
+		width: 92%;
+		.card {
+			width: 100%;
+			height: 156rpx;
+			border-radius: 20rpx;
+		}
+		.img {
+			width: 112rpx;
+			border-radius: 8rpx;
+			
+		}
+	}
+</style>

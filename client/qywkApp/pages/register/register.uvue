@@ -1,15 +1,14 @@
 <template>
 	<view class="validateCode">
-		<image class="bg-img" src="../../static/image/login/bg.png" mode="widthFix"></image>
+		<image class="bg-img" src="../../static/image/bg/bg_6.png" mode="widthFix"></image>
 		<view class="window flex flex-column  align-center">
 			<view class="top flex align-center">
 				<image src="../../static/image/login/chacha.png" mode="widthFix" style="width: 36rpx;margin-right: 10rpx;"></image>
 				<text class="title">注册并登录</text>
 			</view>
-			<input v-model="registerLoginInfo.password" class="uni-input space" placeholder="密码" />
+			<input v-model="registerLoginInfo.password" class="uni-input space" placeholder="密码:必须包含英文,数字" />
 			<input v-model="registerLoginInfo.code" class="uni-input space" placeholder="验证码" />
-			<button class="space" hover-class="btn-hover" @click="clickRegiter"
-				style="width: 600rpx;height: 76rpx;border-radius: 32rpx;color: #fff;line-height: 76rpx;text-align: center;background-color: #b19983;">注册并登录</button>
+			<button class="space btn" hover-class="btn-is-hover" @click="clickRegiter">注册并登录</button>
 		</view>
 	</view>
 </template>
@@ -53,6 +52,7 @@
 					},
 					success: (res) => {
 						let r = res.data
+						if(r == null) return
 						console.log('注册登录返回信息', r);
 						if(r!.code == 200) {
 							console.log(r);
@@ -62,7 +62,7 @@
 							})
 						} else {
 							uni.showToast({
-								title: '网络超时',
+								title: r.message,
 								icon: "none"
 							})
 						}
@@ -97,17 +97,19 @@
 		height: 100%;
 		background-color: $uni-bg-color;
 		.bg-img {
-			width: 750rpx;
+			width: 650rpx;
 			position: absolute;
-			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: -12%;
 		}
 		.window {
 			box-sizing: border-box;
 			width: 650rpx;
-			height: 766rpx;
+			height: 566rpx;
 			padding: 30rpx;
 			margin: 300rpx auto 0 auto;
-			background-color: $uni-bg-color-grey;
+			background-color: rgba(255, 255, 255, 0.6);
 			border-radius: 48rpx;
 
 			.space {
@@ -139,10 +141,18 @@
 				margin-left: 100rpx;
 			}
 
-			.btn-hover {
-				background-color: #94806e;
-			}
-
 		}
+	}
+	
+	.btn {
+		width: 600rpx;
+		height: 76rpx;
+		border-radius: 32rpx;
+		color: #fff;
+		line-height: 76rpx;
+		background-color: #b19983;
+	}
+	.btn-is-hover {
+		background-color: #94806e;
 	}
 </style>

@@ -1,3 +1,3 @@
 // export const BASE_URL = 'http://47.120.10.1:1109'
-export const BASE_URL = 'http://192.168.252.249:9000'
+export const BASE_URL = 'https://47aebe35.r3.cpolar.cn'
 export const TIME_OUT = 10000

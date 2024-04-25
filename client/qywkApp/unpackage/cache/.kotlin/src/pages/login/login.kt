@@ -49,7 +49,7 @@ open class GenPagesLoginLogin : BasePage {
                     "modelValue",
                     "onInput"
                 )),
-                createElementVNode("button", utsMapOf("class" to "space", "hover-class" to "btn-hover", "onClick" to _ctx.clickLogin, "style" to normalizeStyle(utsMapOf("width" to "600rpx", "height" to "76rpx", "border-radius" to "32rpx", "color" to "#fff", "line-height" to "76rpx", "text-align" to "center", "background-color" to "#b19983"))), "登录", 12, utsArrayOf(
+                createElementVNode("button", utsMapOf("class" to "space btn", "hover-class" to "btn-is-hover", "onClick" to _ctx.clickLogin), "登录", 8, utsArrayOf(
                     "onClick"
                 )),
                 createElementVNode("view", utsMapOf("class" to "sub space flex justify-between"), utsArrayOf(
@@ -85,7 +85,7 @@ open class GenPagesLoginLogin : BasePage {
                 return;
             }
             uni_showLoading(ShowLoadingOptions(title = "登录中"));
-            console.log(this.loginInfo, " at pages/login/login.uvue:51");
+            console.log(this.loginInfo, " at pages/login/login.uvue:50");
             uni_request<IResponse<IToken>>(RequestOptions(url = BASE_URL + "/user/login/normal", method = "POST", data = let {
                 object : UTSJSONObject() {
                     var userId = it.loginInfo.userId
@@ -96,7 +96,7 @@ open class GenPagesLoginLogin : BasePage {
                 if (r == null) {
                     return;
                 }
-                console.log("登录返回信息", r, " at pages/login/login.uvue:63");
+                console.log("登录返回信息", r, " at pages/login/login.uvue:62");
                 if (r.code == 200) {
                     uni_setStorageSync("token", r.data!!.token);
                     uni_reLaunch(ReLaunchOptions(url = "/pages/tabbar/tabbar"));
@@ -105,7 +105,7 @@ open class GenPagesLoginLogin : BasePage {
                 }
             }
             , fail = fun(err){
-                console.log(err, " at pages/login/login.uvue:79");
+                console.log(err, " at pages/login/login.uvue:78");
                 uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
             }
             , complete = fun(_){
@@ -128,7 +128,7 @@ open class GenPagesLoginLogin : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("login" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".login " to utsMapOf("width" to "750rpx", "position" to "absolute", "top" to 0)), "window" to utsMapOf(".login " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "766rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "#f5f5f5", "borderRadius" to "48rpx")), "space" to utsMapOf(".login .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".login .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "btn-hover" to utsMapOf(".login .window " to utsMapOf("backgroundColor" to "#94806e")), "sub" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx")), "text" to utsMapOf(".login .window .sub " to utsMapOf("fontSize" to 12, "color" to "#937152")), "icons" to utsMapOf(".login .window " to utsMapOf("width" to "500rpx", "height" to "56rpx")), "img-icon" to utsMapOf(".login .window .icons " to utsMapOf("width" to "56rpx", "height" to "56rpx")));
+                return utsMapOf("btn" to padStyleMapOf(utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "color" to "#ffffff", "lineHeight" to "76rpx", "textAlign" to "center", "backgroundColor" to "#b19983")), "btn-is-hover" to padStyleMapOf(utsMapOf("backgroundColor" to "#94806e")), "login" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".login " to utsMapOf("width" to "750rpx", "position" to "absolute", "top" to 0)), "window" to utsMapOf(".login " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "766rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "rgba(255,255,255,0.6)", "borderRadius" to "48rpx")), "space" to utsMapOf(".login .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".login .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "sub" to utsMapOf(".login .window " to utsMapOf("width" to "600rpx")), "text" to utsMapOf(".login .window .sub " to utsMapOf("fontSize" to 12, "color" to "#937152")), "icons" to utsMapOf(".login .window " to utsMapOf("width" to "500rpx", "height" to "56rpx")), "img-icon" to utsMapOf(".login .window .icons " to utsMapOf("width" to "56rpx", "height" to "56rpx")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

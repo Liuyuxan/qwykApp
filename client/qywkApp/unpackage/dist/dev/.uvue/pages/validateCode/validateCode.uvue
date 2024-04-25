@@ -14,17 +14,17 @@
 				if(this.numberPhone.length <= 0) return 
 				if(this.numberPhone.length != 11) return
 				
-				console.log(this.numberPhone, " at pages/validateCode/validateCode.uvue:32")
+				console.log(this.numberPhone, " at pages/validateCode/validateCode.uvue:31")
 				uni.request<IResponse<ICode>>({
 					url: BASE_URL + `/user/login/sent/code?tel=${this.numberPhone}`,
 					method: 'POST',
 					
 					success: (res) => {
 						let r = res.data
+						if(r == null) return
 						console.log('验证码返回信息', r, " at pages/validateCode/validateCode.uvue:39");
 						if(r!.code == 200) {
 							let code = r!.data!.code
-							console.log(code, " at pages/validateCode/validateCode.uvue:42");
 							uni.showToast({
 								title: '获取验证码成功，已帮您自动填写',
 								icon: "none"
@@ -34,14 +34,14 @@
 							})
 						} else {
 							uni.showToast({
-								title: '网络超时',
+								title: r.message,
 								icon: "none"
 							})
 						}
 						
 					},
 					fail: (err) => {
-						console.log(err, " at pages/validateCode/validateCode.uvue:59");
+						console.log(err, " at pages/validateCode/validateCode.uvue:58");
 						uni.showToast({
 							title: err.errMsg,
 							icon: "none"
@@ -60,7 +60,7 @@ const _cache = this.$.renderCache
   return createElementVNode("view", utsMapOf({ class: "validateCode" }), [
     createElementVNode("image", utsMapOf({
       class: "bg-img",
-      src: "/static/image/login/bg.png",
+      src: "/static/image/bg/bg_4.png",
       mode: "widthFix"
     })),
     createElementVNode("view", utsMapOf({ class: "window flex flex-column align-center" }), [
@@ -79,12 +79,11 @@ const _cache = this.$.renderCache
         placeholder: "手机号"
       }), null, 40 /* PROPS, NEED_HYDRATION */, ["modelValue", "onInput"]),
       createElementVNode("button", utsMapOf({
-        class: "space",
-        "hover-class": "btn-hover",
-        onClick: _ctx.clickRegiter,
-        style: normalizeStyle(utsMapOf({"width":"600rpx","height":"76rpx","border-radius":"32rpx","color":"#fff","line-height":"76rpx","text-align":"center","background-color":"#b19983"}))
-      }), "发送验证码", 12 /* STYLE, PROPS */, ["onClick"])
+        class: "space btn",
+        "hover-class": "btn-is-hover",
+        onClick: _ctx.clickRegiter
+      }), "发送验证码", 8 /* PROPS */, ["onClick"])
     ])
   ])
 }
-const GenPagesValidateCodeValidateCodeStyles = [utsMapOf([["validateCode", padStyleMapOf(utsMapOf([["width", "100%"], ["height", "100%"], ["backgroundColor", "#f2eee9"]]))], ["bg-img", utsMapOf([[".validateCode ", utsMapOf([["width", "750rpx"], ["position", "absolute"], ["top", 0]])]])], ["window", utsMapOf([[".validateCode ", utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "466rpx"], ["paddingTop", "30rpx"], ["paddingRight", "30rpx"], ["paddingBottom", "30rpx"], ["paddingLeft", "30rpx"], ["marginTop", "300rpx"], ["marginRight", "auto"], ["marginBottom", 0], ["marginLeft", "auto"], ["backgroundColor", "#f5f5f5"], ["borderRadius", "48rpx"]])]])], ["space", utsMapOf([[".validateCode .window ", utsMapOf([["marginBottom", "62rpx"]])]])], ["top", utsMapOf([[".validateCode .window ", utsMapOf([["width", "600rpx"], ["marginBottom", "64rpx"]])]])], ["title", utsMapOf([[".validateCode .window .top ", utsMapOf([["fontSize", 16], ["color", "#937152"]])]])], ["uni-input", utsMapOf([[".validateCode .window ", utsMapOf([["width", "600rpx"], ["height", "76rpx"], ["borderRadius", "32rpx"], ["marginTop", 0], ["marginRight", "auto"], ["marginBottom", 0], ["marginLeft", "auto"], ["paddingLeft", 10], ["fontSize", 12], ["backgroundColor", "#f2eee9"], ["fontSize::placeholder", "28rpx"], ["marginLeft::placeholder", "100rpx"]])]])], ["btn-hover", utsMapOf([[".validateCode .window ", utsMapOf([["backgroundColor", "#94806e"]])]])]])]
+const GenPagesValidateCodeValidateCodeStyles = [utsMapOf([["btn", padStyleMapOf(utsMapOf([["width", "600rpx"], ["height", "76rpx"], ["borderRadius", "32rpx"], ["color", "#ffffff"], ["lineHeight", "76rpx"], ["textAlign", "center"], ["backgroundColor", "#b19983"]]))], ["btn-is-hover", padStyleMapOf(utsMapOf([["backgroundColor", "#94806e"]]))], ["validateCode", padStyleMapOf(utsMapOf([["width", "100%"], ["height", "100%"], ["backgroundColor", "#f2eee9"]]))], ["bg-img", utsMapOf([[".validateCode ", utsMapOf([["width", "650rpx"], ["position", "absolute"], ["left", "50%"], ["transform", "translateX(-50%)"], ["bottom", "-10%"]])]])], ["window", utsMapOf([[".validateCode ", utsMapOf([["boxSizing", "border-box"], ["width", "650rpx"], ["height", "466rpx"], ["paddingTop", "30rpx"], ["paddingRight", "30rpx"], ["paddingBottom", "30rpx"], ["paddingLeft", "30rpx"], ["marginTop", "300rpx"], ["marginRight", "auto"], ["marginBottom", 0], ["marginLeft", "auto"], ["backgroundColor", "rgba(255,255,255,0.6)"], ["borderRadius", "48rpx"]])]])], ["space", utsMapOf([[".validateCode .window ", utsMapOf([["marginBottom", "62rpx"]])]])], ["top", utsMapOf([[".validateCode .window ", utsMapOf([["width", "600rpx"], ["marginBottom", "64rpx"]])]])], ["title", utsMapOf([[".validateCode .window .top ", utsMapOf([["fontSize", 16], ["color", "#937152"]])]])], ["uni-input", utsMapOf([[".validateCode .window ", utsMapOf([["width", "600rpx"], ["height", "76rpx"], ["borderRadius", "32rpx"], ["marginTop", 0], ["marginRight", "auto"], ["marginBottom", 0], ["marginLeft", "auto"], ["paddingLeft", 10], ["fontSize", 12], ["backgroundColor", "#f2eee9"], ["fontSize::placeholder", "28rpx"], ["marginLeft::placeholder", "100rpx"]])]])]])]

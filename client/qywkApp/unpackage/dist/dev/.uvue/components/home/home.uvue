@@ -26,17 +26,17 @@
 				functionList: [  // 功能栏
 					{
 						icon: '/static/image/icons/plan.png',
-						navgiateUrl: '',
+						navgiateUrl: '/pages/myPlan/myPlan',
 						text: '计划'
 					},
 					{
 						icon: '/static/image/icons/clothes.png',
-						navgiateUrl: '',
+						navgiateUrl: '/pages/decoration/decoration',
 						text: '装扮'
 					},
 					{
 						icon: '/static/image/icons/message.png',
-						navgiateUrl: '',
+						navgiateUrl: '/pages/message/message',
 						text: '对话'
 					}
 				] as functionListType[],

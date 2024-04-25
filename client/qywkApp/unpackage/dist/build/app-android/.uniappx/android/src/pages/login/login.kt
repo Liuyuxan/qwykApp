@@ -32,7 +32,7 @@ open class GenPagesLoginLogin : BasePage {
             createElementVNode("view", utsMapOf("class" to "window flex flex-column align-center"), utsArrayOf(
                 createElementVNode("view", utsMapOf("class" to "top flex align-center"), utsArrayOf(
                     createElementVNode("image", utsMapOf("src" to "/static/image/login/chacha.png", "mode" to "widthFix", "style" to normalizeStyle(utsMapOf("width" to "36rpx", "margin-right" to "10rpx"))), null, 4),
-                    createElementVNode("text", utsMapOf("class" to "title justify-start"), "登录")
+                    createElementVNode("text", utsMapOf("class" to "title"), "登录")
                 )),
                 createElementVNode("input", utsMapOf("modelValue" to _ctx.loginInfo.userId, "onInput" to fun(`$event`: InputEvent){
                     _ctx.loginInfo.userId = `$event`.detail.value;
@@ -92,16 +92,19 @@ open class GenPagesLoginLogin : BasePage {
                 }
             }, success = fun(res){
                 var r = res.data;
-                console.log("登录返回信息", r, " at pages/login/login.uvue:37");
-                if (r!!.code == 200) {
-                    uni_setStorageSync("token", r!!.data!!.token);
+                if (r == null) {
+                    return;
+                }
+                console.log("登录返回信息", r, " at pages/login/login.uvue:38");
+                if (r.code == 200) {
+                    uni_setStorageSync("token", r.data!!.token);
                     uni_reLaunch(ReLaunchOptions(url = "/pages/tabbar/tabbar"));
                 } else {
                     uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
                 }
             }
             , fail = fun(err){
-                console.log(err, " at pages/login/login.uvue:53");
+                console.log(err, " at pages/login/login.uvue:54");
                 uni_showToast(ShowToastOptions(title = "账号或密码错误", icon = "none"));
             }
             , complete = fun(_){

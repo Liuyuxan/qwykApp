@@ -34,6 +34,18 @@ open class GenPagesTabbarTabbar : BasePage {
         val _component_healthComponent = resolveEasyComponent("healthComponent", GenComponentsHealthComponentHealthComponentClass);
         val _component_myPage = resolveEasyComponent("myPage", GenComponentsMyPageMyPageClass);
         return createElementVNode("scroll-view", utsMapOf("style" to normalizeStyle(utsMapOf("flex" to "1"))), utsArrayOf(
+            withDirectives(createElementVNode("image", utsMapOf("class" to "gif center", "style" to normalizeStyle(utsMapOf("width" to "100%", "bottom" to "2%")), "src" to "/static/animate/leaf_animate.gif", "mode" to "widthFix"), null, 4), utsArrayOf(
+                utsArrayOf(
+                    vShow,
+                    _ctx.isShowGif
+                )
+            )),
+            withDirectives(createElementVNode("image", utsMapOf("class" to "gif center", "style" to normalizeStyle(utsMapOf("width" to "60%", "bottom" to "38%")), "src" to "/static/animate/energy_animate.gif", "mode" to "widthFix"), null, 4), utsArrayOf(
+                utsArrayOf(
+                    vShow,
+                    _ctx.isShowGif
+                )
+            )),
             withDirectives(createElementVNode("view", null, utsArrayOf(
                 createVNode(_component_showWindow)
             ), 512), utsArrayOf(
@@ -134,9 +146,13 @@ open class GenPagesTabbarTabbar : BasePage {
                     }
                 ))), utsArrayOf(
                     createElementVNode("view", utsMapOf("class" to "bg-img"), utsArrayOf(
-                        createElementVNode("image", utsMapOf("class" to "center-icon", "src" to _ctx.tabs[2].selectedIcon, "mode" to "widthFix"), null, 8, utsArrayOf(
-                            "src"
-                        ))
+                        if (isTrue(!_ctx.isShowGif)) {
+                            createElementVNode("image", utsMapOf("key" to 0, "style" to normalizeStyle(utsMapOf("width" to "160rpx")), "src" to _ctx.tabs[2].selectedIcon, "mode" to "widthFix"), null, 12, utsArrayOf(
+                                "src"
+                            ));
+                        } else {
+                            createElementVNode("image", utsMapOf("key" to 1, "style" to normalizeStyle(utsMapOf("width" to "200%")), "src" to "/static/animate/tabbar_animate.gif", "mode" to "widthFix"), null, 4);
+                        }
                     ))
                 ), 46, utsArrayOf(
                     "onTouchstart",
@@ -215,6 +231,7 @@ open class GenPagesTabbarTabbar : BasePage {
         ), 4);
     }
     open var acAnimate: String by `$data`;
+    open var isShowGif: Boolean by `$data`;
     open var tabIndex: Number by `$data`;
     open var centerIndex: Boolean by `$data`;
     open var direction: String by `$data`;
@@ -225,7 +242,7 @@ open class GenPagesTabbarTabbar : BasePage {
     open var pageUrls: UTSArray<String> by `$data`;
     @Suppress("USELESS_CAST")
     override fun data(): Map<String, Any?> {
-        return utsMapOf("acAnimate" to "", "tabIndex" to 2, "centerIndex" to true, "direction" to "right", "loop" to 0, "clickShow" to false, "longClickShow" to false, "tabs" to utsArrayOf<UxTab>(UxTab(name = "展架", selectedIcon = "/static/image/tabBar/选择1.png", unselectedIcon = "/static/image/tabBar/未选择1.png"), UxTab(name = "集市", selectedIcon = "/static/image/tabBar/选择2.png", unselectedIcon = "/static/image/tabBar/未选择2.png"), UxTab(name = "植物", selectedIcon = "/static/image/tabBar/选择3.png", unselectedIcon = "/static/image/tabBar/未选择3.png"), UxTab(name = "膳食", selectedIcon = "/static/image/tabBar/选择4.png", unselectedIcon = "/static/image/tabBar/未选择4.png"), UxTab(name = "我的", selectedIcon = "/static/image/tabBar/选择5.png", unselectedIcon = "/static/image/tabBar/未选择5.png")), "pageUrls" to utsArrayOf(
+        return utsMapOf("acAnimate" to "", "isShowGif" to false, "tabIndex" to 2, "centerIndex" to true, "direction" to "right", "loop" to 0, "clickShow" to false, "longClickShow" to false, "tabs" to utsArrayOf<UxTab>(UxTab(name = "展架", selectedIcon = "/static/image/tabBar/选择1.png", unselectedIcon = "/static/image/tabBar/未选择1.png"), UxTab(name = "集市", selectedIcon = "/static/image/tabBar/选择2.png", unselectedIcon = "/static/image/tabBar/未选择2.png"), UxTab(name = "植物", selectedIcon = "/static/image/tabBar/选择3.png", unselectedIcon = "/static/image/tabBar/未选择3.png"), UxTab(name = "膳食", selectedIcon = "/static/image/tabBar/选择4.png", unselectedIcon = "/static/image/tabBar/未选择4.png"), UxTab(name = "我的", selectedIcon = "/static/image/tabBar/选择5.png", unselectedIcon = "/static/image/tabBar/未选择5.png")), "pageUrls" to utsArrayOf(
             "/pages/showWindow/showWindow",
             "/pages/community/community",
             "/pages/health/health",
@@ -253,7 +270,12 @@ open class GenPagesTabbarTabbar : BasePage {
         this.handlerTouchstart = fun() {
             this.loop = setTimeout(fun(){
                 this.loop = 0;
-                console.log("长按", " at pages/tabbar/tabbar.uvue:67");
+                console.log("长按", " at pages/tabbar/tabbar.uvue:68");
+                this.isShowGif = true;
+                setTimeout(fun(){
+                    this.isShowGif = false;
+                }
+                , 1500);
                 this.clickShow = false;
                 this.longClickShow = true;
             }
@@ -267,14 +289,16 @@ open class GenPagesTabbarTabbar : BasePage {
         ;
         this.handlerTouchend = fun() {
             clearTimeout(this.loop);
+            console.log("离开长按", " at pages/tabbar/tabbar.uvue:87");
+            this.isShowGif = false;
             if (this.loop !== 0) {
-                console.log("单击", " at pages/tabbar/tabbar.uvue:84");
+                console.log("单击", " at pages/tabbar/tabbar.uvue:92");
                 if (this.centerIndex === true) {
                     return;
                 }
                 this.centerIndex = true;
                 this.tabIndex = 2;
-                console.log(this.tabIndex, this.centerIndex, " at pages/tabbar/tabbar.uvue:89");
+                console.log(this.tabIndex, this.centerIndex, " at pages/tabbar/tabbar.uvue:97");
                 this.clickShow = true;
                 this.longClickShow = false;
             }
@@ -296,7 +320,7 @@ open class GenPagesTabbarTabbar : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("center-img" to padStyleMapOf(utsMapOf("width" to 40)), "animate-base" to padStyleMapOf(utsMapOf("transform" to "scale(0.1)", "transitionProperty" to "transform", "transitionDuration" to "0.2s")), "animate-ac" to padStyleMapOf(utsMapOf("transform" to "scale(1)", "transitionProperty" to "transform", "transitionDuration" to "0.2s")), "tabbar" to padStyleMapOf(utsMapOf("position" to "fixed", "zIndex" to 1000, "bottom" to 0, "left" to 0, "right" to 0, "backgroundColor" to "#ffffff", "width" to "100%", "height" to "7%", "overflow" to "visible", "display" to "flex", "flexDirection" to "row", "justifyContent" to "space-around", "alignItems" to "center")), "tab-item" to utsMapOf(".tabbar " to utsMapOf("width" to "20%", "height" to "100%", "overflow" to "visible", "display" to "flex", "flexDirection" to "column", "justifyContent" to "center", "alignItems" to "center")), "bg-img" to utsMapOf(".tabbar .tab-item " to utsMapOf("width" to 70, "height" to 70, "borderRadius" to 70, "backgroundColor" to "#f2eee9", "display" to "flex", "justifyContent" to "center", "alignItems" to "center", "position" to "absolute", "bottom" to 16)), "center-icon" to utsMapOf(".tabbar .tab-item .bg-img " to utsMapOf("width" to 52)), "tab-icon" to utsMapOf(".tabbar .tab-item " to utsMapOf("width" to 24)), "tab-text" to utsMapOf(".tabbar .tab-item " to utsMapOf("marginTop" to 4, "fontSize" to 12, "color" to "#808080")), "active-text" to utsMapOf(".tabbar .tab-item " to utsMapOf("color" to "#937152")), "@TRANSITION" to utsMapOf("animate-base" to utsMapOf("property" to "transform", "duration" to "0.2s"), "animate-ac" to utsMapOf("property" to "transform", "duration" to "0.2s")));
+                return utsMapOf("gif" to padStyleMapOf(utsMapOf("position" to "fixed", "left" to "50%", "transform" to "translate(-50%)")), "center-img" to padStyleMapOf(utsMapOf("width" to 40)), "animate-base" to padStyleMapOf(utsMapOf("transform" to "scale(0.1)", "transitionProperty" to "transform", "transitionDuration" to "0.2s")), "animate-ac" to padStyleMapOf(utsMapOf("transform" to "scale(1)", "transitionProperty" to "transform", "transitionDuration" to "0.2s")), "tabbar" to padStyleMapOf(utsMapOf("position" to "fixed", "zIndex" to 1000, "bottom" to 0, "left" to 0, "right" to 0, "backgroundColor" to "#ffffff", "width" to "100%", "height" to "7%", "overflow" to "visible", "display" to "flex", "flexDirection" to "row", "justifyContent" to "space-around", "alignItems" to "center")), "tab-item" to utsMapOf(".tabbar " to utsMapOf("width" to "20%", "height" to "100%", "overflow" to "visible", "display" to "flex", "flexDirection" to "column", "justifyContent" to "center", "alignItems" to "center")), "bg-img" to utsMapOf(".tabbar .tab-item " to utsMapOf("width" to 70, "height" to 70, "borderRadius" to 70, "backgroundColor" to "#f2eee9", "display" to "flex", "justifyContent" to "center", "alignItems" to "center", "position" to "absolute", "bottom" to 16)), "tab-icon" to utsMapOf(".tabbar .tab-item " to utsMapOf("width" to 24)), "tab-text" to utsMapOf(".tabbar .tab-item " to utsMapOf("marginTop" to 4, "fontSize" to 12, "color" to "#808080")), "active-text" to utsMapOf(".tabbar .tab-item " to utsMapOf("color" to "#937152")), "@TRANSITION" to utsMapOf("animate-base" to utsMapOf("property" to "transform", "duration" to "0.2s"), "animate-ac" to utsMapOf("property" to "transform", "duration" to "0.2s")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

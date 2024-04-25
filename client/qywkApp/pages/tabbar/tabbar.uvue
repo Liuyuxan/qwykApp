@@ -32,8 +32,8 @@
 			
 			<view class="tab-item animate-base" :class="[acAnimate]" @touchstart="handlerTouchstart" @touchmove="handlerTouchmove" @touchend="handlerTouchend" :style="[tabIndex == 2 ? 'display: visible;' : 'display: none;']">
 				<view class="bg-img">
-					<image class="center-icon" :src="tabs[2].selectedIcon" mode="widthFix" v-if="!isShowGif"></image>
-					<image class="center-icon" style="width: 200%;" src="/static/animate/tabbar_animate.gif" mode="widthFix" v-else></image>
+					<image style="width: 160rpx;" :src="tabs[2].selectedIcon" mode="widthFix" v-if="!isShowGif"></image>
+					<image style="width: 200%;" src="/static/animate/tabbar_animate.gif" mode="widthFix" v-else></image>
 				</view>
 			</view>
 			<view class="tab-item" @click="changeTab(2)" v-if="tabIndex !== 2">
@@ -224,10 +224,6 @@
 				bottom: 16px;
 				
 				
-				.center-icon {
-					width: 52px;
-					
-				}
 			}
 			
 			

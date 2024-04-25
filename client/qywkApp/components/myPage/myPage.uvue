@@ -11,7 +11,7 @@
 			<text style="margin-top: 60px; font-size: 16px;color: #594532;">爱吃汉堡哥的卡皮巴拉</text>
 			<text class="mt-2" style="font-size: 10px;color: #8A6913;">账号：210312</text>
 			<view class="tag-bar mt-2 flex justify-around">
-				<view class="item flex flex-column align-center" v-for="(item, index) in tagBars" :key="index">
+				<view class="item flex flex-column align-center" v-for="(item, index) in tagBars" :key="index" @click="clickTagbar(item)">
 					<text class="mt-1" style="font-size: 12px;color: #808080;">{{ item.title }}</text>
 					<text class="mt-1" style="font-size: 12px;color: #000;">{{ item.count }}个</text>
 				</view>
@@ -84,6 +84,7 @@
 	type tagType = {
 		title : string
 		count : number
+		navigateUrl: string
 	}
 	type planType = {
 		name: string
@@ -95,15 +96,18 @@
 				tagBars: [
 					{
 						title: '计划',
-						count: 16
+						count: 16,
+						navigateUrl: '/pages/myPlan/myPlan'
 					},
 					{
 						title: '收藏膳食',
-						count: 0
+						count: 0,
+						navigateUrl: '/pages/myCollection/myCollection'
 					},
 					{
 						title: '好友',
-						count: 8
+						count: 8,
+						navigateUrl: '/pages/friend/friend'
 					},
 				] as tagType[],
 				planOptions: [
@@ -128,6 +132,12 @@
 		},
 		
 		methods: {
+			clickTagbar(item: tagType) {
+				console.log(item);
+				uni.navigateTo({
+					url: item.navigateUrl
+				})
+			},
 			out() {
 				uni.clearStorageSync()
 				uni.reLaunch({

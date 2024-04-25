@@ -1,0 +1,317 @@
+<template>
+	<!-- #ifdef APP -->
+	<scroll-view class="flex flex-column align-center" style="flex:1;background-color: #f2eee9;padding-top: 50px;">
+	<!-- #endif -->
+		<text class="title">我的计划（4个）</text>
+		<view class="options flex mt-2">
+			<text :class="['option mr-2 ml-1', currentOptionIndex == index ? 'ac-option' : '']" 
+						v-for="(item, index) in tabs" :key="item.id"
+						@click="clickOption(index)"
+						>{{ item.name }}</text>
+		</view>
+		
+		<view class="plan flex align-center mt-3" v-for="(item,index) in plans" :key="index">
+			<view class="line mr-3" :style="{'background-color': (colors[index%9])}"></view>
+			<view class="texts">
+				<text class="text" style="font-size: 24rpx;">{{ item.name }}</text>
+				<text class="text" style="font-size: 20rpx;">{{ item.punchCycle }}</text>
+			</view>
+		</view>
+		<button class="add-btn  mt-5" hover-class="add-btn-is-hover" @click="addPlan">添加计划</button>
+	<!-- #ifdef APP -->
+	</scroll-view>
+	<!-- #endif -->
+</template>
+
+<script>
+	type tabType = {
+		id : number
+		name : string
+	}
+	type planType = {
+		id: string,
+		plantId: string | null,
+		name: string,
+		subarea: string,
+		punchCycle: string,
+		punchSize: number,
+		remindTime: string,
+		remindMusic: string,
+		automatic: string,
+		startTime: string | null,
+		endTime: string | null,
+		isSelected: boolean
+	}
+	export default {
+		data() {
+			return {
+				currentOptionIndex: 0,
+				
+				colors: [
+					"#3b361a",
+					"#a27046",
+					"#46a398",
+					"#4679a3",
+					"#a34646",
+					"#83a346",
+					"#a39746",
+					"#a37246",
+					"#46a353"
+				],
+				tabs: [
+					{
+						id: 1,
+						name: '全部'
+					},
+					{
+						id: 2,
+						name: '运动'
+					},
+					{
+						id: 3,
+						name: '健康'
+					},
+					{
+						id: 4,
+						name: '养发'
+					},
+					{
+						id: 5,
+						name: '健脾'
+					},
+					{
+						id: 6,
+						name: '已完成'
+					},
+				] as tabType[],
+				plans: [
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "泡脚",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "艾灸",
+						subarea: "生活",
+						punchCycle: "每周一次",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "拔火罐",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "刮痧",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "针灸",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "中医熏蒸",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "推拿",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "打坐",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "深呼吸",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					},
+					{
+						id: "00cf6a99-2b19-4a10-96f4-e5947eb7adfb",
+						plantId: null,
+						name: "冥想",
+						subarea: "生活",
+						punchCycle: "每天",
+						punchSize: 1,
+						remindTime: "8:00:00",
+						remindMusic: "小叮当.mp3",
+						automatic: "1",
+						startTime: null,
+						endTime: null,
+						isSelected: false
+					}
+				] as planType[]
+
+			};
+		},
+		methods: {
+			clickOption(index:number) {
+				this.currentOptionIndex = index
+			},
+			addPlan() {
+				uni.navigateTo({
+					url: '/pages/drawPlan/drawPlan'
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	$primaryColor: #594532;
+	
+	.title {
+		font-size: 20px;
+		color: $primaryColor;
+		width: 100%;
+		padding-left: 40rpx;
+		padding-bottom: 20rpx;
+		border-bottom:2px dashed $primaryColor;
+	}
+	
+	.options {
+		width: 94%;
+		.option {
+			font-size: 28rpx;
+			color: #796856;
+			transform: scale(1);
+			transition: transform .5s;
+		}
+		.ac-option {
+			transform: scale(1.2);
+			transition: transform .5s;
+		}
+	}
+	
+	.plan {
+		width: 94%;
+		height: 96rpx;
+		background-color: #fcf6e6;
+		border-radius: 16rpx;
+
+		.line {
+			width: 10rpx;
+			height: 48rpx;
+			border-radius: 12rpx;
+
+			.text {
+				color: $primaryColor;
+			}
+		}
+
+		.texts {
+			width: 380rpx;
+		}
+
+		.select {
+			width: 32rpx;
+			height: 32rpx;
+			border-radius: 32rpx;
+		}
+
+		.unselect {
+			width: 32rpx;
+			height: 32rpx;
+			border-radius: 32rpx;
+			border: 1px solid #b19983;
+		}
+	}
+	
+	.add-btn {
+		width: 80%;
+		height: 648rpx;
+		height: 100rpx;
+		border-radius: 16rpx;
+		line-height: 100rpx;
+		background-color: #b19983;
+		color: #fff;
+	}
+	.add-btn-is-hover {
+		background-color: #594532;
+	}
+</style>

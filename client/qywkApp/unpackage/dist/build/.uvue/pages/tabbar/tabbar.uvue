@@ -4,7 +4,8 @@
 	export default {
 		data() {
 			return {
-				acAnimate: '',  // 控制中间tab-icon动画
+				acAnimate: '',  // 控制中间tab-icon过渡
+				isShowGif: false,  // 控制长按打卡动图显示
 				tabIndex: 2,
 				centerIndex: true,//  处于中间页面
 				direction: 'right',
@@ -65,7 +66,10 @@
 					this.loop = 0
 					// 执行长按要执行的内容
 					console.log('长按');
-					
+					this.isShowGif = true
+					setTimeout(() => {
+						this.isShowGif = false
+					},1500)
 					this.clickShow = false
 					this.longClickShow = true
 				}, 500) // 定时的时间
@@ -74,11 +78,15 @@
 			handlerTouchmove() {
 				// 清除定时器
 				clearTimeout(this.loop)
+				
 				this.loop = 0
 			},
 			handlerTouchend() {
 				// 清除定时器
 				clearTimeout(this.loop)
+				console.log('离开长按');
+				this.isShowGif = false
+				
 				if (this.loop !== 0) {
 					// 单击操作
 					console.log('单击');
@@ -118,6 +126,22 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
   return createElementVNode("scroll-view", utsMapOf({
     style: normalizeStyle(utsMapOf({"flex":"1"}))
   }), [
+    withDirectives(createElementVNode("image", utsMapOf({
+      class: "gif center",
+      style: normalizeStyle(utsMapOf({"width":"100%","bottom":"2%"})),
+      src: "/static/animate/leaf_animate.gif",
+      mode: "widthFix"
+    }), null, 4), [
+      [vShow, _ctx.isShowGif]
+    ]),
+    withDirectives(createElementVNode("image", utsMapOf({
+      class: "gif center",
+      style: normalizeStyle(utsMapOf({"width":"60%","bottom":"38%"})),
+      src: "/static/animate/energy_animate.gif",
+      mode: "widthFix"
+    }), null, 4), [
+      [vShow, _ctx.isShowGif]
+    ]),
     withDirectives(createElementVNode("view", null, [
       createVNode(_component_showWindow)
     ], 512), [
@@ -178,11 +202,19 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
         style: normalizeStyle([_ctx.tabIndex == 2 ? 'display: visible;' : 'display: none;'])
       }), [
         createElementVNode("view", utsMapOf({ class: "bg-img" }), [
-          createElementVNode("image", utsMapOf({
-            class: "center-icon",
-            src: _ctx.tabs[2].selectedIcon,
-            mode: "widthFix"
-          }), null, 8, ["src"])
+          isTrue(!_ctx.isShowGif)
+            ? createElementVNode("image", utsMapOf({
+                key: 0,
+                style: normalizeStyle(utsMapOf({"width":"160rpx"})),
+                src: _ctx.tabs[2].selectedIcon,
+                mode: "widthFix"
+              }), null, 12, ["src"])
+            : createElementVNode("image", utsMapOf({
+                key: 1,
+                style: normalizeStyle(utsMapOf({"width":"200%"})),
+                src: "/static/animate/tabbar_animate.gif",
+                mode: "widthFix"
+              }), null, 4)
         ])
       ], 46, ["onTouchstart", "onTouchmove", "onTouchend"]),
       _ctx.tabIndex !== 2
@@ -230,4 +262,4 @@ const _component_myPage = resolveEasyComponent("myPage",_easycom_myPage)
     ])
   ], 4)
 }
-const GenPagesTabbarTabbarStyles = [utsMapOf([["center-img", padStyleMapOf(utsMapOf([["width", 40]]))], ["animate-base", padStyleMapOf(utsMapOf([["transform", "scale(0.1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.2s"]]))], ["animate-ac", padStyleMapOf(utsMapOf([["transform", "scale(1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.2s"]]))], ["tabbar", padStyleMapOf(utsMapOf([["position", "fixed"], ["zIndex", 1000], ["bottom", 0], ["left", 0], ["right", 0], ["backgroundColor", "#ffffff"], ["width", "100%"], ["height", "7%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "row"], ["justifyContent", "space-around"], ["alignItems", "center"]]))], ["tab-item", utsMapOf([[".tabbar ", utsMapOf([["width", "20%"], ["height", "100%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"]])]])], ["bg-img", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 70], ["height", 70], ["borderRadius", 70], ["backgroundColor", "#f2eee9"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["position", "absolute"], ["bottom", 16]])]])], ["center-icon", utsMapOf([[".tabbar .tab-item .bg-img ", utsMapOf([["width", 52]])]])], ["tab-icon", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 24]])]])], ["tab-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["marginTop", 4], ["fontSize", 12], ["color", "#808080"]])]])], ["active-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["color", "#937152"]])]])], ["@TRANSITION", utsMapOf([["animate-base", utsMapOf([["property", "transform"], ["duration", "0.2s"]])], ["animate-ac", utsMapOf([["property", "transform"], ["duration", "0.2s"]])]])]])]
+const GenPagesTabbarTabbarStyles = [utsMapOf([["gif", padStyleMapOf(utsMapOf([["position", "fixed"], ["left", "50%"], ["transform", "translate(-50%)"]]))], ["center-img", padStyleMapOf(utsMapOf([["width", 40]]))], ["animate-base", padStyleMapOf(utsMapOf([["transform", "scale(0.1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.2s"]]))], ["animate-ac", padStyleMapOf(utsMapOf([["transform", "scale(1)"], ["transitionProperty", "transform"], ["transitionDuration", "0.2s"]]))], ["tabbar", padStyleMapOf(utsMapOf([["position", "fixed"], ["zIndex", 1000], ["bottom", 0], ["left", 0], ["right", 0], ["backgroundColor", "#ffffff"], ["width", "100%"], ["height", "7%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "row"], ["justifyContent", "space-around"], ["alignItems", "center"]]))], ["tab-item", utsMapOf([[".tabbar ", utsMapOf([["width", "20%"], ["height", "100%"], ["overflow", "visible"], ["display", "flex"], ["flexDirection", "column"], ["justifyContent", "center"], ["alignItems", "center"]])]])], ["bg-img", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 70], ["height", 70], ["borderRadius", 70], ["backgroundColor", "#f2eee9"], ["display", "flex"], ["justifyContent", "center"], ["alignItems", "center"], ["position", "absolute"], ["bottom", 16]])]])], ["tab-icon", utsMapOf([[".tabbar .tab-item ", utsMapOf([["width", 24]])]])], ["tab-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["marginTop", 4], ["fontSize", 12], ["color", "#808080"]])]])], ["active-text", utsMapOf([[".tabbar .tab-item ", utsMapOf([["color", "#937152"]])]])], ["@TRANSITION", utsMapOf([["animate-base", utsMapOf([["property", "transform"], ["duration", "0.2s"]])], ["animate-ac", utsMapOf([["property", "transform"], ["duration", "0.2s"]])]])]])]

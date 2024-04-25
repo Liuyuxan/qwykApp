@@ -1,0 +1,43 @@
+<template>
+	<view>
+		<input class="search" type="text" :placeholder="placeholder" @confirm="enter"/>
+	</view>
+</template>
+
+<script>
+	export default {
+		name:"search",
+		props: {
+			placeholder: {
+				default: '请输入搜索内容'
+			}
+		},
+		data() {
+			return {
+				
+			};
+		},
+		methods: {
+			enter(e: UniInputConfirmEvent) {
+				console.log(e);
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.search {
+		width: 600rpx;
+		height: 76rpx;
+		border-radius: 50rpx;
+		border: 1px solid #796856;
+		margin: 0 auto;
+		padding-left: 10px;
+		background-color: #f2f2f2;
+	}
+	
+	.search::placeholder {
+		font-size: 28rpx;
+		margin-left: 100rpx;
+	}
+</style>

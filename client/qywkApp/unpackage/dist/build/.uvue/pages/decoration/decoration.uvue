@@ -1,0 +1,18 @@
+
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
+
+
+function GenPagesDecorationDecorationRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+  return createElementVNode("scroll-view", utsMapOf({
+    style: normalizeStyle(utsMapOf({"flex":"1"}))
+  }), " 装扮 ", 4)
+}
+const GenPagesDecorationDecorationStyles = []

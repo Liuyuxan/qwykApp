@@ -25,7 +25,7 @@ open class GenPagesValidateCodeValidateCode : BasePage {
         val _ctx = this;
         val _cache = this.`$`.renderCache;
         return createElementVNode("view", utsMapOf("class" to "validateCode"), utsArrayOf(
-            createElementVNode("image", utsMapOf("class" to "bg-img", "src" to "/static/image/login/bg.png", "mode" to "widthFix")),
+            createElementVNode("image", utsMapOf("class" to "bg-img", "src" to "/static/image/bg/bg_4.png", "mode" to "widthFix")),
             createElementVNode("view", utsMapOf("class" to "window flex flex-column align-center"), utsArrayOf(
                 createElementVNode("view", utsMapOf("class" to "top flex align-center"), utsArrayOf(
                     createElementVNode("image", utsMapOf("src" to "/static/image/login/chacha.png", "mode" to "widthFix", "style" to normalizeStyle(utsMapOf("width" to "36rpx", "margin-right" to "10rpx"))), null, 4),
@@ -38,7 +38,7 @@ open class GenPagesValidateCodeValidateCode : BasePage {
                     "modelValue",
                     "onInput"
                 )),
-                createElementVNode("button", utsMapOf("class" to "space", "hover-class" to "btn-hover", "onClick" to _ctx.clickRegiter, "style" to normalizeStyle(utsMapOf("width" to "600rpx", "height" to "76rpx", "border-radius" to "32rpx", "color" to "#fff", "line-height" to "76rpx", "text-align" to "center", "background-color" to "#b19983"))), "发送验证码", 12, utsArrayOf(
+                createElementVNode("button", utsMapOf("class" to "space btn", "hover-class" to "btn-is-hover", "onClick" to _ctx.clickRegiter), "发送验证码", 8, utsArrayOf(
                     "onClick"
                 ))
             ))
@@ -57,21 +57,23 @@ open class GenPagesValidateCodeValidateCode : BasePage {
             if (this.numberPhone.length != 11) {
                 return;
             }
-            console.log(this.numberPhone, " at pages/validateCode/validateCode.uvue:32");
+            console.log(this.numberPhone, " at pages/validateCode/validateCode.uvue:31");
             uni_request<IResponse<ICode>>(RequestOptions(url = BASE_URL + ("/user/login/sent/code?tel=" + this.numberPhone), method = "POST", success = fun(res){
                 var r = res.data;
+                if (r == null) {
+                    return;
+                }
                 console.log("验证码返回信息", r, " at pages/validateCode/validateCode.uvue:39");
                 if (r!!.code == 200) {
                     var code = r!!.data!!.code;
-                    console.log(code, " at pages/validateCode/validateCode.uvue:42");
                     uni_showToast(ShowToastOptions(title = "获取验证码成功，已帮您自动填写", icon = "none"));
                     uni_navigateTo(NavigateToOptions(url = "/pages/register/register?code=" + code + "&tel=" + this.numberPhone));
                 } else {
-                    uni_showToast(ShowToastOptions(title = "网络超时", icon = "none"));
+                    uni_showToast(ShowToastOptions(title = r.message, icon = "none"));
                 }
             }
             , fail = fun(err){
-                console.log(err, " at pages/validateCode/validateCode.uvue:59");
+                console.log(err, " at pages/validateCode/validateCode.uvue:58");
                 uni_showToast(ShowToastOptions(title = err.errMsg, icon = "none"));
             }
             ));
@@ -90,7 +92,7 @@ open class GenPagesValidateCodeValidateCode : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("validateCode" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".validateCode " to utsMapOf("width" to "750rpx", "position" to "absolute", "top" to 0)), "window" to utsMapOf(".validateCode " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "466rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "#f5f5f5", "borderRadius" to "48rpx")), "space" to utsMapOf(".validateCode .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".validateCode .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "btn-hover" to utsMapOf(".validateCode .window " to utsMapOf("backgroundColor" to "#94806e")));
+                return utsMapOf("btn" to padStyleMapOf(utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "color" to "#ffffff", "lineHeight" to "76rpx", "textAlign" to "center", "backgroundColor" to "#b19983")), "btn-is-hover" to padStyleMapOf(utsMapOf("backgroundColor" to "#94806e")), "validateCode" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".validateCode " to utsMapOf("width" to "650rpx", "position" to "absolute", "left" to "50%", "transform" to "translateX(-50%)", "bottom" to "-10%")), "window" to utsMapOf(".validateCode " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "466rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "rgba(255,255,255,0.6)", "borderRadius" to "48rpx")), "space" to utsMapOf(".validateCode .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".validateCode .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

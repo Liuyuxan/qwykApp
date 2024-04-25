@@ -30,8 +30,8 @@ export class UniAppConfig extends AppConfig {
     constructor() {}
 }
 
-import GenPagesHealthQuestionHealthQuestionClass from './pages/healthQuestion/healthQuestion.uvue?type=page'
 import GenPagesTabbarTabbarClass from './pages/tabbar/tabbar.uvue?type=page'
+import GenPagesHealthQuestionHealthQuestionClass from './pages/healthQuestion/healthQuestion.uvue?type=page'
 import GenPagesLoginLoginClass from './pages/login/login.uvue?type=page'
 import GenPagesPlantDetailPlantDetailClass from './pages/plantDetail/plantDetail.uvue?type=page'
 import GenPagesHealthDetailHealthDetailClass from './pages/healthDetail/healthDetail.uvue?type=page'
@@ -39,9 +39,13 @@ import GenPagesValidateCodeValidateCodeClass from './pages/validateCode/validate
 import GenPagesRegisterRegisterClass from './pages/register/register.uvue?type=page'
 import GenPagesResultHealthResultHealthClass from './pages/resultHealth/resultHealth.uvue?type=page'
 import GenPagesDrawPlanDrawPlanClass from './pages/drawPlan/drawPlan.uvue?type=page'
+import GenPagesMyPlanMyPlanClass from './pages/myPlan/myPlan.uvue?type=page'
+import GenPagesMessageMessageClass from './pages/message/message.uvue?type=page'
+import GenPagesDecorationDecorationClass from './pages/decoration/decoration.uvue?type=page'
+import GenPagesMyCollectionMyCollectionClass from './pages/myCollection/myCollection.uvue?type=page'
 function definePageRoutes() {
-__uniRoutes.push({ path: "pages/healthQuestion/healthQuestion", component: GenPagesHealthQuestionHealthQuestionClass, meta: { isQuit: true } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
-__uniRoutes.push({ path: "pages/tabbar/tabbar", component: GenPagesTabbarTabbarClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/tabbar/tabbar", component: GenPagesTabbarTabbarClass, meta: { isQuit: true } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/healthQuestion/healthQuestion", component: GenPagesHealthQuestionHealthQuestionClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/login/login", component: GenPagesLoginLoginClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/plantDetail/plantDetail", component: GenPagesPlantDetailPlantDetailClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/healthDetail/healthDetail", component: GenPagesHealthDetailHealthDetailClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText","每日药膳推荐"]]) } as PageRoute)
@@ -49,12 +53,16 @@ __uniRoutes.push({ path: "pages/validateCode/validateCode", component: GenPagesV
 __uniRoutes.push({ path: "pages/register/register", component: GenPagesRegisterRegisterClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/resultHealth/resultHealth", component: GenPagesResultHealthResultHealthClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 __uniRoutes.push({ path: "pages/drawPlan/drawPlan", component: GenPagesDrawPlanDrawPlanClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/myPlan/myPlan", component: GenPagesMyPlanMyPlanClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/message/message", component: GenPagesMessageMessageClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/decoration/decoration", component: GenPagesDecorationDecorationClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
+__uniRoutes.push({ path: "pages/myCollection/myCollection", component: GenPagesMyCollectionMyCollectionClass, meta: { isQuit: false } as PageMeta, style: utsMapOf([["navigationBarTitleText",""]]) } as PageRoute)
 }
 const __uniTabBar: Map<string, any | null> | null = utsMapOf()
-const __uniLaunchPage: Map<string, any | null> = utsMapOf([["url","pages/healthQuestion/healthQuestion"],["style",utsMapOf([["navigationBarTitleText",""]])]])
+const __uniLaunchPage: Map<string, any | null> = utsMapOf([["url","pages/tabbar/tabbar"],["style",utsMapOf([["navigationBarTitleText",""]])]])
 @Suppress("UNCHECKED_CAST")
 function defineAppConfig(){
-  __uniConfig.entryPagePath = '/pages/healthQuestion/healthQuestion'
+  __uniConfig.entryPagePath = '/pages/tabbar/tabbar'
   __uniConfig.globalStyle = utsMapOf([["navigationBarTextStyle","black"],["navigationBarTitleText","uni-app x"],["navigationBarBackgroundColor","#F8F8F8"],["backgroundColor","#F8F8F8"],["navigationStyle","custom"]])
   __uniConfig.tabBar = __uniTabBar as Map<string, any> | null
   __uniConfig.conditionUrl = ''

@@ -1,14 +1,13 @@
 <template>
 	<view class="validateCode">
-		<image class="bg-img" src="../../static/image/login/bg.png" mode="widthFix"></image>
+		<image class="bg-img" src="../../static/image/bg/bg_4.png" mode="widthFix"></image>
 		<view class="window flex flex-column  align-center">
 			<view class="top flex align-center">
 				<image src="../../static/image/login/chacha.png" mode="widthFix" style="width: 36rpx;margin-right: 10rpx;"></image>
 				<text class="title justify-start">注册</text>
 			</view>
 			<input v-model="numberPhone" class="uni-input space" placeholder="手机号" />
-			<button class="space" hover-class="btn-hover" @click="clickRegiter"
-				style="width: 600rpx;height: 76rpx;border-radius: 32rpx;color: #fff;line-height: 76rpx;text-align: center;background-color: #b19983;">发送验证码</button>
+			<button class="space btn" hover-class="btn-is-hover" @click="clickRegiter">发送验证码</button>
 		</view>
 	</view>
 </template>
@@ -36,10 +35,10 @@
 					
 					success: (res) => {
 						let r = res.data
+						if(r == null) return
 						console.log('验证码返回信息', r);
 						if(r!.code == 200) {
 							let code = r!.data!.code
-							console.log(code);
 							uni.showToast({
 								title: '获取验证码成功，已帮您自动填写',
 								icon: "none"
@@ -49,7 +48,7 @@
 							})
 						} else {
 							uni.showToast({
-								title: '网络超时',
+								title: r.message,
 								icon: "none"
 							})
 						}
@@ -70,14 +69,29 @@
 </script>
 
 <style lang="scss" scoped>
+	.btn {
+		width: 600rpx;
+		height: 76rpx;
+		border-radius: 32rpx;
+		color: #fff;
+		line-height: 76rpx;
+		text-align: center;
+		background-color: #b19983;
+	}
+	.btn-is-hover {
+		background-color: #94806e;
+	}
+	
 	.validateCode {
 		width: 100%;
 		height: 100%;
 		background-color: $uni-bg-color;
 		.bg-img {
-			width: 750rpx;
+			width: 650rpx;
 			position: absolute;
-			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: -10%;
 		}
 		.window {
 			box-sizing: border-box;
@@ -85,7 +99,7 @@
 			height: 466rpx;
 			padding: 30rpx;
 			margin: 300rpx auto 0 auto;
-			background-color: $uni-bg-color-grey;
+			background-color: rgba(255, 255, 255, 0.6);
 			border-radius: 48rpx;
 
 			.space {
@@ -115,10 +129,6 @@
 			.uni-input::placeholder {
 				font-size: 28rpx;
 				margin-left: 100rpx;
-			}
-
-			.btn-hover {
-				background-color: #94806e;
 			}
 
 		}

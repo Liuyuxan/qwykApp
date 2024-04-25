@@ -38,6 +38,15 @@ const _cache = this.$.renderCache
     createElementVNode("view", utsMapOf({ class: "info mt-2" }), [
       createElementVNode("text", utsMapOf({ class: "text-info" }), toDisplayString(_ctx.info), 1 /* TEXT */)
     ]),
+    createElementVNode("view", utsMapOf({ class: "btn center" }), [
+      createElementVNode("image", utsMapOf({
+        class: "btn-img",
+        style: normalizeStyle(utsMapOf({"width":"310rpx"})),
+        src: "/static/image/showWindow/unlocked_Pattern.png",
+        mode: "widthFix"
+      }), null, 4 /* STYLE */),
+      createElementVNode("text", utsMapOf({ class: "text" }), "已收藏")
+    ]),
     createElementVNode("image", utsMapOf({
       class: "bg",
       src: "/static/image/bg/bg_2.png",
@@ -45,4 +54,4 @@ const _cache = this.$.renderCache
     }))
   ], 4 /* STYLE */)
 }
-const GenPagesHealthDetailHealthDetailStyles = [utsMapOf([["bg", padStyleMapOf(utsMapOf([["width", "100%"], ["transform", "scale(1.4)"], ["position", "fixed"], ["zIndex", -1], ["top", 0], ["left", 0], ["right", 0], ["bottom", 0]]))], ["text", padStyleMapOf(utsMapOf([["position", "absolute"]]))], ["title", padStyleMapOf(utsMapOf([["top", "12%"], ["fontSize", "56rpx"], ["fontWeight", "700"], ["color", "#937152"]]))], ["subtitle", padStyleMapOf(utsMapOf([["bottom", "14%"], ["fontSize", "32rpx"], ["color", "#937152"]]))], ["info", padStyleMapOf(utsMapOf([["width", "632rpx"]]))], ["text-info", utsMapOf([[".info ", utsMapOf([["fontSize", "32rpx"], ["color", "#937152"]])]])]])]
+const GenPagesHealthDetailHealthDetailStyles = [utsMapOf([["bg", padStyleMapOf(utsMapOf([["width", "100%"], ["transform", "scale(1.4)"], ["position", "fixed"], ["zIndex", -1], ["top", 0], ["left", 0], ["right", 0], ["bottom", 0]]))], ["text", utsMapOf([["", utsMapOf([["position", "absolute"]])], [".btn ", utsMapOf([["position", "absolute"], ["top", "50%"], ["left", "50%"], ["transform", "translate(-50%)"], ["color", "#7a927a"], ["fontSize", "52rpx"]])]])], ["title", padStyleMapOf(utsMapOf([["top", "12%"], ["fontSize", "56rpx"], ["fontWeight", "700"], ["color", "#937152"]]))], ["subtitle", padStyleMapOf(utsMapOf([["bottom", "14%"], ["fontSize", "32rpx"], ["color", "#937152"]]))], ["info", padStyleMapOf(utsMapOf([["width", "632rpx"]]))], ["text-info", utsMapOf([[".info ", utsMapOf([["fontSize", "32rpx"], ["color", "#937152"]])]])], ["btn", padStyleMapOf(utsMapOf([["position", "absolute"], ["zIndex", 9], ["bottom", "6%"]]))]])]

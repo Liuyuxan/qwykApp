@@ -30,6 +30,10 @@ open class GenPagesHealthDetailHealthDetail : BasePage {
             createElementVNode("view", utsMapOf("class" to "info mt-2"), utsArrayOf(
                 createElementVNode("text", utsMapOf("class" to "text-info"), toDisplayString(_ctx.info), 1)
             )),
+            createElementVNode("view", utsMapOf("class" to "btn center"), utsArrayOf(
+                createElementVNode("image", utsMapOf("class" to "btn-img", "style" to normalizeStyle(utsMapOf("width" to "310rpx")), "src" to "/static/image/showWindow/unlocked_Pattern.png", "mode" to "widthFix"), null, 4),
+                createElementVNode("text", utsMapOf("class" to "text"), "已收藏")
+            )),
             createElementVNode("image", utsMapOf("class" to "bg", "src" to "/static/image/bg/bg_2.png", "mode" to "widthFix"))
         ), 4);
     }
@@ -51,7 +55,7 @@ open class GenPagesHealthDetailHealthDetail : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("bg" to padStyleMapOf(utsMapOf("width" to "100%", "transform" to "scale(1.4)", "position" to "fixed", "zIndex" to -1, "top" to 0, "left" to 0, "right" to 0, "bottom" to 0)), "text" to padStyleMapOf(utsMapOf("position" to "absolute")), "title" to padStyleMapOf(utsMapOf("top" to "12%", "fontSize" to "56rpx", "fontWeight" to "700", "color" to "#937152")), "subtitle" to padStyleMapOf(utsMapOf("bottom" to "14%", "fontSize" to "32rpx", "color" to "#937152")), "info" to padStyleMapOf(utsMapOf("width" to "632rpx")), "text-info" to utsMapOf(".info " to utsMapOf("fontSize" to "32rpx", "color" to "#937152")));
+                return utsMapOf("bg" to padStyleMapOf(utsMapOf("width" to "100%", "transform" to "scale(1.4)", "position" to "fixed", "zIndex" to -1, "top" to 0, "left" to 0, "right" to 0, "bottom" to 0)), "text" to utsMapOf("" to utsMapOf("position" to "absolute"), ".btn " to utsMapOf("position" to "absolute", "top" to "50%", "left" to "50%", "transform" to "translate(-50%)", "color" to "#7a927a", "fontSize" to "52rpx")), "title" to padStyleMapOf(utsMapOf("top" to "12%", "fontSize" to "56rpx", "fontWeight" to "700", "color" to "#937152")), "subtitle" to padStyleMapOf(utsMapOf("bottom" to "14%", "fontSize" to "32rpx", "color" to "#937152")), "info" to padStyleMapOf(utsMapOf("width" to "632rpx")), "text-info" to utsMapOf(".info " to utsMapOf("fontSize" to "32rpx", "color" to "#937152")), "btn" to padStyleMapOf(utsMapOf("position" to "absolute", "zIndex" to 9, "bottom" to "6%")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

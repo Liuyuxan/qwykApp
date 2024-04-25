@@ -15,6 +15,7 @@ import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
 import io.dcloud.uniapp.extapi.clearStorageSync as uni_clearStorageSync;
+import io.dcloud.uniapp.extapi.navigateTo as uni_navigateTo;
 import io.dcloud.uniapp.extapi.reLaunch as uni_reLaunch;
 open class GenComponentsMyPageMyPage : VueComponent {
     constructor(instance: ComponentInternalInstance) : super(instance) {}
@@ -36,9 +37,14 @@ open class GenComponentsMyPageMyPage : VueComponent {
                 createElementVNode("text", utsMapOf("class" to "mt-2", "style" to normalizeStyle(utsMapOf("font-size" to "10px", "color" to "#8A6913"))), "账号：210312", 4),
                 createElementVNode("view", utsMapOf("class" to "tag-bar mt-2 flex justify-around"), utsArrayOf(
                     createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.tagBars, fun(item, index, _, _): VNode {
-                        return createElementVNode("view", utsMapOf("class" to "item flex flex-column align-center", "key" to index), utsArrayOf(
+                        return createElementVNode("view", utsMapOf("class" to "item flex flex-column align-center", "key" to index, "onClick" to fun(){
+                            _ctx.clickTagbar(item);
+                        }
+                        ), utsArrayOf(
                             createElementVNode("text", utsMapOf("class" to "mt-1", "style" to normalizeStyle(utsMapOf("font-size" to "12px", "color" to "#808080"))), toDisplayString(item.title), 5),
                             createElementVNode("text", utsMapOf("class" to "mt-1", "style" to normalizeStyle(utsMapOf("font-size" to "12px", "color" to "#000"))), toDisplayString(item.count) + "个", 5)
+                        ), 8, utsArrayOf(
+                            "onClick"
                         ));
                     }
                     ), 128)
@@ -90,7 +96,7 @@ open class GenComponentsMyPageMyPage : VueComponent {
                 )),
                 createElementVNode("view", utsMapOf("class" to "sign-in-box mt-5"), utsArrayOf(
                     createElementVNode("image", utsMapOf("style" to normalizeStyle(utsMapOf("width" to "100%")), "src" to "/static/image/bg/bg_4.webp", "mode" to "widthFix"), null, 4),
-                    createElementVNode("view", utsMapOf("class" to "text flex flex-column align-center"), utsArrayOf(
+                    createElementVNode("view", utsMapOf("class" to "texts flex flex-column align-center"), utsArrayOf(
                         createElementVNode("text", utsMapOf("style" to normalizeStyle(utsMapOf("height" to "20px", "line-height" to "20px", "font-size" to "14px", "color" to "#fff", "font-weight" to "700"))), utsArrayOf(
                             "累计获得",
                             createElementVNode("text", utsMapOf("style" to normalizeStyle(utsMapOf("font-weight" to "700", "font-size" to "16px", "color" to "#594532"))), " 1000 ", 4),
@@ -108,15 +114,21 @@ open class GenComponentsMyPageMyPage : VueComponent {
     open var planOptions: UTSArray<planType> by `$data`;
     @Suppress("USELESS_CAST")
     override fun data(): Map<String, Any?> {
-        return utsMapOf("tagBars" to utsArrayOf<tagType>(tagType(title = "计划", count = 16), tagType(title = "收藏膳食", count = 0), tagType(title = "好友", count = 8)), "planOptions" to utsArrayOf<planType>(planType(name = "健康（4/5）", color = "#c9b17f"), planType(name = "运动（3/4）", color = "#e09e10"), planType(name = "养发（2/6）", color = "#a5d63f"), planType(name = "健脾（1/3）", color = "#2a82e4")));
+        return utsMapOf("tagBars" to utsArrayOf<tagType>(tagType(title = "计划", count = 16, navigateUrl = "/pages/myPlan/myPlan"), tagType(title = "收藏膳食", count = 0, navigateUrl = "/pages/myCollection/myCollection"), tagType(title = "好友", count = 8, navigateUrl = "/pages/friend/friend")), "planOptions" to utsArrayOf<planType>(planType(name = "健康（4/5）", color = "#c9b17f"), planType(name = "运动（3/4）", color = "#e09e10"), planType(name = "养发（2/6）", color = "#a5d63f"), planType(name = "健脾（1/3）", color = "#2a82e4")));
     }
     override fun `$initMethods`() {
+        this.clickTagbar = fun(item: tagType) {
+            console.log(item, " at components/myPage/myPage.uvue:54");
+            uni_navigateTo(NavigateToOptions(url = item.navigateUrl));
+        }
+        ;
         this.out = fun() {
             uni_clearStorageSync();
             uni_reLaunch(ReLaunchOptions(url = "/pages/login/login"));
         }
         ;
     }
+    open lateinit var clickTagbar: (item: tagType) -> Unit;
     open lateinit var out: () -> Unit;
     companion object {
         val styles: Map<String, Map<String, Map<String, Any>>>
@@ -127,7 +139,7 @@ open class GenComponentsMyPageMyPage : VueComponent {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("avatar" to padStyleMapOf(utsMapOf("width" to 96, "borderRadius" to 96, "marginBottom" to -48, "zIndex" to 99)), "top-icons" to padStyleMapOf(utsMapOf("width" to "100%")), "top-icon" to utsMapOf(".top-icons " to utsMapOf("width" to 24, "marginRight" to 18)), "bg" to padStyleMapOf(utsMapOf("width" to "100%", "backgroundColor" to "#fff5e0", "borderRadius" to 30, "paddingBottom" to 70)), "tag-bar" to utsMapOf(".bg " to utsMapOf("width" to "90%", "borderRadius" to 16, "backgroundColor" to "#fffaf5")), "item" to utsMapOf(".bg .tag-bar " to utsMapOf("width" to "33%")), "report" to utsMapOf(".bg " to utsMapOf("width" to "90%", "borderRadius" to 16, "backgroundColor" to "#fffaf5", "paddingTop" to 10, "paddingRight" to 10, "paddingBottom" to 10, "paddingLeft" to 10)), "dot" to utsMapOf(".bg .report .title " to utsMapOf("width" to 10, "height" to 10, "borderRadius" to 10, "backgroundColor" to "#DEB867")), "box" to utsMapOf(".bg .report " to utsMapOf("display" to "flex", "flexDirection" to "row", "width" to 300, "height" to 150, "paddingBottom" to 16, "borderBottomWidth" to 1, "borderBottomStyle" to "dashed", "borderBottomColor" to "#594532")), "left" to utsMapOf(".bg .report " to utsMapOf("width" to "50%")), "inner-left" to utsMapOf(".bg .report .left " to utsMapOf("width" to 100, "height" to 100, "marginTop" to 20, "backgroundColor" to "#fcf6e6", "borderRadius" to 12)), "right" to utsMapOf(".bg .report " to utsMapOf("width" to "50%", "height" to "100%", "display" to "flex", "justifyContent" to "space-between")), "title" to utsMapOf(".bg .report .right " to utsMapOf("fontSize" to 14, "color" to "#594532")), "text" to utsMapOf(".bg .report .right " to utsMapOf("width" to 158, "paddingTop" to 4, "paddingRight" to 12, "paddingBottom" to 4, "paddingLeft" to 12, "backgroundColor" to "#fcf6e6", "borderRadius" to 8, "fontSize" to 12, "color" to "#594532"), ".bg .sign-in-box " to utsMapOf("top" to "50%", "right" to "5%", "position" to "absolute")), "sign-in-box" to utsMapOf(".bg " to utsMapOf("width" to "90%", "borderRadius" to 16, "position" to "relative")));
+                return utsMapOf("avatar" to padStyleMapOf(utsMapOf("width" to 96, "borderRadius" to 96, "marginBottom" to -48, "zIndex" to 99)), "top-icons" to padStyleMapOf(utsMapOf("width" to "100%")), "top-icon" to utsMapOf(".top-icons " to utsMapOf("width" to 24, "marginRight" to 18)), "bg" to padStyleMapOf(utsMapOf("width" to "100%", "backgroundColor" to "#fff5e0", "borderRadius" to 30, "paddingBottom" to 70)), "tag-bar" to utsMapOf(".bg " to utsMapOf("width" to "90%", "borderRadius" to 16, "backgroundColor" to "#fffaf5")), "item" to utsMapOf(".bg .tag-bar " to utsMapOf("width" to "33%")), "report" to utsMapOf(".bg " to utsMapOf("width" to "90%", "borderRadius" to 16, "backgroundColor" to "#fffaf5", "paddingTop" to 10, "paddingRight" to 10, "paddingBottom" to 10, "paddingLeft" to 10)), "dot" to utsMapOf(".bg .report .title " to utsMapOf("width" to 10, "height" to 10, "borderRadius" to 10, "backgroundColor" to "#DEB867")), "box" to utsMapOf(".bg .report " to utsMapOf("display" to "flex", "flexDirection" to "row", "width" to 300, "height" to 150, "paddingBottom" to 16, "borderBottomWidth" to 1, "borderBottomStyle" to "dashed", "borderBottomColor" to "#594532")), "left" to utsMapOf(".bg .report " to utsMapOf("width" to "50%")), "inner-left" to utsMapOf(".bg .report .left " to utsMapOf("width" to 100, "height" to 100, "marginTop" to 20, "backgroundColor" to "#fcf6e6", "borderRadius" to 12)), "right" to utsMapOf(".bg .report " to utsMapOf("width" to "50%", "height" to "100%", "display" to "flex", "justifyContent" to "space-between")), "title" to utsMapOf(".bg .report .right " to utsMapOf("fontSize" to 14, "color" to "#594532")), "text" to utsMapOf(".bg .report .right " to utsMapOf("width" to 158, "paddingTop" to 4, "paddingRight" to 12, "paddingBottom" to 4, "paddingLeft" to 12, "backgroundColor" to "#fcf6e6", "borderRadius" to 8, "fontSize" to 12, "color" to "#594532")), "sign-in-box" to utsMapOf(".bg " to utsMapOf("width" to "90%", "borderRadius" to 16, "position" to "relative")), "texts" to utsMapOf(".bg .sign-in-box " to utsMapOf("top" to "50%", "right" to "5%", "position" to "absolute")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

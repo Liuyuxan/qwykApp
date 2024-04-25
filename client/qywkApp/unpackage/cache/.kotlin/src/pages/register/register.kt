@@ -36,7 +36,7 @@ open class GenPagesRegisterRegister : BasePage {
         val _ctx = this;
         val _cache = this.`$`.renderCache;
         return createElementVNode("view", utsMapOf("class" to "validateCode"), utsArrayOf(
-            createElementVNode("image", utsMapOf("class" to "bg-img", "src" to "/static/image/login/bg.png", "mode" to "widthFix")),
+            createElementVNode("image", utsMapOf("class" to "bg-img", "src" to "/static/image/bg/bg_6.png", "mode" to "widthFix")),
             createElementVNode("view", utsMapOf("class" to "window flex flex-column align-center"), utsArrayOf(
                 createElementVNode("view", utsMapOf("class" to "top flex align-center"), utsArrayOf(
                     createElementVNode("image", utsMapOf("src" to "/static/image/login/chacha.png", "mode" to "widthFix", "style" to normalizeStyle(utsMapOf("width" to "36rpx", "margin-right" to "10rpx"))), null, 4),
@@ -45,7 +45,7 @@ open class GenPagesRegisterRegister : BasePage {
                 createElementVNode("input", utsMapOf("modelValue" to _ctx.registerLoginInfo.password, "onInput" to fun(`$event`: InputEvent){
                     _ctx.registerLoginInfo.password = `$event`.detail.value;
                 }
-                , "class" to "uni-input space", "placeholder" to "密码"), null, 40, utsArrayOf(
+                , "class" to "uni-input space", "placeholder" to "密码:必须包含英文,数字"), null, 40, utsArrayOf(
                     "modelValue",
                     "onInput"
                 )),
@@ -56,7 +56,7 @@ open class GenPagesRegisterRegister : BasePage {
                     "modelValue",
                     "onInput"
                 )),
-                createElementVNode("button", utsMapOf("class" to "space", "hover-class" to "btn-hover", "onClick" to _ctx.clickRegiter, "style" to normalizeStyle(utsMapOf("width" to "600rpx", "height" to "76rpx", "border-radius" to "32rpx", "color" to "#fff", "line-height" to "76rpx", "text-align" to "center", "background-color" to "#b19983"))), "注册并登录", 12, utsArrayOf(
+                createElementVNode("button", utsMapOf("class" to "space btn", "hover-class" to "btn-is-hover", "onClick" to _ctx.clickRegiter), "注册并登录", 8, utsArrayOf(
                     "onClick"
                 ))
             ))
@@ -72,7 +72,7 @@ open class GenPagesRegisterRegister : BasePage {
             if (this.registerLoginInfo.tel.length <= 0) {
                 return;
             }
-            console.log(this.registerLoginInfo, " at pages/register/register.uvue:42");
+            console.log(this.registerLoginInfo, " at pages/register/register.uvue:41");
             uni_showLoading(ShowLoadingOptions(title = "登陆中"));
             uni_request<IResponse<IToken>>(RequestOptions(url = BASE_URL + "/user/login/register", method = "POST", data = let {
                 object : UTSJSONObject() {
@@ -82,13 +82,16 @@ open class GenPagesRegisterRegister : BasePage {
                 }
             }, success = fun(res){
                 var r = res.data;
+                if (r == null) {
+                    return;
+                }
                 console.log("注册登录返回信息", r, " at pages/register/register.uvue:56");
                 if (r!!.code == 200) {
                     console.log(r, " at pages/register/register.uvue:58");
                     uni_setStorageSync("token", r!!.data!!.token);
                     uni_navigateTo(NavigateToOptions(url = "/pages/healthQuestion/healthQuestion"));
                 } else {
-                    uni_showToast(ShowToastOptions(title = "网络超时", icon = "none"));
+                    uni_showToast(ShowToastOptions(title = r.message, icon = "none"));
                 }
             }
             , fail = fun(err){
@@ -114,7 +117,7 @@ open class GenPagesRegisterRegister : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("validateCode" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".validateCode " to utsMapOf("width" to "750rpx", "position" to "absolute", "top" to 0)), "window" to utsMapOf(".validateCode " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "766rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "#f5f5f5", "borderRadius" to "48rpx")), "space" to utsMapOf(".validateCode .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".validateCode .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "btn-hover" to utsMapOf(".validateCode .window " to utsMapOf("backgroundColor" to "#94806e")));
+                return utsMapOf("validateCode" to padStyleMapOf(utsMapOf("width" to "100%", "height" to "100%", "backgroundColor" to "#f2eee9")), "bg-img" to utsMapOf(".validateCode " to utsMapOf("width" to "650rpx", "position" to "absolute", "left" to "50%", "transform" to "translateX(-50%)", "bottom" to "-12%")), "window" to utsMapOf(".validateCode " to utsMapOf("boxSizing" to "border-box", "width" to "650rpx", "height" to "566rpx", "paddingTop" to "30rpx", "paddingRight" to "30rpx", "paddingBottom" to "30rpx", "paddingLeft" to "30rpx", "marginTop" to "300rpx", "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "backgroundColor" to "rgba(255,255,255,0.6)", "borderRadius" to "48rpx")), "space" to utsMapOf(".validateCode .window " to utsMapOf("marginBottom" to "62rpx")), "top" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "marginBottom" to "64rpx")), "title" to utsMapOf(".validateCode .window .top " to utsMapOf("fontSize" to 16, "color" to "#937152")), "uni-input" to utsMapOf(".validateCode .window " to utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "marginTop" to 0, "marginRight" to "auto", "marginBottom" to 0, "marginLeft" to "auto", "paddingLeft" to 10, "fontSize" to 12, "backgroundColor" to "#f2eee9", "fontSize::placeholder" to "28rpx", "marginLeft::placeholder" to "100rpx")), "btn" to padStyleMapOf(utsMapOf("width" to "600rpx", "height" to "76rpx", "borderRadius" to "32rpx", "color" to "#ffffff", "lineHeight" to "76rpx", "backgroundColor" to "#b19983")), "btn-is-hover" to padStyleMapOf(utsMapOf("backgroundColor" to "#94806e")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

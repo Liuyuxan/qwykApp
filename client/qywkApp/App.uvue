@@ -7,7 +7,7 @@
 			console.log('App Launch')
 		},
 		onShow: function () {
-			// Utils.checkLogin()
+			Utils.checkLogin()
 			console.log('App Show')
 		},
 		onHide: function () {

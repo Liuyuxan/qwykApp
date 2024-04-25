@@ -21,18 +21,18 @@ import io.dcloud.uniapp.extapi.showLoading as uni_showLoading;
 open class GenPagesHealthQuestionHealthQuestion : BasePage {
     constructor(instance: ComponentInternalInstance) : super(instance) {
         onLoad(fun(_: OnLoadOptions) {
-            var token = "eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzg4NjI1MzI4NywidXNlcl9pZCI6InJvb3QiLCJuaWNrbmFtZSI6ImFkaW1pbiIsInVzZXJfa2V5IjoibG9naW4tdG9rZW5zOnJvb3QifQ.UMwlkYwqvLtV9ZPomVOf2i7aZAxQfnakhMUWAhKRzs60U49ai5ZH8rp8px161KGhc4xfLHX4E53NH37sncKFjQ";
-            uni_request<IResponse<resType>>(RequestOptions(url = "/health/questionnaire/getAllProblem?page=" + 1 + "&size=" + 15, header = object : UTSJSONObject() {
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzQ1MTU3NDMwMSwidXNlcl9pZCI6IjIwMjIyMTI3OTYiLCJ1c2VyX2tleSI6ImxvZ2luLXRva2VuczoyMDIyMjEyNzk2IiwidXNlcm5hbWUiOiLliJjlrofovakifQ.Uz5L1X_Brb2bnrxarXU0ggj-xt1wYKJsaFC4MaqWkvp7Mit6ru68hxSghtL7pLq0THR1RF7pXQVislnwTYmDnQ";
+            uni_request<Any>(RequestOptions(url = "https://zjyt.cqytxy.edu.cn/user/info/get", header = object : UTSJSONObject() {
                 var Authorization = token
             }, success = fun(res){
                 var r = res.data;
                 if (r == null) {
                     return;
                 }
-                console.log("问卷数据", r, " at pages/healthQuestion/healthQuestion.uvue:425");
+                console.log("问卷数据", r, " at pages/healthQuestion/healthQuestion.uvue:427");
             }
             , fail = fun(err){
-                console.log(err, " at pages/healthQuestion/healthQuestion.uvue:428");
+                console.log(err, " at pages/healthQuestion/healthQuestion.uvue:430");
             }
             ));
         }

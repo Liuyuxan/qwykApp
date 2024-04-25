@@ -13,6 +13,11 @@
 			<text class="text-info">{{ info }}</text>
 		</view>
 		
+		<view class="btn center">
+			<image class="btn-img" style="width: 310rpx;" src="../../static/image/showWindow/unlocked_Pattern.png" mode="widthFix"></image>
+			<text class="text">已收藏</text>
+		</view>
+		
 		<image class="bg" src="/static/image/bg/bg_2.png" mode="widthFix"></image>
 		
 	<!-- #ifdef APP -->
@@ -71,4 +76,17 @@
 		}
 	}
 	
+	.btn {
+		position: absolute;
+		z-index: 9;
+		bottom: 6%;
+		.text {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%);
+			color: #7a927a;
+			font-size: 52rpx;
+		}
+	}
 </style>

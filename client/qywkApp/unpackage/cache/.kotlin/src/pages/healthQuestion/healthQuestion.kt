@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
+import io.dcloud.uniapp.extapi.getStorageSync as uni_getStorageSync;
 import io.dcloud.uniapp.extapi.hideLoading as uni_hideLoading;
 import io.dcloud.uniapp.extapi.navigateTo as uni_navigateTo;
 import io.dcloud.uniapp.extapi.request as uni_request;
@@ -22,18 +23,19 @@ import io.dcloud.uniapp.extapi.showLoading as uni_showLoading;
 open class GenPagesHealthQuestionHealthQuestion : BasePage {
     constructor(instance: ComponentInternalInstance) : super(instance) {
         onLoad(fun(_: OnLoadOptions) {
-            var token = "eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVfdGltZSI6MTcxMzQ1MTU3NDMwMSwidXNlcl9pZCI6IjIwMjIyMTI3OTYiLCJ1c2VyX2tleSI6ImxvZ2luLXRva2VuczoyMDIyMjEyNzk2IiwidXNlcm5hbWUiOiLliJjlrofovakifQ.Uz5L1X_Brb2bnrxarXU0ggj-xt1wYKJsaFC4MaqWkvp7Mit6ru68hxSghtL7pLq0THR1RF7pXQVislnwTYmDnQ";
-            uni_request<Any>(RequestOptions(url = "https://zjyt.cqytxy.edu.cn/user/info/get", header = object : UTSJSONObject() {
+            var token = uni_getStorageSync("token");
+            console.log("token", token, " at pages/healthQuestion/healthQuestion.uvue:438");
+            uni_request<Any>(RequestOptions(url = "/health/questionnaire/getAllProblem?page=" + 1 + "&size=" + 15, header = object : UTSJSONObject() {
                 var Authorization = token
             }, success = fun(res){
                 var r = res.data;
                 if (r == null) {
                     return;
                 }
-                console.log("问卷数据", r, " at pages/healthQuestion/healthQuestion.uvue:452");
+                console.log("问卷数据", r, " at pages/healthQuestion/healthQuestion.uvue:447");
             }
             , fail = fun(err){
-                console.log(err, " at pages/healthQuestion/healthQuestion.uvue:455");
+                console.log(err, " at pages/healthQuestion/healthQuestion.uvue:450");
             }
             ));
         }
@@ -207,7 +209,7 @@ open class GenPagesHealthQuestionHealthQuestion : BasePage {
             }
         val styles0: Map<String, Map<String, Map<String, Any>>>
             get() {
-                return utsMapOf("question" to padStyleMapOf(utsMapOf("paddingTop" to 50, "backgroundColor" to "#f2eee9")), "bg" to padStyleMapOf(utsMapOf("position" to "absolute", "zIndex" to 0, "width" to 350, "bottom" to "-10%", "left" to "50%", "transform" to "translateX(-50%)")), "top-text" to padStyleMapOf(utsMapOf("width" to "100%", "height" to 18, "fontSize" to 10, "color" to "#ffffff", "backgroundColor" to "#B49B70", "textAlign" to "center", "lineHeight" to "18px")), "name" to padStyleMapOf(utsMapOf("fontSize" to 24, "color" to "#B49B70")), "content" to padStyleMapOf(utsMapOf("boxSizing" to "border-box", "width" to "670rpx", "position" to "absolute", "zIndex" to 9, "backgroundColor" to "rgba(255,255,255,0.3)", "paddingTop" to "50rpx", "paddingRight" to "50rpx", "paddingBottom" to "50rpx", "paddingLeft" to "50rpx", "borderRadius" to 24)), "title" to utsMapOf(".content " to utsMapOf("fontSize" to 16, "color" to "#B49B70")), "options" to utsMapOf(".content " to utsMapOf("width" to "100%")), "option-item" to utsMapOf(".content .options " to utsMapOf("height" to "64rpx", "lineHeight" to "64rpx", "textAlign" to "center", "borderWidth" to 1, "borderStyle" to "solid", "borderColor" to "#B49B70", "backgroundColor" to "#f2efeb", "fontSize" to 16, "color" to "#B49B70")), "active-option" to utsMapOf(".content .options " to utsMapOf("color" to "#ffffff", "backgroundColor" to "#b49b70")), "btn" to utsMapOf(".content " to utsMapOf("width" to 130, "height" to 40, "fontSize" to 24, "lineHeight" to "40px", "backgroundColor" to "#b49b70", "color" to "#ffffff", "marginTop" to 30, "marginRight" to "auto", "marginBottom" to 30, "marginLeft" to "auto")), "btn-is-hover" to utsMapOf(".content " to utsMapOf("backgroundColor" to "#594532")));
+                return utsMapOf("question" to padStyleMapOf(utsMapOf("paddingTop" to 50, "backgroundColor" to "#f2eee9")), "bg" to padStyleMapOf(utsMapOf("position" to "absolute", "zIndex" to 0, "width" to 350, "bottom" to "-10%", "left" to "50%", "transform" to "translateX(-50%)")), "top-text" to padStyleMapOf(utsMapOf("width" to "100%", "height" to 18, "fontSize" to 10, "color" to "#ffffff", "backgroundColor" to "#B49B70", "textAlign" to "center", "lineHeight" to "18px")), "name" to padStyleMapOf(utsMapOf("fontSize" to 24, "color" to "#B49B70")), "content" to padStyleMapOf(utsMapOf("boxSizing" to "border-box", "width" to "670rpx", "position" to "absolute", "zIndex" to 9, "backgroundColor" to "rgba(255,255,255,0.3)", "paddingTop" to "50rpx", "paddingRight" to "50rpx", "paddingBottom" to "50rpx", "paddingLeft" to "50rpx", "borderRadius" to 24)), "title" to utsMapOf(".content " to utsMapOf("fontSize" to 16, "color" to "#B49B70")), "options" to utsMapOf(".content " to utsMapOf("width" to "100%")), "option-item" to utsMapOf(".content .options " to utsMapOf("height" to "64rpx", "lineHeight" to "64rpx", "textAlign" to "center", "borderWidth" to 1, "borderStyle" to "solid", "borderColor" to "#B49B70", "backgroundColor" to "#f2efeb", "fontSize" to 16, "color" to "#B49B70")), "active-option" to utsMapOf(".content .options " to utsMapOf("color" to "#ffffff", "backgroundColor" to "#b49b70")), "btn" to padStyleMapOf(utsMapOf("width" to 130, "height" to 40, "fontSize" to 24, "lineHeight" to "40px", "backgroundColor" to "#b49b70", "color" to "#ffffff", "marginTop" to 30, "marginRight" to "auto", "marginBottom" to 30, "marginLeft" to "auto")), "btn-is-hover" to padStyleMapOf(utsMapOf("backgroundColor" to "#594532")));
             }
         var inheritAttrs = true;
         var inject: Map<String, Map<String, Any?>> = utsMapOf();

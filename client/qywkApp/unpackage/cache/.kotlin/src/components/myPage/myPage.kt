@@ -16,6 +16,7 @@ import kotlinx.coroutines.Deferred;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.async;
 import io.dcloud.uniapp.extapi.clearStorageSync as uni_clearStorageSync;
+import io.dcloud.uniapp.extapi.navigateTo as uni_navigateTo;
 import io.dcloud.uniapp.extapi.reLaunch as uni_reLaunch;
 open class GenComponentsMyPageMyPage : VueComponent {
     constructor(instance: ComponentInternalInstance) : super(instance) {}
@@ -37,9 +38,14 @@ open class GenComponentsMyPageMyPage : VueComponent {
                 createElementVNode("text", utsMapOf("class" to "mt-2", "style" to normalizeStyle(utsMapOf("font-size" to "10px", "color" to "#8A6913"))), "账号：210312", 4),
                 createElementVNode("view", utsMapOf("class" to "tag-bar mt-2 flex justify-around"), utsArrayOf(
                     createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.tagBars, fun(item, index, _, _): VNode {
-                        return createElementVNode("view", utsMapOf("class" to "item flex flex-column align-center", "key" to index), utsArrayOf(
+                        return createElementVNode("view", utsMapOf("class" to "item flex flex-column align-center", "key" to index, "onClick" to fun(){
+                            _ctx.clickTagbar(item);
+                        }
+                        ), utsArrayOf(
                             createElementVNode("text", utsMapOf("class" to "mt-1", "style" to normalizeStyle(utsMapOf("font-size" to "12px", "color" to "#808080"))), toDisplayString(item.title), 5),
                             createElementVNode("text", utsMapOf("class" to "mt-1", "style" to normalizeStyle(utsMapOf("font-size" to "12px", "color" to "#000"))), toDisplayString(item.count) + "个", 5)
+                        ), 8, utsArrayOf(
+                            "onClick"
                         ));
                     }
                     ), 128)
@@ -109,15 +115,21 @@ open class GenComponentsMyPageMyPage : VueComponent {
     open var planOptions: UTSArray<planType> by `$data`;
     @Suppress("USELESS_CAST")
     override fun data(): Map<String, Any?> {
-        return utsMapOf("tagBars" to utsArrayOf<tagType>(tagType(title = "计划", count = 16), tagType(title = "收藏膳食", count = 0), tagType(title = "好友", count = 8)), "planOptions" to utsArrayOf<planType>(planType(name = "健康（4/5）", color = "#c9b17f"), planType(name = "运动（3/4）", color = "#e09e10"), planType(name = "养发（2/6）", color = "#a5d63f"), planType(name = "健脾（1/3）", color = "#2a82e4")));
+        return utsMapOf("tagBars" to utsArrayOf<tagType>(tagType(title = "计划", count = 16, navigateUrl = "/pages/myPlan/myPlan"), tagType(title = "收藏膳食", count = 0, navigateUrl = "/pages/myCollection/myCollection"), tagType(title = "好友", count = 8, navigateUrl = "/pages/friend/friend")), "planOptions" to utsArrayOf<planType>(planType(name = "健康（4/5）", color = "#c9b17f"), planType(name = "运动（3/4）", color = "#e09e10"), planType(name = "养发（2/6）", color = "#a5d63f"), planType(name = "健脾（1/3）", color = "#2a82e4")));
     }
     override fun `$initMethods`() {
+        this.clickTagbar = fun(item: tagType) {
+            console.log(item, " at components/myPage/myPage.uvue:136");
+            uni_navigateTo(NavigateToOptions(url = item.navigateUrl));
+        }
+        ;
         this.out = fun() {
             uni_clearStorageSync();
             uni_reLaunch(ReLaunchOptions(url = "/pages/login/login"));
         }
         ;
     }
+    open lateinit var clickTagbar: (item: tagType) -> Unit;
     open lateinit var out: () -> Unit;
     companion object {
         val styles: Map<String, Map<String, Map<String, Any>>>

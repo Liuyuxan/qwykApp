@@ -1,0 +1,100 @@
+
+	type foodType = { __$originalPosition: UTSSourceMapPosition<"foodType", "pages/myCollection/myCollection.uvue", 26, 7>;
+		name: string
+		function: string
+		img: string
+	}
+	export default {
+		data() {
+			return {
+				colors: [
+					"#a77e8e",
+					"#7a927a",
+					"#7a8d91",
+					"#91897a",
+					"#7e7a91"
+				],
+				foods: [
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/1.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/2.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/3.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/4.png'
+					},
+					{
+						name: '膳食-四神粥',
+						function: '主要功效：温补脾胃、补血益气、健脾养胃、滋阴补肝、益肾养肝、改善病态 ',
+						img: '/static/image/pic/5.png'
+					}
+				] as foodType[]
+			};
+		}
+	}
+
+
+import _easycom_search from '@/components/search/search.uvue'
+function GenPagesMyCollectionMyCollectionRender(): any | null {
+const _ctx = this
+const _cache = this.$.renderCache
+const _component_search = resolveEasyComponent("search",_easycom_search)
+
+  return createElementVNode("scroll-view", utsMapOf({
+    class: "flex flex-column align-center pt",
+    style: normalizeStyle(utsMapOf({"flex":"1","background-color":"#fffaf5"}))
+  }), [
+    createElementVNode("text", utsMapOf({ class: "title mt-3" }), "我的收藏"),
+    createVNode(_component_search, utsMapOf({ placeholder: "输入主要食材,名称,功效搜索" })),
+    createElementVNode("view", utsMapOf({ class: "cards" }), [
+      createElementVNode(Fragment, null, RenderHelpers.renderList(_ctx.foods, (item, index, _, _): VNode => {
+        return createElementVNode("view", utsMapOf({
+          class: "card mt-4 flex justify-center align-center",
+          key: index,
+          style: normalizeStyle(utsMapOf({'background-color': (_ctx.colors[index%5])}))
+        }), [
+          createElementVNode("view", utsMapOf({
+            style: normalizeStyle(utsMapOf({"width":"10rpx","height":"66%"}))
+          }), [
+            createElementVNode("view", utsMapOf({
+              style: normalizeStyle(utsMapOf({"width":"100%","height":"40rpx","border-radius":"10rpx","background-color":"rgba(255,255,255,0.5)"}))
+            }), null, 4 /* STYLE */)
+          ], 4 /* STYLE */),
+          createElementVNode("view", utsMapOf({
+            class: "ml-3",
+            style: normalizeStyle(utsMapOf({"width":"70%"}))
+          }), [
+            createElementVNode("text", utsMapOf({
+              style: normalizeStyle(utsMapOf({"color":"#fff","font-size":"12px","font-weight":"700"}))
+            }), toDisplayString(item.name), 5 /* TEXT, STYLE */),
+            createElementVNode("text", utsMapOf({
+              style: normalizeStyle(utsMapOf({"color":"#fff","font-size":"12px"}))
+            }), toDisplayString(item.function), 5 /* TEXT, STYLE */)
+          ], 4 /* STYLE */),
+          createElementVNode("image", utsMapOf({
+            class: "img ml-2",
+            src: item.img,
+            mode: "widthFix"
+          }), null, 8 /* PROPS */, ["src"])
+        ], 4 /* STYLE */)
+      }), 128 /* KEYED_FRAGMENT */)
+    ]),
+    createElementVNode("text", utsMapOf({
+      class: "mt-5",
+      style: normalizeStyle(utsMapOf({"font-size":"24rpx","color":"#B5A491"}))
+    }), "膳食调理只可作为养生辅助，如若身体不适请线下就医", 4 /* STYLE */)
+  ], 4 /* STYLE */)
+}
+const GenPagesMyCollectionMyCollectionStyles = [utsMapOf([["title", padStyleMapOf(utsMapOf([["fontSize", 20], ["color", "#594532"], ["paddingLeft", "40rpx"], ["paddingBottom", "20rpx"]]))], ["cards", padStyleMapOf(utsMapOf([["width", "92%"]]))], ["card", utsMapOf([[".cards ", utsMapOf([["width", "100%"], ["height", "156rpx"], ["borderRadius", "20rpx"]])]])], ["img", utsMapOf([[".cards ", utsMapOf([["width", "112rpx"], ["borderRadius", "8rpx"]])]])]])]
