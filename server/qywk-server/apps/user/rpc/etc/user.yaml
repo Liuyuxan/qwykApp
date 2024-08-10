@@ -1,0 +1,18 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: user.rpc
+
+MDB:
+  DataSource: root:root@tcp(127.0.0.1:3306)/qywk_user?charset=utf8mb3&parseTime=True
+
+RDB:
+  Addr: "127.0.0.1:6379"
+  Password: ""
+  DB: 0
+
+Jwt:
+  AccessSecret: qywk_2024_5_13_wxzx_cqyt_cq_cn
+  AccessExpire: 604800

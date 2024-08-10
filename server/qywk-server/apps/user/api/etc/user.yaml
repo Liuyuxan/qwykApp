@@ -1,0 +1,13 @@
+Name: user
+Host: "[2409:8a60:4e45:f434::1000]"
+Port: 8888
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+
+Jwt:
+  AccessSecret: qywk_2024_5_13_wxzx_cqyt_cq_cn
+  AccessExpire: 604800

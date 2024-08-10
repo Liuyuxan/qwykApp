@@ -1,0 +1,67 @@
+syntax = "v1"
+
+type Result {
+}
+
+type (
+	LoginReq {
+		userId   string `json:"userId"`
+		password string `json:"password"`
+	}
+	RegisterReq {
+		password string `json:"password"`
+		code     string `json:"code"`
+		tel      string `json:"tel"`
+		nickname string `json:"nickname"`
+	}
+	CodeReq {
+		tel string `json:"tel"`
+	}
+	ChangeReq {
+		userId      string `json:"userId"`
+		password    string `json:"password"`
+		tel         string `json:"tel"`
+		code        string `json:"code"`
+		newPassword string `json:"newPassword"`
+	}
+	WechatLoginReq {
+		code string `json:"code"`
+	}
+	ForgetRep {
+		userId   string `json:"userId"`
+		password string `json:"password"`
+		tel      string `json:"tel"`
+		code     string `json:"code"`
+	}
+)
+
+@server (
+	group:  user
+	prefix: /user/login
+)
+service user {
+	@doc "普通登陆"
+	@handler login
+	post /normal (LoginReq) returns (Result)
+
+	@doc "微信快速登陆"
+	@handler fast
+	post /fast (WechatLoginReq) returns (Result)
+
+	@doc "手机号注册"
+	@handler register
+	post /register (RegisterReq) returns (Result)
+
+	@doc "修改密码"
+	@handler change
+	post /change (ChangeReq) returns (Result)
+
+	@doc "忘记密码"
+	@handler forget
+	post /forget (ForgetRep) returns (Result)
+
+	@doc "发送验证码"
+	@handler sentCode
+	post /sent/code (ChangeReq) returns (Result)
+}
+

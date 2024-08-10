@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./user";
+
+message LoginReq {
+  string userId = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  string token = 1;
+}
+
+message RegisterReq {
+  string password = 1;
+  string code = 2;
+  string tel = 3;
+  string nickname = 4;
+}
+
+message RegisterResp {
+  string userId = 1;
+  string token = 2;
+}
+
+message CodeReq {
+  string tel = 1;
+}
+
+message CodeResp {
+  string code = 2;
+}
+
+message ChangeReq {
+  string userId = 1;
+  string password = 2;
+  string tel = 3;
+  string code = 4;
+  string newPassword = 5;
+}
+
+message ChangeResp {
+  bool status = 1;
+}
+
+message WechatLoginReq {
+  string code = 1;
+}
+
+message ForgetRep {
+  string userId = 1;
+  string password = 2;
+  string tel = 3;
+  string code = 4;
+}
+
+message ForgetResp {
+  bool status = 1;
+}
+
+service user {
+  // 普通登陆
+  rpc login (LoginReq) returns (LoginResp);
+  // 微信快速登陆
+  rpc wechatLogin (WechatLoginReq) returns (LoginResp);
+  // 手机号注册
+  rpc register (RegisterReq) returns (RegisterResp);
+  // 发送验证码
+  rpc sentCode (CodeReq) returns (CodeResp);
+  // 修改密码
+  rpc change (ChangeReq) returns (ChangeResp);
+  // 忘记密码
+  rpc forget (ForgetRep) returns (ForgetResp);
+}
+
+/*
+  goctl rpc protoc user.proto  --go_out=. --go-grpc_out=. --zrpc_out=.
+ */
