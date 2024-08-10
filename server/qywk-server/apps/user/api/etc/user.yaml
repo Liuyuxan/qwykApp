@@ -1,5 +1,5 @@
 Name: user
-Host: "[2409:8a60:4e45:f434::1000]"
+Host: 0.0.0.0
 Port: 8888
 
 UserRpc:
