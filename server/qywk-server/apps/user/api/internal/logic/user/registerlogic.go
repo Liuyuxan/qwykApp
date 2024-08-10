@@ -35,7 +35,7 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *result.Result, e
 	})
 
 	if err != nil {
-		return result.Err().SetData("err", err), nil
+		return result.Err().SetData("err", err.Error()), nil
 	}
 
 	return result.Ok().SetData("info", res), nil

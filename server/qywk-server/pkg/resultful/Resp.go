@@ -9,12 +9,18 @@ type Result struct {
 	Data    map[string]interface{} `json:"data"`
 }
 
+func NewResult() *Result {
+	return &Result{
+		Data: make(map[string]interface{}),
+	}
+}
+
 func Ok() *Result {
 	return &Result{
 		Code:    http.StatusOK,
 		Success: true,
 		Message: "请求成功",
-		Data:    nil,
+		Data:    make(map[string]interface{}),
 	}
 }
 
@@ -23,11 +29,14 @@ func Err() *Result {
 		Code:    http.StatusBadRequest,
 		Success: false,
 		Message: "请求失败",
-		Data:    nil,
+		Data:    make(map[string]interface{}),
 	}
 }
 
 func (r *Result) SetData(key string, value interface{}) *Result {
+	if r.Data == nil {
+		r.Data = make(map[string]interface{})
+	}
 	r.Data[key] = value
 	return r
 }

@@ -30,7 +30,7 @@ message CodeReq {
 }
 
 message CodeResp {
-  string code = 2;
+  bool status = 1;
 }
 
 message ChangeReq {
