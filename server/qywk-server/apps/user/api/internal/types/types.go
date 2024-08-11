@@ -4,19 +4,19 @@ package types
 type ChangeReq struct {
 	UserId      string `json:"userId"`
 	Password    string `json:"password"`
-	Tel         string `json:"tel"`
+	Email       string `json:"email"`
 	Code        string `json:"code"`
 	NewPassword string `json:"newPassword"`
 }
 
 type CodeReq struct {
-	Tel string `json:"tel"`
+	Email string `json:"email"`
 }
 
 type ForgetRep struct {
 	UserId   string `json:"userId"`
 	Password string `json:"password"`
-	Tel      string `json:"tel"`
+	Email    string `json:"email"`
 	Code     string `json:"code"`
 }
 
@@ -28,7 +28,7 @@ type LoginReq struct {
 type RegisterReq struct {
 	Password string `json:"password"`
 	Code     string `json:"code"`
-	Tel      string `json:"tel"`
+	Email    string `json:"email"`
 	Nickname string `json:"nickname"`
 }
 

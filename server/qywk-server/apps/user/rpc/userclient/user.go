@@ -17,7 +17,7 @@ type (
 	ChangeResp     = user.ChangeResp
 	CodeReq        = user.CodeReq
 	CodeResp       = user.CodeResp
-	ForgetRep      = user.ForgetRep
+	ForgetReq      = user.ForgetReq
 	ForgetResp     = user.ForgetResp
 	LoginReq       = user.LoginReq
 	LoginResp      = user.LoginResp
@@ -37,7 +37,7 @@ type (
 		// 修改密码
 		Change(ctx context.Context, in *ChangeReq, opts ...grpc.CallOption) (*ChangeResp, error)
 		// 忘记密码
-		Forget(ctx context.Context, in *ForgetRep, opts ...grpc.CallOption) (*ForgetResp, error)
+		Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error)
 	}
 
 	defaultUser struct {
@@ -82,7 +82,7 @@ func (m *defaultUser) Change(ctx context.Context, in *ChangeReq, opts ...grpc.Ca
 }
 
 // 忘记密码
-func (m *defaultUser) Forget(ctx context.Context, in *ForgetRep, opts ...grpc.CallOption) (*ForgetResp, error) {
+func (m *defaultUser) Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.Forget(ctx, in, opts...)
 }

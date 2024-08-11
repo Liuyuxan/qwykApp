@@ -30,7 +30,7 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *result.Result, e
 	res, err := l.svcCtx.User.Register(l.ctx, &user.RegisterReq{
 		Password: req.Password,
 		Code:     req.Code,
-		Tel:      req.Tel,
+		Email:    req.Email,
 		Nickname: req.Nickname,
 	})
 

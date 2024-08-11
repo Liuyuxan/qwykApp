@@ -42,7 +42,7 @@ type UserClient interface {
 	// 修改密码
 	Change(ctx context.Context, in *ChangeReq, opts ...grpc.CallOption) (*ChangeResp, error)
 	// 忘记密码
-	Forget(ctx context.Context, in *ForgetRep, opts ...grpc.CallOption) (*ForgetResp, error)
+	Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error)
 }
 
 type userClient struct {
@@ -103,7 +103,7 @@ func (c *userClient) Change(ctx context.Context, in *ChangeReq, opts ...grpc.Cal
 	return out, nil
 }
 
-func (c *userClient) Forget(ctx context.Context, in *ForgetRep, opts ...grpc.CallOption) (*ForgetResp, error) {
+func (c *userClient) Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ForgetResp)
 	err := c.cc.Invoke(ctx, User_Forget_FullMethodName, in, out, cOpts...)
@@ -128,7 +128,7 @@ type UserServer interface {
 	// 修改密码
 	Change(context.Context, *ChangeReq) (*ChangeResp, error)
 	// 忘记密码
-	Forget(context.Context, *ForgetRep) (*ForgetResp, error)
+	Forget(context.Context, *ForgetReq) (*ForgetResp, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -151,7 +151,7 @@ func (UnimplementedUserServer) SentCode(context.Context, *CodeReq) (*CodeResp, e
 func (UnimplementedUserServer) Change(context.Context, *ChangeReq) (*ChangeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Change not implemented")
 }
-func (UnimplementedUserServer) Forget(context.Context, *ForgetRep) (*ForgetResp, error) {
+func (UnimplementedUserServer) Forget(context.Context, *ForgetReq) (*ForgetResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Forget not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
@@ -258,7 +258,7 @@ func _User_Change_Handler(srv interface{}, ctx context.Context, dec func(interfa
 }
 
 func _User_Forget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ForgetRep)
+	in := new(ForgetReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -270,7 +270,7 @@ func _User_Forget_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: User_Forget_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).Forget(ctx, req.(*ForgetRep))
+		return srv.(UserServer).Forget(ctx, req.(*ForgetReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -38,7 +38,7 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 	RDB := l.svcCtx.RDB
 
 	// 验证码校验
-	codeK := constants.VERIFY_CODE + in.Tel
+	codeK := constants.VERIFY_EMAIL_CODE + in.Email
 	code, _ := RDB.Get(ctx, codeK).Result()
 
 	if code == "" || code != in.Code {
@@ -47,25 +47,25 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 		RDB.Del(ctx, codeK)
 	}
 
-	// 手机号查询, 判断是否已经注册过了
+	// 邮箱查询, 判断是否已经注册过了
 	var userinfo models.UserInfo
-	telK := constants.USERINFO_TEL + in.Tel
+	emailK := constants.USERINFO_EMAIL + in.Email
 
-	res, _ := RDB.Get(ctx, telK).Result()
+	res, _ := RDB.Get(ctx, emailK).Result()
 	if res != "" {
-		return nil, errors.New("手机号已注册")
+		return nil, errors.New("邮箱已注册")
 	}
 
 	// 如果 Redis 中没有用户信息，查询数据库
-	get, err := MDB.Where("tel=?", in.Tel).Get(&userinfo)
+	get, err := MDB.Where("e_mail=?", in.Email).Get(&userinfo)
 	if err != nil {
 		return nil, errors.New("数据库查询异常")
 	}
 
 	if get {
 		userInfoJson, _ := userinfo.ToString()
-		RDB.Set(ctx, telK, userInfoJson, time.Hour*3).Err()
-		return nil, errors.New("手机号已注册")
+		RDB.Set(ctx, emailK, userInfoJson, time.Hour*3).Err()
+		return nil, errors.New("邮箱已注册")
 	}
 
 	// 判断密码格式是否正确
@@ -79,7 +79,8 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 	userinfo = models.UserInfo{
 		UserId:     uid,
 		Password:   md5pwd,
-		Tel:        sql.NullString{in.Tel, true},
+		Tel:        sql.NullString{"", false},
+		Email:      sql.NullString{in.Email, true},
 		Nickname:   in.Nickname,
 		Avatar:     sql.NullString{"https://qywk/avatar.jpg", true}, // 这里先是默认的头像
 		CreateTime: time.Now(),                                      // 使用当前时间替代零值
@@ -106,7 +107,7 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 	userInfoJson, err := userinfo.ToString()
 
 	err1, err2 :=
-		RDB.Set(ctx, telK, userInfoJson, time.Hour*3).Err(),
+		RDB.Set(ctx, emailK, userInfoJson, time.Hour*3).Err(),
 		RDB.Set(ctx, uidK, userInfoJson, time.Hour*3).Err()
 
 	if err1 != nil || err2 != nil {

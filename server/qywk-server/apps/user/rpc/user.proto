@@ -16,7 +16,7 @@ message LoginResp {
 message RegisterReq {
   string password = 1;
   string code = 2;
-  string tel = 3;
+  string email = 3;
   string nickname = 4;
 }
 
@@ -26,19 +26,18 @@ message RegisterResp {
 }
 
 message CodeReq {
-  string tel = 1;
+  string email = 1;
 }
 
 message CodeResp {
-  bool status = 1;
 }
 
 message ChangeReq {
   string userId = 1;
   string password = 2;
-  string tel = 3;
-  string code = 4;
-  string newPassword = 5;
+  string email = 4;
+  string code = 5;
+  string newPassword = 6;
 }
 
 message ChangeResp {
@@ -49,10 +48,10 @@ message WechatLoginReq {
   string code = 1;
 }
 
-message ForgetRep {
+message ForgetReq {
   string userId = 1;
   string password = 2;
-  string tel = 3;
+  string email = 3;
   string code = 4;
 }
 
@@ -72,7 +71,7 @@ service user {
   // 修改密码
   rpc change (ChangeReq) returns (ChangeResp);
   // 忘记密码
-  rpc forget (ForgetRep) returns (ForgetResp);
+  rpc forget (ForgetReq) returns (ForgetResp);
 }
 
 /*

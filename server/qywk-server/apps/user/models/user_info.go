@@ -10,6 +10,9 @@ type UserInfo struct {
 	UserId     string         `xorm:"'user_id'"`     // 用户id
 	Password   string         `xorm:"'password'"`    // md5加密密码
 	Tel        sql.NullString `xorm:"'tel'"`         // 手机号
+	Email      sql.NullString `xorm:"'e_mail'"`      // 邮箱
+	OpenId     sql.NullString `xorm:"'open_id'"`     // 微信校验码
+	SessionId  sql.NullString `xorm:"'session_id'"`  // 微信会话码
 	Nickname   string         `xorm:"'nickname'"`    // 用户名
 	Avatar     sql.NullString `xorm:"'avatar'"`      // 头像url地址
 	CreateTime time.Time      `xorm:"'create_time'"` // 创建时间

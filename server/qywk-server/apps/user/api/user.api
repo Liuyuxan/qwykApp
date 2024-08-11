@@ -1,7 +1,6 @@
 syntax = "v1"
 
-type Result {
-}
+type Result {}
 
 type (
 	LoginReq {
@@ -11,16 +10,16 @@ type (
 	RegisterReq {
 		password string `json:"password"`
 		code     string `json:"code"`
-		tel      string `json:"tel"`
+		email    string `json:"email"`
 		nickname string `json:"nickname"`
 	}
 	CodeReq {
-		tel string `json:"tel"`
+		email string `json:"email"`
 	}
 	ChangeReq {
 		userId      string `json:"userId"`
 		password    string `json:"password"`
-		tel         string `json:"tel"`
+		email       string `json:"email"`
 		code        string `json:"code"`
 		newPassword string `json:"newPassword"`
 	}
@@ -30,7 +29,7 @@ type (
 	ForgetRep {
 		userId   string `json:"userId"`
 		password string `json:"password"`
-		tel      string `json:"tel"`
+		email    string `json:"email"`
 		code     string `json:"code"`
 	}
 )
@@ -62,6 +61,7 @@ service user {
 
 	@doc "发送验证码"
 	@handler sentCode
-	post /sent/code (ChangeReq) returns (Result)
+	post /sent/code (CodeReq) returns (Result)
 }
 
+// goctl api go --api user.api --dir .

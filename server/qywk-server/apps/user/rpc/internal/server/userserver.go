@@ -53,7 +53,7 @@ func (s *UserServer) Change(ctx context.Context, in *user.ChangeReq) (*user.Chan
 }
 
 // 忘记密码
-func (s *UserServer) Forget(ctx context.Context, in *user.ForgetRep) (*user.ForgetResp, error) {
+func (s *UserServer) Forget(ctx context.Context, in *user.ForgetReq) (*user.ForgetResp, error) {
 	l := logic.NewForgetLogic(ctx, s.svcCtx)
 	return l.Forget(in)
 }

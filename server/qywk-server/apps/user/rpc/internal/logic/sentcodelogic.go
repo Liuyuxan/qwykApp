@@ -4,12 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"google.golang.org/appengine/log"
 	"math/rand"
-	"net/http"
-	"net/url"
 	"qywk-server/pkg/constants"
-	"regexp"
+	"qywk-server/pkg/email"
 	"time"
 
 	"qywk-server/apps/user/rpc/internal/svc"
@@ -34,78 +31,44 @@ func NewSentCodeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SentCode
 
 func (l *SentCodeLogic) SentCode(in *user.CodeReq) (*user.CodeResp, error) {
 	RMD := l.svcCtx.RDB
+	SMS := l.svcCtx.Config.Sms
+
 	// 1. 验证手机号格式
-	if !isValidPhone(in.Tel) {
-		return nil, errors.New("invalid phone number format")
+	if !email.IsValidEmail(in.Email) {
+		return nil, errors.New("invalid email format")
 	}
 
-	// 2. 生成验证码
+	// 2. 检查是否在一分钟内已发送过验证码
+	limitK := constants.LIMIT_EMAIL_CODE + in.Email
+	exists, err := RMD.Exists(ctx, limitK).Result()
+	if err != nil {
+		return nil, errors.New("failed to check email code limit")
+	}
+	if exists > 0 {
+		return nil, errors.New("please wait before requesting a new code")
+	}
+
+	// 3. 生成验证码
 	code := generateVerificationCode()
 
-	codeK := constants.VERIFY_CODE
-	// 3. 存储验证码到缓存或数据库 (假设使用 Redis)
-	err := RMD.Set(ctx, codeK, code, time.Minute*5).Err() // 验证码有效期为5分钟
+	codeK := constants.VERIFY_EMAIL_CODE
+	// 4. 存储验证码到缓存或数据库 (假设使用 Redis)
+	err = RMD.Set(ctx, codeK, code, time.Minute*5).Err() // 验证码有效期为5分钟
 	if err != nil {
 		return nil, errors.New("failed to store verification code")
 	}
 
-	// 4. 发送验证码 (假设使用短信服务提供商)
-	go smsSend(in.Tel, code)
-
-	// 5. 记录发送日志
-	log.Infof(l.ctx, "Verification code sent to phone: %s, code: %s", in.Tel, code)
-
-	// 6. 返回结果
-	return &user.CodeResp{
-		Status: true,
-	}, nil
-}
-
-// 营业厅发送短信业务
-func smsSend(tel, code string) error {
-	// 1. 校验手机号格式
-	if !isValidPhone(tel) {
-		return errors.New("invalid phone number format")
-	}
-
-	// 2. 构建短信内容
-	message := fmt.Sprintf("Your verification code is: %s", code)
-
-	// 3. 调用短信服务商接口发送短信
-	err := sendSmsViaProvider(tel, message)
+	// 5. 设置一分钟的限制键
+	err = RMD.Set(ctx, limitK, "sent", time.Minute).Err()
 	if err != nil {
-		log.Infof(ctx, "Failed to send SMS to %s: %v", tel, err)
-		return errors.New("failed to send SMS")
+		return nil, errors.New("failed to set email code limit")
 	}
 
-	// 4. 记录发送日志
-	log.Infof(ctx, "SMS sent to %s with code: %s at %s", tel, code, time.Now().Format(time.RFC3339))
+	// 6. 发送验证码
+	go email.SendCode(SMS, in.Email, code)
 
-	return nil
-}
-
-func sendSmsViaProvider(tel, message string) error {
-	resp, err := http.PostForm("营业厅提供的短信api", url.Values{
-		"tel":     {tel},
-		"message": {message},
-	})
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return errors.New("SMS provider returned non-200 status")
-	}
-
-	return nil
-}
-
-// 验证手机号格式
-func isValidPhone(phone string) bool {
-	// 正则表达式验证手机号格式 (假设国内手机号格式)
-	re := regexp.MustCompile(`^1[3-9]\d{9}$`)
-	return re.MatchString(phone)
+	// 7. 返回结果
+	return &user.CodeResp{}, nil
 }
 
 // 生成验证码

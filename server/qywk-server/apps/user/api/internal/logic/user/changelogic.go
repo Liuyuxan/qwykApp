@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"qywk-server/apps/user/rpc/user"
+	result "qywk-server/pkg/resultful"
 
 	"qywk-server/apps/user/api/internal/svc"
 	"qywk-server/apps/user/api/internal/types"
@@ -24,8 +26,18 @@ func NewChangeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ChangeLogi
 	}
 }
 
-func (l *ChangeLogic) Change(req *types.ChangeReq) (resp *types.Result, err error) {
-	// todo: add your logic here and delete this line
+func (l *ChangeLogic) Change(req *types.ChangeReq) (resp *result.Result, err error) {
+	res, err := l.svcCtx.User.Change(l.ctx, &user.ChangeReq{
+		UserId:      req.UserId,
+		Password:    req.Password,
+		NewPassword: req.NewPassword,
+		Email:       req.Email,
+		Code:        req.Code,
+	})
 
-	return
+	if err != nil {
+		return result.Err().SetData("err", err.Error()), nil
+	}
+
+	return result.Ok().SetData("status", res.Status), nil
 }
