@@ -3,14 +3,13 @@ package logic
 import (
 	"context"
 	"errors"
+	"github.com/zeromicro/go-zero/core/logx"
 	"qywk-server/apps/user/models"
-	"qywk-server/pkg/constants"
-	"qywk-server/pkg/encrypt"
-
 	"qywk-server/apps/user/rpc/internal/svc"
 	"qywk-server/apps/user/rpc/user"
-
-	"github.com/zeromicro/go-zero/core/logx"
+	"qywk-server/pkg/encrypt"
+	"qywk-server/pkg/redisutils/keys"
+	"qywk-server/pkg/redisutils/pre"
 )
 
 type ChangeLogic struct {
@@ -41,7 +40,8 @@ func (l *ChangeLogic) Change(in *user.ChangeReq) (*user.ChangeResp, error) {
 
 	// 2. 检查用户存在性
 	var userinfo models.UserInfo
-	get, err := MDB.Where("user_id = ? && email = ?", in.UserId, in.Email).Get(&userinfo)
+	get, err := MDB.Where("user_id = ? and e_mail = ?", in.UserId, in.Email).Get(&userinfo)
+	logx.Infof("userinfo:%v", get)
 	if err != nil || !get {
 		return &user.ChangeResp{
 			Status: false,
@@ -62,8 +62,8 @@ func (l *ChangeLogic) Change(in *user.ChangeReq) (*user.ChangeResp, error) {
 		}, errors.New("旧密码有误")
 	}
 
-	// 4. 验证码校验
-	codeK := constants.VERIFY_EMAIL_CODE + in.Email
+	//4. 验证码校验
+	codeK := keys.Create(pre.VerifyEmail, in.Email)
 	code, _ := RDB.Get(ctx, codeK).Result()
 
 	if code == "" || code != in.Code {
@@ -74,8 +74,10 @@ func (l *ChangeLogic) Change(in *user.ChangeReq) (*user.ChangeResp, error) {
 		RDB.Del(ctx, codeK)
 	}
 
-	_, err = MDB.Where("user_id=?", in.UserId).Update(map[string]interface{}{"password": md5pwd})
+	userinfo.Password = md5pwd
+	_, err = MDB.Where("user_id = ?", in.UserId).Update(&userinfo)
 	if err != nil {
+		logx.Infof("err:%v", err)
 		return &user.ChangeResp{
 			Status: false,
 		}, errors.New("数据库异常")
@@ -84,5 +86,4 @@ func (l *ChangeLogic) Change(in *user.ChangeReq) (*user.ChangeResp, error) {
 	return &user.ChangeResp{
 		Status: true,
 	}, nil
-	return &user.ChangeResp{}, nil
 }

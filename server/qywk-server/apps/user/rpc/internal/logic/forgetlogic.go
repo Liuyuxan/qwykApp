@@ -7,8 +7,9 @@ import (
 	"qywk-server/apps/user/models"
 	"qywk-server/apps/user/rpc/internal/svc"
 	"qywk-server/apps/user/rpc/user"
-	"qywk-server/pkg/constants"
 	"qywk-server/pkg/encrypt"
+	"qywk-server/pkg/redisutils/keys"
+	"qywk-server/pkg/redisutils/pre"
 )
 
 type ForgetLogic struct {
@@ -39,7 +40,8 @@ func (l *ForgetLogic) Forget(in *user.ForgetReq) (*user.ForgetResp, error) {
 
 	// 2. 检查用户存在性
 	var userinfo models.UserInfo
-	get, err := MDB.Where("user_id = ? && email = ?", in.UserId, in.Email).Get(&userinfo)
+	get, err := MDB.Where("user_id = ? and e_mail = ?", in.UserId, in.Email).Get(&userinfo)
+	logx.Infof("userinfo:%v", get)
 	if err != nil || !get {
 		return &user.ForgetResp{
 			Status: false,
@@ -55,7 +57,7 @@ func (l *ForgetLogic) Forget(in *user.ForgetReq) (*user.ForgetResp, error) {
 	md5pwd := encrypt.GetMD5String(in.Password)
 
 	// 4. 验证码校验
-	codeK := constants.VERIFY_EMAIL_CODE + in.Email
+	codeK := keys.Create(pre.VerifyEmail, in.Email)
 	code, _ := RDB.Get(ctx, codeK).Result()
 
 	if code == "" || code != in.Code {
@@ -66,7 +68,8 @@ func (l *ForgetLogic) Forget(in *user.ForgetReq) (*user.ForgetResp, error) {
 		RDB.Del(ctx, codeK)
 	}
 
-	_, err = MDB.Where("user_id=?", in.UserId).Update(map[string]interface{}{"password": md5pwd})
+	userinfo.Password = md5pwd
+	_, err = MDB.Where("user_id = ?", in.UserId).Update(&userinfo)
 	if err != nil {
 		return &user.ForgetResp{
 			Status: false,

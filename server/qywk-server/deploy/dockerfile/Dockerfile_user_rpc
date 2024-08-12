@@ -1,0 +1,27 @@
+FROM alpine:latest
+
+# 添加时区
+RUN echo -e "https://mirrors.aliyun.com/alpine/v3.15/main\nhttps://mirrors.aliyun.com/alpine/v3.15/community">/etc/apk/repositories && \
+    apk update && \
+    apk --no-cache add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai">/etc/timezone
+ENV TZ=Asia/Shanghai
+
+ARG SERVER_NAME=user
+ARG SERVER_TYPE=rpc
+
+ENV RUN_BIN bin/${SEVER_NAME}-${SERVER_TYPE}
+ENV RUN_CONF /${SERVER_NAME}/conf/${SERVER_NAME}.yaml
+
+RUN mkdir /$SERVER_NAME && mkdir /$SERVER_NAME/bin && mkdir /$SERVER_NAME/conf
+
+COPY ./bin/$SERVER_NAME-$SERVER_TYPE /$SERVER_NAME/bin/
+
+COPY ./apps/$SERVER_NAME/$SERVER_TYPE/etc/$SERVER_NAME.yamL /$SERVER_NAME/conf/
+
+RUN chmod +x /$SERVER_NAME/bin/$SERVER_NAME-$SERVER_TYPE
+
+WORKDIR /$SERVER_NAME
+
+ENTRYPOINT $RUN_BIN -f $RUN_CONF

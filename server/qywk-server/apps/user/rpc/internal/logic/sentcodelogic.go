@@ -5,8 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
-	"qywk-server/pkg/constants"
 	"qywk-server/pkg/email"
+	"qywk-server/pkg/redisutils/keys"
+	"qywk-server/pkg/redisutils/pre"
 	"time"
 
 	"qywk-server/apps/user/rpc/internal/svc"
@@ -39,7 +40,7 @@ func (l *SentCodeLogic) SentCode(in *user.CodeReq) (*user.CodeResp, error) {
 	}
 
 	// 2. 检查是否在一分钟内已发送过验证码
-	limitK := constants.LIMIT_EMAIL_CODE + in.Email
+	limitK := keys.Create(pre.LimitEmail, in.Email)
 	exists, err := RMD.Exists(ctx, limitK).Result()
 	if err != nil {
 		return nil, errors.New("failed to check email code limit")
@@ -51,7 +52,7 @@ func (l *SentCodeLogic) SentCode(in *user.CodeReq) (*user.CodeResp, error) {
 	// 3. 生成验证码
 	code := generateVerificationCode()
 
-	codeK := constants.VERIFY_EMAIL_CODE
+	codeK := keys.Create(pre.VerifyEmail, in.Email)
 	// 4. 存储验证码到缓存或数据库 (假设使用 Redis)
 	err = RMD.Set(ctx, codeK, code, time.Minute*5).Err() // 验证码有效期为5分钟
 	if err != nil {

@@ -11,6 +11,8 @@ import (
 	"qywk-server/pkg/constants"
 	"qywk-server/pkg/encrypt"
 	"qywk-server/pkg/jwts"
+	"qywk-server/pkg/redisutils/keys"
+	"qywk-server/pkg/redisutils/pre"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -38,7 +40,7 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 	RDB := l.svcCtx.RDB
 
 	// 验证码校验
-	codeK := constants.VERIFY_EMAIL_CODE + in.Email
+	codeK := keys.Create(pre.VerifyEmail, in.Email)
 	code, _ := RDB.Get(ctx, codeK).Result()
 
 	if code == "" || code != in.Code {
@@ -49,7 +51,7 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 
 	// 邮箱查询, 判断是否已经注册过了
 	var userinfo models.UserInfo
-	emailK := constants.USERINFO_EMAIL + in.Email
+	emailK := keys.Create(pre.UserInfoEmail, in.Email)
 
 	res, _ := RDB.Get(ctx, emailK).Result()
 	if res != "" {
@@ -93,7 +95,7 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 		return nil, errors.New("数据库异常")
 	}
 
-	uidK := constants.USERINFO_ID + uid
+	uidK := keys.Create(pre.UserInfoId, uid)
 
 	token, err := jwts.GenJwtToken(
 		l.svcCtx.Config.Jwt.AccessSecret,

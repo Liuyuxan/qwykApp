@@ -8,9 +8,10 @@ import (
 	"qywk-server/apps/user/models"
 	"qywk-server/apps/user/rpc/internal/svc"
 	"qywk-server/apps/user/rpc/user"
-	"qywk-server/pkg/constants"
 	"qywk-server/pkg/encrypt"
 	"qywk-server/pkg/jwts"
+	"qywk-server/pkg/redisutils/keys"
+	"qywk-server/pkg/redisutils/pre"
 	"time"
 )
 
@@ -56,8 +57,8 @@ func (l *LoginLogic) Login(in *user.LoginReq) (*user.LoginResp, error) {
 	}
 
 	// 4. 生成身份验证令牌 (假设使用 JWT)
-	uidK := constants.USERINFO_ID + in.UserId
-	emailK := constants.USERINFO_EMAIL + in.UserId
+	uidK := keys.Create(pre.UserInfoId, in.UserId)
+	emailK := keys.Create(pre.UserInfoEmail, userinfo.Email.String)
 
 	token, err := jwts.GenJwtToken(
 		l.svcCtx.Config.Jwt.AccessSecret,

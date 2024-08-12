@@ -5,8 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"qywk-server/apps/user/models"
-	"qywk-server/pkg/constants"
 	"qywk-server/pkg/jwts"
+	"qywk-server/pkg/redisutils/keys"
+	"qywk-server/pkg/redisutils/pre"
 	"time"
 
 	"qywk-server/apps/user/rpc/internal/svc"
@@ -57,7 +58,7 @@ func (l *WechatLoginLogic) WechatLogin(in *user.WechatLoginReq) (*user.LoginResp
 	}
 
 	// 第四步：为用户生成JWT令牌或会话
-	uidK := constants.USERINFO_ID + userinfo.UserId
+	uidK := keys.Create(pre.UserInfoId, userinfo.UserId)
 
 	token, err := jwts.GenJwtToken(
 		l.svcCtx.Config.Jwt.AccessSecret,
@@ -69,7 +70,7 @@ func (l *WechatLoginLogic) WechatLogin(in *user.WechatLoginReq) (*user.LoginResp
 	)
 
 	userInfoJson, err := userinfo.ToString()
-	emailK := constants.USERINFO_EMAIL + userinfo.Email.String
+	emailK := keys.Create(pre.UserInfoEmail, userinfo.Email.String)
 
 	err1, err2 :=
 		RDB.Set(ctx, emailK, userInfoJson, time.Hour*3).Err(),
