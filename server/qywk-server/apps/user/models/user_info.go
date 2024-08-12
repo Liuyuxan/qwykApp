@@ -24,16 +24,6 @@ func (UserInfo) TableName() string {
 	return "user_info"
 }
 
-// MarshalBinary 实现 encoding.BinaryMarshaler
-func (u *UserInfo) MarshalBinary() ([]byte, error) {
-	return json.Marshal(u)
-}
-
-// UnmarshalBinary 实现 encoding.BinaryUnmarshaler
-func (u *UserInfo) UnmarshalBinary(data []byte) error {
-	return json.Unmarshal(data, u)
-}
-
 // 序列化为 JSON 字符串
 func (u *UserInfo) ToString() (string, error) {
 	data, err := json.Marshal(u)
@@ -41,4 +31,9 @@ func (u *UserInfo) ToString() (string, error) {
 		return "", err
 	}
 	return string(data), nil
+}
+
+// 反序列化 JSON 字符串
+func (u *UserInfo) FromString(jsonStr string) error {
+	return json.Unmarshal([]byte(jsonStr), u)
 }

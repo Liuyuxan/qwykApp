@@ -59,12 +59,12 @@ message ForgetResp {
   bool status = 1;
 }
 
-service user {
+service login {
   // 普通登陆
   rpc login (LoginReq) returns (LoginResp);
   // 微信快速登陆
   rpc wechatLogin (WechatLoginReq) returns (LoginResp);
-  // 手机号注册
+  // 邮箱号注册
   rpc register (RegisterReq) returns (RegisterResp);
   // 发送验证码
   rpc sentCode (CodeReq) returns (CodeResp);
@@ -74,6 +74,37 @@ service user {
   rpc forget (ForgetReq) returns (ForgetResp);
 }
 
+
+message UserInfoBasicReq {
+  string user_id = 1;
+}
+
+message UserInfoBasicResp {
+  string user_id =  1;
+  string nickname = 2;
+  string avatar = 3;
+}
+
+message UserInfoDetailReq {
+  string token = 1;
+}
+
+message UserInfoDetailResp {
+  string user_id =  1;
+  string nickname = 2;
+  string avatar = 3;
+  string tel = 4;
+  string email = 5;
+}
+
+
+service info {
+  // 查询用户的基本信息
+  rpc getUserInfoBasic (UserInfoBasicReq) returns (UserInfoBasicResp);
+  // 查询用户的详细信息
+  rpc getUserInfoDetail (UserInfoDetailReq) returns (UserInfoDetailResp);
+}
+
 /*
-  goctl rpc protoc user.proto  --go_out=. --go-grpc_out=. --zrpc_out=.
+  goctl rpc protoc user.proto --go_out=. --go-grpc_out=. --zrpc_out=. -m
  */

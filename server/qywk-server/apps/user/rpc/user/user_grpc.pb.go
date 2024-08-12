@@ -19,23 +19,23 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	User_Login_FullMethodName       = "/user.user/login"
-	User_WechatLogin_FullMethodName = "/user.user/wechatLogin"
-	User_Register_FullMethodName    = "/user.user/register"
-	User_SentCode_FullMethodName    = "/user.user/sentCode"
-	User_Change_FullMethodName      = "/user.user/change"
-	User_Forget_FullMethodName      = "/user.user/forget"
+	Login_Login_FullMethodName       = "/user.login/login"
+	Login_WechatLogin_FullMethodName = "/user.login/wechatLogin"
+	Login_Register_FullMethodName    = "/user.login/register"
+	Login_SentCode_FullMethodName    = "/user.login/sentCode"
+	Login_Change_FullMethodName      = "/user.login/change"
+	Login_Forget_FullMethodName      = "/user.login/forget"
 )
 
-// UserClient is the client API for User service.
+// LoginClient is the client API for Login service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserClient interface {
+type LoginClient interface {
 	// 普通登陆
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	// 微信快速登陆
 	WechatLogin(ctx context.Context, in *WechatLoginReq, opts ...grpc.CallOption) (*LoginResp, error)
-	// 手机号注册
+	// 邮箱号注册
 	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
 	// 发送验证码
 	SentCode(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*CodeResp, error)
@@ -45,83 +45,83 @@ type UserClient interface {
 	Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error)
 }
 
-type userClient struct {
+type loginClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserClient(cc grpc.ClientConnInterface) UserClient {
-	return &userClient{cc}
+func NewLoginClient(cc grpc.ClientConnInterface) LoginClient {
+	return &loginClient{cc}
 }
 
-func (c *userClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+func (c *loginClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, User_Login_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Login_Login_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) WechatLogin(ctx context.Context, in *WechatLoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+func (c *loginClient) WechatLogin(ctx context.Context, in *WechatLoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, User_WechatLogin_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Login_WechatLogin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+func (c *loginClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterResp)
-	err := c.cc.Invoke(ctx, User_Register_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Login_Register_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) SentCode(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*CodeResp, error) {
+func (c *loginClient) SentCode(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*CodeResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CodeResp)
-	err := c.cc.Invoke(ctx, User_SentCode_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Login_SentCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) Change(ctx context.Context, in *ChangeReq, opts ...grpc.CallOption) (*ChangeResp, error) {
+func (c *loginClient) Change(ctx context.Context, in *ChangeReq, opts ...grpc.CallOption) (*ChangeResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ChangeResp)
-	err := c.cc.Invoke(ctx, User_Change_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Login_Change_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error) {
+func (c *loginClient) Forget(ctx context.Context, in *ForgetReq, opts ...grpc.CallOption) (*ForgetResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ForgetResp)
-	err := c.cc.Invoke(ctx, User_Forget_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Login_Forget_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UserServer is the server API for User service.
-// All implementations must embed UnimplementedUserServer
+// LoginServer is the server API for Login service.
+// All implementations must embed UnimplementedLoginServer
 // for forward compatibility
-type UserServer interface {
+type LoginServer interface {
 	// 普通登陆
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	// 微信快速登陆
 	WechatLogin(context.Context, *WechatLoginReq) (*LoginResp, error)
-	// 手机号注册
+	// 邮箱号注册
 	Register(context.Context, *RegisterReq) (*RegisterResp, error)
 	// 发送验证码
 	SentCode(context.Context, *CodeReq) (*CodeResp, error)
@@ -129,182 +129,315 @@ type UserServer interface {
 	Change(context.Context, *ChangeReq) (*ChangeResp, error)
 	// 忘记密码
 	Forget(context.Context, *ForgetReq) (*ForgetResp, error)
-	mustEmbedUnimplementedUserServer()
+	mustEmbedUnimplementedLoginServer()
 }
 
-// UnimplementedUserServer must be embedded to have forward compatible implementations.
-type UnimplementedUserServer struct {
+// UnimplementedLoginServer must be embedded to have forward compatible implementations.
+type UnimplementedLoginServer struct {
 }
 
-func (UnimplementedUserServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
+func (UnimplementedLoginServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedUserServer) WechatLogin(context.Context, *WechatLoginReq) (*LoginResp, error) {
+func (UnimplementedLoginServer) WechatLogin(context.Context, *WechatLoginReq) (*LoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WechatLogin not implemented")
 }
-func (UnimplementedUserServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
+func (UnimplementedLoginServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
-func (UnimplementedUserServer) SentCode(context.Context, *CodeReq) (*CodeResp, error) {
+func (UnimplementedLoginServer) SentCode(context.Context, *CodeReq) (*CodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SentCode not implemented")
 }
-func (UnimplementedUserServer) Change(context.Context, *ChangeReq) (*ChangeResp, error) {
+func (UnimplementedLoginServer) Change(context.Context, *ChangeReq) (*ChangeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Change not implemented")
 }
-func (UnimplementedUserServer) Forget(context.Context, *ForgetReq) (*ForgetResp, error) {
+func (UnimplementedLoginServer) Forget(context.Context, *ForgetReq) (*ForgetResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Forget not implemented")
 }
-func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
+func (UnimplementedLoginServer) mustEmbedUnimplementedLoginServer() {}
 
-// UnsafeUserServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserServer will
+// UnsafeLoginServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LoginServer will
 // result in compilation errors.
-type UnsafeUserServer interface {
-	mustEmbedUnimplementedUserServer()
+type UnsafeLoginServer interface {
+	mustEmbedUnimplementedLoginServer()
 }
 
-func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
-	s.RegisterService(&User_ServiceDesc, srv)
+func RegisterLoginServer(s grpc.ServiceRegistrar, srv LoginServer) {
+	s.RegisterService(&Login_ServiceDesc, srv)
 }
 
-func _User_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Login_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).Login(ctx, in)
+		return srv.(LoginServer).Login(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_Login_FullMethodName,
+		FullMethod: Login_Login_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).Login(ctx, req.(*LoginReq))
+		return srv.(LoginServer).Login(ctx, req.(*LoginReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_WechatLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Login_WechatLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(WechatLoginReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).WechatLogin(ctx, in)
+		return srv.(LoginServer).WechatLogin(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_WechatLogin_FullMethodName,
+		FullMethod: Login_WechatLogin_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).WechatLogin(ctx, req.(*WechatLoginReq))
+		return srv.(LoginServer).WechatLogin(ctx, req.(*WechatLoginReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Login_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).Register(ctx, in)
+		return srv.(LoginServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_Register_FullMethodName,
+		FullMethod: Login_Register_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).Register(ctx, req.(*RegisterReq))
+		return srv.(LoginServer).Register(ctx, req.(*RegisterReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_SentCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Login_SentCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CodeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).SentCode(ctx, in)
+		return srv.(LoginServer).SentCode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_SentCode_FullMethodName,
+		FullMethod: Login_SentCode_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).SentCode(ctx, req.(*CodeReq))
+		return srv.(LoginServer).SentCode(ctx, req.(*CodeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_Change_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Login_Change_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ChangeReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).Change(ctx, in)
+		return srv.(LoginServer).Change(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_Change_FullMethodName,
+		FullMethod: Login_Change_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).Change(ctx, req.(*ChangeReq))
+		return srv.(LoginServer).Change(ctx, req.(*ChangeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_Forget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Login_Forget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ForgetReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).Forget(ctx, in)
+		return srv.(LoginServer).Forget(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_Forget_FullMethodName,
+		FullMethod: Login_Forget_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).Forget(ctx, req.(*ForgetReq))
+		return srv.(LoginServer).Forget(ctx, req.(*ForgetReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// User_ServiceDesc is the grpc.ServiceDesc for User service.
+// Login_ServiceDesc is the grpc.ServiceDesc for Login service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.user",
-	HandlerType: (*UserServer)(nil),
+var Login_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "user.login",
+	HandlerType: (*LoginServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "login",
-			Handler:    _User_Login_Handler,
+			Handler:    _Login_Login_Handler,
 		},
 		{
 			MethodName: "wechatLogin",
-			Handler:    _User_WechatLogin_Handler,
+			Handler:    _Login_WechatLogin_Handler,
 		},
 		{
 			MethodName: "register",
-			Handler:    _User_Register_Handler,
+			Handler:    _Login_Register_Handler,
 		},
 		{
 			MethodName: "sentCode",
-			Handler:    _User_SentCode_Handler,
+			Handler:    _Login_SentCode_Handler,
 		},
 		{
 			MethodName: "change",
-			Handler:    _User_Change_Handler,
+			Handler:    _Login_Change_Handler,
 		},
 		{
 			MethodName: "forget",
-			Handler:    _User_Forget_Handler,
+			Handler:    _Login_Forget_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "user.proto",
+}
+
+const (
+	Info_GetUserInfoBasic_FullMethodName  = "/user.info/getUserInfoBasic"
+	Info_GetUserInfoDetail_FullMethodName = "/user.info/getUserInfoDetail"
+)
+
+// InfoClient is the client API for Info service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type InfoClient interface {
+	// 查询用户的基本信息
+	GetUserInfoBasic(ctx context.Context, in *UserInfoBasicReq, opts ...grpc.CallOption) (*UserInfoBasicResp, error)
+	// 查询用户的详细信息
+	GetUserInfoDetail(ctx context.Context, in *UserInfoDetailReq, opts ...grpc.CallOption) (*UserInfoDetailResp, error)
+}
+
+type infoClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewInfoClient(cc grpc.ClientConnInterface) InfoClient {
+	return &infoClient{cc}
+}
+
+func (c *infoClient) GetUserInfoBasic(ctx context.Context, in *UserInfoBasicReq, opts ...grpc.CallOption) (*UserInfoBasicResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserInfoBasicResp)
+	err := c.cc.Invoke(ctx, Info_GetUserInfoBasic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *infoClient) GetUserInfoDetail(ctx context.Context, in *UserInfoDetailReq, opts ...grpc.CallOption) (*UserInfoDetailResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserInfoDetailResp)
+	err := c.cc.Invoke(ctx, Info_GetUserInfoDetail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// InfoServer is the server API for Info service.
+// All implementations must embed UnimplementedInfoServer
+// for forward compatibility
+type InfoServer interface {
+	// 查询用户的基本信息
+	GetUserInfoBasic(context.Context, *UserInfoBasicReq) (*UserInfoBasicResp, error)
+	// 查询用户的详细信息
+	GetUserInfoDetail(context.Context, *UserInfoDetailReq) (*UserInfoDetailResp, error)
+	mustEmbedUnimplementedInfoServer()
+}
+
+// UnimplementedInfoServer must be embedded to have forward compatible implementations.
+type UnimplementedInfoServer struct {
+}
+
+func (UnimplementedInfoServer) GetUserInfoBasic(context.Context, *UserInfoBasicReq) (*UserInfoBasicResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfoBasic not implemented")
+}
+func (UnimplementedInfoServer) GetUserInfoDetail(context.Context, *UserInfoDetailReq) (*UserInfoDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfoDetail not implemented")
+}
+func (UnimplementedInfoServer) mustEmbedUnimplementedInfoServer() {}
+
+// UnsafeInfoServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to InfoServer will
+// result in compilation errors.
+type UnsafeInfoServer interface {
+	mustEmbedUnimplementedInfoServer()
+}
+
+func RegisterInfoServer(s grpc.ServiceRegistrar, srv InfoServer) {
+	s.RegisterService(&Info_ServiceDesc, srv)
+}
+
+func _Info_GetUserInfoBasic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserInfoBasicReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InfoServer).GetUserInfoBasic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Info_GetUserInfoBasic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InfoServer).GetUserInfoBasic(ctx, req.(*UserInfoBasicReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Info_GetUserInfoDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserInfoDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InfoServer).GetUserInfoDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Info_GetUserInfoDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InfoServer).GetUserInfoDetail(ctx, req.(*UserInfoDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Info_ServiceDesc is the grpc.ServiceDesc for Info service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Info_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "user.info",
+	HandlerType: (*InfoServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "getUserInfoBasic",
+			Handler:    _Info_GetUserInfoBasic_Handler,
+		},
+		{
+			MethodName: "getUserInfoDetail",
+			Handler:    _Info_GetUserInfoDetail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
