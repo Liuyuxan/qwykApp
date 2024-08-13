@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package display;
+
+option go_package="./display";
+
+message QueryPlantsReq {
+  string userId = 1;
+  int32 page = 2;
+  int32 size = 3;
+}
+
+message Plants {
+  string  id = 1;
+  string name = 2;
+  string url = 3;
+  repeated string tag = 4;
+  string desc = 5;
+  string has = 6;
+}
+
+message PlantsResp {
+  int32 total = 1;
+  repeated Plants records = 2;
+}
+
+service plants {
+  rpc queryAll(QueryPlantsReq) returns (PlantsResp);
+  rpc queryHas(QueryPlantsReq) returns (PlantsResp);
+  rpc queryNotHas(QueryPlantsReq) returns (PlantsResp);
+}
+
+// goctl rpc protoc display.proto --go_out=. --go-grpc_out=. --zrpc_out=. -m

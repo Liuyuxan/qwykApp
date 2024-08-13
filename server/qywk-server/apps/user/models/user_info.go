@@ -24,8 +24,17 @@ func (UserInfo) TableName() string {
 	return "user_info"
 }
 
+// 屏蔽字段，不暴露重要的字段
+func (u *UserInfo) mustShield() *UserInfo {
+	u.Password = ""
+	u.OpenId = sql.NullString{"", false}
+	u.SessionId = sql.NullString{"", false}
+	return u
+}
+
 // 序列化为 JSON 字符串
 func (u *UserInfo) ToString() (string, error) {
+	u.mustShield()
 	data, err := json.Marshal(u)
 	if err != nil {
 		return "", err

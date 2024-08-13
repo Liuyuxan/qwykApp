@@ -38,4 +38,8 @@ const (
 	VerifyEmail = "verify:email:"
 
 	LimitEmail = "limit:email:"
+
+	DisplayPlantsAll    = "display:plants:all:"
+	DisplayPlantsHas    = "display:plants:has:"
+	DisplayPlantsNotHas = "display:plants:not_has:"
 )

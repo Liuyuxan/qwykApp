@@ -67,7 +67,12 @@ func (l *SentCodeLogic) SentCode(in *user.CodeReq) (*user.CodeResp, error) {
 	}
 
 	// 6. 发送验证码
-	go email.SendCode(SMS, in.Email, code)
+	go func() {
+		err := email.SendCode(SMS, in.Email, code)
+		if err != nil {
+			logx.Infof("err: %v", err)
+		}
+	}()
 
 	// 7. 返回结果
 	return &user.CodeResp{}, nil

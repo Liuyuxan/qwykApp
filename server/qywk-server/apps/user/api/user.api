@@ -4,33 +4,33 @@ type Result {}
 
 type (
 	LoginReq {
-		userId   string `json:"userId"`
-		password string `json:"password"`
+		userId   string `jsonx:"userId"`
+		password string `jsonx:"password"`
 	}
 	RegisterReq {
-		password string `json:"password"`
-		code     string `json:"code"`
-		email    string `json:"email"`
-		nickname string `json:"nickname"`
+		password string `jsonx:"password"`
+		code     string `jsonx:"code"`
+		email    string `jsonx:"email"`
+		nickname string `jsonx:"nickname"`
 	}
 	CodeReq {
-		email string `json:"email"`
+		email string `jsonx:"email"`
 	}
 	ChangeReq {
-		userId      string `json:"userId"`
-		password    string `json:"password"`
-		email       string `json:"email"`
-		code        string `json:"code"`
-		newPassword string `json:"newPassword"`
+		userId      string `jsonx:"userId"`
+		password    string `jsonx:"password"`
+		email       string `jsonx:"email"`
+		code        string `jsonx:"code"`
+		newPassword string `jsonx:"newPassword"`
 	}
 	WechatLoginReq {
-		code string `json:"code"`
+		code string `jsonx:"code"`
 	}
 	ForgetRep {
-		userId   string `json:"userId"`
-		password string `json:"password"`
-		email    string `json:"email"`
-		code     string `json:"code"`
+		userId   string `jsonx:"userId"`
+		password string `jsonx:"password"`
+		email    string `jsonx:"email"`
+		code     string `jsonx:"code"`
 	}
 )
 

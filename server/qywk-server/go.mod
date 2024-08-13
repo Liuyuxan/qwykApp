@@ -5,8 +5,10 @@ go 1.22
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.8.1
+	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.6.1
 	github.com/zeromicro/go-zero v1.7.0
+	google.golang.org/appengine v1.6.7
 	google.golang.org/grpc v1.65.0
 	google.golang.org/protobuf v1.34.2
 	xorm.io/xorm v1.3.9

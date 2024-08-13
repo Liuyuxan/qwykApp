@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca67a8f2-7784-4aed-9e03-5a65cbc0fb2a" name="默认变更列表" comment="fix(qywk-modules-health)">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/qywk-cloud.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../qywk-server/apps/display/models/init.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../qywk-server/apps/display/models/plant_user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../qywk-server/apps/display/models/plants.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../qywk-server/apps/display/rpc/display.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../qywk-server/pkg/pageutils/pageutils.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/PlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/controller/PlanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanSysAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/ao/PlanSysAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanSysDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanSysDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanUserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/dto/PlanUserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanPunchStateVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanPunchStateVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanSysVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/vo/PlanSysVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/PlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/PlanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/PlanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/service/impl/PlanServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/dto/UserInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/pojo/dto/UserInfoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/service/impl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qywk-user-center/src/main/java/com/qywk/user/service/impl/LoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/file/rpc/etc/file.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/apps/file/rpc/etc/file.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/health/rpc/health.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/apps/health/rpc/health.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/user/api/userApi.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/user/models/user_info.go" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/apps/user/models/user_info.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/user/rpc/etc/user.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/apps/user/rpc/etc/user.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/user/rpc/internal/logic/login/sentcodelogic.go" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/apps/user/rpc/internal/logic/login/sentcodelogic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/apps/user/rpc/userRpc.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qywk-server/pkg/constants/customenum.go" beforeDir="false" afterPath="$PROJECT_DIR$/../qywk-server/pkg/constants/customenum.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,40 +38,50 @@
       </list>
     </option>
   </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "DQ344"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Liuyuxan/qwykApp.git",
+    "accountId": "eb94c548-be66-4bac-a149-dc129b00e11f"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/pom.xml" root0="SKIP_INSPECTION" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
   <component name="ProjectId" id="2fAt5nutL0oC0KiOzDu8Q6ziPhr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="mysql" />
-    <property name="RequestMappingsPanelOrder0" value="0" />
-    <property name="RequestMappingsPanelOrder1" value="1" />
-    <property name="RequestMappingsPanelWidth0" value="75" />
-    <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/qywk-modules/qywk-modules-health/src/main/java/com/qywk/health/pojo/entity" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="模块" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/qlh/code/work/qwykApp/server/qywk-cloud",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -95,7 +110,7 @@
       <recent name="com.qywk.common.customenum" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.QYWKUserCenterApplication">
+  <component name="RunManager">
     <configuration name="QYWKChatAiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="qywk-modules-chat-ai" />
       <extension name="coverage">
@@ -161,15 +176,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.QYWKUserCenterApplication" />
-        <item itemvalue="Spring Boot.QYWKGateWayApplication" />
-        <item itemvalue="Spring Boot.QYWKChatAiApplication" />
-        <item itemvalue="Spring Boot.QYWKHealthApplication" />
-        <item itemvalue="Spring Boot.QYWKCommunityApplication" />
-      </list>
-    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-33c477a475b1-e0158606a674-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.19072.18" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-GO-241.19072.18" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="SpringBeansView">
@@ -245,6 +259,11 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="b0cf0f69-eac4-421e-bb64-2b50e1c284d3" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -255,7 +274,6 @@
         <entry key="b0cf0f69-eac4-421e-bb64-2b50e1c284d3">
           <value>
             <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -274,17 +292,12 @@
                   </entry>
                 </map>
               </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="b0cf0f69-eac4-421e-bb64-2b50e1c284d3" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init(qywk-modules-community): 初始化社区模块" />
@@ -294,20 +307,7 @@
     <MESSAGE value="fix(qywk-modules-health)" />
     <option name="LAST_COMMIT_MESSAGE" value="fix(qywk-modules-health)" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/qywk-gateway/src/main/java/com/qywk/filter/AuthFilter.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/qywk-gateway/src/main/java/com/qywk/filter/AuthFilter.java</url>
-          <line>80</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
   </component>
 </project>
