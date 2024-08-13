@@ -1,0 +1,39 @@
+syntax = "v1"
+
+type Result {}
+
+type Plants {
+	Id   string   `json:"id"`
+	Name string   `json:"name"`
+	Url  string   `json:"url"`
+	Tag  []string `json:"tag"`
+	Desc string   `json:"desc"`
+	Has  string   `json:"has"`
+}
+
+type QueryPlantsReq {
+	UserId string `json:"userId"`
+	Page   int32  `json:"page"`
+	Size   int32  `json:"size"`
+}
+
+@server (
+	group:  plants
+	prefix: /display/plants
+	jwt:    Jwt
+)
+service display {
+	@doc "查询全部中药植物信息"
+	@handler queryAll
+	post /query/all (QueryPlantsReq) returns (Result)
+
+	@doc "查询已拥有的中药植物信息"
+	@handler queryHas
+	post /query/has (QueryPlantsReq) returns (Result)
+
+	@doc "查询未拥有的中药植物信息"
+	@handler queryNotHas
+	get /query/notHas (QueryPlantsReq) returns (Result)
+}
+
+// goctl api go --api display.api --dir .

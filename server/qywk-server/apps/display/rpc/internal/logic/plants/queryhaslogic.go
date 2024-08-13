@@ -3,7 +3,6 @@ package plantslogic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"qywk-server/apps/display/models"
 	"qywk-server/pkg/constants"
 	"qywk-server/pkg/jsonx"
@@ -50,7 +49,7 @@ func (l *QueryHasLogic) QueryHas(in *display.QueryPlantsReq) (*display.PlantsRes
 	if err == nil {
 		return ret, nil
 	}
-	logx.Infof("err:", err)
+	logx.Infof("err:%v", err)
 
 	// 执行查询
 	err = MDB.Table("plants").
@@ -58,8 +57,6 @@ func (l *QueryHasLogic) QueryHas(in *display.QueryPlantsReq) (*display.PlantsRes
 		Where("plants.enable = ?", constants.Activation).
 		Limit(limit, offset).
 		Find(&res)
-
-	fmt.Println(res)
 
 	if err != nil {
 		logx.Infof("err:", err)
@@ -73,7 +70,7 @@ func (l *QueryHasLogic) QueryHas(in *display.QueryPlantsReq) (*display.PlantsRes
 		Count(&models.Plants{})
 
 	if err != nil {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 		return nil, errors.New("数据库异常")
 	}
 
@@ -100,7 +97,7 @@ func (l *QueryHasLogic) QueryHas(in *display.QueryPlantsReq) (*display.PlantsRes
 	if err == nil {
 		RDB.Set(ctx, key, json, time.Hour*3)
 	} else {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 	}
 
 	return ret, nil

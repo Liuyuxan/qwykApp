@@ -1,10 +1,10 @@
-package user
+package login
 
 import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"qywk-server/apps/user/api/internal/logic/user"
+	"qywk-server/apps/user/api/internal/logic/login"
 	"qywk-server/apps/user/api/internal/svc"
 	"qywk-server/apps/user/api/internal/types"
 )
@@ -18,7 +18,7 @@ func RegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := user.NewRegisterLogic(r.Context(), svcCtx)
+		l := login.NewRegisterLogic(r.Context(), svcCtx)
 		resp, err := l.Register(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

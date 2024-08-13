@@ -1,4 +1,4 @@
-package user
+package login
 
 import (
 	"context"
@@ -11,29 +11,29 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type FastLogic struct {
+type SentCodeLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-// 微信快速登陆
-func NewFastLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FastLogic {
-	return &FastLogic{
+// 发送验证码
+func NewSentCodeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SentCodeLogic {
+	return &SentCodeLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *FastLogic) Fast(req *types.WechatLoginReq) (resp *result.Result, err error) {
-	res, err := l.svcCtx.User.WechatLogin(l.ctx, &user.WechatLoginReq{
-		Code: req.Code,
+func (l *SentCodeLogic) SentCode(req *types.CodeReq) (resp *result.Result, err error) {
+	_, err = l.svcCtx.Login.SentCode(l.ctx, &user.CodeReq{
+		Email: req.Email,
 	})
 
 	if err != nil {
 		return result.Err().SetData("err", err.Error()), nil
 	}
 
-	return result.Ok().SetData("token", res.Token), nil
+	return result.Ok().SetMsg("短信发送成功"), nil
 }

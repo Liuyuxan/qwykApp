@@ -4,7 +4,7 @@ package handler
 import (
 	"net/http"
 
-	user "qywk-server/apps/user/api/internal/handler/user"
+	login "qywk-server/apps/user/api/internal/handler/login"
 	"qywk-server/apps/user/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -17,37 +17,37 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				// 修改密码
 				Method:  http.MethodPost,
 				Path:    "/change",
-				Handler: user.ChangeHandler(serverCtx),
+				Handler: login.ChangeHandler(serverCtx),
 			},
 			{
 				// 微信快速登陆
 				Method:  http.MethodPost,
 				Path:    "/fast",
-				Handler: user.FastHandler(serverCtx),
+				Handler: login.FastHandler(serverCtx),
 			},
 			{
 				// 忘记密码
 				Method:  http.MethodPost,
 				Path:    "/forget",
-				Handler: user.ForgetHandler(serverCtx),
+				Handler: login.ForgetHandler(serverCtx),
 			},
 			{
 				// 普通登陆
 				Method:  http.MethodPost,
 				Path:    "/normal",
-				Handler: user.LoginHandler(serverCtx),
+				Handler: login.LoginHandler(serverCtx),
 			},
 			{
 				// 手机号注册
 				Method:  http.MethodPost,
 				Path:    "/register",
-				Handler: user.RegisterHandler(serverCtx),
+				Handler: login.RegisterHandler(serverCtx),
 			},
 			{
 				// 发送验证码
 				Method:  http.MethodPost,
 				Path:    "/sent/code",
-				Handler: user.SentCodeHandler(serverCtx),
+				Handler: login.SentCodeHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/user/login"),

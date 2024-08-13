@@ -48,7 +48,7 @@ func (l *QueryNotHasLogic) QueryNotHas(in *display.QueryPlantsReq) (*display.Pla
 	if err == nil {
 		return ret, nil
 	}
-	logx.Infof("err:", err)
+	logx.Infof("err:%v", err)
 
 	// 执行查询未拥有的植物
 	err = MDB.Table("plants").
@@ -58,7 +58,7 @@ func (l *QueryNotHasLogic) QueryNotHas(in *display.QueryPlantsReq) (*display.Pla
 		Find(&res)
 
 	if err != nil {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 		return nil, errors.New("数据库异常")
 	}
 
@@ -69,7 +69,7 @@ func (l *QueryNotHasLogic) QueryNotHas(in *display.QueryPlantsReq) (*display.Pla
 		Count(&models.Plants{})
 
 	if err != nil {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 		return nil, errors.New("数据库异常")
 	}
 
@@ -96,7 +96,7 @@ func (l *QueryNotHasLogic) QueryNotHas(in *display.QueryPlantsReq) (*display.Pla
 	if err == nil {
 		RDB.Set(ctx, key, json, time.Hour*3)
 	} else {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 	}
 
 	return ret, nil

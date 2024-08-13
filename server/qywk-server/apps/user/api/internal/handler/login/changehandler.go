@@ -1,25 +1,25 @@
-package user
+package login
 
 import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"qywk-server/apps/user/api/internal/logic/user"
+	"qywk-server/apps/user/api/internal/logic/login"
 	"qywk-server/apps/user/api/internal/svc"
 	"qywk-server/apps/user/api/internal/types"
 )
 
-// 微信快速登陆
-func FastHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+// 修改密码
+func ChangeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.WechatLoginReq
+		var req types.ChangeReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := user.NewFastLogic(r.Context(), svcCtx)
-		resp, err := l.Fast(&req)
+		l := login.NewChangeLogic(r.Context(), svcCtx)
+		resp, err := l.Change(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

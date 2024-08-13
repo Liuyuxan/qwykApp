@@ -1,4 +1,4 @@
-package user
+package login
 
 import (
 	"context"
@@ -11,29 +11,30 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type SentCodeLogic struct {
+type LoginLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-// 发送验证码
-func NewSentCodeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SentCodeLogic {
-	return &SentCodeLogic{
+// 普通登陆
+func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic {
+	return &LoginLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *SentCodeLogic) SentCode(req *types.CodeReq) (resp *result.Result, err error) {
-	_, err = l.svcCtx.User.SentCode(l.ctx, &user.CodeReq{
-		Email: req.Email,
+func (l *LoginLogic) Login(req *types.LoginReq) (resp *result.Result, err error) {
+	res, err := l.svcCtx.Login.Login(l.ctx, &user.LoginReq{
+		UserId:   req.UserId,
+		Password: req.Password,
 	})
 
 	if err != nil {
 		return result.Err().SetData("err", err.Error()), nil
 	}
 
-	return result.Ok().SetMsg("短信发送成功"), nil
+	return result.Ok().SetData("token", res.Token), nil
 }

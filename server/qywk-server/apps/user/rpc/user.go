@@ -5,7 +5,8 @@ import (
 	"fmt"
 
 	"qywk-server/apps/user/rpc/internal/config"
-	"qywk-server/apps/user/rpc/internal/server"
+	infoServer "qywk-server/apps/user/rpc/internal/server/info"
+	loginServer "qywk-server/apps/user/rpc/internal/server/login"
 	"qywk-server/apps/user/rpc/internal/svc"
 	"qywk-server/apps/user/rpc/user"
 
@@ -26,7 +27,8 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		user.RegisterUserServer(grpcServer, server.NewUserServer(ctx))
+		user.RegisterLoginServer(grpcServer, loginServer.NewLoginServer(ctx))
+		user.RegisterInfoServer(grpcServer, infoServer.NewInfoServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

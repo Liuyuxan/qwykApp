@@ -1,4 +1,4 @@
-package user
+package login
 
 import (
 	"context"
@@ -11,27 +11,28 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type ForgetLogic struct {
+type ChangeLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-// 忘记密码
-func NewForgetLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ForgetLogic {
-	return &ForgetLogic{
+// 修改密码
+func NewChangeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ChangeLogic {
+	return &ChangeLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *ForgetLogic) Forget(req *types.ForgetRep) (resp *result.Result, err error) {
-	res, err := l.svcCtx.User.Forget(l.ctx, &user.ForgetReq{
-		UserId:   req.UserId,
-		Password: req.Password,
-		Email:    req.Email,
-		Code:     req.Code,
+func (l *ChangeLogic) Change(req *types.ChangeReq) (resp *result.Result, err error) {
+	res, err := l.svcCtx.Login.Change(l.ctx, &user.ChangeReq{
+		UserId:      req.UserId,
+		Password:    req.Password,
+		NewPassword: req.NewPassword,
+		Email:       req.Email,
+		Code:        req.Code,
 	})
 
 	if err != nil {

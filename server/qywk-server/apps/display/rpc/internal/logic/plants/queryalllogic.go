@@ -50,7 +50,7 @@ func (l *QueryAllLogic) QueryAll(in *display.QueryPlantsReq) (*display.PlantsRes
 	if err == nil {
 		return ret, nil
 	}
-	logx.Infof("err:", err)
+	logx.Infof("err:%v", err)
 
 	// 查询所有
 	err = MDB.Table(models.Plants{}.TableName()).
@@ -58,14 +58,14 @@ func (l *QueryAllLogic) QueryAll(in *display.QueryPlantsReq) (*display.PlantsRes
 		Limit(limit, offset).
 		Find(&res)
 	if err != nil {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 		return nil, errors.New("数据库异常")
 	}
 
 	// 查询总记录数
 	count, err := MDB.Where("enable = ?", constants.Activation).Count(&models.Plants{})
 	if err != nil {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 		return nil, errors.New("数据库异常")
 	}
 
@@ -103,7 +103,7 @@ func (l *QueryAllLogic) QueryAll(in *display.QueryPlantsReq) (*display.PlantsRes
 	if err == nil {
 		RDB.Set(ctx, key, json, time.Hour*3)
 	} else {
-		logx.Infof("err:", err)
+		logx.Infof("err:%v", err)
 	}
 
 	return ret, nil

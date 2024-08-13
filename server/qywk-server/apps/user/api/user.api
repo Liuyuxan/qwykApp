@@ -1,41 +1,41 @@
-                      syntax = "v1"
+syntax = "v1"
 
 type Result {}
 
 type (
 	LoginReq {
-		userId   string `jsonx:"userId"`
-		password string `jsonx:"password"`
+		userId   string `json:"userId"`
+		password string `json:"password"`
 	}
 	RegisterReq {
-		password string `jsonx:"password"`
-		code     string `jsonx:"code"`
-		email    string `jsonx:"email"`
-		nickname string `jsonx:"nickname"`
+		password string `json:"password"`
+		code     string `json:"code"`
+		email    string `json:"email"`
+		nickname string `json:"nickname"`
 	}
 	CodeReq {
-		email string `jsonx:"email"`
+		email string `json:"email"`
 	}
 	ChangeReq {
-		userId      string `jsonx:"userId"`
-		password    string `jsonx:"password"`
-		email       string `jsonx:"email"`
-		code        string `jsonx:"code"`
-		newPassword string `jsonx:"newPassword"`
+		userId      string `json:"userId"`
+		password    string `json:"password"`
+		email       string `json:"email"`
+		code        string `json:"code"`
+		newPassword string `json:"newPassword"`
 	}
 	WechatLoginReq {
-		code string `jsonx:"code"`
+		code string `json:"code"`
 	}
 	ForgetRep {
-		userId   string `jsonx:"userId"`
-		password string `jsonx:"password"`
-		email    string `jsonx:"email"`
-		code     string `jsonx:"code"`
+		userId   string `json:"userId"`
+		password string `json:"password"`
+		email    string `json:"email"`
+		code     string `json:"code"`
 	}
 )
 
 @server (
-	group:  user
+	group:  login
 	prefix: /user/login
 )
 service user {

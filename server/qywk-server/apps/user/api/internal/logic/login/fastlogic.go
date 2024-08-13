@@ -1,4 +1,4 @@
-package user
+package login
 
 import (
 	"context"
@@ -11,25 +11,24 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type LoginLogic struct {
+type FastLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-// 普通登陆
-func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic {
-	return &LoginLogic{
+// 微信快速登陆
+func NewFastLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FastLogic {
+	return &FastLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *LoginLogic) Login(req *types.LoginReq) (resp *result.Result, err error) {
-	res, err := l.svcCtx.User.Login(l.ctx, &user.LoginReq{
-		UserId:   req.UserId,
-		Password: req.Password,
+func (l *FastLogic) Fast(req *types.WechatLoginReq) (resp *result.Result, err error) {
+	res, err := l.svcCtx.Login.WechatLogin(l.ctx, &user.WechatLoginReq{
+		Code: req.Code,
 	})
 
 	if err != nil {
