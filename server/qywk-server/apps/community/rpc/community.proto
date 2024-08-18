@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package community;
+
+option go_package = "./community";
+
+service article {
+
+}
+
+service comment {
+
+}
+
+service

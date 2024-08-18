@@ -12,9 +12,8 @@ type Plants {
 }
 
 type QueryPlantsReq {
-	UserId string `json:"userId"`
-	Page   int32  `json:"page"`
-	Size   int32  `json:"size"`
+	Page int32 `form:"page"`
+	Size int32 `form:"size"`
 }
 
 @server (
@@ -37,9 +36,9 @@ service display {
 }
 
 type QueryMealReq {
-	page    int32
-	size    int32
-	subarea string
+	Page    int32  `form:"page"`
+	Size    int32  `form:"size"`
+	Subarea string `form:"subarea"`
 }
 
 @server (

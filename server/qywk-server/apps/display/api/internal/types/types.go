@@ -11,15 +11,14 @@ type Plants struct {
 }
 
 type QueryMealReq struct {
-	Page    int32
-	Size    int32
-	Subarea string
+	Page    int32  `form:"page"`
+	Size    int32  `form:"size"`
+	Subarea string `form:"subarea"`
 }
 
 type QueryPlantsReq struct {
-	UserId string `json:"userId"`
-	Page   int32  `json:"page"`
-	Size   int32  `json:"size"`
+	Page int32 `form:"page"`
+	Size int32 `form:"size"`
 }
 
 type Result struct {

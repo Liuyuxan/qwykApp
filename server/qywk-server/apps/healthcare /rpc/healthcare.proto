@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package healthcare;
+
+option go_package = "./healthcare";
+
+message Request {
+
+}
+
+service plan {
+
+}
+
+service checkin {
+
+}
+

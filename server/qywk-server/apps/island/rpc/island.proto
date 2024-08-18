@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package island;
+
+option go_package = "./island";
+
+service friends {
+
+}
+
+service market {
+
+}

@@ -6,6 +6,7 @@ import (
 
 	"qywk-server/apps/display/rpc/display"
 	"qywk-server/apps/display/rpc/internal/config"
+	mealServer "qywk-server/apps/display/rpc/internal/server/meal"
 	plantsServer "qywk-server/apps/display/rpc/internal/server/plants"
 	"qywk-server/apps/display/rpc/internal/svc"
 
@@ -27,6 +28,7 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		display.RegisterPlantsServer(grpcServer, plantsServer.NewPlantsServer(ctx))
+		display.RegisterMealServer(grpcServer, mealServer.NewMealServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
@@ -37,5 +39,3 @@ func main() {
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()
 }
-
-// CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o qywk-display-rpc .

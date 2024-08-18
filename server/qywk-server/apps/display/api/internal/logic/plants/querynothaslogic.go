@@ -3,6 +3,7 @@ package plants
 import (
 	"context"
 	"qywk-server/apps/display/rpc/client/plants"
+	"qywk-server/pkg/constants"
 	"qywk-server/resultful"
 
 	"qywk-server/apps/display/api/internal/svc"
@@ -27,8 +28,9 @@ func NewQueryNotHasLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Query
 }
 
 func (l *QueryNotHasLogic) QueryNotHas(req *types.QueryPlantsReq) (resp *result.Result, err error) {
+	userId := l.ctx.Value(constants.UserId).(string)
 	res, err := l.svcCtx.PlantsZrpcClient.QueryNotHas(l.ctx, &plants.QueryPlantsReq{
-		UserId: req.UserId,
+		UserId: userId,
 		Page:   req.Page,
 		Size:   req.Size,
 	})

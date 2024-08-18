@@ -63,9 +63,11 @@ func (l *QuerySubareaLogic) QuerySubarea(in *display.Request) (*display.QuerySub
 	var subareas []*display.Subarea
 
 	for _, v := range res {
+		var k models.Meal
+		MDB.Table(models.Meal{}.TableName()).Where("subarea = ?", v.Subarea).Limit(1).Get(&k)
 		subareas = append(subareas, &display.Subarea{
 			Name: v.Subarea,
-			Url:  v.SubareaURL,
+			Url:  k.SubareaURL,
 		})
 	}
 
