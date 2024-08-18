@@ -30,4 +30,43 @@ service plants {
   rpc queryNotHas(QueryPlantsReq) returns (PlantsResp);
 }
 
+message Subarea {
+  string name = 1;
+  string url = 2;
+}
+
+message QuerySubareaResp {
+  repeated Subarea subareas = 1;
+}
+
+message Request {
+
+}
+
+message QueryMealReq {
+  int32 page = 1;
+  int32 size = 2;
+  string subarea = 3;
+  string userId = 4;
+}
+
+message Meal {
+  string subarea = 1;
+  string subareaUrl = 2;
+  string name = 3;
+  repeated string photos = 4;
+  string desc = 5;
+  bool collect = 6;
+  repeated string subtitle = 7;
+}
+
+message QueryMealResp {
+  repeated Meal meals = 1;
+}
+
+service meal {
+  rpc querySubarea(Request) returns (QuerySubareaResp);
+  rpc queryMeal (QueryMealReq) returns (QueryMealResp);
+}
+
 // goctl rpc protoc display.proto --go_out=. --go-grpc_out=. --zrpc_out=. -m

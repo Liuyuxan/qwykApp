@@ -76,21 +76,21 @@ service login {
 
 
 message UserInfoBasicReq {
-  string user_id = 1;
+  string userId = 1;
 }
 
 message UserInfoBasicResp {
-  string user_id =  1;
+  string userId =  1;
   string nickname = 2;
   string avatar = 3;
 }
 
 message UserInfoDetailReq {
-  string token = 1;
+  string userId = 1;
 }
 
 message UserInfoDetailResp {
-  string user_id =  1;
+  string userId =  1;
   string nickname = 2;
   string avatar = 3;
   string tel = 4;

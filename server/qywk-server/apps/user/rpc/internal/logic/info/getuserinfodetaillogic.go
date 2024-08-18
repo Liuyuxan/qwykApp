@@ -7,7 +7,6 @@ import (
 	"qywk-server/apps/user/models"
 	"qywk-server/apps/user/rpc/internal/svc"
 	"qywk-server/apps/user/rpc/user"
-	"qywk-server/pkg/jwts"
 	"qywk-server/pkg/redisutils/keys"
 	"qywk-server/pkg/redisutils/pre"
 	"time"
@@ -35,21 +34,8 @@ func (l *GetUserInfoDetailLogic) GetUserInfoDetail(in *user.UserInfoDetailReq) (
 	RDB := l.svcCtx.RDB
 	ctx := l.ctx
 
-	// 解析 JWT token
-	claims, err := jwts.ParseJwtToken(in.GetToken(), l.svcCtx.Config.Jwt.AccessSecret)
-	if err != nil {
-		logx.Infof("Error parsing JWT token: %v", err)
-		return nil, errors.New("无效的token")
-	}
-	uid, ok := claims["user_id"].(string)
-	if !ok {
-		errMsg := "JWT claims do not contain user_id"
-		logx.Infof(errMsg)
-		return nil, errors.New(errMsg)
-	}
-
 	var userinfo models.UserInfo
-	uidK := keys.Create(pre.UserInfoId, uid)
+	uidK := keys.Create(pre.UserInfoId, in.UserId)
 
 	// 从 Redis 中获取用户信息
 	res, err := RDB.Get(ctx, uidK).Result()
@@ -67,7 +53,7 @@ func (l *GetUserInfoDetailLogic) GetUserInfoDetail(in *user.UserInfoDetailReq) (
 		}
 	} else {
 		// 从数据库中获取用户信息
-		get, err := MDB.Where("user_id=? and enable=1", uid).Get(&userinfo)
+		get, err := MDB.Where("user_id=? and enable=1", in.UserId).Get(&userinfo)
 		if err != nil {
 			logx.Infof("Error querying database: %v", err)
 			return nil, errors.New("数据库查询异常")

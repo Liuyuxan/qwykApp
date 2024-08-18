@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	meal "qywk-server/apps/display/api/internal/handler/meal"
 	plants "qywk-server/apps/display/api/internal/handler/plants"
 	"qywk-server/apps/display/api/internal/svc"
 
@@ -14,14 +15,33 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				// 获取膳食详细信息
+				Method:  http.MethodGet,
+				Path:    "/query/meal",
+				Handler: meal.QueryMealHandler(serverCtx),
+			},
+			{
+				// 获取膳食分区信息
+				Method:  http.MethodGet,
+				Path:    "/query/subarea",
+				Handler: meal.QuerySubareaHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Jwt.AccessSecret),
+		rest.WithPrefix("/meal"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
 				// 查询全部中药植物信息
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/query/all",
 				Handler: plants.QueryAllHandler(serverCtx),
 			},
 			{
 				// 查询已拥有的中药植物信息
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/query/has",
 				Handler: plants.QueryHasHandler(serverCtx),
 			},
@@ -33,6 +53,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Jwt.AccessSecret),
-		rest.WithPrefix("/display/plants"),
+		rest.WithPrefix("/plants"),
 	)
 }

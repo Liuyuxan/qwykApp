@@ -5,10 +5,12 @@ go 1.22
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.8.1
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.21.0
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.6.1
 	github.com/zeromicro/go-zero v1.7.0
 	google.golang.org/grpc v1.65.0
+	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.5.1
 	google.golang.org/protobuf v1.34.2
 	xorm.io/xorm v1.3.9
 )
@@ -39,7 +41,6 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.21.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect

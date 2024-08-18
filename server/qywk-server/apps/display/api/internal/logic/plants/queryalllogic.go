@@ -3,7 +3,7 @@ package plants
 import (
 	"context"
 	"qywk-server/apps/display/rpc/client/plants"
-	result "qywk-server/pkg/resultful"
+	"qywk-server/resultful"
 
 	"qywk-server/apps/display/api/internal/svc"
 	"qywk-server/apps/display/api/internal/types"

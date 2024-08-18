@@ -36,7 +36,7 @@ type (
 
 @server (
 	group:  login
-	prefix: /user/login
+	prefix: /login
 )
 service user {
 	@doc "普通登陆"
@@ -62,6 +62,25 @@ service user {
 	@doc "发送验证码"
 	@handler sentCode
 	post /sent/code (CodeReq) returns (Result)
+}
+
+type getUserInfoBasicReq {
+	userId string `form:"userId"`
+}
+
+@server (
+	group:  userinfo
+	prefix: /info
+	jwt:    Jwt
+)
+service user {
+	@doc "获取用户的基础信息"
+	@handler getUserInfoBasic
+	get /basic (getUserInfoBasicReq) returns (Result)
+
+	@doc "获取用户的详细信息"
+	@handler getUserInfoDetail
+	get /detail returns (Result)
 }
 
 // goctl api go --api user.api --dir .

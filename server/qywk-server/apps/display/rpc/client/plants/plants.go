@@ -13,9 +13,15 @@ import (
 )
 
 type (
-	Plants         = display.Plants
-	PlantsResp     = display.PlantsResp
-	QueryPlantsReq = display.QueryPlantsReq
+	Meal             = display.Meal
+	Plants           = display.Plants
+	PlantsResp       = display.PlantsResp
+	QueryMealReq     = display.QueryMealReq
+	QueryMealResp    = display.QueryMealResp
+	QueryPlantsReq   = display.QueryPlantsReq
+	QuerySubareaResp = display.QuerySubareaResp
+	Request          = display.Request
+	Subarea          = display.Subarea
 
 	PlantsZrpcClient interface {
 		QueryAll(ctx context.Context, in *QueryPlantsReq, opts ...grpc.CallOption) (*PlantsResp, error)

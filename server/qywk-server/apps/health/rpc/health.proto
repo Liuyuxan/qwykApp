@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package health;
-
-option go_package = "./health";
-
-
-

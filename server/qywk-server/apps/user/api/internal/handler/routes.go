@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	login "qywk-server/apps/user/api/internal/handler/login"
+	userinfo "qywk-server/apps/user/api/internal/handler/userinfo"
 	"qywk-server/apps/user/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -50,6 +51,25 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: login.SentCodeHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/user/login"),
+		rest.WithPrefix("/login"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				// 获取用户的基础信息
+				Method:  http.MethodGet,
+				Path:    "/basic",
+				Handler: userinfo.GetUserInfoBasicHandler(serverCtx),
+			},
+			{
+				// 获取用户的详细信息
+				Method:  http.MethodGet,
+				Path:    "/detail",
+				Handler: userinfo.GetUserInfoDetailHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Jwt.AccessSecret),
+		rest.WithPrefix("/info"),
 	)
 }

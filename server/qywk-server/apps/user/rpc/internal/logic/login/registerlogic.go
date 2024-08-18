@@ -102,8 +102,8 @@ func (l *RegisterLogic) Register(in *user.RegisterReq) (*user.RegisterResp, erro
 		l.svcCtx.Config.Jwt.AccessSecret,
 		l.svcCtx.Config.Jwt.AccessExpire,
 		map[string]any{
-			"user_id":  uid,
-			"user_key": uidK,
+			constants.UserId:  uid,
+			constants.UserKey: uidK,
 		},
 	)
 

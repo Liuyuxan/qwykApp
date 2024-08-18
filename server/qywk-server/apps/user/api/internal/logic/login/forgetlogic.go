@@ -3,7 +3,7 @@ package login
 import (
 	"context"
 	"qywk-server/apps/user/rpc/user"
-	result "qywk-server/pkg/resultful"
+	"qywk-server/resultful"
 
 	"qywk-server/apps/user/api/internal/svc"
 	"qywk-server/apps/user/api/internal/types"

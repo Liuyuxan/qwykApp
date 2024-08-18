@@ -42,4 +42,6 @@ const (
 	DisplayPlantsAll    = "display:plants:all:"
 	DisplayPlantsHas    = "display:plants:has:"
 	DisplayPlantsNotHas = "display:plants:not_has:"
+	DisplayMealSubarea  = "display:meal:subarea:"
+	DisplayMealInfo     = "display:meal:info:"
 )

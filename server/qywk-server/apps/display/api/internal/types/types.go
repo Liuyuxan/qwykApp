@@ -10,6 +10,12 @@ type Plants struct {
 	Has  string   `json:"has"`
 }
 
+type QueryMealReq struct {
+	Page    int32
+	Size    int32
+	Subarea string
+}
+
 type QueryPlantsReq struct {
 	UserId string `json:"userId"`
 	Page   int32  `json:"page"`

@@ -38,3 +38,7 @@ type Result struct {
 type WechatLoginReq struct {
 	Code string `json:"code"`
 }
+
+type GetUserInfoBasicReq struct {
+	UserId string `form:"userId"`
+}

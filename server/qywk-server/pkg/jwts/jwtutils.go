@@ -3,6 +3,10 @@ package jwts
 import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"net/http"
+	"qywk-server/pkg/constants"
+	result "qywk-server/resultful"
 	"time"
 )
 
@@ -10,7 +14,7 @@ import (
 func GenJwtToken(secret string, expired int64, data map[string]any) (string, error) {
 	// 创建声明
 	claims := jwt.MapClaims{
-		"exp": time.Now().Add(time.Duration(expired) * time.Second).Unix(),
+		constants.Expire: time.Now().Add(time.Duration(expired) * time.Second).Unix(),
 	}
 	for key, value := range data {
 		claims[key] = value
@@ -43,4 +47,8 @@ func ParseJwtToken(tokenStr, secret string) (jwt.MapClaims, error) {
 	} else {
 		return nil, fmt.Errorf("invalid token")
 	}
+}
+
+func JwtUnauthorizedResult(w http.ResponseWriter, r *http.Request, err error) {
+	httpx.WriteJson(w, http.StatusUnauthorized, result.Err().SetCode(404).SetMsg("鉴权失败"))
 }

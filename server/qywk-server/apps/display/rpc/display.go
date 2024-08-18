@@ -37,3 +37,5 @@ func main() {
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()
 }
+
+// CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o qywk-display-rpc .

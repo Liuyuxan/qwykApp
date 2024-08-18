@@ -1,7 +1,6 @@
 package models
 
 import (
-	"encoding/json"
 	"time"
 )
 
@@ -18,18 +17,4 @@ type Plants struct {
 
 func (Plants) TableName() string {
 	return "plants"
-}
-
-// 序列化为 JSON 字符串
-func (p *Plants) ToString() (string, error) {
-	data, err := json.Marshal(p)
-	if err != nil {
-		return "", err
-	}
-	return string(data), nil
-}
-
-// 反序列化 JSON 字符串
-func (p *Plants) FromString(jsonStr string) error {
-	return json.Unmarshal([]byte(jsonStr), p)
 }

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"qywk-server/apps/user/models"
+	"qywk-server/pkg/constants"
 	"qywk-server/pkg/jwts"
 	"qywk-server/pkg/redisutils/keys"
 	"qywk-server/pkg/redisutils/pre"
@@ -65,8 +66,8 @@ func (l *WechatLoginLogic) WechatLogin(in *user.WechatLoginReq) (*user.LoginResp
 		l.svcCtx.Config.Jwt.AccessSecret,
 		l.svcCtx.Config.Jwt.AccessExpire,
 		map[string]any{
-			"user_id":  userinfo.UserId,
-			"user_key": uidK,
+			constants.UserId:  userinfo.UserId,
+			constants.UserKey: uidK,
 		},
 	)
 
